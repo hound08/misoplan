@@ -5,7 +5,7 @@
       name="jdbc/OracleDB" 
       auth="Container" 
       type="javax.sql.DataSource" 
-      username="j20180403" 
+      username="J20180403" 
       password="tiger" 
       driverClassName="oracle.jdbc.driver.OracleDriver" 
       factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" 
