@@ -108,7 +108,7 @@ ul {
 				<li>본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</li>
 			</ul>
 			<hr>
-			<form class="form-table">	
+			<form action="writeAB.do" class="form-table">	
 				<table>
 				<tr><td>제목</td><td><input type="text" class="input"></td></tr>
 				<tr><td>최소인원</td><td><input type="text" class="input"></td></tr>

@@ -248,7 +248,7 @@ div {
 		</div>
 <!--section card -->
 		<div>
-			<a href="writeFormAB.do"><button class="write-button">글쓰기</button></a>
+			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 		</div>
 		<div class="pagination">
 			<a href="#">&laquo;</a> 
