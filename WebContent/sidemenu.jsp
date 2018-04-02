@@ -15,7 +15,7 @@
 		img {vertical-align:bottom;}
 		#sidemenu  {
 				margin-top: 60px;
-				background-color: blue;
+				background-color: #39A2D8;
 				border: 3px solid red;
 				width: 200px;
 				height: 550px;
