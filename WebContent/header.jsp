@@ -105,7 +105,7 @@
 			<ul class="category-menu">
 				<li><a href="search.jsp"><img src="images/category1.png" align="middle" class="category-image"></a></li>
 				<li><a href="makePlan.do"><img src="images/category2.png" align="middle" class="category-image"></a></li>
-				<li><a href="plan1.jsp"><img src="images/category3.png" align="middle" class="category-image"></a></li>
+				<li><a href="boardschedule.do"><img src="images/category3.png" align="middle" class="category-image"></a></li>
 				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
