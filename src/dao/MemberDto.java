@@ -81,5 +81,4 @@ public class MemberDto {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
-	
 }
