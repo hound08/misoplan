@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -109,12 +110,19 @@
 				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
-		<div class="login">
-			<div class="loginlabel">
-				<a href="" class="login_label">로그인</a>
-				<a href="myInfoForm.do" class="login_label">회원가입</a>
+		<c:if test="${email != null }">
+			<div class="login">
+				<p><% out.println(session.getAttribute("email")); %>님 환영합니다!</p>
 			</div>
-		</div>
+		</c:if>
+		<c:if test="${email == null }">
+			<div class="login">
+				<div class="loginlabel">
+					<a href="loginForm.do" class="login_label">로그인</a>
+					<a href="myInfoForm.do" class="login_label">회원가입</a>
+				</div>
+			</div>
+		</c:if>
 	</div>
 </body>
 </html>

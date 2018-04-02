@@ -53,9 +53,6 @@ public class MemberDao {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				System.out.println("^^^^^^^^^" + password);
-				System.out.println("!@#!@#!@#" + rs.getString(1));
-
 				if (rs.getString(1).equals(password)) {
 					result = 1;
 				} else {
