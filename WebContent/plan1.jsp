@@ -75,7 +75,7 @@ div {
 
 .second-text { /* center-second 텍스트 삽입 */
 	width: 340px;
-	height: 70px;
+	height: 50px;
 	padding: px 10px;
 	overflow: hidden;
 }
@@ -94,6 +94,13 @@ div {
 	width: 340px;
 	height: 20px;
 	overflow: hidden;
+}
+.tag {
+	width: 340px;
+	height: 20px;
+	padding: px 10px;
+	overflow: hidden;
+	font-size: 10pt;
 }
 
 .idlocal { /* 아아디를 나타내기 위한 영역 확보 */
@@ -124,7 +131,6 @@ div {
 </style>
 </head>
 <body>
-
 	<div class="second-bar1" align="center">
 		<img id="main-images" alt="image" src="images/1.jpg" width="1200px;">
 		<div class="main-label">
@@ -162,19 +168,22 @@ div {
 
 		<div class="center-second">
 			<div class="second-box">
-				<img alt="image" src="images/a.png">
+				<img alt="image" src="${image_url }">
 			</div>
 			<div class="local">
 				<p>[지역]</p>
 			</div>
 			<div class="second-text">
-				<h1>제목 : 눈빛</h1>
+				<h1>제목 : ${title }</h1>
+			</div>
+			<div class="tag">
+				#eee
 			</div>
 			<div class="idlocal" align="right">
-				아이디 : 나야나
+				아이디 : ${nickname }
 			</div>
 			<div class="datelocal" align="right">
-				2018.03.30
+				${board_date }
 			</div>
 		</div>
 		<div class="center-second">
@@ -186,6 +195,9 @@ div {
 			</div>
 			<div class="second-text">
 				<h1>제목 : 여친구함</h1>
+			</div>
+			<div class="tag">
+				#eee
 			</div>
 			<div class="idlocal" align="right">
 				아이디 : 나야나
@@ -205,6 +217,9 @@ div {
 			<div class="second-text">
 				<h1>제목 : 기회</h1>
 			</div>
+			<div class="tag">
+				#eee
+			</div>
 			<div class="idlocal" align="right">
 				아이디 : 나야나
 			</div>
@@ -221,6 +236,9 @@ div {
 			</div>
 			<div class="second-text">
 				<h1>제목 :</h1>
+			</div>
+			<div class="tag">
+				#eee
 			</div>
 			<div class="idlocal" align="right">
 				아이디 : 나야나
@@ -239,6 +257,9 @@ div {
 			<div class="second-text">
 				<h1>제목 :</h1>
 			</div>
+			<div class="tag">
+				#eee
+			</div>
 			<div class="idlocal" align="right">
 				아이디 : 나야나
 			</div>
@@ -255,6 +276,9 @@ div {
 			</div>
 			<div class="second-text">
 				<h1>제목 :</h1>
+			</div>
+			<div class="tag">
+				#eee
 			</div>
 			<div class="idlocal" align="right">
 				아이디 : 나야나
