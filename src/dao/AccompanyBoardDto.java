@@ -17,6 +17,7 @@ public class AccompanyBoardDto {
 	private Date reg_date; //작성일
 	private Date closing_date; //마감일
 	private boolean is_closed; //마감 여부
+	
 	public int getPost_num() {
 		return post_num;
 	}
