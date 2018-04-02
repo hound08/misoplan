@@ -41,9 +41,12 @@ public class writeActionAB implements CommandProcess{
 		accompanyDto.setTag(tag);
 		accompanyDto.setContent(content);
 		accompanyDto.setImage_url(image_url);
+		accompanyDto.setView_count(0);
+		accompanyDto.setVote_count(0);
+		accompanyDto.setCurrent_number(1);
+		accompanyDto.is_closed(true);
 		
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
-		
 		
 		return null;
 	}//writeFormAction.requestPro
