@@ -112,7 +112,7 @@
 		<div class="login">
 			<div class="loginlabel">
 				<a href="" class="login_label">로그인</a>
-				<a href="" class="login_label">회원가입</a>
+				<a href="myInfoForm.do" class="login_label">회원가입</a>
 			</div>
 		</div>
 	</div>
