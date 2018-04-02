@@ -1,6 +1,10 @@
+<%@page import="service.AreaParser"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,11 +15,18 @@
   src="https://code.jquery.com/jquery-3.3.1.min.js"
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
 <style type="text/css">
 	/* 전체 적용   */
 	
 	*{
 		font-family: 'NanumSquareRound', sans-serif;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:visited{
+		color: black;
 	}
 	html{
 		width: 100%;
@@ -51,15 +62,20 @@
 		width: 10%;
 		height: 900px;
 		background-color: #39A2D8;
+
 	}
 	.sidebar-menu{
 		background-color: #39A2D8;
 		min-width: 100%;
+		height: 5.8%;
 		border-bottom: 1px solid white;
 		
 	}
+	.sidebar-menu:hover {
+		cursor: pointer;
+	}
 	.sidedesc{
-		padding: 0px;
+		padding: 20px 0 0 0;
 		margin: 0px;
 		text-align: center;
 		color: white;
@@ -81,120 +97,75 @@
     .citydesc{
     	width: 0%;
     	float: left;
-    	margin: 13% 0 0 5%;
+    	margin: 16% 0 0 5%;
+    }
+    #cityinfo:hover{
+    	cursor: pointer;
     }
     .cityimage{
-    	margin: 2.5% 0 0 2.5%;
+    	margin: 4% 0 0 4%;
     	float:left;
     	width: 0%;
     }
 </style>
+
+
 <script type="text/javascript">
-	function clickSideBar(clicked_id){
-		alert(clicked_id);
-		document.getElementById("center").style.width="20%";
-		
-		var cityinfolist = document.getElementsByClassName("cityinfo");
-		var cityimagelist = document.getElementsByClassName("cityimage");
-		var citydesclist = document.getElementsByClassName("citydesc");
-		for(var i = 0; i<cityinfolist.length; i++){
-			cityinfolist[i].style.width="100%";
-			cityinfolist[i].style.height="12%";
-			cityinfolist[i].style.border="1px solid gray";
-			cityimagelist[i].style.width="35%";
-			cityimagelist[i].style.height="80%";
-			citydesclist[i].style.width="20%";
-		}
-		document.getElementById("map").style.width="70%";
-		
-	}
+
+	
+$(document).on('click','.sidebar-menu', function(){
+    var areaCode = $(this).attr('id');
+	var data = {
+		'areaCode':areaCode,
+	};
+    $.ajax({
+            type:'POST',
+            url : '/loadCityList.jsp',
+            data: JSON.stringify(data),
+            contentType : "application/json",
+			success: function(){
+				
+            }
+        });
+});
+	
+	
+/* 	    	alert(clicked_id);
+			document.getElementById("center").style.width="15%";
+			document.getElementById("map").style.width="75%";
+			
+			var cityinfolist = document.getElementsByClassName("cityinfo");
+			var cityimagelist = document.getElementsByClassName("cityimage");
+			var citydesclist = document.getElementsByClassName("citydesc");
+			for(var i = 0; i<cityinfolist.length; i++){
+				cityinfolist[i].style.width="100%";
+				cityinfolist[i].style.height="12%";
+				cityinfolist[i].style.border="1px solid gray";
+				cityimagelist[i].style.width="35%";
+				cityimagelist[i].style.height="80%";
+				citydesclist[i].style.width="20%";
+			} */
 </script>
 </head>
 <body>
 
 <div class="section">
 		<div class="sidebar">
-			<div class="sidebar-menu" id="sidebar-seoul" onclick="javascript:clickSideBar(this.id);">
-				<p class="sidedesc" id="sidedesc">
-					서울특별시			
-				</p>
-			</div>
-			<div class="sidebar-menu" id="sidebar-gg" onclick="javascript:clickSideBar(this.id);">
-				<p class="sidedesc">
-					경기도
-				</p>
-			</div>
-			<div class="sidebar-menu" id="sidebar-jeju" onclick="javascript:clickSideBar(this.id);">
-				<p class="sidedesc">
-					제주도
-				</p>
-			</div>
-			<div class="sidebar-menu" id="sidebar-busan" onclick="javascript:clickSideBar(this.id);">
-				<p class="sidedesc">
-					부산광역시
-				</p>
-			</div>
+			${areasMap }
+			<c:forEach var="areaMap" items="${areasList}">
+					<div class="sidebar-menu" id="${areaMap.code}" onclick="javascript:clickSideBar(this.id);">
+						<p class="sidedesc" id="sidedesc">
+							${areaMap.name}
+						</p>
+					</div>
+			</c:forEach>
 		</div>
 		
 	
 	<div class="center" id="center">
 		<div class="cityinfo" id="cityinfo">
 			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<a href="#" class="citydesc" id="citydesc">수원시</a>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">안양시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">화성시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">용인시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">오산시</p>
-		</div><div class="cityinfo" id="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<a href="#" class="citydesc" id="citydesc">수원시</a>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">안양시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">화성시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">용인시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">오산시</p>
-		</div><div class="cityinfo" id="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<a href="#" class="citydesc" id="citydesc">수원시</a>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">안양시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">화성시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">용인시</p>
-		</div>
-		<div class="cityinfo">
-			<img class="cityimage" id="cityimage" alt="" src="images/plan.jpg">
-			<p class="citydesc" id="citydesc">오산시</p>
+			<p class="citydesc" id="citydesc">수원시</p>
 		</div>
 	</div>
 	

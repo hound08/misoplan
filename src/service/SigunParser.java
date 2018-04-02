@@ -15,8 +15,8 @@ import org.xml.sax.SAXException;
  * */
 
 public class SigunParser {
-	public ArrayList<HashMap<String, Object>> parserTest() throws ParserConfigurationException,UnsupportedEncodingException{
-		ArrayList<HashMap<String, Object>> testList = new ArrayList<HashMap<String,Object>>();
+	public ArrayList<HashMap<String, String>> getSigun(String areaCode) throws ParserConfigurationException,UnsupportedEncodingException{
+		ArrayList<HashMap<String, String>> sigunList = new ArrayList<HashMap<String,String>>();
 		
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?ServiceKey=";
 		String serviceKey = "irqglLi1gisI6SuWlVdGZcdGGffwI7ZSmgzhLB4bdWSaPeRPsGqkD7IbkQFI18JgOmG%2BGWCdh5eDW12ZBKoANQ%3D%3D";
@@ -28,7 +28,7 @@ public class SigunParser {
 		parameter = parameter + "&" +"startPage=1";
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=AppTest";
-		parameter = parameter + "&" + "areaCode=31";
+		parameter = parameter + "&" + "areaCode="+areaCode;
 		
 		addr = addr + serviceKey + parameter;
 		System.out.println("@@SigunParser addr @@" + addr);
@@ -56,11 +56,11 @@ public class SigunParser {
 			Node code = root.getElementsByTagName("code").item(i);
 			Node name = root.getElementsByTagName("name").item(i);
 			
-			HashMap<String,Object> parseTest = new HashMap<String, Object>();
-			parseTest.put("code", code.getTextContent());
-			parseTest.put("name", name.getTextContent());
-			testList.add(parseTest);
+			HashMap<String,String> sigunMap = new HashMap<String, String>();
+			sigunMap.put("code", code.getTextContent());
+			sigunMap.put("name", name.getTextContent());
+			sigunList.add(sigunMap);
 		}
-		return testList;
+		return sigunList;
 	}
 }
