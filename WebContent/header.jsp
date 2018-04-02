@@ -111,8 +111,13 @@
 		</div>
 		<div class="login">
 			<div class="loginlabel">
+<<<<<<< HEAD
 				<a href="" class="login_label">로그인</a>
 				<a href="myInfoForm.do" class="login_label">회원가입</a>
+=======
+				<a href="loginForm.do" class="login_label">로그인</a>
+				<a href="" class="login_label">회원가입</a>
+>>>>>>> acee915f57d0bc6e3172f82810867b19654408fd
 			</div>
 		</div>
 	</div>
