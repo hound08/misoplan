@@ -98,7 +98,7 @@
 </head>
 <body>
 	<div class="header" id="header1">
-		<div class="logo" onclick="location.href='main.jsp'">
+		<div class="logo" onclick="location.href='main.do'">
 			<img alt="logo" src="images/logo.png" class="logo_image"> 
 		</div>
 		<div class="category">
