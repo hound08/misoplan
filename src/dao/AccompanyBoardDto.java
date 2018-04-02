@@ -17,7 +17,7 @@ public class AccompanyBoardDto {
 	private int current_number; //현재인원
 	private Date reg_date; //작성일
 	private Date closing_date; //마감일
-	private boolean is_closed; //마감 여부
+	private int is_closed; //마감 여부
 	
 	public int getPost_num() {
 		return post_num;
@@ -91,10 +91,10 @@ public class AccompanyBoardDto {
 	public void setClosing_date(Date closing_date) {
 		this.closing_date = closing_date;
 	}
-	public boolean isIs_closed() {
+	public int getIs_closed() {
 		return is_closed;
 	}
-	public void setIs_closed(boolean is_closed) {
+	public void setIs_closed(int is_closed) {
 		this.is_closed = is_closed;
 	}
 	public String getTag() {
