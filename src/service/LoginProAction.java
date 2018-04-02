@@ -19,6 +19,7 @@ public class LoginProAction implements CommandProcess {
 			MemberDao dao = MemberDao.getInstance();
 			int result = dao.loginCheck(email, password);
 			
+			request.setAttribute("email", email);
 			request.setAttribute("result", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
