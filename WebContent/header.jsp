@@ -112,7 +112,7 @@
 		</div>
 		<c:if test="${email != null }">
 			<div class="login">
-				<p><% out.println(session.getAttribute("email")); %>님 환영합니다!</p>
+				<p><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
 			</div>
 		</c:if>
 		<c:if test="${email == null }">
