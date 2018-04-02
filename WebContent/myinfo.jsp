@@ -67,7 +67,7 @@
 				<h1>내 정보</h1>
 				<div id="myinfo">
 					<div id="second">
-						<form action="myinfopro.jsp" id="secondbox">
+						<form action="myInfoPro.do" id="secondbox">
 						<div id="img">
 								<input type="image" value="프로필사진" >
 						</div>

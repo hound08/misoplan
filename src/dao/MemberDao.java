@@ -108,4 +108,26 @@ public class MemberDao {
 		return dto;
 	}
 
+	public int update(MemberDto memberdto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "update member set nickname =?, password =?, phone =? where email = ?" ;
+		try {
+			conn = getConnection();
+			   ps = conn.prepareStatement(sql);
+			   ps.setString(1, memberdto.getNickname());
+			   ps.setString(2, memberdto.getPassword());
+			   ps.setString(3, memberdto.getPhone());
+			   ps.setString(4, memberdto.getEmail());
+			   result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close();; 
+		        if (conn != null) conn.close();
+		}
+		return result;
+	}
+
 }
