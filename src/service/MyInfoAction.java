@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MemberDao;
 import dao.MemberDto;
 
-public class MyinfoProAction implements CommandProcess {
+public class MyInfoAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

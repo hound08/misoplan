@@ -85,13 +85,14 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from member where email = yhoooj@naver.com";
+		String sql = "select * from member where email = 'yhoooj@naver.com'";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			// ps.setString(1, email);
 			rs = ps.executeQuery();
 			if (rs.next()) {
+				System.out.println("탄다!!!!!!!!!!!!");
 				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setPassword(rs.getString("password"));

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -165,28 +166,29 @@ div {
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
 				onClick="location.href='###'">
 		</div>
-
+		<c:forEach var = "bs" items="${list }">	
 		<div class="center-second">
 			<div class="second-box">
-				<img alt="image" src="${image_url }">
+				<img alt="image" src="${bs.image_url }">
 			</div>
 			<div class="local">
 				<p>[지역]</p>
 			</div>
 			<div class="second-text">
-				<h1>제목 : ${title }</h1>
+				<h1>제목 : ${bs.title }</h1>
 			</div>
 			<div class="tag">
 				#eee
 			</div>
 			<div class="idlocal" align="right">
-				아이디 : ${nickname }
+				아이디 : ${bs.nickname }
 			</div>
 			<div class="datelocal" align="right">
-				${board_date }
+				${bs.board_date }
 			</div>
 		</div>
-		<div class="center-second">
+		</c:forEach>
+		<!-- <div class="center-second">
 			<div class="second-box">
 				<img alt="image" src="images/b.png">
 			</div>
@@ -286,7 +288,7 @@ div {
 			<div class="datelocal" align="right">
 				2018.03.30
 			</div>
-		</div>
+		</div> -->
 		<div class="bottom-page" align="center">
 			페이지 번호출력
 		</div>
