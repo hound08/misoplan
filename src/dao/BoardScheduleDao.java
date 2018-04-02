@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -70,4 +72,42 @@ public class BoardScheduleDao {
 	return dto;
 }
 
+	public List<BoardScheduleDto> list(int starRow, int endRow) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM BOARDSCHEDULE";
+		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, starRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				BoardScheduleDto bs = new BoardScheduleDto();
+				bs.setBs_num(rs.getInt(1));
+				bs.setSl_code(rs.getString(2));
+				bs.setEmail(rs.getString(3));
+				bs.setNickname(rs.getString(4));
+				bs.setTitle(rs.getString(5));
+				bs.setTag(rs.getString(6));
+				bs.setContent(rs.getString(7));
+				bs.setImage_url(rs.getString(8));
+				bs.setVote_count(rs.getInt(9));
+				bs.setView_count(rs.getInt(10));
+				bs.setBoard_date(rs.getDate(11));
+				list.add(bs);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close(); 
+	        if (conn != null) conn.close(); 
+		}
+		return list;
+		
+	}
 }
