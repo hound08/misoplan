@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -18,18 +19,8 @@ public class BoardScheduleAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			BoardScheduleDao bsd = BoardScheduleDao.getInstance();
-			BoardScheduleDto dto = bsd.bsList();
-			request.setAttribute("bs_num", dto.getBs_num());
-			request.setAttribute("sl_code", dto.getSl_code());
-			request.setAttribute("email", dto.getEmail());
-			request.setAttribute("nickname", dto.getNickname());
-			request.setAttribute("title", dto.getTitle());
-			request.setAttribute("tag", dto.getTag());
-			request.setAttribute("content", dto.getContent());
-			request.setAttribute("image_url", dto.getImage_url());
-			request.setAttribute("vote_count", dto.getVote_count());
-			request.setAttribute("view_count", dto.getView_count());
-			request.setAttribute("board_date", dto.getBoard_date());
+			List<BoardScheduleDto> list = bsd.list();
+			request.setAttribute("list", list);
 		} catch (Exception e ) {
 			System.out.println(e.getMessage());
 		}

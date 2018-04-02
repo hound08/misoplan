@@ -72,7 +72,7 @@ public class BoardScheduleDao {
 	return dto;
 }
 
-	public List<BoardScheduleDto> list(int starRow, int endRow) throws SQLException {
+	public List<BoardScheduleDto> list() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -81,8 +81,7 @@ public class BoardScheduleDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, starRow);
-			ps.setInt(2, endRow);
+	
 			rs = ps.executeQuery();
 			
 			while (rs.next()) {

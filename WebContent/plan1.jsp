@@ -188,7 +188,7 @@ div {
 			</div>
 		</div>
 		</c:forEach>
-		<div class="center-second">
+		<!-- <div class="center-second">
 			<div class="second-box">
 				<img alt="image" src="images/b.png">
 			</div>
@@ -288,7 +288,7 @@ div {
 			<div class="datelocal" align="right">
 				2018.03.30
 			</div>
-		</div>
+		</div> -->
 		<div class="bottom-page" align="center">
 			페이지 번호출력
 		</div>
