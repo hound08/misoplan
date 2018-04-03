@@ -23,6 +23,7 @@ margin: 0px auto;
 .section {
 	width: 1200px;
 	height: 1000px;
+	margin-bottom: 100px;
 }
 
 .main-image {
@@ -81,6 +82,16 @@ ul {
 	color: #2478FF;
 }
 
+.cancel-button{
+	width: 70px;
+	height: 30px;
+	display: flex;
+	float: right;
+	font-size: 15px;
+	justify-content: center;
+	margin-top: 20px;
+}
+
 </style>
 </head>
 <body>
@@ -97,21 +108,24 @@ ul {
 				<li>본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</li>
 			</ul>
 			<hr>
-			<form class="form-table">	
+			<form action="writeAB.do" class="form-table">	
 				<table>
-				<tr><td>제목</td><td><input type="text" class="input"></td></tr>
-				<tr><td>최소인원</td><td><input type="text" class="input"></td></tr>
-				<tr><td>마감날짜</td><td><input type="date" class="input"></td></tr>
-				<tr><td>태그</td><td><input type="text" class="input" id="hashtag" placeholder="#"></td></tr>
-				<tr><td>내용</td><td><div><textarea rows="20" cols="140"></textarea></div></td></tr>
-				<tr><td>이미지</td><td><input type="file" class="input"></td></tr>
+				<tr><td>제목</td><td><input type="text" class="input" name="title"></td></tr>
+				<tr><td>최소인원</td><td><input type="text" class="input" name="minimum_num"></td></tr>
+				<tr><td>마감날짜</td><td><input type="date" class="input" name="closing_date"></td></tr>
+				<tr><td>태그</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
+				<tr><td>내용</td><td><div><textarea rows="20" cols="140" name="content"></textarea></div></td></tr>
+				<tr><td>이미지</td><td><input type="file" class="input" name="image_url"></td></tr>
 				</table>
-				<div>
-					<input type="submit" value="완료">
-					<a href="accompanyBoard.jsp"><button>취소하기</button></a>				
-				</div>
+				<input type="submit" value="완료" class="submit-button">
 			</form>
+			<div>
+				<a href="accompanyBoard.jsp"><button class="cancel-button">취소</button></a>							
+			</div>
 		</div>
+	</div>
+	<div class="footer_wrap">
+		<%@ include file="footer.jsp"%>
 	</div>
 	
 	<script type="text/javascript">

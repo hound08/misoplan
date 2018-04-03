@@ -98,21 +98,21 @@
 </head>
 <body>
 	<div class="header" id="header1">
-		<div class="logo" onclick="location.href='main.jsp'">
+		<div class="logo" onclick="location.href='main.do'">
 			<img alt="logo" src="images/logo.png" class="logo_image"> 
 		</div>
 		<div class="category">
 			<ul class="category-menu">
 				<li><a href="search.jsp"><img src="images/category1.png" align="middle" class="category-image"></a></li>
 				<li><a href="makePlan.do"><img src="images/category2.png" align="middle" class="category-image"></a></li>
-				<li><a href="plan1.jsp"><img src="images/category3.png" align="middle" class="category-image"></a></li>
+				<li><a href="boardschedule.do"><img src="images/category3.png" align="middle" class="category-image"></a></li>
 				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
 		<div class="login">
 			<div class="loginlabel">
 				<a href="" class="login_label">로그인</a>
-				<a href="" class="login_label">회원가입</a>
+				<a href="myInfoForm.do" class="login_label">회원가입</a>
 			</div>
 		</div>
 	</div>

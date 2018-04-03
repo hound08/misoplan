@@ -1,6 +1,6 @@
 package dao;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class AccompanyBoardDto {
 	
@@ -10,6 +10,7 @@ public class AccompanyBoardDto {
 	private String title;	//게시물 제목
 	private String image_url; //대표 이미지 url
 	private String content; //게시물 내용
+	private String tag; //해시태
 	private int vote_count; //추천수
 	private int view_count; //조회수
 	private int minimum_number; //최소인원
@@ -17,6 +18,7 @@ public class AccompanyBoardDto {
 	private Date reg_date; //작성일
 	private Date closing_date; //마감일
 	private boolean is_closed; //마감 여부
+	
 	public int getPost_num() {
 		return post_num;
 	}
@@ -94,6 +96,12 @@ public class AccompanyBoardDto {
 	}
 	public void setIs_closed(boolean is_closed) {
 		this.is_closed = is_closed;
+	}
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
 }

@@ -7,6 +7,7 @@ public class MemberDto {
 	private String nickname;
 	private String password;
 	private String phone;
+	private String profile_url;
 	private int member_score;
 	private int member_admin;
 	private int ban;
@@ -37,6 +38,12 @@ public class MemberDto {
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getProfile_url() {
+		return profile_url;
+	}
+	public void setProfile_url(String profile_url) {
+		this.profile_url = profile_url;
 	}
 	public int getMember_score() {
 		return member_score;
@@ -74,5 +81,4 @@ public class MemberDto {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
-	
 }
