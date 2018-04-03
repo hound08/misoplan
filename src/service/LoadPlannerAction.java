@@ -13,10 +13,10 @@ public class LoadPlannerAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AreaParser parser = new AreaParser();
+		AreaParser areaParser = new AreaParser();
 		try {
-			ArrayList<HashMap<String, Object>> areas = parser.parserTest();
-			request.setAttribute("areas", areas);
+			ArrayList<HashMap<String, String>> areas = areaParser.getAreas();
+			request.setAttribute("areasList", areas);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

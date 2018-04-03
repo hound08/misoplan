@@ -72,8 +72,6 @@ public class MemberDao {
 				conn.close();
 		}
 
-		System.out.println("결과!!!!! : " + result);
-
 		return result;
 	}
 
