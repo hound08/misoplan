@@ -15,5 +15,4 @@
 			obj.put(sigunMap.get("code"), sigunMap.get("name"));
 		}
 		out.print(obj);	
-		System.out.println(obj);
 	%>
