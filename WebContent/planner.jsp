@@ -11,11 +11,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
-<script type="text/javascript" src="../js/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
 <style type="text/css">
 	/* 전체 적용   */
 	
@@ -115,36 +112,35 @@
 	
 $(document).on('click','.sidebar-menu', function(){
     var areaCode = $(this).attr('id');
-	var data = {
-		'areaCode':areaCode,
-	};
-    $.ajax({
-            type:'POST',
-            url : '/loadCityList.jsp',
-            data: JSON.stringify(data),
-            contentType : "application/json",
-			success: function(){
-				
-            }
-        });
+    var sendData = "areaCode="+areaCode;
+    $.post('loadCityList.jsp', sendData, function(msg){
+    	var list = JSON.parse(msg);
+    	$('.center').contents().remove();
+    	for(var i = 0; i < Object.keys(list).length; i++){
+    		var obj = list[i];
+     			$('.center').prepend("<div class='cityinfo' id="+Object.keys(list)[i]+" onclick='javascript:alert(this.id);'>"
+    			    	+	"<img class='cityimage' id='cityimage' alt='' src='images/plan.jpg'>"
+    			    	+	"<p class='citydesc' id='citydesc'>"+list[i+1]+"</p>"
+    			    	+   "</div>");
+    	}
+    	
+    	document.getElementById("center").style.width="20%";
+		document.getElementById("map").style.width="70%";
+		
+		var cityinfolist = document.getElementsByClassName("cityinfo");
+		var cityimagelist = document.getElementsByClassName("cityimage");
+		var citydesclist = document.getElementsByClassName("citydesc");
+		for(var i = 0; i<cityinfolist.length; i++){
+			cityinfolist[i].style.width="100%";
+			cityinfolist[i].style.height="12%";
+			cityinfolist[i].style.border="1px solid gray";
+			cityimagelist[i].style.width="35%";
+			cityimagelist[i].style.height="80%";
+			citydesclist[i].style.width="30%";
+		} 
+    });
 });
-	
-	
-/* 	    	alert(clicked_id);
-			document.getElementById("center").style.width="15%";
-			document.getElementById("map").style.width="75%";
-			
-			var cityinfolist = document.getElementsByClassName("cityinfo");
-			var cityimagelist = document.getElementsByClassName("cityimage");
-			var citydesclist = document.getElementsByClassName("citydesc");
-			for(var i = 0; i<cityinfolist.length; i++){
-				cityinfolist[i].style.width="100%";
-				cityinfolist[i].style.height="12%";
-				cityinfolist[i].style.border="1px solid gray";
-				cityimagelist[i].style.width="35%";
-				cityimagelist[i].style.height="80%";
-				citydesclist[i].style.width="20%";
-			} */
+
 </script>
 </head>
 <body>
@@ -153,7 +149,7 @@ $(document).on('click','.sidebar-menu', function(){
 		<div class="sidebar">
 			${areasMap }
 			<c:forEach var="areaMap" items="${areasList}">
-					<div class="sidebar-menu" id="${areaMap.code}" onclick="javascript:clickSideBar(this.id);">
+					<div class="sidebar-menu" id="${areaMap.code}">
 						<p class="sidedesc" id="sidedesc">
 							${areaMap.name}
 						</p>
