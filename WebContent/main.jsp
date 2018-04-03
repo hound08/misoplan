@@ -128,11 +128,7 @@ div {
 	<div class="section">
 		<div class="image">
 			<div class="imageText">
-<<<<<<< HEAD
-				<p class="imageTitle">헤헤</p>
-=======
 				<p class="imageTitle">미소플랜</p>
->>>>>>> c9e1930791b42308486f0bddccc4485b8f38c2e9
 				<p class="imageDesc">미소플랜에 오신 것을 환영합니다<br>자신만의 일정을 자유롭게 꾸며보세요</p>
 			</div>
 		</div>
