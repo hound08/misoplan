@@ -102,8 +102,8 @@
 				<div id="myinfo">
 					<div id="second">
 						<form action="myInfoPro.do" name="frm" id="secondbox">
-						<div id="img">
-								<input type="image" value="프로필사진" >
+						<div id="img_div">
+								<img id="img" alt="프로필 사진" src="${memberdto.profile_url }">
 						</div>
 						<table>
 							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
