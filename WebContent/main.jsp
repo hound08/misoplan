@@ -128,7 +128,7 @@ div {
 	<div class="section">
 		<div class="image">
 			<div class="imageText">
-				<p class="imageTitle">씨발</p>
+				<p class="imageTitle">나만의 여행 플래너</p>
 				<p class="imageDesc">미소플랜에 오신 것을 환영합니다<br>자신만의 일정을 자유롭게 꾸며보세요</p>
 			</div>
 		</div>
