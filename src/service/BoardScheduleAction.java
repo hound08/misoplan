@@ -28,3 +28,4 @@ public class BoardScheduleAction implements CommandProcess {
 	}
 
 }
+
