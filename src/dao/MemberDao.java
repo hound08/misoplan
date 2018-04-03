@@ -72,8 +72,6 @@ public class MemberDao {
 				conn.close();
 		}
 
-		System.out.println("결과!!!!! : " + result);
-
 		return result;
 	}
 
@@ -89,7 +87,6 @@ public class MemberDao {
 			// ps.setString(1, email);
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				System.out.println("탄다!!!!!!!!!!!!");
 				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setPassword(rs.getString("password"));
