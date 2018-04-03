@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -96,6 +96,7 @@ div {
 	height: 20px;
 	overflow: hidden;
 }
+
 .tag {
 	width: 340px;
 	height: 20px;
@@ -111,6 +112,7 @@ div {
 	font-size: 13pt;
 	overflow: hidden;
 }
+
 .datelocal { /* 날짜를 나타내기 위한 영역 확보 */
 	width: 340px;
 	height: 30px;
@@ -118,12 +120,13 @@ div {
 	font-size: 11pt;
 	overflow: hidden;
 }
-.bottom-page{
+
+.bottom-page {
 	width: 1200px;
 	height: 35px;
 	margin: 35px 0 0 0;
-	
 }
+
 .search {
 	width: 1200px;
 	height: 35px;
@@ -161,33 +164,30 @@ div {
 
 	<div class="center">
 		<div id="button1" align="right">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='updateForm.do'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
 				onClick="location.href='###'">
 		</div>
-		<c:forEach var = "bs" items="${list }">	
-		<div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="${bs.image_url }">
+		<c:forEach var="bs" items="${list }">
+			<div class="center-second">
+				<div class="second-box">
+					<img alt="image" src="${bs.image_url }">
+				</div>
+				<div class="local">
+					<p>[지역]</p>
+				</div>
+				<div class="second-text">
+					<h1>제목 : ${bs.title }</h1>
+				</div>
+				<div class="tag">#eee</div>
+				<div class="idlocal" align="right">아이디 : ${bs.nickname }</div>
+				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			<div class="second-text">
-				<h1>제목 : ${bs.title }</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : ${bs.nickname }
-			</div>
-			<div class="datelocal" align="right">
-				${bs.board_date }
-			</div>
-		</div>
+	
 		</c:forEach>
+	</div>
 		<!-- <div class="center-second">
 			<div class="second-box">
 				<img alt="image" src="images/b.png">
@@ -290,19 +290,26 @@ div {
 			</div>
 		</div> -->
 		<div class="bottom-page" align="center">
-			페이지 번호출력
+			<div style="text-align: center;">
+				<%-- <c:if test="${startPage > blockSize }">
+					<a href='list.do?pageNum=${startPage-blockSize }'>[이전]</a>
+				</c:if>
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<a href='list.do?pageNum=${i}'>[${i}]</a>
+				</c:forEach>
+				<c:if test="${endPage < pageCnt}">
+					<a href='list.do?pageNum=${startPage+blockSize}'>[다음]</a>
+				</c:if> --%>
+			</div>
+			<div class="search" align="center">
+				<select name="menu">
+					<option value="##">###</option>
+					<option value="##">###</option>
+					<option value="##">###</option>
+					<option value="##">###</option>
+				</select> <input type="text" name="search"> 돋보기 이미지
+			</div>
 		</div>
-		<div class="search" align="center">
-			<select name="menu">
-   		   		<option value="##">###</option>
-    			<option value="##">###</option>
-    			<option value="##">###</option>
-    			<option value="##">###</option>
-			</select>
-			<input type="text" name="search">
-			돋보기 이미지
-		</div>
-	</div>
-	<%@ include file="footer.jsp"%>
+		<%@ include file="footer.jsp"%>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class BoardScheduleDao {
 		return conn;
 	}
 
-	public BoardScheduleDto bsList() throws SQLException {
+	/*public BoardScheduleDto bsList() throws SQLException {plan1 일정보기 눌렀을때 페이지
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -77,7 +77,7 @@ public class BoardScheduleDao {
 		}
 
 		return dto;
-	}
+	}*/
 
 	public List<BoardScheduleDto> list() throws SQLException {
 		Connection conn = null;
@@ -120,7 +120,7 @@ public class BoardScheduleDao {
 
 	}
 
-	public int getTotalCnt() throws SQLException {
+	/*public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -132,6 +132,7 @@ public class BoardScheduleDao {
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 
+			
 			if (rs.next()) {
 				result = rs.getInt(1);
 			}
@@ -148,5 +149,5 @@ public class BoardScheduleDao {
 		}
 		return result;
 
-	}
+	}*/
 }
