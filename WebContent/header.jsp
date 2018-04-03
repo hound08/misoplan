@@ -110,19 +110,21 @@
 				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
-		<c:if test="${email != null }">
-			<div class="login">
-				<p><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
-			</div>
-		</c:if>
-		<c:if test="${email == null }">
-			<div class="login">
-				<div class="loginlabel">
-					<a href="loginForm.do" class="login_label">로그인</a>
-					<a href="myInfoForm.do" class="login_label">회원가입</a>
-				</div>
-			</div>
-		</c:if>
+		<%
+			if (session.getAttribute("email") == null) {	%>
+				<div class="login">
+					<div class="loginlabel">
+						<a href="loginForm.do" class="login_label">로그인</a>
+						<a href="myInfoForm.do" class="login_label">회원가입</a>
+					</div>
+				</div>	<%
+			} else if (session.getAttribute("email") != null) {	%>
+				<div class="login">
+					<p><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
+					<p><input type="button" name="logout" value="로그아웃" onclick="logout.do"></p>
+				</div>	<%
+			}
+		%>
 	</div>
 </body>
 </html>
