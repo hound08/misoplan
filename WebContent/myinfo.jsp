@@ -70,6 +70,7 @@
 		
 		</script>
 	</head>
+	<%request.setAttribute("email", session.getAttribute("email")); %>
 	<body>
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
@@ -77,10 +78,10 @@
 				<h1>내 정보</h1>
 				<div id="myinfo">
 					<div id="second">
-						<form action="myInfoPro.do" name="frm" id="secondbox" method="post" enctype="multipart/form-data">
+						<form action="myInfoPro.do?email='${email }'" name="frm" id="secondbox" method="post" enctype="multipart/form-data">
 						<div id="img_div">
 								<img id="img" alt="프로필 사진" src="images/1.jpg"><br>
-								<input type="file" name="filename">
+								<input type="file" name="Profile_url">
 						</div>
 						<table>
 							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
