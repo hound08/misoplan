@@ -116,11 +116,10 @@ $(document).on('click','.sidebar-menu', function(){
     $.post('loadCityList.jsp', sendData, function(msg){
     	var list = JSON.parse(msg);
     	$('.center').contents().remove();
-    	for(var i = 0; i < Object.keys(list).length; i++){
-    		var obj = list[i];
-     			$('.center').prepend("<div class='cityinfo' id="+Object.keys(list)[i]+" onclick='javascript:alert(this.id);'>"
+    	for(var i = Object.keys(list).length; i > 0; i--){
+     			$('.center').prepend("<div class='cityinfo' id="+Object.keys(list)[i-1]+" onclick='javascript:alert(this.id);'>"
     			    	+	"<img class='cityimage' id='cityimage' alt='' src='images/plan.jpg'>"
-    			    	+	"<p class='citydesc' id='citydesc'>"+list[i+1]+"</p>"
+    			    	+	"<p class='citydesc' id='citydesc'>"+list[Object.keys(list)[i-1]]+"</p>"
     			    	+   "</div>");
     	}
     	
