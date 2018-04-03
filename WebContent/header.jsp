@@ -145,11 +145,10 @@ img {
 						<a href="joinForm.do" class="login_label">회원가입</a>
 					</div>
 				</div>	<%
-			} else if (session.getAttribute("email") != null) {
-				request.setAttribute("email", session.getAttribute("email")); %>
+			} else if (session.getAttribute("email") != null) {	%>
 				<div class="login">
 					<p class="welcome"><% out.println(session.getAttribute("email")); %>님 환영합니다!</p>
-					<p class="myInfo"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do'"></p>
+					<p class="myInfo"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do?email=${email}'"></p>
 					<p class="logout"><input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}

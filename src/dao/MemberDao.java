@@ -91,6 +91,7 @@ public class MemberDao {
 				dto.setNickname(rs.getString("nickname"));
 				dto.setPassword(rs.getString("password"));
 				dto.setPhone(rs.getString("phone"));
+				dto.setProfile_url(rs.getString("profile_url"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
