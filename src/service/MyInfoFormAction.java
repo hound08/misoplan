@@ -22,9 +22,6 @@ public class MyInfoFormAction implements CommandProcess {
 			
 			request.setAttribute("email", email);
 			request.setAttribute("memberdto", memberdto);
-			
-			System.out.println("@@@@@@" + email);
-			System.out.println("@@@@@@" + memberdto.getEmail());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

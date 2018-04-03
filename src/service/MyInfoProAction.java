@@ -10,7 +10,6 @@ import dao.MemberDao;
 import dao.MemberDto;
 
 public class MyInfoProAction implements CommandProcess {
-
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -18,19 +17,18 @@ public class MyInfoProAction implements CommandProcess {
 			request.setCharacterEncoding("UTF-8");
 			MemberDto memberdto = new MemberDto();
 			String email = request.getParameter("email");
+			memberdto.setEmail(request.getParameter("email"));
 			memberdto.setNickname(request.getParameter("Nickname"));	
 			memberdto.setPassword(request.getParameter("password"));
 			memberdto.setPhone(request.getParameter("phone"));
-
 			
 			MemberDao memberdao = MemberDao.getInstance();
 			int result = memberdao.update(memberdto);
 			request.setAttribute("result", result);
 			request.setAttribute("email", email);
-			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		return "Myinfo.jsp";
+		return "myinfopro.jsp";
 	}
 }
