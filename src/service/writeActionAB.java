@@ -36,15 +36,11 @@ public class writeActionAB implements CommandProcess{
 		
 		AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
 		accompanyDto.setTitle(title);
-		accompanyDto.setMinimum_number(minimum_num);
 		accompanyDto.setClosing_date(closing_date);
 		accompanyDto.setTag(tag);
 		accompanyDto.setContent(content);
 		accompanyDto.setImage_url(image_url);
-		accompanyDto.setView_count(0);
-		accompanyDto.setVote_count(0);
-		accompanyDto.setCurrent_number(1);
-		accompanyDto.is_closed(true);
+		accompanyDto.setMinimum_number(minimum_num);
 		
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		

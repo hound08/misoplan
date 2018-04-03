@@ -8,6 +8,7 @@
 </head>
 <body>
 	<c:if test="${result == 1 }">
+		<% session.setAttribute("email", request.getParameter("email")); %>
 		<script type="text/javascript">
 			location.href="main.do";
 		</script>
