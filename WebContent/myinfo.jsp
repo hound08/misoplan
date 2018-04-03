@@ -6,6 +6,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>내 정보</title>
+		
 		<style type="text/css">
 			#center {
 				border: 1px solid red;
@@ -55,28 +56,39 @@
 				border-radius :10px;
 			}
 		</style>
+		<script type="text/javascript">
+		function winop() {
+			if (!frm.Nickname.value) {
+				alert("닉네임을 입력해주세요.");
+				frm.Nickname.focus();
+				return false;
+			}
+			window.open("myinfocheck.jsp?Nickname=" + frm.Nickname.value, "",
+			"width=300 height=300");
+		}
+		
+		
+		</script>
 	</head>
 	<body>
-		<%
-		
-		
-		%>
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
 				<h1>내 정보</h1>
 				<div id="myinfo">
 					<div id="second">
-						<form action="myinfopro.jsp" id="secondbox">
-						<div id="img">
-								<input type="image" value="프로필사진" >
+						<form action="myInfoPro.do" name="frm" id="secondbox">
+						<div id="img_div">
+								<img id="img" alt="프로필 사진" src="${memberdto.profile_url }">
 						</div>
 						<table>
-							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" value="${memberdto.email }"></td><td></td></tr>
-							<tr><td>닉 네 임 : </td><td><input type="text" class="input" required="required" value="${memberdto.nickname }"></td><td><input type="button" class="but" value="중복확인"></td></tr>
-							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" value="${memberdto.password }"></td><td></td></tr>
-							<tr><td>비밀번호 확인 : </td><td><input type="password" class="input" required="required" value="${ membberdto.password}"></td><td></td></tr>
-							<tr><td>핸드폰 번호 : </td><td><input type="tel" class="input" required="required" value="${memberdto.phone }"></td><td></td></tr>
+							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
+							<tr><td>닉 네 임 : </td><td><input type="text" class="input" required="required" name="Nickname" id="Nickname" value="${memberdto.nickname }" oninput="checkId()"></td>
+													<td><input type="button" class="but" value="중복확인" id="nameclice" onclick="winop()"></td></tr>
+							<tr><td>		   </td><td><span id="name_result"></span></td></tr>
+							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" name="password" value="${memberdto.password }"></td><td></td></tr>
+							<tr><td>비밀번호 확인 : </td><td><input type="password" class="input" required="required" ></td><td></td></tr>
+							<tr><td>핸드폰 번호 : </td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td><td></td></tr>
 							<tr></tr>
 							<tr><td></td><td><input type="submit" class="but" value="정보 수정"> 
 											 <input type="button" value="회원탈퇴"></td><td></td></tr>		

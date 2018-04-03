@@ -39,46 +39,7 @@ public class BoardScheduleDao {
 
 		return conn;
 	}
-
-	/*public BoardScheduleDto bsList() throws SQLException {plan1 일정보기 눌렀을때 페이지
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARDSCHEDULE";
-		BoardScheduleDto dto = new BoardScheduleDto();
-
-		try {
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			rs = ps.executeQuery();
-
-			if (rs.next()) {
-				dto.setBs_num(rs.getInt(1));
-				dto.setSl_code(rs.getString(2));
-				dto.setEmail(rs.getString(3));
-				dto.setNickname(rs.getString(4));
-				dto.setTitle(rs.getString(5));
-				dto.setTag(rs.getString(6));
-				dto.setContent(rs.getString(7));
-				dto.setImage_url(rs.getString(8));
-				dto.setVote_count(rs.getInt(9));
-				dto.setView_count(rs.getInt(10));
-				dto.setBoard_date(rs.getDate(11));
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
-		}
-
-		return dto;
-	}*/
-
+	
 	public List<BoardScheduleDto> list() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -104,6 +65,7 @@ public class BoardScheduleDao {
 				bs.setVote_count(rs.getInt(9));
 				bs.setView_count(rs.getInt(10));
 				bs.setBoard_date(rs.getDate(11));
+				bs.setLocal_names(rs.getString(12));
 				list.add(bs);
 			}
 		} catch (Exception e) {
@@ -118,6 +80,13 @@ public class BoardScheduleDao {
 		}
 		return list;
 
+	}
+	public writeList(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		
 	}
 
 	/*public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료

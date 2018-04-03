@@ -11,13 +11,13 @@
    <c:if test="${result > 0 }">
       <script type="text/javascript">
          alert("수정 성공");
-         //location.href = "myInfoForm.do?email=${email }";
+         location.href = "myInfoForm.do?email=${email }";
       </script>
    </c:if>
    <c:if test="${result == 0}">
       <script type="text/javascript">
          alert("수정 실패");
-        // location.href="myInfoForm.do?email=${email}"
+         location.href="myInfoForm.do?email=${email}"
       </script>   
    </c:if>
 </body>

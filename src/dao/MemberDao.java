@@ -80,17 +80,18 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from member where email = 'yhoooj@naver.com'";
+		String sql = "select * from member where email = ?";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			// ps.setString(1, email);
+			ps.setString(1, email);
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setPassword(rs.getString("password"));
 				dto.setPhone(rs.getString("phone"));
+				dto.setProfile_url(rs.getString("profile_url"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -103,6 +104,47 @@ public class MemberDao {
 				conn.close();
 		}
 		return dto;
+	}
+
+	public int update(MemberDto memberdto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "update member set nickname =?, password =?, phone =? where email = ?" ;
+		try {
+			conn = getConnection();
+			   ps = conn.prepareStatement(sql);
+			   ps.setString(1, memberdto.getNickname());
+			   ps.setString(2, memberdto.getPassword());
+			   ps.setString(3, memberdto.getPhone());
+			   ps.setString(4, memberdto.getEmail());
+			   result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close();; 
+		     if (conn != null) conn.close();
+		}
+		return result;
+	}
+	public int nameChk(String Nickname) throws SQLException{
+		int result  = 1;  				Connection conn = null;
+		String sql  = "select Nickname from member where Nickname=?"; 
+		PreparedStatement pstmt = null; ResultSet rs = null;
+		try { 
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, Nickname);
+			rs = pstmt.executeQuery();
+			if (rs.next()) result = 1;
+			else result = 0;
+		} catch(Exception e) { System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
+		}
+		return result;
 	}
 
 }
