@@ -110,7 +110,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String sql = "update member set nickname =?, password =?, phone =? where email = ?" ;
+		String sql = "update member set nickname =?, password =?, phone =?  where email = ?" ;
 		try {
 			conn = getConnection();
 			   ps = conn.prepareStatement(sql);

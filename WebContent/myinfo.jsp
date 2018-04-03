@@ -77,7 +77,7 @@
 				<h1>내 정보</h1>
 				<div id="myinfo">
 					<div id="second">
-						<form action="myInfoPro.do" name="frm" id="secondbox">
+						<form action="myInfoPro.do" name="frm" id="secondbox" method="post" enctype="multipart/form-data">
 						<div id="img_div">
 								<img id="img" alt="프로필 사진" src="images/1.jpg"><br>
 								<input type="file" name="filename">
