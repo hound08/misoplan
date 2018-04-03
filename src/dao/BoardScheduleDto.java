@@ -15,6 +15,8 @@ public class BoardScheduleDto {
 	private int vote_count;
 	private int view_count;
 	private Date board_date;
+	private String local_names;
+	
 	
 	
 	
@@ -84,8 +86,12 @@ public class BoardScheduleDto {
 	public void setBoard_date(Date board_date) {
 		this.board_date = board_date;
 	}
-	
-	
-	
+	public String getLocal_names() {
+		return local_names;
+	}
+	public void setLocal_names(String local_names) {
+		this.local_names = local_names;
+	}
+
 	
 }

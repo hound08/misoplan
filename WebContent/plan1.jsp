@@ -144,7 +144,6 @@ div {
 				</p>
 			</span>
 		</div>
-
 	</div>
 	<script type="text/javascript">
 		var image = document.getElementById("main-images");
@@ -160,11 +159,12 @@ div {
 		}
 		setInterval(replacePhoto, 3000);
 	</script>
-
-
+	<%
+		request.setAttribute("email", session.getAttribute("email"));
+	%>
 	<div class="center">
 		<div id="button1" align="right">
-			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='updateForm.do'">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardwrite.do'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
@@ -176,7 +176,7 @@ div {
 					<img alt="image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					<p>[지역]</p>
+					<p>${bs.local_names }</p>
 				</div>
 				<div class="second-text">
 					<h1>제목 : ${bs.title }</h1>
