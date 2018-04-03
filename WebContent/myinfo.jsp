@@ -67,6 +67,8 @@
 				xmlReq.onreadystatechange = callBack;
 				xmlReq.open("get", "myinfocheck.jsp?uid="+uid, true);
 				
+				
+				
 			}
 		
 		
