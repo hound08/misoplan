@@ -11,10 +11,17 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import dao.MemberDao;
+import dao.MemberDto;
+
 public class JoinProAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MemberDto dto = new MemberDto();
+		dto.setEmail(request.getParameter("email"));
+		
+		// 사진 업로드 관련 코드
 		request.setCharacterEncoding("utf-8");
 		int maxSize = 5 * 1024 * 1024;
 		String fileSave = "/upload";
@@ -38,9 +45,6 @@ public class JoinProAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
-		
-		String name = multi.getParameter("name");
-		String title = multi.getParameter("title");
 		
 		return "main.do";
 	}
