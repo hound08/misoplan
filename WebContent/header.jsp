@@ -1,3 +1,4 @@
+<%@page import="dao.MemberDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -72,7 +73,11 @@ img {
 	/*	border-left:solid;
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
+<<<<<<< HEAD
 	width: 220px;
+=======
+	width: 260px; 
+>>>>>>> 0dd2211013e41fbc311300bbbf34a1f059629efd
 	height: 50px;
 	display: flex;
 	align-items: center;
@@ -110,6 +115,19 @@ img {
 	color: black;
 	align-content: center;
 }
+<<<<<<< HEAD
+=======
+
+.myInfo {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.logout {
+	margin-right: 10px;
+}
+
+>>>>>>> 0dd2211013e41fbc311300bbbf34a1f059629efd
 </style>
 </head>
 <body>
@@ -125,19 +143,22 @@ img {
 				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
-		<c:if test="${email != null }">
-			<div class="login">
-				<p><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
-			</div>
-		</c:if>
-		<c:if test="${email == null }">
-			<div class="login">
-				<div class="loginlabel">
-					<a href="loginForm.do" class="login_label">로그인</a>
-					<a href="myInfoForm.do" class="login_label">회원가입</a>
-				</div>
-			</div>
-		</c:if>
+		<%
+			if (session.getAttribute("email") == null) {	%>
+				<div class="login">
+					<div class="loginlabel">
+						<a href="loginForm.do" class="login_label">로그인</a>
+						<a href="joinForm.do" class="login_label">회원가입</a>
+					</div>
+				</div>	<%
+			} else if (session.getAttribute("email") != null) {	%>
+				<div class="login">
+					<p class="welcome"><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
+					<p class="myInfo"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do'"></p>
+					<p class="logout"><input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
+				</div>	<%
+			}
+		%>
 	</div>
 </body>
 </html>

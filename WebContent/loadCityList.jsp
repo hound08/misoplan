@@ -1,26 +1,19 @@
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="jdk.nashorn.internal.ir.debug.JSONWriter"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="service.SigunParser"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
 	<%
 		String areaCode = request.getParameter("areaCode");
-		System.out.println(areaCode);
-
-		SigunParser sigunParser = new SigunParser();
+		SigunParser sigunParser = new SigunParser();	
 		ArrayList<HashMap<String, String>> sigunList = sigunParser.getSigun(areaCode);
-		for(int i = 0; i < sigunList.size(); i++){
+		JSONObject obj = new JSONObject();
+		for(int i =0; i < sigunList.size(); i++){
 			HashMap<String, String> sigunMap = sigunList.get(i);
-			out.print(sigunMap.get("code"));
-			out.println(sigunMap.get("name"));
+			obj.put(sigunMap.get("code"), sigunMap.get("name"));
 		}
+		out.print(obj);	
+		System.out.println(obj);
 	%>
-</body>
-</html>
