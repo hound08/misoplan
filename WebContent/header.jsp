@@ -10,11 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	  *{ margin:0; padding:0; }
-      li{ list-style:none; }
-      a{ text-decoration:none;}
-      a:hover{text-decoration:underline; text-decoration: none; }
-      img {vertical-align:bottom;}
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	text-decoration: none;
+}
+
+img {
+	vertical-align: bottom;
+}
 
 .header {
 	width: 100%;
@@ -22,7 +38,7 @@
 	overflow: hidden;
 	margin: 5px auto;
 	display: inline-block;
-/*	border:solid;  
+	/*	border:solid;  
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
 }
@@ -31,19 +47,19 @@
 	width: 180px;
 	height: 100%;
 	float: left;
-/*	border-right: solid;
+	/*	border-right: solid;
 	border-color: #EAEAEA;
 	border-width: 2px;
 	margin-right: 90px;	*/
 }
 
-.logo_image{
+.logo_image {
 	float: right;
 	cursor: pointer;
 }
 
 .category {
-	width: 800px; 
+	width: 800px;
 	height: 50px;
 	padding: 0px auto;
 	margin-top: auto;
@@ -54,25 +70,29 @@
 }
 
 .login {
-/*	border-left:solid;
+	/*	border-left:solid;
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
+<<<<<<< HEAD
+	width: 220px;
+=======
 	width: 260px; 
+>>>>>>> 0dd2211013e41fbc311300bbbf34a1f059629efd
 	height: 50px;
 	display: flex;
-	align-items:center;
+	align-items: center;
 	float: right;
 }
 
 .login_label {
-    vertical-align:middle;
-    text-decoration: none;
-    font-size: 15px;
-    cursor: pointer;
-    margin-left: 20px;
+	vertical-align: middle;
+	text-decoration: none;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 20px;
 }
 
-.login_label:hover{
+.login_label:hover {
 	color: #47C83E
 }
 
@@ -95,6 +115,8 @@
 	color: black;
 	align-content: center;
 }
+<<<<<<< HEAD
+=======
 
 .myInfo {
 	margin-left: 10px;
@@ -105,6 +127,7 @@
 	margin-right: 10px;
 }
 
+>>>>>>> 0dd2211013e41fbc311300bbbf34a1f059629efd
 </style>
 </head>
 <body>
