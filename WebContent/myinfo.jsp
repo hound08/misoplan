@@ -66,6 +66,8 @@
 			window.open("myinfocheck.jsp?Nickname=" + frm.Nickname.value, "",
 			"width=300 height=300");
 		}
+		
+		
 		</script>
 	</head>
 	<body>
