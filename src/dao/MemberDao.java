@@ -152,7 +152,7 @@ public class MemberDao {
 	public int insertMember(MemberDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO MEMBER VALUES(?, ?,?, ?, ?)";
+		String sql = "INSERT INTO MEMBER(EMAIL, NICKNAME, PASSWORD, PHONE, PROFILE_URL) VALUES(?, ?, ?, ?, ?)";
 		int result = 0;
 		
 		try {
