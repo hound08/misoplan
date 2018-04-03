@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 public class LogoutProAction implements CommandProcess {
 
 	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		return null;
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		return "logoutPro.jsp";
 	}
 
 }
