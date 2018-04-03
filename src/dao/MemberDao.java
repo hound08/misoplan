@@ -127,27 +127,24 @@ public class MemberDao {
 		}
 		return result;
 	}
-	public static boolean nameChk(String Nickname) throws SQLException{
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "select Nickname from member ";
-		try {
-			 ps = conn.prepareStatement(sql);
-			 rs = ps.executeQuery();
-			 while(rs.next()){
-				 if(rs.getString("Nickname").equals(Nickname)){
-					 return true;
-				 }
-			 }
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+	public int nameChk(String Nickname) throws SQLException{
+		int result  = 1;  				Connection conn = null;
+		String sql  = "select Nickname from member where Nickname=?"; 
+		PreparedStatement pstmt = null; ResultSet rs = null;
+		try { 
+			conn  = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, Nickname);
+			rs = pstmt.executeQuery();
+			if (rs.next()) result = 1;
+			else result = 0;
+		} catch(Exception e) { System.out.println(e.getMessage());
 		} finally {
-			 if (ps != null) ps.close();; 
-		     if (conn != null) conn.close();
-		     if (rs != null) rs.close();
+			if (rs != null) rs.close();
+			if (pstmt != null) pstmt.close();
+			if (conn != null) conn.close();
 		}
-		return false;
+		return result;
 	}
 
 }

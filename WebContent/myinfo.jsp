@@ -57,21 +57,15 @@
 			}
 		</style>
 		<script type="text/javascript">
-			val xmlReq;
-			function createAjax(){
-				xmlReq = new XMLHttpRequest();
+		function winop() {
+			if (!frm.Nickname.value) {
+				alert("닉네임을 입력해주세요.");
+				frm.Nickname.focus();
+				return false;
 			}
-			function ajaxSend(){
-				createAjax();
-				var uid = document.getElementById("uid").value;
-				xmlReq.onreadystatechange = callBack;
-				xmlReq.open("get", "myinfocheck.jsp?uid="+uid, true);
-				
-				
-				
-			}
-		
-		
+			window.open("myinfocheck.jsp?Nickname=" + frm.Nickname.value, "",
+			"width=300 height=300");
+		}
 		</script>
 	</head>
 	<body>
@@ -88,7 +82,7 @@
 						<table>
 							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
 							<tr><td>닉 네 임 : </td><td><input type="text" class="input" required="required" name="Nickname" id="Nickname" value="${memberdto.nickname }" oninput="checkId()"></td>
-													<td><input type="button" class="but" value="중복확인" id="nameclice" onclick="nameclick()"></td></tr>
+													<td><input type="button" class="but" value="중복확인" id="nameclice" onclick="winop()"></td></tr>
 							<tr><td>		   </td><td><span id="name_result"></span></td></tr>
 							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" name="password" value="${memberdto.password }"></td><td></td></tr>
 							<tr><td>비밀번호 확인 : </td><td><input type="password" class="input" required="required" ></td><td></td></tr>
