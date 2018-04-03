@@ -41,6 +41,7 @@ public class MyInfoProAction implements CommandProcess {
 			} catch(Exception e){
 				e.printStackTrace();
 			}
+			
 			ParameterBlock pb = new ParameterBlock();
 			pb.add(imagePath+"/"+filename);
 			RenderedOp rOp = JAI.create("fileload", pb);
