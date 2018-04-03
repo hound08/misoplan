@@ -164,6 +164,7 @@ div {
 
 	<div class="center">
 		<div id="button1" align="right">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='updateForm.do'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
@@ -186,6 +187,7 @@ div {
 			</div>
 	
 		</c:forEach>
+	</div>
 		<!-- <div class="center-second">
 			<div class="second-box">
 				<img alt="image" src="images/b.png">
@@ -289,7 +291,7 @@ div {
 		</div> -->
 		<div class="bottom-page" align="center">
 			<div style="text-align: center;">
-				<c:if test="${startPage > blockSize }">
+				<%-- <c:if test="${startPage > blockSize }">
 					<a href='list.do?pageNum=${startPage-blockSize }'>[이전]</a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
@@ -297,7 +299,7 @@ div {
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
 					<a href='list.do?pageNum=${startPage+blockSize}'>[다음]</a>
-				</c:if>
+				</c:if> --%>
 			</div>
 			<div class="search" align="center">
 				<select name="menu">
