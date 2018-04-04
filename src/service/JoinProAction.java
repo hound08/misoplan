@@ -47,12 +47,11 @@ public class JoinProAction implements CommandProcess {
 		
 		// 회원 정보 관련 코드
 		MemberDto dto = new MemberDto();
-		System.out.println("씨발아!!!!!!!!! : " + request.getParameter("email"));
 		dto.setEmail(multi.getParameter("email"));
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setPassword(multi.getParameter("password"));
 		dto.setPhone(multi.getParameter("phone"));
-		dto.setProfile_url(realPath + "/" + filename);
+		dto.setProfile_url("/J20180403/upload/" + filename);
 		
 		try {
 			MemberDao dao = MemberDao.getInstance();
