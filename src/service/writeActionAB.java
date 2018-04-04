@@ -1,14 +1,19 @@
 package service;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import dao.AccompanyBoardDto;
 import dao.AccompanyDao;
@@ -21,36 +26,57 @@ public class writeActionAB implements CommandProcess{
 		request.setCharacterEncoding("utf-8"); //encode to UTF-8
 		
 		HttpSession session = request.getSession();
-		String email = String.valueOf(session.getAttribute("email"));
 		
-		String title = request.getParameter("title");
-		int minimum_num = Integer.parseInt(request.getParameter("minimum_num"));
+		int maxSize = 5 * 1024 * 1024;
+		String filename = "";
+		String fileSave = "/upload";
+		String realPath = request.getServletContext().getRealPath(fileSave);
+		MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+		Enumeration en = multi.getFileNames();
 		
-		String String_date = request.getParameter("closing_date");
+		while (en.hasMoreElements()) {	// 여러개의 파일을 올릴 때 이런 방식으로 사용
+			String filename1 = (String)en.nextElement();
+			filename = multi.getFilesystemName(filename1);
+			String original = multi.getOriginalFileName(filename1);
+			String type = multi.getContentType(filename1);
+			File file = multi.getFile(filename1);
+			System.out.println("real Path : " + realPath);
+			System.out.println("파라메타 이름 : " + filename1);
+			System.out.println("실제 파일 이름 : " + original);
+			System.out.println("저장된 파일 이름 : " + filename);
+			System.out.println("파일 타입 : " + type);
+			
+			if (file != null) {
+				System.out.println("크기 : " + file.length() + "<br>");
+			}
+		}
+		
+		String String_date = multi.getParameter("closing_date");
 		Date util_date = null;
 		try {
-			util_date = new SimpleDateFormat("yyyy/MM/dd").parse(String_date);
+			util_date = new SimpleDateFormat("yyyy-MM-dd").parse(String_date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		java.sql.Date closing_date = new java.sql.Date(util_date.getDate());
 		
-		String tag = request.getParameter("tag");
-		String content = request.getParameter("content");
-		String image_url = request.getParameter("image_url");
-		
 		AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
-		accompanyDto.setEmail(email);
-		accompanyDto.setTitle(title);
+		accompanyDto.setEmail(String.valueOf(session.getAttribute("email")));
+		accompanyDto.setTitle(multi.getParameter("title"));
 		accompanyDto.setClosing_date(closing_date);
-		accompanyDto.setTag(tag);
-		accompanyDto.setContent(content);
-		accompanyDto.setImage_url(image_url);
-		accompanyDto.setMinimum_number(minimum_num);
+		accompanyDto.setTag(multi.getParameter("tag"));
+		accompanyDto.setContent(multi.getParameter("content"));
+		accompanyDto.setImage_url("/J20180403/upload/" + filename);
+		accompanyDto.setMinimum_number(Integer.parseInt(multi.getParameter("minimum_num")));
 
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		int result = accompanyDao.insert(accompanyDto);
+<<<<<<< HEAD
 		
+=======
+        request.setAttribute("result", result);
+
+>>>>>>> e3049a4388ac6302e3d35e06d9b482ae61926839
 		return "writeFormAB2.jsp";
 	}//writeFormAction.requestPro
 

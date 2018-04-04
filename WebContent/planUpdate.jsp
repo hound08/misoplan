@@ -88,6 +88,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	overflow: auto;
 	margin: 0 0 5px 4px;
 	border: 1px solid gray;
+	font-size: 10pt;
 }
 .card-box-bottom {
 	width: 240px;
@@ -99,6 +100,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 1160px;
 	height: 400px;
 	padding: 0 0 0 0px;
+	font-size: 10pt;
 }
 .bottom-image {
 	width: 300px;
@@ -149,7 +151,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 						title
 					</div>
 					<div class="card-box-bottom">
-						내 용
+						내 용${dto.tour_text }
 					</div>
 				</div>
 				<div class="center-card-box">
@@ -160,6 +162,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 						내 용
 					</div>
 				</div>
+		
 				<div class="center-card-box">
 					<div class="card-box-title">
 						title

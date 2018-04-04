@@ -17,10 +17,10 @@ public class LoginProAction implements CommandProcess {
 			String password = request.getParameter("password");
 			
 			MemberDao dao = MemberDao.getInstance();
-			int result = dao.loginCheck(email, password);
+			String result = dao.loginCheck(email, password);
 			
 			request.setAttribute("email", email);
-			request.setAttribute("result", result);
+			request.setAttribute("nickname", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

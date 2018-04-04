@@ -26,6 +26,7 @@ public class MyInfoProAction implements CommandProcess {
 		try {
 			// 사진 업로드 관련 코드
 			request.setCharacterEncoding("utf-8");
+			
 			int maxSize = 5 * 1024 * 1024;
 			String filename = "";
 			String fileSave = "/upload";

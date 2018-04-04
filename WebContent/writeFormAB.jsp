@@ -108,10 +108,22 @@ ul {
 				<li>본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</li>
 			</ul>
 			<hr>
-			<form action="writeAB.do" class="form-table">	
+			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
 				<table>
 				<tr><td>제목</td><td><input type="text" class="input" name="title"></td></tr>
-				<tr><td>최소인원</td><td><input type="text" class="input" name="minimum_num"></td></tr>
+				<tr><td>최소 인원(본인포함)</td>
+					<td><select name="minimum_num">
+							<option value="2">2명</option>
+							<option value="3">3명</option>
+							<option value="4">4명</option>
+							<option value="5">5명</option>
+							<option value="6">6명</option>
+							<option value="7">7명</option>
+							<option value="8">8명</option>
+							<option value="9">9명</option>
+							<option value="10">10명</option>
+						</select></td>
+				</tr>
 				<tr><td>마감날짜</td><td><input type="date" class="input" name="closing_date"></td></tr>
 				<tr><td>태그</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
 				<tr><td>내용</td><td><div><textarea rows="20" cols="140" name="content"></textarea></div></td></tr>
@@ -131,7 +143,7 @@ ul {
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
 		var current = 0;
-		var images = [ "images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg","images/korea5.jpg","images/korea1.jpg"]
+		var images = ["images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg","images/korea5.jpg","images/korea1.jpg"]
 
 		function replacePhoto() {
 			++current;
