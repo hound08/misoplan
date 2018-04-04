@@ -6,6 +6,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<p>씨발놈아!!!!!!!!!!!!!!</p>
+	씨발아
+	${param }
 </body>
 </html>
