@@ -80,7 +80,7 @@
 					<div id="second">
 						<form action="myInfoPro.do" name="frm" id="secondbox" method="post" enctype="multipart/form-data">
 						<div id="img_div">
-								<img id="img" alt="프로필 사진" src="images/${ memberdto.profile_url}"><br>
+								<img id="img" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
 								<input type="file" name="profile_url">
 						</div>
 						<table>
