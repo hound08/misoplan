@@ -154,7 +154,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 						내 용${dto.tour_text }
 					</div>
 				</div>
-				<div class="center-card-box">
+				<!-- <div class="center-card-box">
 					<div class="card-box-title">
 						title
 					</div>
@@ -185,7 +185,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					</div>
 					<div class="card-box-bottom">
 						내 용
-					</div>
+					</div> -->
 				</div>
 			</div>
 		<div class="center-bottom-image">
