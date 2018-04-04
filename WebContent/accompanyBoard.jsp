@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -281,11 +282,13 @@ div {
 		</div>
 		<div class="pagination">
 			<a href="#">&laquo;</a> 
+			<a href="#">&#9665</a>
 			<a href="#" class="active">1</a> 
 			<a href="#">2</a> 
 			<a href="#">3</a> 
 			<a href="#" >4</a> 
 			<a href="#">5</a> 
+			<a href="#">&#9655</a>
 			<a href="#">&raquo;</a>
 		</div>
 		<div class="search">

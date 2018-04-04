@@ -136,4 +136,28 @@ public class AccompanyDao {
 		return result;
 	}
 	
+	public int getTotalCnt() {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select count(*) from accompanyboard";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return total;
+	}
 }
