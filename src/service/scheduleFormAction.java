@@ -25,7 +25,9 @@ public class scheduleFormAction implements CommandProcess{
 				}
 				// 1 과 10을 구하는 구문
 				int currentPage = Integer.parseInt(pageNum);
+				//   페이지         게시물 로우
 				int pageSize = 10, blockSize = 10;
+				
 				int startRow = (currentPage - 1) * pageSize + 1; //처음엔 1
 				int endRow = startRow + pageSize -1; //10
 				int startNum = totCnt - startRow + 1; //38    
@@ -60,7 +62,4 @@ public class scheduleFormAction implements CommandProcess{
 		}
 		return "schedule.jsp";
 	}
-
-	
-	
 }

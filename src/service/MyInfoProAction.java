@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.renderable.ParameterBlock;
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.media.jai.JAI;
@@ -30,7 +31,7 @@ public class MyInfoProAction implements CommandProcess {
 			String filename = "";
 			String fileSave = "/upload";
 			String realPath = request.getServletContext().getRealPath(fileSave);
-			MultipartRequest multi = new MultipartRequest(request, realPath, maxSize, "utf-8", new DefaultFileRenamePolicy());
+			MultipartRequest multi = new MultipartRequest(request, realPath , maxSize, "utf-8", new DefaultFileRenamePolicy());
 			Enumeration en = multi.getFileNames();
 			
 			while (en.hasMoreElements()) {	// 여러개의 파일을 올릴 때 이런 방식으로 사용
@@ -59,8 +60,23 @@ public class MyInfoProAction implements CommandProcess {
 			memberdto.setPassword(multi.getParameter("password"));
 			memberdto.setPhone(multi.getParameter("phone"));
 			System.out.println("phone : " + multi.getParameter("phone"));
-			memberdto.setProfile_url("/J20180403/upload/" + filename);
-			System.out.println("aa : "+ "/J20180403/upload/" + filename);
+			if(multi.getFile("profile_url")!=null){
+			    File file=multi.getFile("profile_url");
+			    memberdto.setProfile_url("/J20180403/upload/" + filename);
+			}else{
+				MemberDao memberdao = MemberDao.getInstance();
+				MemberDto memberdto2;
+				try {
+					memberdto2 = memberdao.select(email);
+					memberdto.setProfile_url(memberdto2.getProfile_url());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+			// memberdto.setProfile_url("/J20180403/upload/" + filename);
+			System.out.println("kk aa : "+ "/J20180403/upload/" + filename);
 		try {
 			MemberDao memberdao = MemberDao.getInstance();
 			int result = memberdao.update(memberdto);
