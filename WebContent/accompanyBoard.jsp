@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -46,8 +47,9 @@ div {
 	margin-top: 35px;
 	margin-left: auto;
 	margin-right: auto;
-	display: flex;
+	display: inline-block;
 	justify-content: space-between;
+	border: solid;
 }
 
 .pagenumber {
@@ -68,6 +70,8 @@ div {
 }
 .container{
 	padding: 15px;
+	height: 100%;
+	border: solid;
 }
 
 .card {
@@ -76,7 +80,7 @@ div {
 	border: solid 2px;
 	border-radius: 10px;
 	border-color: #F6F6F6;
-	position: relative;
+	display: inline-block;
 	overflow: hidden;
 }
 
@@ -182,81 +186,31 @@ div {
 		</div>
 		<div class="section-card">
 			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1"
-					style="width: 100%">
+				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
 				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행당구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다구합니다.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/search.jpg" class="card-image" alt="2"
-					style="width: 100%">
-				</figure>
-				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행구합니당.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/accompany.jpg" class="card-image" alt="3"
-					style="width: 100%">
-				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행구합니당.</p>
+					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
+					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
+					<div style="float: right;">마감?</div><div>내용</div>
+					<div style="vertical-align: baseline;">조회수 추천수</div>
+					<div>등록일</div>
 				</div>
 			</div>
 		</div>
 		<!--section card -->
-		<div class="section-card">
-			<div class="card">
-				<img src="images/accompany.jpg" class="card-image" alt="4"
-					style="width: 100%">
-				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행구합니당.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/accompany.jpg" class="card-image" alt="5"
-					style="width: 100%">
-				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행구합니당.</p>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/accompany.jpg" class="card-image" alt="6"
-					style="width: 100%">
-				<div class="container">
-					<h3>
-						<b>동행 구합니다.</b>
-					</h3>
-					<p>동행구합니당.</p>
-				</div>
-			</div>
-		</div>
-<!--section card -->
 		<div>
 			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 		</div>
 		<div class="pagination">
-			<a href="#">&laquo;</a> 
+			<c:if test="${pagenum != 1}">
+				<a href="list.do?pageNum=${currentPage-1}">&laquo;</a> 			
+			</c:if>
+			<a href="#">&#9665</a>
 			<a href="#" class="active">1</a> 
 			<a href="#">2</a> 
 			<a href="#">3</a> 
 			<a href="#" >4</a> 
 			<a href="#">5</a> 
+			<a href="#">&#9655</a>
 			<a href="#">&raquo;</a>
 		</div>
 		<div class="search">
@@ -269,11 +223,9 @@ div {
 			<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 			<button type="submit" class="search-submit">검색</button>
 		</div>
-	</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
-
 
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
@@ -289,7 +241,6 @@ div {
 		}
 
 		setInterval(replacePhoto, 3000);
-		
 	</script>
 </body>
 </html>

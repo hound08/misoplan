@@ -87,7 +87,6 @@ public class BoardScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		BoardScheduleDto dto = new BoardScheduleDto();
 		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
 		String sql1 = "SELECT SL_CODE FROM SCHEDULELARGE WHERE EMAIL = ?";
 		String sql2 = "SELECT * FROM SCHEDULEMEDIUM WHERE SL_CODE = ?";
@@ -107,13 +106,14 @@ public class BoardScheduleDao {
 				
 				if(rs.next()) {
 					do {
+						BoardScheduleDto dto = new BoardScheduleDto();
 						dto.setSl_code(rs.getString("SL_CODE"));
 						dto.setSm_code(rs.getString("SM_CODE"));
 						dto.setLocal_name(rs.getString("LOCAL_NAME"));
 						dto.setLocal_code(rs.getString("LOCAL_CODE"));
 						dto.setTour_date(rs.getDate("TOUR_DATE"));
 						dto.setTour_text(rs.getString("TOUR_TEXT"));
-						System.out.println("TOUR_TEXT : " + rs.getString("TOUR_TEXT"));
+						System.out.println("TOUR_TEXT : " + rs.getString("LOCAL_CODE"));
 						list.add(dto);
 					} while(rs.next());
 				} else {
@@ -132,6 +132,30 @@ public class BoardScheduleDao {
 		}
 		
 		return list;
+	}
+
+	public int getTotalCnt() throws SQLException {
+		Connection conn = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      String sql = "SELECT COUNT(*) FROM BOARDSCHEDULE";
+	      int result = 0;
+	      
+	      try {
+	    	  conn = getConnection();
+	          ps = conn.prepareStatement(sql);
+	          rs = ps.executeQuery();
+	          if (rs.next()) {
+	             result = rs.getInt(1);
+	          }
+		} catch (Exception e) {
+			 System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close(); 
+	        if (ps != null) ps.close(); 
+	        if (conn != null) conn.close(); 
+		}
+		return result;
 	}
 	
 	/*

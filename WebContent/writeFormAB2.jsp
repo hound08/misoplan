@@ -8,12 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result > 0}">
-		<script type="text/javascript">
-			alert("성공");
-			location.href="accompanyBoard.jsp";
-		</script>
-	</c:if>
 	<c:if test="${result == 0}">
 		<script type="text/javascript">
 			alert("실패");

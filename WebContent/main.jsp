@@ -30,17 +30,13 @@ div {
 }
 
 .imageText {
-	padding-top: 100px;
+	padding-top: 150px;
 	width: 1080px;
 	text-align: center;
 }
 
-.imageTitle {
-	font-size: 100px;
-}
-
 .imageDesc {
-	font-size: 50px;
+	font-size: 60px;
 }
 
 .contents {
@@ -128,7 +124,6 @@ div {
 	<div class="section">
 		<div class="image">
 			<div class="imageText">
-				<p class="imageTitle">미소플랜</p>
 				<p class="imageDesc">미소플랜에 오신 것을 환영합니다<br>자신만의 일정을 자유롭게 꾸며보세요</p>
 			</div>
 		</div>
