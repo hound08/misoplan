@@ -41,7 +41,7 @@
 				height: 100px;
 			}
 			#img input {
-			
+		
 			}
 			#secondbox table{
 				margin: 0px auto;
