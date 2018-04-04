@@ -40,13 +40,18 @@ h1 {
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#email').change(function() {
-			var id = $('#email').val();
-			var sendData = 'email=' + email;
-			$.post('joinCheck.jsp', sendData, function(msg) {
-				$('#pEmailCheck').html(msg);
-			});
-		});
+		var url = 'joinCheck.jsp';
+		var param = $('#email').val();
+		
+		$('#email').change(function(){
+	         $.ajax({
+	             type: 'POST',
+	        	 url: url,
+	        	 data: param,
+	        	 success: function(result) {
+	               $('#pEmailCheck').html(result);   
+	             }});
+	    });
 	});
 </script>
 </head>
