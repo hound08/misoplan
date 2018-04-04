@@ -87,7 +87,6 @@ public class BoardScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		BoardScheduleDto dto = new BoardScheduleDto();
 		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
 		String sql1 = "SELECT SL_CODE FROM SCHEDULELARGE WHERE EMAIL = ?";
 		String sql2 = "SELECT * FROM SCHEDULEMEDIUM WHERE SL_CODE = ?";
@@ -107,13 +106,14 @@ public class BoardScheduleDao {
 				
 				if(rs.next()) {
 					do {
+						BoardScheduleDto dto = new BoardScheduleDto();
 						dto.setSl_code(rs.getString("SL_CODE"));
 						dto.setSm_code(rs.getString("SM_CODE"));
 						dto.setLocal_name(rs.getString("LOCAL_NAME"));
 						dto.setLocal_code(rs.getString("LOCAL_CODE"));
 						dto.setTour_date(rs.getDate("TOUR_DATE"));
 						dto.setTour_text(rs.getString("TOUR_TEXT"));
-						System.out.println("TOUR_TEXT : " + rs.getString("TOUR_TEXT"));
+						System.out.println("TOUR_TEXT : " + rs.getString("LOCAL_CODE"));
 						list.add(dto);
 					} while(rs.next());
 				} else {
