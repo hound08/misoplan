@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
 
-public class BoardWriteAction implements CommandProcess {
+public class BoardSelectAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request,
