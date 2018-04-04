@@ -65,6 +65,7 @@ public class BoardScheduleDao {
 	            bs.setVote_count(rs.getInt(9));
 	            bs.setView_count(rs.getInt(10));
 	            bs.setBoard_date(rs.getDate(11));
+	            bs.setLocal_names(rs.getString(12));
 	            list.add(bs);
 	         }
 	      } catch (Exception e) {
@@ -97,21 +98,24 @@ public class BoardScheduleDao {
 			ps.setString(1, email);
 			rs = ps.executeQuery();
 			if ( rs.next() ) {
+				String sl_code = rs.getString(1);
 				rs.close();
 				ps.close();
 				ps = conn.prepareStatement(sql2);
+				ps.setString(1,	sl_code);
 				rs = ps.executeQuery();
 				
 				if(rs.next()) {
-					while(rs.next()) {
+					do {
 						dto.setSl_code(rs.getString("SL_CODE"));
 						dto.setSm_code(rs.getString("SM_CODE"));
 						dto.setLocal_name(rs.getString("LOCAL_NAME"));
 						dto.setLocal_code(rs.getString("LOCAL_CODE"));
 						dto.setTour_date(rs.getDate("TOUR_DATE"));
 						dto.setTour_text(rs.getString("TOUR_TEXT"));
+						System.out.println("TOUR_TEXT : " + rs.getString("TOUR_TEXT"));
 						list.add(dto);
-					}
+					} while(rs.next());
 				} else {
 					System.out.println("대분류는 찾았으나 중분류를 찾지 못함!");
 				}

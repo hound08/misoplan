@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -146,47 +147,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			세부 일정
 		</div>
 			<div class="center-main-card">
+			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box">
 					<div class="card-box-title">
-						title
+						날짜 지역${dto.tour_date }
 					</div>
 					<div class="card-box-bottom">
 						내 용${dto.tour_text }
 					</div>
 				</div>
-				<div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div>
-		
-				<div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div>
-				<div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div>
-				<div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div>
+			</c:forEach>
 			</div>
 		<div class="center-bottom-image">
 			<div class="bottom-image">

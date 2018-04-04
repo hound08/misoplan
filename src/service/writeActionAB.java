@@ -41,7 +41,7 @@ public class writeActionAB implements CommandProcess{
 			String type = multi.getContentType(filename1);
 			File file = multi.getFile(filename1);
 			System.out.println("real Path : " + realPath);
-			System.out.println("파라메타 이름 : " + filename1);
+			System.out.println("파라미터 이름 : " + filename1);
 			System.out.println("실제 파일 이름 : " + original);
 			System.out.println("저장된 파일 이름 : " + filename);
 			System.out.println("파일 타입 : " + type);
@@ -52,14 +52,8 @@ public class writeActionAB implements CommandProcess{
 		}
 		
 		String String_date = multi.getParameter("closing_date");
-		Date util_date = null;
-		try {
-			util_date = new SimpleDateFormat("yyyy-MM-dd").parse(String_date);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		java.sql.Date closing_date = new java.sql.Date(util_date.getDate());
-		
+		java.sql.Date closing_date = java.sql.Date.valueOf(String_date);
+				
 		AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
 		accompanyDto.setEmail(String.valueOf(session.getAttribute("email")));
 		accompanyDto.setTitle(multi.getParameter("title"));

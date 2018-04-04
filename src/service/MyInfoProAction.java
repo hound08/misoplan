@@ -23,7 +23,6 @@ public class MyInfoProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		try {
 			// 사진 업로드 관련 코드
 			request.setCharacterEncoding("utf-8");
 			
@@ -52,20 +51,23 @@ public class MyInfoProAction implements CommandProcess {
 			}
 			request.setCharacterEncoding("UTF-8");
 			MemberDto memberdto = new MemberDto();
-			String email = request.getParameter("email");
-			System.out.println("@@@@@@@@@@@ email = "+ email);
+			String email = multi.getParameter("email");
+			System.out.println("@@@@@@@@@@@ email = "+ multi.getParameter("email"));
 			
 			memberdto.setEmail(multi.getParameter("email"));
 			memberdto.setNickname(multi.getParameter("Nickname"));	
 			memberdto.setPassword(multi.getParameter("password"));
 			memberdto.setPhone(multi.getParameter("phone"));
 			System.out.println("phone : " + multi.getParameter("phone"));
-			memberdto.setProfile_url(multi.getParameter("profile_url"));
-			System.out.println("aa : "+ multi.getParameter("Profile_url"));
+			memberdto.setProfile_url("/J20180403/upload/" + filename);
+			System.out.println("aa : "+ "/J20180403/upload/" + filename);
+		try {
 			MemberDao memberdao = MemberDao.getInstance();
 			int result = memberdao.update(memberdto);
-			request.setAttribute("result", result);
-			request.setAttribute("email", email);
+			if (result > 0) {
+				request.setAttribute("result", result);
+				request.setAttribute("email", email);
+			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
