@@ -7,23 +7,19 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result != '0' || result != '-1'}">
-		<% session.setAttribute("email", request.getParameter("email")); %>
+	<c:if test="${nickname != null }">
+		<%
+			session.setAttribute("email", request.getAttribute("email"));
+			session.setAttribute("nickname", request.getAttribute("nickname"));
+		%>
 		<script type="text/javascript">
 			location.href="main.do";
 		</script>
 	</c:if>
 
-	<c:if test="${result == '0' }">
+	<c:if test="${nickname == null }">
 		<script type="text/javascript">
-			alert("비밀번호가 틀렸습니다.");
-			location.href="loginForm.do";
-		</script>
-	</c:if>
-	
-	<c:if test="${result == '-1' }">
-		<script type="text/javascript">
-			alert("존재하지 않는 아이디입니다.");
+			alert("아이디 또는 비밀번호가 틀렸습니다.");
 			location.href="loginForm.do";
 		</script>
 	</c:if>
