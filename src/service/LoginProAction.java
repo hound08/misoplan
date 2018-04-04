@@ -21,7 +21,6 @@ public class LoginProAction implements CommandProcess {
 			
 			request.setAttribute("email", email);
 			request.setAttribute("nickname", result);
-			request.setAttribute("result", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
