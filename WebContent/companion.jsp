@@ -10,12 +10,12 @@
 			#center {
 				border: 1px solid red;
 				margin: 0px auto;
-				width: 1000px;
+				width: 1200px;
 				height: 100%;
 			}
 			
 			#main {
-					width: 730px;
+					width: 930px;
 					border: 3px solid green;
 					text-align: center;
 					float: left;

@@ -10,11 +10,11 @@
 			#center {
 				border: 1px solid red;
 				margin: 0px auto;
-				width: 1000px;
+				width: 1200px;
 			}
 			
 			#main {
-					width: 730px;
+					width: 930px;
 					border: 3px solid green;
 					text-align: center;
 					float: left;
@@ -94,7 +94,7 @@
 							<p class="menutitle" >동해</p>
 						</div>
 						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">>
+							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
 							<p class="menutitle" >동해</p>
 						</div>
 							<div class="pagination">
