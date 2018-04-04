@@ -72,7 +72,7 @@
 									<c:forEach var="bsdto" items="${schedule }">
 							<tr>
 								<td>	
-									
+								
 								
 									</c:forEach>
 								</c:if>
