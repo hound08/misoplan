@@ -36,7 +36,7 @@
 	</div>
 	<div class="loginForm">
 		<form action="loginPro.do">
-			<h2>로그인</h2><br>
+			<h1>로그인</h1><br>
 			<p>이메일 : <input type="text" name="email" required="required"></p><br>
 			<p>비밀번호 : <input type="password" name="password" required="required"></p><br>
 			<p><input type="submit" value="로그인"></p>

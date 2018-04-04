@@ -10,11 +10,27 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-	  *{ margin:0; padding:0; }
-      li{ list-style:none; }
-      a{ text-decoration:none;}
-      a:hover{text-decoration:underline; text-decoration: none; }
-      img {vertical-align:bottom;}
+* {
+	margin: 0;
+	padding: 0;
+}
+
+li {
+	list-style: none;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	text-decoration: none;
+}
+
+img {
+	vertical-align: bottom;
+}
 
 .header {
 	width: 100%;
@@ -22,7 +38,7 @@
 	overflow: hidden;
 	margin: 5px auto;
 	display: inline-block;
-/*	border:solid;  
+	/*	border:solid;  
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
 }
@@ -31,19 +47,19 @@
 	width: 180px;
 	height: 100%;
 	float: left;
-/*	border-right: solid;
+	/*	border-right: solid;
 	border-color: #EAEAEA;
 	border-width: 2px;
 	margin-right: 90px;	*/
 }
 
-.logo_image{
+.logo_image {
 	float: right;
 	cursor: pointer;
 }
 
 .category {
-	width: 800px; 
+	width: 800px;
 	height: 50px;
 	padding: 0px auto;
 	margin-top: auto;
@@ -53,26 +69,37 @@
 	align-items: center;
 }
 
-.login {
-/*	border-left:solid;
+.login_on {
+	/*	border-left:solid;
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
-	width: 260px; 
+	padding-top: 5px;
+	width: 200px; 
 	height: 50px;
-	display: flex;
-	align-items:center;
+	align-items: center;
+	float: right;
+}
+
+.login_off {
+	/*	border-left:solid;
+	border-color: #EAEAEA;
+	border-width: 2px;	*/
+	padding-top: 15px;
+	width: 200px; 
+	height: 50px;
+	align-items: center;
 	float: right;
 }
 
 .login_label {
-    vertical-align:middle;
-    text-decoration: none;
-    font-size: 15px;
-    cursor: pointer;
-    margin-left: 20px;
+	vertical-align: middle;
+	text-decoration: none;
+	font-size: 15px;
+	cursor: pointer;
+	margin-left: 20px;
 }
 
-.login_label:hover{
+.login_label:hover {
 	color: #47C83E
 }
 
@@ -96,15 +123,6 @@
 	align-content: center;
 }
 
-.myInfo {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.logout {
-	margin-right: 10px;
-}
-
 </style>
 </head>
 <body>
@@ -117,22 +135,22 @@
 				<li><a href="search.jsp"><img src="images/category1.png" align="middle" class="category-image"></a></li>
 				<li><a href="makePlan.do"><img src="images/category2.png" align="middle" class="category-image"></a></li>
 				<li><a href="boardschedule.do"><img src="images/category3.png" align="middle" class="category-image"></a></li>
-				<li><a href="accompanyBoard.jsp"><img src="images/category4.png" align="middle" class="category-image"></a></li>
+				<li><a href="listAction.do"><img src="images/category4.png" align="middle" class="category-image"></a></li>
 			</ul>
 		</div>
 		<%
 			if (session.getAttribute("email") == null) {	%>
-				<div class="login">
+				<div class="login_off">
 					<div class="loginlabel">
 						<a href="loginForm.do" class="login_label">로그인</a>
 						<a href="joinForm.do" class="login_label">회원가입</a>
 					</div>
 				</div>	<%
 			} else if (session.getAttribute("email") != null) {	%>
-				<div class="login">
-					<p class="welcome"><a href="myInfoForm.do"><% out.println(session.getAttribute("email")); %>님 환영합니다!</a></p>
-					<p class="myInfo"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do'"></p>
-					<p class="logout"><input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
+				<div class="login_on">
+					<p class="welcome"><strong><% out.println(session.getAttribute("nickname")); %></strong>님 환영합니다!</p>
+					<p class="buttons"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do?email=${email}'">
+					<input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}
 		%>

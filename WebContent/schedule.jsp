@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
    <%@ include file="header.jsp" %>
 <!DOCTYPE html >
 <html>
@@ -10,12 +12,12 @@
 			#center {
 				border: 1px solid red;
 				margin: 0px auto;
-				width: 1000px;
+				width: 1200px;
 				height: 100%;
 			}
 			
 			#main {
-					width: 730px;
+					width: 930px;
 					border: 3px solid green;
 					text-align: center;
 					float: left;
@@ -65,10 +67,17 @@
 				<div id="myinfo">
 					<div id="info">
 						<table border="1">
-							<tr><th id="planname">일정 제목 </th> <th id="region">중분류 지역명 </th><th>여행기간</th><th>등록일</th></tr>
-							<tr><td>신나는 전주로 가자 </td><td>전주,남원,여수,순천 </td><td>4.10~4.14</td><td>2018-03-30</td></tr>
-							<tr><td>신나는 부산로 가자 </td><td>부산 </td><td>4.10~4.14</td><td>2018-03-30</td></tr>
-							<tr><td>신나는 서울로 가자 </td><td>서울,수원,인천</td><td>4.10~4.14</td><td>2018-03-30</td></tr>
+							<tr><th>번호</th><th id="planname">일정 제목 </th> <th id="region">중분류 지역명 </th><th>여행기간</th><th>등록일</th></tr>
+								<c:if test="${totCnt > 0 }">
+									<c:forEach var="bsdto" items="${schedule }">
+							<tr>
+								<td>	
+								
+								
+									</c:forEach>
+								</c:if>
+							</tr>
+						
 						</table>
 						<div class="pagination">
 										<a href="#">&laquo;</a> 

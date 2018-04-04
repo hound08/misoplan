@@ -8,17 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-   <c:if test="${result > 0 }">
-      <script type="text/javascript">
-         alert("수정 성공");
-         location.href = "myInfoForm.do?email=${email }";
-      </script>
-   </c:if>
-   <c:if test="${result == 0}">
-      <script type="text/javascript">
-         alert("수정 실패");
-         location.href="myInfoForm.do?email=${email}"
-      </script>   
-   </c:if>
+	<c:if test="${result == 0}">
+		<script type="text/javascript">
+			alert("실패");
+			location.href="accompanyBoard.jsp";
+		</script>
+	</c:if>
 </body>
 </html>

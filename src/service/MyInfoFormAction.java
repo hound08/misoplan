@@ -1,5 +1,6 @@
 package service;
 
+
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -7,25 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDao;
+import dao.MemberDto;
 
-public class LoginProAction implements CommandProcess {
+public class MyInfoFormAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
-			String password = request.getParameter("password");
+			MemberDao memberdao = MemberDao.getInstance();
+			MemberDto memberdto = memberdao.select(email);
 			
-			MemberDao dao = MemberDao.getInstance();
-			String result = dao.loginCheck(email, password);
 			
 			request.setAttribute("email", email);
-			request.setAttribute("nickname", result);
+			request.setAttribute("memberdto", memberdto);
+			System.out.println("memberdto Profile_url->"+memberdto.getProfile_url());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		return "loginPro.jsp";
+		return "myinfo.jsp";
 	}
 
 }

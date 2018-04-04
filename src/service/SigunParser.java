@@ -35,7 +35,7 @@ public class SigunParser {
 		parameter = parameter + "&" + "areaCode="+areaCode;
 		
 		addr = addr + serviceKey + parameter;
-		System.out.println("@@SigunParser addr @@" + addr);
+		//System.out.println("@@SigunParser addr @@" + addr);
 		
 		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
 		DocumentBuilder parser = f.newDocumentBuilder();

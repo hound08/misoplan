@@ -1,11 +1,11 @@
 package dao;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class AccompanyBoardDto {
 	
 	private int post_num; //게시물 번호
-	private int email;	//작성자 이메일
+	private String email;	//작성자 이메일
 	private String nickname;  // 작성자 닉네임
 	private String title;	//게시물 제목
 	private String image_url; //대표 이미지 url
@@ -25,10 +25,10 @@ public class AccompanyBoardDto {
 	public void setPost_num(int post_num) {
 		this.post_num = post_num;
 	}
-	public int getEmail() {
+	public String getEmail() {
 		return email;
 	}
-	public void setEmail(int email) {
+	public void setEmail(String email) {
 		this.email = email;
 	}
 	public String getNickname() {
