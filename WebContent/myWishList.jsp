@@ -13,6 +13,7 @@
 				width: 1200px;
 			}
 			
+			
 			#main {
 					width: 930px;
 					border: 3px solid green;
