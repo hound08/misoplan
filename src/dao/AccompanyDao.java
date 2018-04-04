@@ -67,7 +67,7 @@ public class AccompanyDao {
 		int result = 0;
 		int num = 0;
 		
-		String sql1 = "Select nvl(max(post_num),0) from accompanyboard";
+		String sql1 = "select nvl(max(post_num),0) from accompanyboard";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql1);
@@ -83,15 +83,13 @@ public class AccompanyDao {
 		}
 		
 		String nickname = null;
-		String sl_code = null;
-		String sql2 = "select nickname, sl_code from accompanyboard where email = ?";
+		String sql2 = "select nickname from member where email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, accompanyBoardDto.getEmail());
 			rs = pstmt.executeQuery();
 			rs.next();
 			nickname = rs.getString(1);
-			sl_code = rs.getString(2);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} finally {
@@ -99,13 +97,25 @@ public class AccompanyDao {
 			close(pstmt);
 		}
 		
-		String sql3 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		/*String sl_code = null;
+		String sql3 = "select from sl_code schedulelarge where email = ?";
 		try {
 			pstmt = conn.prepareStatement(sql3);
+			pstmt.setString(1, accompanyBoardDto.getEmail());
+			rs = pstmt.executeQuery();
+			rs.next();
+			sl_code = rs.getString(1);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}*/
+		
+		String sql4 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql4);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, accompanyBoardDto.getEmail()); 
 			pstmt.setString(3, nickname); 
-			pstmt.setString(4, sl_code); 
+			pstmt.setString(4, null); 
 			pstmt.setString(5, accompanyBoardDto.getTitle());
 			pstmt.setString(6, accompanyBoardDto.getImage_url());
 			pstmt.setString(7, accompanyBoardDto.getContent());
