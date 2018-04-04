@@ -65,6 +65,7 @@ public class BoardScheduleDao {
 	            bs.setVote_count(rs.getInt(9));
 	            bs.setView_count(rs.getInt(10));
 	            bs.setBoard_date(rs.getDate(11));
+	            bs.setLocal_names(rs.getString(12));
 	            list.add(bs);
 	         }
 	      } catch (Exception e) {
