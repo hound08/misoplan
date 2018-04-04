@@ -40,7 +40,7 @@
 		<ul>
 			<h1>My Page</h1>
 			<li class="sidemenus"><a href="myinfo.jsp" class="a">내정보</a></li>
-			<li class="sidemenus"><a href="schedule.jsp" class="a">내 계획</a></li>
+			<li class="sidemenus"><a href="schedule.do" class="a">내 계획</a></li>
 			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 List</a></li>
 			<li class="sidemenus" ><a href="companion.jsp" class="a">동행</a>
 			</li>

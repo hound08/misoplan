@@ -21,7 +21,25 @@ public class BoardScheduleDto {
 	private String local_code;
 	private Date tour_date;
 	private String tour_text;
+	private String ss_code;
+	private String tour_name;
 	
+	
+	
+	
+	
+	public String getSs_code() {
+		return ss_code;
+	}
+	public void setSs_code(String ss_code) {
+		this.ss_code = ss_code;
+	}
+	public String getTour_name() {
+		return tour_name;
+	}
+	public void setTour_name(String tour_name) {
+		this.tour_name = tour_name;
+	}
 	
 	
 	public int getBs_num() {

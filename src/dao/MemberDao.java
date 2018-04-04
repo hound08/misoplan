@@ -88,6 +88,7 @@ public class MemberDao {
 				dto.setPassword(rs.getString("password"));
 				dto.setPhone(rs.getString("phone"));
 				dto.setProfile_url(rs.getString("profile_url"));
+				System.out.println("select  profile_url->"+rs.getString("profile_url"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -113,7 +114,7 @@ public class MemberDao {
 			   ps.setString(1, memberdto.getNickname());
 			   ps.setString(2, memberdto.getPassword());
 			   ps.setString(3, memberdto.getPhone());
-			   ps.setString(4, memberdto.getProfile_url());			   
+				   ps.setString(4, memberdto.getProfile_url());			   
 			   ps.setString(5, memberdto.getEmail());
 			   System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ memberdto.getProfile_url() );
 			   result = ps.executeUpdate();
