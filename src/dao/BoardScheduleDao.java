@@ -130,6 +130,30 @@ public class BoardScheduleDao {
 		
 		return list;
 	}
+
+	public int getTotalCnt() throws SQLException {
+		Connection conn = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      String sql = "SELECT COUNT(*) FROM BOARDSCHEDULE";
+	      int result = 0;
+	      
+	      try {
+	    	  conn = getConnection();
+	          ps = conn.prepareStatement(sql);
+	          rs = ps.executeQuery();
+	          if (rs.next()) {
+	             result = rs.getInt(1);
+	          }
+		} catch (Exception e) {
+			 System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close(); 
+	        if (ps != null) ps.close(); 
+	        if (conn != null) conn.close(); 
+		}
+		return result;
+	}
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
