@@ -80,24 +80,39 @@ public class AccompanyDao {
 		} finally {
 			close(rs);
 			close(pstmt);
-			close(conn);
 		}
 		
-		String sql2 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		String nickname = null;
+		String sl_code = null;
+		String sql2 = "select nickname, sl_code from accompanyboard where email = ?";
 		try {
-			conn = getConnection();
 			pstmt = conn.prepareStatement(sql2);
+			pstmt.setString(1, accompanyBoardDto.getEmail());
+			rs = pstmt.executeQuery();
+			rs.next();
+			nickname = rs.getString(1);
+			sl_code = rs.getString(2);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+		}
+		
+		String sql3 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql3);
 			pstmt.setInt(1, num);
-			pstmt.setString(2, "tbd"); //Email
-			pstmt.setString(3, "tbd"); //Nickname
-			pstmt.setString(4, "tbd"); //SL_code
+			pstmt.setString(2, accompanyBoardDto.getEmail()); 
+			pstmt.setString(3, nickname); 
+			pstmt.setString(4, sl_code); 
 			pstmt.setString(5, accompanyBoardDto.getTitle());
 			pstmt.setString(6, accompanyBoardDto.getImage_url());
 			pstmt.setString(7, accompanyBoardDto.getContent());
 			pstmt.setString(8, accompanyBoardDto.getTag());
 			pstmt.setInt(9, 0);
 			pstmt.setInt(10, 0);
-			pstmt.setString(12, "tbd"); //Closing_Date
+			pstmt.setDate(12, accompanyBoardDto.getClosing_date()); 
 			pstmt.setInt(13, accompanyBoardDto.getMinimum_number());
 			pstmt.setInt(14, 1);
 			pstmt.setInt(15, 0);

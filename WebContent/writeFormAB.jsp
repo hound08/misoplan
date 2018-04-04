@@ -138,7 +138,6 @@ ul {
 			if (current >= images.length)
 				current = 0;
 			image.src = images[current];
-			
 		}
 
 		setInterval(replacePhoto, 3000);
