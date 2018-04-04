@@ -7,14 +7,15 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Session;
+
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
 
 public class BoardSelectAction implements CommandProcess {
 
 	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
