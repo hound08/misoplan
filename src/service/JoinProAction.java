@@ -34,25 +34,15 @@ public class JoinProAction implements CommandProcess {
 			String original = multi.getOriginalFileName(filename1);
 			String type = multi.getContentType(filename1);
 			File file = multi.getFile(filename1);
-			System.out.println("real Path : " + realPath);
-			System.out.println("파라메타 이름 : " + filename1);
-			System.out.println("실제 파일 이름 : " + original);
-			System.out.println("저장된 파일 이름 : " + filename);
-			System.out.println("파일 타입 : " + type);
-			
-			if (file != null) {
-				System.out.println("크기 : " + file.length() + "<br>");
-			}
 		}
 		
 		// 회원 정보 관련 코드
 		MemberDto dto = new MemberDto();
-		System.out.println("씨발아!!!!!!!!! : " + request.getParameter("email"));
-		dto.setEmail(request.getParameter("email"));
-		dto.setNickname(request.getParameter("nickname"));
-		dto.setPassword(request.getParameter("password"));
-		dto.setPhone(request.getParameter("phone"));
-		dto.setProfile_url(realPath + "/" + filename);
+		dto.setEmail(multi.getParameter("email"));
+		dto.setNickname(multi.getParameter("nickname"));
+		dto.setPassword(multi.getParameter("password"));
+		dto.setPhone(multi.getParameter("phone"));
+		dto.setProfile_url("/J20180403/upload/" + filename);
 		
 		try {
 			MemberDao dao = MemberDao.getInstance();

@@ -16,13 +16,13 @@ public class MyInfoFormAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
-			System.out.println("!!!!!!!!!!!!!!!!!"+ email);
 			MemberDao memberdao = MemberDao.getInstance();
 			MemberDto memberdto = memberdao.select(email);
 			
 			
 			request.setAttribute("email", email);
 			request.setAttribute("memberdto", memberdto);
+			System.out.println("memberdto Profile_url->"+memberdto.getProfile_url());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

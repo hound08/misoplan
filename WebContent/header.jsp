@@ -69,14 +69,24 @@ img {
 	align-items: center;
 }
 
-.login {
+.login_on {
 	/*	border-left:solid;
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
-	width: 220px;
-	width: 260px; 
+	padding-top: 5px;
+	width: 200px; 
 	height: 50px;
-	display: flex;
+	align-items: center;
+	float: right;
+}
+
+.login_off {
+	/*	border-left:solid;
+	border-color: #EAEAEA;
+	border-width: 2px;	*/
+	padding-top: 15px;
+	width: 200px; 
+	height: 50px;
 	align-items: center;
 	float: right;
 }
@@ -113,15 +123,6 @@ img {
 	align-content: center;
 }
 
-.myInfo {
-	margin-left: 10px;
-	margin-right: 10px;
-}
-
-.logout {
-	margin-right: 10px;
-}
-
 </style>
 </head>
 <body>
@@ -139,17 +140,17 @@ img {
 		</div>
 		<%
 			if (session.getAttribute("email") == null) {	%>
-				<div class="login">
+				<div class="login_off">
 					<div class="loginlabel">
 						<a href="loginForm.do" class="login_label">로그인</a>
 						<a href="joinForm.do" class="login_label">회원가입</a>
 					</div>
 				</div>	<%
 			} else if (session.getAttribute("email") != null) {	%>
-				<div class="login">
-					<p class="welcome"><% out.println(session.getAttribute("email")); %>님 환영합니다!</p>
-					<p class="myInfo"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do?email=${email}'"></p>
-					<p class="logout"><input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
+				<div class="login_on">
+					<p class="welcome"><strong><% out.println(session.getAttribute("nickname")); %></strong>님 환영합니다!</p>
+					<p class="buttons"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do?email=${email}'">
+					<input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}
 		%>

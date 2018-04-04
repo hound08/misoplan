@@ -39,12 +39,12 @@ public class MemberDao {
 		return conn;
 	}
 
-	public int loginCheck(String email, String password) throws SQLException {
+	public String loginCheck(String email, String password) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT PASSWORD FROM MEMBER WHERE EMAIL = ?";
-		int result = 0;
+		String sql = "SELECT NICKNAME, PASSWORD FROM MEMBER WHERE EMAIL = ?";
+		String result = null;
 
 		try {
 			conn = getConnection();
@@ -53,13 +53,9 @@ public class MemberDao {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				if (rs.getString(1).equals(password)) {
-					result = 1;
-				} else {
-					result = 0;
+				if (rs.getString(2).equals(password)) {
+					result = rs.getString(1);
 				}
-			} else {
-				result = -1;
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -92,6 +88,7 @@ public class MemberDao {
 				dto.setPassword(rs.getString("password"));
 				dto.setPhone(rs.getString("phone"));
 				dto.setProfile_url(rs.getString("profile_url"));
+				System.out.println("select  profile_url->"+rs.getString("profile_url"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -117,8 +114,9 @@ public class MemberDao {
 			   ps.setString(1, memberdto.getNickname());
 			   ps.setString(2, memberdto.getPassword());
 			   ps.setString(3, memberdto.getPhone());
-			   ps.setString(4, memberdto.getProfile_url());			   
+				   ps.setString(4, memberdto.getProfile_url());			   
 			   ps.setString(5, memberdto.getEmail());
+			   System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ memberdto.getProfile_url() );
 			   result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
