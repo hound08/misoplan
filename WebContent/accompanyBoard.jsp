@@ -195,93 +195,15 @@ div {
 					<div>등록일</div>
 				</div>
 			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-				</div>
-			</div>
 		</div>
 		<!--section card -->
 		<div>
 			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 		</div>
 		<div class="pagination">
-			<a href="#">&laquo;</a> 
+			<c:if test="${pagenum != 1}">
+				<a href="list.do?pageNum=${currentPage-1}">&laquo;</a> 			
+			</c:if>
 			<a href="#">&#9665</a>
 			<a href="#" class="active">1</a> 
 			<a href="#">2</a> 
