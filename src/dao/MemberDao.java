@@ -55,11 +55,7 @@ public class MemberDao {
 			if (rs.next()) {
 				if (rs.getString(2).equals(password)) {
 					result = rs.getString(1);
-				} else {
-					result = "0";
 				}
-			} else {
-				result = "-1";
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
