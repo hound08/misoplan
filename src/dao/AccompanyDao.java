@@ -112,10 +112,10 @@ public class AccompanyDao {
 			pstmt.setString(8, accompanyBoardDto.getTag());
 			pstmt.setInt(9, 0);
 			pstmt.setInt(10, 0);
-			pstmt.setDate(12, accompanyBoardDto.getClosing_date()); 
-			pstmt.setInt(13, accompanyBoardDto.getMinimum_number());
-			pstmt.setInt(14, 1);
-			pstmt.setInt(15, 0);
+			pstmt.setDate(11, accompanyBoardDto.getClosing_date()); 
+			pstmt.setInt(12, accompanyBoardDto.getMinimum_number());
+			pstmt.setInt(13, 1);
+			pstmt.setInt(14, 0);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

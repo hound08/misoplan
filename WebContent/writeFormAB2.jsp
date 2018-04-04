@@ -14,7 +14,7 @@
 			location.href="accompanyBoard.jsp";
 		</script>
 	</c:if>
-	<c:if test="${result === 0}">
+	<c:if test="${result == 0}">
 		<script type="text/javascript">
 			alert("실패");
 			location.href="accompanyBoard.jsp";
