@@ -147,7 +147,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			세부 일정
 		</div>
 			<div class="center-main-card">
-			<%-- <c:forEach var="dto" items="${list }"> --%>
+			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box">
 					<div class="card-box-title">
 						날짜 지역${dto.tour_date }
@@ -156,41 +156,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 						내 용${dto.tour_text }
 					</div>
 				</div>
-		
-				<!-- <div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div> -->
-		
-				<!-- <div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div> -->
-				<!-- <div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div> -->
-				<!-- <div class="center-card-box">
-					<div class="card-box-title">
-						title
-					</div>
-					<div class="card-box-bottom">
-						내 용
-					</div>
-				</div> -->	
-			<%-- </c:forEach> --%>
+			</c:forEach>
 			</div>
 		<div class="center-bottom-image">
 			<div class="bottom-image">
