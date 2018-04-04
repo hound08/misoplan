@@ -50,7 +50,6 @@ public class writeActionAB implements CommandProcess{
 
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		int result = accompanyDao.insert(accompanyDto);
-		if(result > 0)
 		
 		return "writeFormAB2.jsp";
 	}//writeFormAction.requestPro
