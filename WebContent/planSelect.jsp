@@ -30,11 +30,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 
 .main-top {
 	width: 1200px;
-	height: 300px;
+	height: 330px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
 	
+}
+.main-imagebt{
+	width: 80px;
+	height: 30px;
+	margin: 0 5px 0 50px;
 }
 .main-top-second1 {
 	width: 400px;
@@ -116,33 +121,45 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .button-bottom {
 	width: 1100px;
-	height: 30px;gin : 0 30px;
+	height: 30px;
+	magin : 0 30px;
 }
 
 </style>
+<script type="text/javascript">
+	function previewFile(input){
+   		 var reader=new FileReader();
+    
+   		 reader.onload=function(event){
+    	   $('.main-top-second1').attr('src', event.target.result);
+    	}
+  		  reader.readAsDataURL(input.files[0]);
+ 	}
+</script>
 </head>
 <body>
-<form action="boardselect.do" name="planSelect" method="post" enctype="multipart/form-data">
+<form action="boardinsert.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
-		<div class="main-top-second1" align="left">
-			<!-- <img alt="IMG" src="images/k1.jpg"> -->
-			<input type="file" name="plan_image">
-		</div>
+		<!-- <div class="main-top-second1" align="left"> -->
+			<img class="main-top-second1" alt="IMG" src="">
+		<!-- </div> -->
 		<div class="main-top-second2">
 		
 		<div class="main-second-box2">
-			제 목 : <input type="text" name="title" required="required">
+			제 목 : <input type="text" name="title" required="required" value="${dto.title }>
 		</div>
 		<div class="main-second-box1">
-			태 그 : <input type="text" name="tag" required="required">
+			태 그 : <input type="text" name="tag" required="required" value="${dto.tag }">
 		</div>
 		<div class="main-second-box1">
 			기 간 : <input type="date"> ~ <input type="date">
 		</div>
 		<div class="main-second-box1">
-			작성자: <input type="text" name="nickname" required="required">
+			작성자: <input type="text" name="nickname" required="required" value="${dto.nickname }">
 		</div>
-		
+		</div>
+		<div class="main-imagebt">
+			<input class="" type="file" name="plan_image_url" value="" onchange="image(this)">
 		</div>
 	</div>
 	<div class="main-center">
@@ -165,7 +182,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<textarea rows="13" cols="163"></textarea>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="button" value="확인" style="width: 40pt; height: 20pt" onclick="location.href='boardinsetAction.do'">
+			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
+			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
 			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
