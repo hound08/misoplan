@@ -55,9 +55,7 @@ public class JoinProAction implements CommandProcess {
 			MemberDao dao = MemberDao.getInstance();
 			int result = dao.insertMember(dto);
 
-			if (result > 0) {
-				request.setAttribute("result", result);
-			}
+			request.setAttribute("result", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
