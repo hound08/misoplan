@@ -36,6 +36,9 @@ public class BoardInsertAction implements CommandProcess {
 		}
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
+		dto.setTag(multi.getParameter("tag"));
+		dto.setNickname(multi.getParameter("nickname"));
+		dto.setTour_text(multi.getParameter("tour_text"));
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			int result = dao.insertPlan(dto);

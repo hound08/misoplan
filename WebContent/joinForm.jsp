@@ -54,8 +54,12 @@ h1 {
 	$(function() {
 		$('#email').change(function() {
 			var sendData = 'email=' + $('#email').val();
-			$.post('joinCheck.jsp', sendData, function(result) {
-				$('#spanEmail').html(result);
+			
+			$.post(
+				'joinCheck.jsp',
+				sendData,
+				function(result) {
+					$('#spanEmail').html(result);
 			});
 		});
 	});

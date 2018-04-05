@@ -71,8 +71,10 @@ public class MyInfoProAction implements CommandProcess {
 				try {
 					memberdto2 = memberdao.select(email);
 					memberdto.setProfile_url(memberdto2.getProfile_url());
+					
+					// memberdto에 저장한 주소를 request에 저장 (이후 jsp에서 받아오기 위해)
+					request.setAttribute("profile_url", memberdto.getProfile_url());
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				
