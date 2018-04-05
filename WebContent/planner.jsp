@@ -52,6 +52,7 @@
 		transition:all 0.5s;
 	}
 	.tourlist{
+		display: inline-block;
 		padding: 0px;
 		margin: 0px;
 		float: left;
@@ -103,25 +104,42 @@
     }
     .citydesc{
     	width: 0%;
-    	float: left;
-    	margin: 13% 0 0 5%;
+    	margin: 10% 0 0 30%;
     }
     #cityinfo:hover{
     	cursor: pointer;
-    }
-    .cityimage{
-    	margin: 4% 0 0 4%;
-    	float:left;
-    	width: 0%;
     }
     .selected{
     	background-color: gray;
     	color: white;
     }
     .tourImage{
-    	width: 30%;
+    	width: 100%;
+    	height: 100%;
+    }
+    .tourtitle{
+    	padding: 5px;
+    }
+    .touraddr{
+    	padding: 5px;
+    }
+    .tourImageDiv{
+    	width: 80%;
     	height: 30%;
     }
+    .plusbutton{
+    	text-align: center;
+    	background-color: #ff531a;
+    	color: white;
+    	float:right;
+    	width: 20%;
+    	height: 55px;
+    }
+    .plusbutton:hover {
+		cursor: pointer;
+	}
+    
+    
 </style>
 
 
@@ -142,12 +160,11 @@ $(document).on('click','#sidebar-menu', function(){
     	$('.center').contents().remove();
     	for(var i = Object.keys(list).length; i > 0; i--){
 				$('.center').prepend("<li id='cityinfo' data="+Object.keys(list)[i-1]+">"
-						+	"<img class='cityimage' id='cityimage' alt='' src='images/plan.jpg'>"
     			    	+	"<p class='citydesc' id='citydesc'>"+list[Object.keys(list)[i-1]]+"</p>"
     			    	+   "</li>");
     	}
     	
-    	document.getElementById("center").style.width="15%";
+    	document.getElementById("center").style.width="10%";
 		document.getElementById("map").style.width="80%";
 		document.getElementById("tourlist").style.width="0px";
 		var cityinfolist = $('.center').children();
@@ -155,11 +172,9 @@ $(document).on('click','#sidebar-menu', function(){
 		var citydesclist = document.getElementsByClassName("citydesc");
 		for(var i = 0; i<cityinfolist.length; i++){
 			cityinfolist[i].style.width="100%";
-			cityinfolist[i].style.height="12%";
+			cityinfolist[i].style.height="5%";
 			cityinfolist[i].style.border="1px solid gray";
-			cityimagelist[i].style.width="35%";
-			cityimagelist[i].style.height="80%";
-			citydesclist[i].style.width="30%";
+			citydesclist[i].style.width="50%";
 		} 
     /* load city list end */
     
@@ -202,8 +217,8 @@ $(document).on('click','#cityinfo', function(){
 				if(firstImage == undefined){
 					firstImage = "images/no_image.jpg";
 				}
-				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><img class='tourImage' src="+firstImage+">"
-				+"<p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></li>");
+				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
+				+"<div class='plusbutton'><br>+</div><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></li>");
 			}
 			
 		},
