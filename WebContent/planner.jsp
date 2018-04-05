@@ -118,14 +118,18 @@
     	background-color: gray;
     	color: white;
     }
-    
+    .tourImage{
+    	width: 30%;
+    	height: 30%;
+    }
 </style>
 
 
 
 
 <script type="text/javascript">
-
+var mapx = [];
+var mapy = [];
   
   
 $(document).on('click','#sidebar-menu', function(){
@@ -145,7 +149,7 @@ $(document).on('click','#sidebar-menu', function(){
     	
     	document.getElementById("center").style.width="15%";
 		document.getElementById("map").style.width="80%";
-		
+		document.getElementById("tourlist").style.width="0px";
 		var cityinfolist = $('.center').children();
 		var cityimagelist = document.getElementsByClassName("cityimage");
 		var citydesclist = document.getElementsByClassName("citydesc");
@@ -176,6 +180,7 @@ $(document).on('click','#cityinfo', function(){
 	var $this = $(this);
 	var areaCode = $('.selected').attr('data');
 	var sigunguCode = $(this).attr('data');
+	$('.tourlist').contents().remove();
 	$.ajax({
 		url : 'GalleryList',
 		type : 'get',
@@ -187,42 +192,59 @@ $(document).on('click','#cityinfo', function(){
 		success : function(data) {
 			var myItem = data.response.body.items.item;
 			for(var i = 0; i < myItem.length; i++){
+				mapx.push(myItem[i].mapx);
+				mapy.push(myItem[i].mapy);
 				var title = myItem[i].title;
-				var addr = myItem[i].addr1;
+				var addr1 = myItem[i].addr1;
+				var addr2 = myItem[i].addr2;
 				var contentid = myItem[i].contentid;
-				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr+"</p></li>");
+				var firstImage = myItem[i].firstimage;
+				if(firstImage == undefined){
+					firstImage = "images/no_image.jpg";
+				}
+				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><img class='tourImage' src="+firstImage+">"
+				+"<p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></li>");
 			}
+			
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert("request : " + XMLHttpRequest);
-			alert("Status: " + textStatus);
-			alert("Error: " + errorThrown);
+			console.log("request : " + XMLHttpRequest);
+			console.log("Status: " + textStatus);
+			console.log("Error: " + errorThrown);
 		}
 	});
 	
-	document.getElementById("tourlist").style.width = "10%";
+	for(var i = 0; i < mapx.length; i++){
+		console.log(mapx[i]);
+		marker = new google.maps.Marker({
+	  	    position: new google.maps.LatLng(mapx[i], mapy[i]),
+		  	map: map
+		});
+	}
+	
+	document.getElementById("tourlist").style.width = "20%";
 	var tourinfo = document.getElementsByClassName("tourinfo");
 	for(var i = 0; i < tourinfo.length; i++){
 		tourinfo[i].style.width = "100%";
 	}
-	document.getElementById("map").style.width="70%";
+	document.getElementById("map").style.width="60%";
 	$(".center").children().removeClass("selected");
 	$this.addClass('selected');
 	
 });
 
-
-$(document).on('click','#sidebar-menu', function(e){
+ $(document).on('click','#sidebar-menu', function(e){
 	    var $this = $(this).attr('data');
 	    if($this == '1'){
+			e.preventDefault();
 		    map.panTo({lat:37.566662, lng:126.978424});
 		    map.setZoom(12, true);
+		    
 	    }
 	    else if($this == '2'){
 	    	var incheon = new google.maps.LatLng(37.4261057, 126.7530724);
 			e.preventDefault();
 		    map.panTo(incheon);
-	    	
 		    map.setZoom(12, true);
 	    }
 	    else if($this == '3'){
@@ -316,9 +338,28 @@ $(document).on('click','#sidebar-menu', function(e){
 		    map.setZoom(11, true);
 	    }	    
 });
-
+ 
+ 
+ function initMap() {
+       var area = document.getElementsByClassName('sidebar-menu');
+	   var center = {lat:36.543583, lng:127.859900};
+       map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 7,
+         center: center,
+         gestureHandling: 'greedy'
+       });  
+	  }
+/* function addMarker(mapx, mapy){
+	marker = new google.maps.Marker({
+  	    position: new google.maps.LatLng(mapx, mapy),
+	  	map: map
+	});
+ } */
 </script>
 
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
+</script>
 </head>
 <body>
 
@@ -343,19 +384,7 @@ $(document).on('click','#sidebar-menu', function(e){
 		</ul>
 
 		<div id="map" class="map"></div>
-		<script>
-		      function initMap() {
-			        var center = {lat:36.543583, lng:127.859900};
-			        map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 7,
-			          center: center,
-			          gestureHandling: 'greedy'
-			        });  
-		    	  }
-	    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
-    </script>
+		
 </div>
 
 </body>

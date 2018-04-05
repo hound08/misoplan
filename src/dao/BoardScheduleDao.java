@@ -157,7 +157,6 @@ public class BoardScheduleDao {
 		}
 		return result;
 	}
-<<<<<<< HEAD
 
 	public List<ArrayList<BoardScheduleDto>> getMylist(String email) throws SQLException {
 		  Connection conn = null;
@@ -211,7 +210,6 @@ public class BoardScheduleDao {
 
 
 
-=======
 	public int insertPlan(BoardScheduleDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -250,7 +248,6 @@ public class BoardScheduleDao {
 		}
 		
 	}*/
->>>>>>> 6ce2d83b39248e348efbee9886601d76bfb993bc
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
