@@ -72,6 +72,7 @@
 								<div class="idlocal" align="right">여행기간 : ${bsdto.tour_date }</div>
 								<div class="datelocal" align="right">작성일 : ${bsdto.regi_date }</div>
 							</div>
+							
 						
 						</c:forEach>
 						<div class="pagination">

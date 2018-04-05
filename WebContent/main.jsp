@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
@@ -76,7 +77,13 @@ div {
 }
 
 /* ---------------------------- 관광지 순위 ---------------------------- */
-.tourListWrap {
+.rankList {
+	width: 100%;
+	height: 450px;
+	left: 0px;
+}
+
+.rankTitleWrap {
 	background-image: url("images/best_tour.jpg");
 	position: absolute;
 	left: 0px;
@@ -84,38 +91,48 @@ div {
 	height: 225px;
 }
 
-.tourListWrapText {
+.rankTitleText {
 	width: 1080px;
 	padding-top: 50px;
 	color: white;
 	text-align: center;
 }
 
-.tourListHeadTitle {
+.rankTitleTextHead {
 	font-size: 70px;
 }
 
-.tourListHeadContent {
+.rankTitleTextContent {
 	font-size: 35px;
 }
 
-.tourList {
-	width: 100%;
-	height: 450px;
-	left: 0px;
+.rankListWrap {
+	padding-top: 270px;
+	text-align: center;
+	font-size: 20px;
 }
 
-.tourListContent {
-	border: 1px solid black;
-	padding-top: 300px;
+.rankListContent {
+	display: inline-block;
+	margin: 15px 15px 15px 15px;
+}
+
+.rankName {
+	padding-top: 10px;
+}
+
+.rankImage {
+	width: 320px;
+	height: 180px;
 }
 
 /* ---------------------------- footer 영역 ---------------------------- */
 .footer_wrap {
+	float: right;
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	margin-top: 50px;
+	margin-top: 360px;
 	background-color: #0099ff;
 }
 </style>
@@ -155,15 +172,20 @@ div {
 					<p class="menudesc">다른 회원의 일정을 구경하거나 자신이 만든 일정을 공유할 수 있습니다.</p>
 				</div>
 			</div>
-			<div class="tourList">
-				<div class="tourListWrap">
-					<div class="tourListWrapText">
-						<p class="tourListHeadTitle">관광지 순위</p>
-						<p class="tourListHeadContent">가장 인기있는 관광지를 알아보세요</p>
+			<div class="rankList">
+				<div class="rankTitleWrap">
+					<div class="rankTitleText">
+						<p class="rankTitleTextHead">관광지 순위</p>
+						<p class="rankTitleTextContent">가장 인기있는 관광지를 알아보세요</p>
 					</div>
 				</div>
-				<div class="tourListContent">
-					<p>${tour_num }</p>
+				<div class="rankListWrap">
+					<c:forEach var="list" items="${list }">
+						<div class="rankListContent">
+							<img class="rankImage" alt="${list.tour_name }" src="${list.image_url }">
+							<p class="rankName"><strong>${list.tour_name }</strong></p>
+						</div>
+					</c:forEach>
 				</div>
 			</div>
 		</div>

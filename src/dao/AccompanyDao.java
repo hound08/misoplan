@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -136,7 +138,7 @@ public class AccompanyDao {
 		return result;
 	}
 	
-	public int getTotalCnt() {
+	public int getTotalPost() {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -159,5 +161,46 @@ public class AccompanyDao {
 		}
 		
 		return total;
+	}
+
+	public List<AccompanyBoardDto> list(int startRow, int endRow){
+		
+		List<AccompanyBoardDto> list = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select from (select rownum rn, a.* from (select *from accompanyboard order by post_num desc) a) where rn between ? and ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
+				accompanyDto.setNickname(rs.getString(4));
+				accompanyDto.setTitle(rs.getString(6));
+				accompanyDto.setContent(rs.getString(8));
+				accompanyDto.setTag(rs.getString(9));
+				accompanyDto.setView_count(rs.getInt(10));
+				accompanyDto.setVote_count(rs.getInt(11));
+				accompanyDto.setReg_date(rs.getDate(12));
+				accompanyDto.setMinimum_number(rs.getInt(14));
+				accompanyDto.setCurrent_number(rs.getInt(15));
+				accompanyDto.setIs_closed(rs.getInt(16));
+				list.add(accompanyDto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return list;
 	}
 }

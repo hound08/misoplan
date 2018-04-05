@@ -53,7 +53,6 @@ public class MyInfoProAction implements CommandProcess {
 			request.setCharacterEncoding("UTF-8");
 			MemberDto memberdto = new MemberDto();
 			String email = multi.getParameter("email");
-			System.out.println("@@@@@@@@@@@ email = "+ multi.getParameter("email"));
 			
 			memberdto.setEmail(multi.getParameter("email"));
 			memberdto.setNickname(multi.getParameter("Nickname"));	
@@ -63,14 +62,19 @@ public class MyInfoProAction implements CommandProcess {
 			if(multi.getFile("profile_url")!=null){
 			    File file=multi.getFile("profile_url");
 			    memberdto.setProfile_url("/J20180403/upload/" + filename);
+			    
+			    // 수정된 이미지가 헤더에도 적용되도록 주소를 request에 저장 (이후 jsp에서 받아오기 위해)
+			    request.setAttribute("profile_url", "/J20180403/upload/" + filename);
 			}else{
 				MemberDao memberdao = MemberDao.getInstance();
 				MemberDto memberdto2;
 				try {
 					memberdto2 = memberdao.select(email);
 					memberdto.setProfile_url(memberdto2.getProfile_url());
+					
+					// memberdto에 저장한 주소를 request에 저장 (이후 jsp에서 받아오기 위해)
+					request.setAttribute("profile_url", memberdto.getProfile_url());
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				

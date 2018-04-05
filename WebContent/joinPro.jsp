@@ -7,13 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%
-		session.invalidate();
-	%>
-	
 	<script type="text/javascript">
-		alert("로그아웃 되었습니다.");
-		location.href="main.do";
+		alert("회원가입이 완료되었습니다.");
+		location.href="loginForm.do"
 	</script>
 </body>
 </html>

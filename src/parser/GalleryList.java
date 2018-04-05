@@ -47,7 +47,7 @@ public class GalleryList extends HttpServlet {
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
-		parameter = parameter + "&" + "numOfRows=12";
+		parameter = parameter + "&" + "numOfRows=200";
 		parameter = parameter + "&" + "pageNo=1";
 		parameter = parameter + "&" + "_type=json";
 		

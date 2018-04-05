@@ -9,6 +9,8 @@
 </head>
 <body>
    <c:if test="${result > 0 }">
+   	  <!-- MyInfoProAction.java에서 request에 저장한 이미지 주소를 session에 저장 (헤더에 적용하기 위해서) -->
+   	  <% session.setAttribute("profile_url", request.getAttribute("profile_url")); %>
       <script type="text/javascript">
          alert("수정 성공");
          location.href = "myInfoForm.do?email=${email }";

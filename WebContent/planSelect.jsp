@@ -7,6 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- <script type="text/javascript">
+	function chk() {
+		if (frm.email.value != frm.emai1.value) {
+			alert("회원이 아닙니다.");
+			return false;
+		}
+		return true;
+	}
+</script> -->
 <style type="text/css">
 /* 	절대위치(absolute)
 	상대위치(relative) */
@@ -44,18 +53,19 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-second-box1{
 	width: 610px;
-	height: 25px;
-	margin: 15px 0 0 5px;
-	font-size: 10pt;
+	height: 35px;
+	margin: 20px 0 0 5px;
+	font-size: 15pt;
 }
 .main-second-box2{
 	width: 610px;
-	height: 30px;
+	height: 35px;
 	margin: 15px 0 0 5px;
+	font-size: 15pt;
 }
 .main-center {
 	width: 1200px;
-	height: 800px;
+	height: 650px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
@@ -99,47 +109,40 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .center-bottom-image {
 	width: 1160px;
-	height: 400px;
-	padding: 0 0 0 0px;
+	height: 200px;
+	margin: 20px 20px;
 	font-size: 10pt;
+	vertical-align: top;
 }
-.bottom-image {
-	width: 300px;
-	height: 380px;
-	margin: 10px 15px;
-	display: inline-block;
-	border: 1px solid gray;
+.button-bottom {
+	width: 1100px;
+	height: 30px;gin : 0 30px;
 }
-.bottom-text {
-	width: 790px;
-	height: 380px;
-	margin: 10px 15px;
-	display: inline-block;
-	border: 1px solid gray;
-}
+
 </style>
 </head>
 <body>
+<form action="boardselect.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
 		<div class="main-top-second1" align="left">
-			<img alt="IMG" src="images/k1.jpg">
+			<!-- <img alt="IMG" src="images/k1.jpg"> -->
+			<input type="file" name="plan_image">
 		</div>
 		<div class="main-top-second2">
-		<div class="main-second-box1">
-			2018.04.02
-		</div>
+		
 		<div class="main-second-box2">
-			title
+			제 목 : <input type="text" name="title" required="required">
 		</div>
 		<div class="main-second-box1">
-			여행지
+			태 그 : <input type="text" name="tag" required="required">
 		</div>
 		<div class="main-second-box1">
-			기간
+			기 간 : <input type="date"> ~ <input type="date">
 		</div>
 		<div class="main-second-box1">
-			작성자
+			작성자: <input type="text" name="nickname" required="required">
 		</div>
+		
 		</div>
 	</div>
 	<div class="main-center">
@@ -150,23 +153,23 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box">
 					<div class="card-box-title">
-						날짜 지역${dto.tour_date }
+						${dto.tour_date }
 					</div>
 					<div class="card-box-bottom">
-						내 용${dto.tour_text }
+						${dto.tour_text }
 					</div>
 				</div>
 			</c:forEach>
 			</div>
 		<div class="center-bottom-image">
-			<div class="bottom-image">
-				MAIN-IMG
-			</div>
-			<div class="bottom-text">
-				TEXT
-			</div>
+			<textarea rows="13" cols="163"></textarea>
+		</div>
+		<div class="button-bottom" align="right">
+			<input type="button" value="확인" style="width: 40pt; height: 20pt" onclick="location.href='boardinsetAction.do'">
+			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
+	</form>
 	
 	<%@ include file="footer.jsp"%>
 

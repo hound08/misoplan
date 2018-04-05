@@ -11,17 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
-import dao.MemberDao;
-import dao.MemberDto;
+import dao.BoardScheduleDao;
+import dao.BoardScheduleDto;
 
-public class JoinProAction implements CommandProcess {
+public class BoardInsertAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-
-		// 사진 업로드 관련 코드
-		request.setCharacterEncoding("utf-8");
 		int maxSize = 5 * 1024 * 1024;
 		String filename = "";
 		String fileSave = "/upload";
@@ -37,27 +34,23 @@ public class JoinProAction implements CommandProcess {
 			String type = multi.getContentType(filename1);
 			File file = multi.getFile(filename1);
 		}
-
-		// 회원 정보 관련 코드
-		MemberDto dto = new MemberDto();
-		dto.setEmail(multi.getParameter("email"));
+		BoardScheduleDto dto = new BoardScheduleDto();
+		dto.setTitle(multi.getParameter("title"));
+		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
-		dto.setPassword(multi.getParameter("password"));
-		dto.setPhone(multi.getParameter("phone"));
-		dto.setProfile_url("/J20180403/upload/" + filename);
-
+		dto.setTour_text(multi.getParameter("tour_text"));
 		try {
-			MemberDao dao = MemberDao.getInstance();
-			int result = dao.insertMember(dto);
-
+			BoardScheduleDao dao = BoardScheduleDao.getInstance();
+			int result = dao.insertPlan(dto);
+			
 			if (result > 0) {
 				request.setAttribute("result", result);
 			}
-		} catch (Exception e) {
+		} catch (Exception e ) {
 			System.out.println(e.getMessage());
 		}
-
-		return "joinPro.jsp";
+		
+		return "plan1.jsp";
 	}
 
 }
