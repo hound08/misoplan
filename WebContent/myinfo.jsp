@@ -13,7 +13,6 @@
 				width: 1200px;
 				height: 100%;
 			}
-			
 			#main {
 					background-color: #f0f0f0;
 					width: 930px;
