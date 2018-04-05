@@ -117,6 +117,10 @@ div {
 	margin: 15px 15px 15px 15px;
 }
 
+.rankName {
+	padding-top: 10px;
+}
+
 .rankImage {
 	width: 320px;
 	height: 180px;
@@ -128,7 +132,7 @@ div {
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	margin-top: 350px;
+	margin-top: 360px;
 	background-color: #0099ff;
 }
 </style>
@@ -179,7 +183,7 @@ div {
 					<c:forEach var="list" items="${list }">
 						<div class="rankListContent">
 							<img class="rankImage" alt="${list.tour_name }" src="${list.image_url }">
-							<p><strong>${list.tour_name }</strong></p>
+							<p class="rankName"><strong>${list.tour_name }</strong></p>
 						</div>
 					</c:forEach>
 				</div>
