@@ -14,8 +14,8 @@ div {
 }
 
 .joinDiv {
-	padding-top: 200px;
-	padding-bottom: 200px;
+	padding-top: 100px;
+	padding-bottom: 100px;
 	width: 1080px;
 	text-align: center;
 }
@@ -24,7 +24,6 @@ div {
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	margin-top: 50px;
 	background-color: #0099ff;
 }
 
@@ -32,11 +31,33 @@ div {
 	margin-bottom: 5px;
 }
 
+.inputType {
+	width: 300px;
+	height: 30px;
+}
+
+#submit {
+	width: 300px;
+	height: 40px;
+	color: white;
+	background-color: #1A7AD9;
+	border-color: transparent;
+}
+
 #spanEmail {
 	font-size: 13px;
 }
 
+#spanNickname {
+	font-size: 13px;
+}
+
 .pNickname {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.pPassword {
 	margin-top: 15px;
 }
 
@@ -63,6 +84,19 @@ h1 {
 			});
 		});
 	});
+	
+	$(function() {
+		$('#nickname').change(function() {
+			var sendData = 'nickname=' + $('#nickname').val();
+			
+			$.post(
+				'joinCheck.jsp',
+				sendData,
+				function(result) {
+					$('#spanNickname').html(result);
+			});
+		});
+	});
 </script>
 </head>
 <body>
@@ -72,14 +106,14 @@ h1 {
 	<div class="joinDiv">
 		<h1>회원가입</h1>
 		<form action="joinPro.do" name="joinForm" method="post" enctype="multipart/form-data">
-			<p class="pEmail">이메일 : <input type="email" id="email" name="email" required="required"></p>
+			<p class="pEmail"><input type="email" id="email" name="email" class="inputType" required="required" placeholder="이메일"></p>
 			<span id="spanEmail">　</span>
-			<p class="pNickname">별명 : <input type="text" name="nickname" required="required"></p>
-			<p>비밀번호 : <input type="password" name="password" required="required"></p>
-			<p>비밀번호 확인 : <input type="password" name="passwordChk" required="required"></p>
-			<p>연락처 : <input type="tel" name="phone" required="required"></p>
-			<p>프로필 사진 : <input type="file" name="profile_url"></p>
-			<p><input type="submit" value="회원가입"></p>
+			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
+			<span id="spanNickname">　</span>
+			<p class="pPassword"><input type="password" name="password" class="inputType" required="required" placeholder="비밀번호"></p>
+			<p><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
+			<p><input type="file" name="profile_url" class="inputType"></p>
+			<p><input type="submit" id="submit" value="회원가입"></p>
 		</form>
 	</div>
 	<div class="footer_wrap">

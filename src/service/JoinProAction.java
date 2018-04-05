@@ -44,15 +44,18 @@ public class JoinProAction implements CommandProcess {
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setPassword(multi.getParameter("password"));
 		dto.setPhone(multi.getParameter("phone"));
-		dto.setProfile_url("/J20180403/upload/" + filename);
-
+		
+		if (multi.getFile("profile_url") != null) {
+			dto.setProfile_url("/J20180403/upload/" + filename);
+		} else {
+			dto.setProfile_url("/J20180403/images/no_profile_image.png");
+		}
+		
 		try {
 			MemberDao dao = MemberDao.getInstance();
 			int result = dao.insertMember(dto);
 
-			if (result > 0) {
-				request.setAttribute("result", result);
-			}
+			request.setAttribute("result", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
