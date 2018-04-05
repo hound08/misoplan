@@ -11,12 +11,12 @@
 			#center {
 				border: 1px solid red;
 				margin: 0px auto;
-				width: 1200px;
+				width: 1000px;
 				height: 100%;
 			}
 			
 			#main {
-					width: 930px;
+					width: 730px;
 					border: 3px solid green;
 					text-align: center;
 					float: left;
@@ -34,14 +34,14 @@
 				padding: 30px;
 			}
 			
-			#img {
+			#previewImg {
 				margin: 0px auto;
 				border: 1px solid red;
 				width: 100px;
 				height: 100px;
 			}
 			#img input {
-			
+		
 			}
 			#secondbox table{
 				margin: 0px auto;
@@ -56,6 +56,7 @@
 				border-radius :10px;
 			}
 		</style>
+		<script type="text/javascript" src="js/jQuery.js"></script>
 		<script type="text/javascript">
 		 function winop() {
 			if (!frm.Nickname.value) {
@@ -77,7 +78,17 @@
 		}
 		
 		
-		
+		function previewFile(input){
+		      var reader=new FileReader();
+		      
+		      reader.onload=function(event){
+		         $('#previewImg').attr('src', event.target.result);
+		      }
+		      reader.readAsDataURL(input.files[0]);
+		   }
+
+		 
+
 		</script>
 	</head>
 	<%request.setAttribute("email", session.getAttribute("email")); %>
@@ -90,8 +101,8 @@
 					<div id="second">
 						<form action="myInfoPro.do" name="frm" onsubmit="return chk()" id="secondbox" method="post" enctype="multipart/form-data">
 						<div id="img_div">
-								<img id="img" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
-								<input type="file" name="profile_url" accept="${ memberdto.profile_url}">
+								<img id="previewImg" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
+								<input type="file" name="profile_url" value="${ memberdto.profile_url}" onchange="preview(this)">
 						</div>
 						<table>
 							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
