@@ -122,23 +122,25 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 </style>
 </head>
 <body>
+<form action="boardselect.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
 		<div class="main-top-second1" align="left">
-			<img alt="IMG" src="images/k1.jpg">
+			<!-- <img alt="IMG" src="images/k1.jpg"> -->
+			<input type="file" name="plan_image">
 		</div>
 		<div class="main-top-second2">
 		
 		<div class="main-second-box2">
-			제 목 : <input type="text">
+			제 목 : <input type="text" name="title" required="required">
 		</div>
 		<div class="main-second-box1">
-			태 그 : <input type="text">
+			태 그 : <input type="text" name="tag" required="required">
 		</div>
 		<div class="main-second-box1">
-			기 간 : <input type="date"> ~ <input type="date">
+			기 간 : <input type="${dto. }"> ~ <input type="date">
 		</div>
 		<div class="main-second-box1">
-			작성자: <input type="text">
+			작성자: <input type="text" name="nickname" required="required">
 		</div>
 		
 		</div>
@@ -167,6 +169,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
+	</form>
 	
 	<%@ include file="footer.jsp"%>
 

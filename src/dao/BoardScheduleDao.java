@@ -157,6 +157,29 @@ public class BoardScheduleDao {
 		}
 		return result;
 	}
+	public int insertPlan(BoardScheduleDto dto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "INSERT INTO BOARDSCHEDULE(TITLE, TAG, NICKNAME, IMAGE_URL, TOUR_TEXT) VALUES(?, ?, ?, ?, ?)";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getTitle());
+			ps.setString(2, dto.getTag());
+			ps.setString(3, dto.getNickname());
+			ps.setString(4, dto.getImage_url());
+			ps.setString(5, dto.getTour_text());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return result;
+	}
 	
 /*	public int sl_code() throws SQLException {
 		Connection conn = null;
