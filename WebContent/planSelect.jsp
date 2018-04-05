@@ -137,7 +137,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			태 그 : <input type="text" name="tag" required="required">
 		</div>
 		<div class="main-second-box1">
-			기 간 : <input type="${dto. }"> ~ <input type="date">
+			기 간 : <input type="date"> ~ <input type="date">
 		</div>
 		<div class="main-second-box1">
 			작성자: <input type="text" name="nickname" required="required">
@@ -165,7 +165,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<textarea rows="13" cols="163"></textarea>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="button" value="확인" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
+			<input type="button" value="확인" style="width: 40pt; height: 20pt" onclick="location.href='boardinsetAction.do'">
 			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
