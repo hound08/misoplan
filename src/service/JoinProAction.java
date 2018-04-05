@@ -48,7 +48,7 @@ public class JoinProAction implements CommandProcess {
 		if (multi.getFile("profile_url") != null) {
 			dto.setProfile_url("/J20180403/upload/" + filename);
 		} else {
-			dto.setProfile_url("/J20180403/images/no_profile.jpg");
+			dto.setProfile_url("/J20180403/images/no_profile_image.png");
 		}
 		
 		try {
