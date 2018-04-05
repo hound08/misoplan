@@ -26,35 +26,29 @@
 			#main h1 {
 					margin: 20px 0px;
 			}
-			#info table {
+			.center-second { /* center 의 세부 내용 쭉쭉~~*/
+				border: 0.5px solid gray;
+				width: 350px;
+				height: 400px;
+				display: inline-block; /* 가로형 정렬 */
+				margin: 30px 22.5px;
+				border-radius: 10px;
+				vertical-align: middle; /* 텍스트 라인 높이 맞춤 */
 			}
-			#planname {
-				width: 400px;
-			}
-			#region {
-				width: 150px;
-			}
-			.pagination {
+			
+			.second-box { /* center-second 이미지 삽입 div */
+				border-radius: 10px;
+				width: 350px;
+				height: 250px;
 				clear: both;
-			    justify-content: center;
-			    margin: 50px 0 35px 0;
-			}
-						
-			.pagination a {
-				color:black;
-			    padding: 8px 16px;
-			    font-size:20px;
-			    text-decoration: none;
+				overflow: hidden;
 			}
 			
-			.pagination a.active {
-			    background-color: #4CAF50;
-			    color: white;
-			}
-			
-			.pagination a:hover:not(.active) {
-			    background-color: #ddd;
-			    border-radius: 5px;
+			.second-text { /* center-second 텍스트 삽입 */
+				width: 340px;
+				height: 50px;
+				padding: px 10px;
+				overflow: hidden;
 			}
 		</style>
 	</head>
@@ -66,19 +60,20 @@
 				<h1>나의 일정 리스트</h1>
 				<div id="myinfo">
 					<div id="info">
-						<table border="1">
-							<tr><th>번호</th><th id="planname">일정 제목 </th> <th id="region">중분류 지역명 </th><th>여행기간</th><th>등록일</th></tr>
-								<c:if test="${totCnt > 0 }">
-									<c:forEach var="bsdto" items="${schedule }">
-							<tr>
-								<td>	
-								
-								
-									</c:forEach>
-								</c:if>
-							</tr>
+						<c:forEach var="bsdto" items="${list }">
+							<div class="center-second">
+								<div class="second-box">
+									<img alt="image" src="images/1.jpg">
+								</div>
+								<div class="second-text">
+									<h1>제목 : ${bs.s_name }</h1>
+								</div>
+								<div class="tag">여행지 : ${bsdto.local_name }</div>
+								<div class="idlocal" align="right">여행기간 : ${bsdto.tour_date }</div>
+								<div class="datelocal" align="right">작성일 : ${bsdto.regi_date }</div>
+							</div>
 						
-						</table>
+						</c:forEach>
 						<div class="pagination">
 										<a href="#">&laquo;</a> 
 										<a href="#" class="active">1</a> 

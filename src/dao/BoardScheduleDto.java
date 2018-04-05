@@ -23,11 +23,25 @@ public class BoardScheduleDto {
 	private String tour_text;
 	private String ss_code;
 	private String tour_name;
+	private String s_name;
+	private Date regi_date;
 	
 	
 	
 	
 	
+	public String getS_name() {
+		return s_name;
+	}
+	public void setS_name(String s_name) {
+		this.s_name = s_name;
+	}
+	public Date getRegi_date() {
+		return regi_date;
+	}
+	public void setRegi_date(Date regi_date) {
+		this.regi_date = regi_date;
+	}
 	public String getSs_code() {
 		return ss_code;
 	}

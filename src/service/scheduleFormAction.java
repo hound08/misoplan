@@ -1,6 +1,8 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,50 +17,33 @@ public class scheduleFormAction implements CommandProcess{
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		BoardScheduleDao bsdao = BoardScheduleDao.getInstance();
 		
 		try {
-			int totCnt = bsdao.getTotalCnt(); // 전체 로우 개수
-			 String pageNum = request.getParameter("pageNum");
-				if(pageNum==null || pageNum.equals("")){
-					pageNum = "1";
+			String email = request.getParameter("email");
+			BoardScheduleDao bsdao = BoardScheduleDao.getInstance();
+			List<ArrayList<BoardScheduleDto>> planList = bsdao.getMylist(email);
+			List<ArrayList<BoardScheduleDto>> requestPlanList = null;
+			ArrayList<BoardScheduleDto> requestPlan = null;
+			
+			
+			for(int i = 0; i < planList.size(); i++){
+				ArrayList<BoardScheduleDto> plan = planList.get(i);
+				for(int j = 0; j < plan.size(); j++){
+					BoardScheduleDto bsdto = plan.get(j);
+					/*if(j == 1){
+						String s_name = bsdto.getS_name();
+						Date regi_Date = bsdto.getRegi_date();
+					}
+					if(j == plan.size()){
+						
+					}*/
+					
 				}
-				// 1 과 10을 구하는 구문
-				int currentPage = Integer.parseInt(pageNum);
-				//   페이지         게시물 로우
-				int pageSize = 10, blockSize = 10;
-				
-				int startRow = (currentPage - 1) * pageSize + 1; //처음엔 1
-				int endRow = startRow + pageSize -1; //10
-				int startNum = totCnt - startRow + 1; //38    
-				// 게시글 보는 지정
-				List<BoardScheduleDto> list = bsdao.list();
-				int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
-				int startPage = (int)(currentPage - 1)/blockSize*blockSize + 1;
-				int endPage = startPage + blockSize -1;
-				if(endPage>pageCnt) endPage = pageCnt;
-				
-				request.setAttribute("totCnt", totCnt);
-				request.setAttribute("pageNum", pageNum);
-				request.setAttribute("currentPage", currentPage);
-				request.setAttribute("startNum", startNum);
-				request.setAttribute("list", list);
-				request.setAttribute("blockSize", blockSize);
-				request.setAttribute("pageCnt", pageCnt);
-				request.setAttribute("startPage", startPage);
-				request.setAttribute("endPage", endPage);
-				
-				System.out.println("--------------------------------------");
-				System.out.println("startNum-->" + startNum);
-				System.out.println("totCnt --> " + totCnt);
-				System.out.println("currntPage-->" + currentPage);
-				System.out.println("blockSize --> " + blockSize);
-				System.out.println("pageSize --> " + pageSize);
-				System.out.println("pageCnt --> " + pageCnt);
-				System.out.println("startPage -->" + startPage);
-				System.out.println("endPage --> " + endPage);
-		} catch (Exception e) {
-			e.printStackTrace();
+			}
+			
+			
+		} catch (Exception e ) {
+			System.out.println(e.getMessage());
 		}
 		return "schedule.jsp";
 	}

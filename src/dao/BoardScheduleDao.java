@@ -157,6 +157,59 @@ public class BoardScheduleDao {
 		}
 		return result;
 	}
+
+	public List<ArrayList<BoardScheduleDto>> getMylist(String email) throws SQLException {
+		  Connection conn = null;
+	      PreparedStatement ps = null;
+	      ResultSet rs = null;
+	      String sql = "select l.sl_code,l.s_name, m.LOCAL_NAME, m.TOUR_DATE, l.REGI_DATE from   SCHEDULELARGE l, "
+	      		+ "schedulemedium m where  l.sl_code = m.sl_code and    email = ? ";
+	      List<ArrayList<BoardScheduleDto>> planList = new ArrayList<ArrayList<BoardScheduleDto>>();
+	      ArrayList<BoardScheduleDto> plan = new ArrayList<BoardScheduleDto>();
+	      try {
+		         conn = getConnection();
+		         ps = conn.prepareStatement(sql);
+		         ps.setString(1, email);
+		         rs = ps.executeQuery();
+
+		         while (rs.next()) {
+		            String flag = "11";
+		            if(flag.equals(rs.getString(1))){
+		            	BoardScheduleDto bsdto = new BoardScheduleDto();
+		            	bsdto.setSl_code(rs.getString("sl_code"));
+			            bsdto.setS_name(rs.getString("s_name"));
+			            bsdto.setLocal_name(rs.getString("local_name"));
+			            bsdto.setTour_date(rs.getDate("tour_date"));
+			            bsdto.setRegi_date(rs.getDate("regi_date"));
+			            plan.add(bsdto);
+		            }else{
+		            	planList.add(plan);
+		            	flag = rs.getString(1);
+		            	plan = new ArrayList<BoardScheduleDto>();
+		            	BoardScheduleDto bsdto = new BoardScheduleDto();
+		            	bsdto.setSl_code(rs.getString("sl_code"));
+			            bsdto.setS_name(rs.getString("s_name"));
+			            bsdto.setLocal_name(rs.getString("local_name"));
+			            bsdto.setTour_date(rs.getDate("tour_date"));
+			            bsdto.setRegi_date(rs.getDate("regi_date"));
+			            plan.add(bsdto);
+		            }
+		         }
+		         planList.add(plan);
+		      } catch (Exception e) {
+		         System.out.println(e.getMessage());
+		      } finally {
+		         if (rs != null)  rs.close();
+		         if (ps != null)  ps.close();
+		         if (conn != null) conn.close();
+		      }
+		      return planList;
+		   }
+
+
+
+
+
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
