@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,8 @@ public class MainAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			TourRankDao dao = TourRankDao.getInstance();
-			TourRankDto dto = dao.selectList();
-			request.setAttribute("tour_num", dto.getTour_num());
-			request.setAttribute("tour_name", dto.getTour_name());
-			request.setAttribute("tour_code", dto.getTour_code());
-			request.setAttribute("image_url", dto.getImage_url());
+			List<TourRankDto> list = dao.selectRankList();
+			request.setAttribute("list", list);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

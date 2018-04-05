@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -36,23 +38,25 @@ public class TourRankDao {
 		return conn;
 	}
 	
-	public TourRankDto selectList() throws SQLException {
+	public List<TourRankDto> selectRankList() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		List<TourRankDto> list = new ArrayList<TourRankDto>();
 		String sql = "SELECT * FROM TOURRANK";
-		TourRankDto dto = new TourRankDto();
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
 			
-			if (rs.next()) {
+			while (rs.next()) {
+				TourRankDto dto = new TourRankDto();
 				dto.setTour_num(rs.getInt(1));
 				dto.setTour_name(rs.getString(2));
 				dto.setTour_code(rs.getString(3));
 				dto.setImage_url(rs.getString(4));
+				list.add(dto);
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -62,7 +66,7 @@ public class TourRankDao {
 			if (conn != null) conn.close();
 		}
 		
-		return dto;
+		return list;
 	}
 	
 }
