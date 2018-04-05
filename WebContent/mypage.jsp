@@ -66,8 +66,9 @@
 			color : white;
 			background-color:  #1e68cb;
 		}
-		.menu a:hover{
+		 a:hover{
 			color: #1e68cb;
+			background-color: white;
 		}
 	</style>
 </head>
@@ -80,7 +81,7 @@
 			</div>
 			<div id="schedule">
 				<div id="schedulea">
-					<a href="#" class="menu"> 내 계획 </a>
+					<a href="schedule.do?email=${email }" class="menu"> 내 계획 </a>
 				</div>
 			
 			</div>
