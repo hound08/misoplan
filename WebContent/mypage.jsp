@@ -18,19 +18,17 @@
 		#main {
 			width: 1200px;
 			margin: 0 auto;
-			border: 1px solid;
-			height: 100%
 		}
 		#main div{
 			float: left;
 		}
 		#myinfo{
 			width: 690px;
-			height: 300px;
+			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#myinfoa {
-			margin: 180px 0px 0px 50px;
+			margin: 80px 0px 0px 50px;
 		}
 		/* ##myinfoa.a:hover{
 			color : #1e68cb;
@@ -39,61 +37,61 @@
 		} */
 		#schedule{
 			width: 490px;
-			height: 300px;
+			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#schedulea {
-			margin: 180px 0px 0px 50px;
+			margin: 80px 0px 0px 50px;
 		}
 		#myWishlist{
 			width: 490px;
-			height: 300px;
+			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#myWishlista{
-			margin: 180px 0px 0px 50px;
+			margin: 80px 0px 0px 50px;
 		}
 		#companion{
 			width: 690px;
-			height: 300px;
+			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#companiona{
-			margin: 180px 0px 0px 50px;
+			margin: 80px 0px 0px 50px;
 		}
-		.a {
-			font-size: 20px;
+		.menu {
+			font-size: 19px;
 			padding: 10px;
 			border-radius: 10px;
 			color : white;
-			letter-spacing: 0.1em;
-			text-decoration:none;
 			background-color:  #1e68cb;
 		}
-	
+		.menu a:hover{
+			color: #1e68cb;
+		}
 	</style>
-
 </head>
 <body>
 	<div id="main">
 			<div id="myinfo" background="images/03.jpg">
 				<div id="myinfoa">
-					<a href="myInfoForm.do?email=${email}" class="a"> 개인 정보 수정 </a>
+					<a href="myInfoForm.do?email=${email}" class="menu"> 개인 정보 수정 </a>
 				</div>
 			</div>
 			<div id="schedule">
 				<div id="schedulea">
-					<a href="#" class="a"> 내 계획 </a>
+					<a href="#" class="menu"> 내 계획 </a>
 				</div>
+			
 			</div>
 			<div id="myWishlist">
 				<div id="myWishlista">
-					<a href="#" class="a"> 찜 List </a>
+					<a href="#" class="menu"> 찜 List </a>
 				</div>
 			</div>
 			<div id="companion">
 				<div id="companiona">
-					<a href="#" class="a"> 동행 </a>
+					<a href="#" class="menu"> 동행 </a>
 				</div>
 			</div>
 		
