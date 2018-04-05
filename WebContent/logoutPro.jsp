@@ -9,7 +9,11 @@
 <body>
 	<%
 		session.invalidate();
-		response.sendRedirect("main.do");
 	%>
+	
+	<script type="text/javascript">
+		alert("로그아웃 되었습니다.");
+		location.href="main.do";
+	</script>
 </body>
 </html>
