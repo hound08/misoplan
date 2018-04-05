@@ -846,7 +846,7 @@ div {
 		ArrayList<String> jejuSelList = new ArrayList<>();
 		ArrayList<HashMap<String, Object>> guArrList = new ArrayList<>(); */
 	%>
-	<div id="test">ㅅㅂ</div>
+	<div id="test">test</div>
 	<div class="section">
 		<!--검색창 & 검색 버튼  -->
 		<div class="searchSection">
