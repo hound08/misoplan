@@ -57,7 +57,7 @@ public class JoinProAction implements CommandProcess {
 			System.out.println(e.getMessage());
 		}
 
-		return "main.do";
+		return "joinPro.jsp";
 	}
 
 }
