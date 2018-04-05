@@ -11,6 +11,7 @@
 		<%
 			session.setAttribute("email", request.getAttribute("email"));
 			session.setAttribute("nickname", request.getAttribute("nickname"));
+			session.setAttribute("profile_url", request.getAttribute("profile_url"));
 		%>
 		<script type="text/javascript">
 			location.href="main.do";

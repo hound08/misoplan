@@ -1,12 +1,14 @@
 package service;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.MemberDao;
+import dao.MemberDto;
 
 public class LoginProAction implements CommandProcess {
 
@@ -17,10 +19,11 @@ public class LoginProAction implements CommandProcess {
 			String password = request.getParameter("password");
 			
 			MemberDao dao = MemberDao.getInstance();
-			String result = dao.loginCheck(email, password);
+			List<String> list = dao.loginCheck(email, password);
 			
-			request.setAttribute("email", email);
-			request.setAttribute("nickname", result);
+			request.setAttribute("email", list.get(0));
+			request.setAttribute("nickname", list.get(1));
+			request.setAttribute("profile_url", list.get(2));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

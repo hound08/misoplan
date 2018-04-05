@@ -113,14 +113,14 @@ public class BoardScheduleDao {
 						dto.setLocal_code(rs.getString("LOCAL_CODE"));
 						dto.setTour_date(rs.getDate("TOUR_DATE"));
 						dto.setTour_text(rs.getString("TOUR_TEXT"));
-						System.out.println("TOUR_TEXT : " + rs.getString("LOCAL_CODE"));
+						
+/*						System.out.println("TOUR_TEXT : " + rs.getString("LOCAL_CODE"));*/
 						list.add(dto);
 					} while(rs.next());
-				} else {
-					System.out.println("대분류는 찾았으나 중분류를 찾지 못함!");
 				}
 			} else {
 				System.out.println("해당 이메일에 맞는 대분류가 없음!");
+				list = null;
 			}
 							
 		}catch (Exception e ) {
@@ -157,6 +157,44 @@ public class BoardScheduleDao {
 		}
 		return result;
 	}
+	public int insertPlan(BoardScheduleDto dto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "INSERT INTO BOARDSCHEDULE(TITLE, TAG, NICKNAME, IMAGE_URL, TOUR_TEXT) VALUES(?, ?, ?, ?, ?)";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getTitle());
+			ps.setString(2, dto.getTag());
+			ps.setString(3, dto.getNickname());
+			ps.setString(4, dto.getImage_url());
+			ps.setString(5, dto.getTour_text());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return result;
+	}
+	
+/*	public int sl_code() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "SELECT SL_CODE FROM BOARDSCHEDULE EMAIL = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+		}
+		
+	}*/
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
