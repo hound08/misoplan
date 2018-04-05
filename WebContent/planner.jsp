@@ -60,12 +60,15 @@
 		overflow: scroll;
 		transition:all 0.5s;
 	}
+	.tourinfo{
+		border: 1px solid gray;
+	}
 	
 	.sidebar{
 		padding: 0px;
 		margin: 0px;
 		float: left;
-		width: 10%;
+		width: 5%;
 		height: 900px;
 
 	}
@@ -88,7 +91,7 @@
         padding: 0px;
 		margin: 0px;
 		float: left;
-		width: 90%;
+		width: 95%;
 		height: 900px;
 		transition:all 0.5s;
     }
@@ -140,8 +143,8 @@ $(document).on('click','#sidebar-menu', function(){
     			    	+   "</li>");
     	}
     	
-    	document.getElementById("center").style.width="20%";
-		document.getElementById("map").style.width="70%";
+    	document.getElementById("center").style.width="15%";
+		document.getElementById("map").style.width="80%";
 		
 		var cityinfolist = $('.center').children();
 		var cityimagelist = document.getElementsByClassName("cityimage");
@@ -201,9 +204,8 @@ $(document).on('click','#cityinfo', function(){
 	var tourinfo = document.getElementsByClassName("tourinfo");
 	for(var i = 0; i < tourinfo.length; i++){
 		tourinfo[i].style.width = "100%";
-		
 	}
-	document.getElementById("map").style.width="60%";
+	document.getElementById("map").style.width="70%";
 	$(".center").children().removeClass("selected");
 	$this.addClass('selected');
 	
