@@ -16,16 +16,26 @@ public class BoardSelectAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		try {
-			String email = request.getParameter("email");
-			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			List<BoardScheduleDto> list = dao.selectList(email);
-			request.setAttribute("list", list);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			try {
+				System.out.println("카카카카카카카ㅏ카ㅏ");
+				String email = request.getParameter("email");
+				BoardScheduleDao dao = BoardScheduleDao.getInstance();
+				List<BoardScheduleDto> list = dao.selectList(email);
+				
+				if (list == null) {
+					System.out.println("널이다!!!!!!!!!!!!!!!");
+					return "main.do";
+			
+				} else {
+					request.setAttribute("list", list);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
+			}
+			
+			return "planSelect.jsp";
 		}
 		
-		return "planUpdate.jsp";
 	}
 
-}
+
