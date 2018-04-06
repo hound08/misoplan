@@ -61,12 +61,6 @@ div {
 	text-align: center;
 }
 
-.footer_wrap {
-	margin-top: 600px;
-	padding-top: 20px; margin-left : auto;
-	margin-right: auto;
-	margin-left: auto;
-}
 .container{
 	padding: 15px;
 	height: 100%;
@@ -116,14 +110,12 @@ div {
 }
 
 .search {
- 	display: flex;
-    justify-content: center;
-	width :500px;
+	display: inline-flex;
 }
 
 .search-bar{
 	font-size: 15px;
-	width: 100%;
+	width: 400px;
 	height: 30px;
 }
 
