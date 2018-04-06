@@ -12,7 +12,7 @@ public class BoardFormAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		return "plan1.jsp";
+		return "boardschedule.do";
 	}
 
 }
