@@ -156,13 +156,50 @@
     .plandiv{
 		position: absolute;
 		top: 50px;
-		left: 500px;
-		background-color: white;
-		width: 0%;
-		height: 300px;
+		left: 79%;
+		background-color: rgba(255,255,255,1);
+		width: 20%;
+		height: 40px;
+		border: 1px solid white;
+		border-radius: 10px;
 		transition:all 0.5s;
     }
-    
+    .day{
+    	width: 100%;
+    	height: 20px;
+    	background-color: #39A2D8;
+    	border-radius: 10px;
+    }
+    .dayleft{
+    	float: left;	
+    }
+    .dayright{
+    	float: right;
+    }
+    .deleteday{
+    	float: right;
+    }
+    .plantop{
+    	width: 100%;
+    	height: 20px;
+    	background-color: gray;
+    	border: 1px solid gray;
+    	border-radius: 10px;
+    	color: white;
+		text-align: center;    	
+    }
+    .dayplus{
+    	width: 100%;
+    	height: 20px;
+    	background-color: #33cc33;
+    	border: 1px solid #33cc33;
+    	border-radius: 10px;
+    	color: white;
+    	text-align: center;
+    }
+    .dayplus:hover{
+    	cursor: pointer;
+    }
 </style>
 
 
@@ -273,11 +310,20 @@ $(document).on('click','#cityinfo', function(){
 
 $(document).on('click', '.plusbutton', function(){
 	var $this = $(this).attr("id");
-	var id = $('.plandiv')
-	alert(id);
-	$('.plandiv').css('width','20%');
+	var plandiv = $('.plandiv'); 
+	var day = 1;
+	var area = 0.
+	
+	
+	/* plandiv.prepend("<div class='day'><p class='dayleft'>"+day+"일</p><div class='deleteday'>X</div><p class='dayright'>"++"</p>"); */
 });
-
+$(document).on('click', '.dayplus', function(){
+	var plandiv = $(".plandiv");
+	plandiv.prepend("<div class='day'>1일</div>");
+	plandiv.css('height', '60px');
+	
+	
+});
 
 
 
@@ -440,7 +486,12 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 			<div class="map" id="map">
 			</div>
 			<div class="plandiv" id="plandiv">
-			엘레렐렐렐 떴당
+				<div class="plantop" id="plantop">
+					PLAN
+				</div>
+				<div class="dayplus" id="dayplus">
+					1일 +
+				</div>		
 			</div>
 		</div>
 		
