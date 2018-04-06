@@ -127,6 +127,22 @@ a:hover {
 	color: black;
 }
 
+.btnMyInfo {
+	width: 70px;
+	height: 22px;
+	color: white;
+	background-color: #49B2E9;
+	border-color: transparent;
+}
+
+.btnLogout {
+	width: 70px;
+	height: 22px;
+	color: white;
+	background-color: #49B2E9;
+	border-color: transparent;
+}
+
 </style>
 </head>
 <body>
@@ -156,8 +172,8 @@ a:hover {
 				</div>
 				<div class="login_on">
 					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
-					<p class="buttons"><input type="button" value="정보수정" onclick="location.href='mypage.jsp?email=${email}'">
-					<input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
+					<p class="buttons"><input type="button" class="btnMyInfo" value="정보수정" onclick="location.href='mypage.jsp?email=${email}'">
+					<input type="button" value="로그아웃" class="btnLogout" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}
 		%>

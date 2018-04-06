@@ -48,7 +48,16 @@ div {
 	font-size: 13px;
 }
 
+#spanNickname {
+	font-size: 13px;
+}
+
 .pNickname {
+	margin-top: 15px;
+	margin-bottom: 5px;
+}
+
+.pPassword {
 	margin-top: 15px;
 }
 
@@ -75,6 +84,19 @@ h1 {
 			});
 		});
 	});
+	
+	$(function() {
+		$('#nickname').change(function() {
+			var sendData = 'nickname=' + $('#nickname').val();
+			
+			$.post(
+				'joinCheck.jsp',
+				sendData,
+				function(result) {
+					$('#spanNickname').html(result);
+			});
+		});
+	});
 </script>
 </head>
 <body>
@@ -86,9 +108,9 @@ h1 {
 		<form action="joinPro.do" name="joinForm" method="post" enctype="multipart/form-data">
 			<p class="pEmail"><input type="email" id="email" name="email" class="inputType" required="required" placeholder="이메일"></p>
 			<span id="spanEmail">　</span>
-			<p class="pNickname"><input type="text" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
-			<p><input type="password" name="password" class="inputType" required="required" placeholder="비밀번호"></p>
-			<p><input type="password" name="passwordChk" class="inputType" required="required" placeholder="비밀번호 확인"></p>
+			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
+			<span id="spanNickname">　</span>
+			<p class="pPassword"><input type="password" name="password" class="inputType" required="required" placeholder="비밀번호"></p>
 			<p><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
 			<p><input type="file" name="profile_url" class="inputType"></p>
 			<p><input type="submit" id="submit" value="회원가입"></p>

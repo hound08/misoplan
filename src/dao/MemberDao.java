@@ -67,6 +67,33 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public int nicknameCheck(String nickname) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MEMBER WHERE NICKNAME = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nickname);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
 
 	public List<String> loginCheck(String email, String password) throws SQLException {
 		Connection conn = null;

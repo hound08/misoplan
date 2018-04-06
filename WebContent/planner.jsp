@@ -41,6 +41,7 @@
 		margin: 0px;
 		width: 100%;
 		min-height: 100%;
+		overflow: hidden;
 	}
 	.center{
 		padding: 0px;
@@ -52,6 +53,7 @@
 		transition:all 0.5s;
 	}
 	.tourlist{
+		display: inline-block;
 		padding: 0px;
 		margin: 0px;
 		float: left;
@@ -100,23 +102,65 @@
     	height: 0%;
     	padding: 0px;
     	margin:0px;
+    	border: 1px solid gray;
     }
     .citydesc{
+    	text-align: center;
     	width: 0%;
-    	float: left;
-    	margin: 13% 0 0 5%;
+    	margin: 10% 0 0 30%;
     }
     #cityinfo:hover{
     	cursor: pointer;
     }
-    .cityimage{
-    	margin: 4% 0 0 4%;
-    	float:left;
-    	width: 0%;
-    }
     .selected{
     	background-color: gray;
     	color: white;
+    }
+    .tourImage{
+    	width: 100%;
+    	height: 100%;
+    }
+    .tourtitle{
+    	padding: 5px;
+    }
+    .touraddr{
+    	padding: 5px;
+    }
+    .tourImageDiv{
+    	width: 100%;
+    	height: 30%;
+    	margin: 5% 0 0 0;
+    }
+    .tourdescdiv{
+    	float: left;
+    	width: 79%;
+    	overflow: hidden;
+    	border: 1px solid gray;
+    }
+    .plusbutton{
+    	text-align: center;
+    	background-color: #ff531a;
+    	color: white;
+    	float:right;
+    	width: 20%;
+    	height: 55px;
+    }
+    .plusbutton:hover {
+		cursor: pointer;
+	}
+	.plan{
+	}
+	.wrapper{
+		position: relative;
+	}
+    .plandiv{
+		position: absolute;
+		top: 50px;
+		left: 500px;
+		background-color: white;
+		width: 0%;
+		height: 300px;
+		transition:all 0.5s;
     }
     
 </style>
@@ -125,7 +169,8 @@
 
 
 <script type="text/javascript">
-
+var mapx = [];
+var mapy = [];
   
   
 $(document).on('click','#sidebar-menu', function(){
@@ -138,24 +183,21 @@ $(document).on('click','#sidebar-menu', function(){
     	$('.center').contents().remove();
     	for(var i = Object.keys(list).length; i > 0; i--){
 				$('.center').prepend("<li id='cityinfo' data="+Object.keys(list)[i-1]+">"
-						+	"<img class='cityimage' id='cityimage' alt='' src='images/plan.jpg'>"
     			    	+	"<p class='citydesc' id='citydesc'>"+list[Object.keys(list)[i-1]]+"</p>"
     			    	+   "</li>");
     	}
     	
-    	document.getElementById("center").style.width="15%";
-		document.getElementById("map").style.width="80%";
-		
+    	document.getElementById("center").style.width="8%";
+		document.getElementById("map").style.width="87%";
+		document.getElementById("tourlist").style.width="0px";
 		var cityinfolist = $('.center').children();
 		var cityimagelist = document.getElementsByClassName("cityimage");
 		var citydesclist = document.getElementsByClassName("citydesc");
 		for(var i = 0; i<cityinfolist.length; i++){
 			cityinfolist[i].style.width="100%";
-			cityinfolist[i].style.height="12%";
+			cityinfolist[i].style.height="5%";
 			cityinfolist[i].style.border="1px solid gray";
-			cityimagelist[i].style.width="35%";
-			cityimagelist[i].style.height="80%";
-			citydesclist[i].style.width="30%";
+			citydesclist[i].style.width="50%";
 		} 
     /* load city list end */
     
@@ -176,8 +218,9 @@ $(document).on('click','#cityinfo', function(){
 	var $this = $(this);
 	var areaCode = $('.selected').attr('data');
 	var sigunguCode = $(this).attr('data');
+	$('.tourlist').contents().remove();
 	$.ajax({
-		url : 'GalleryList',
+		url : 'TourList',
 		type : 'get',
 		dataType : 'json',
 		data : {
@@ -187,34 +230,67 @@ $(document).on('click','#cityinfo', function(){
 		success : function(data) {
 			var myItem = data.response.body.items.item;
 			for(var i = 0; i < myItem.length; i++){
+				mapx.push(myItem[i].mapx);
+				mapy.push(myItem[i].mapy);
 				var title = myItem[i].title;
-				var addr = myItem[i].addr1;
+				var addr1 = myItem[i].addr1;
+				var addr2 = myItem[i].addr2;
 				var contentid = myItem[i].contentid;
-				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr+"</p></li>");
+				var firstImage = myItem[i].firstimage;
+				if(firstImage == undefined){
+					firstImage = "images/no_image.jpg";
+				}
+				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
+				+"<div class='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><br>+</div></li>");
 			}
+			
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
-			alert("request : " + XMLHttpRequest);
-			alert("Status: " + textStatus);
-			alert("Error: " + errorThrown);
+			console.log("request : " + XMLHttpRequest);
+			console.log("Status: " + textStatus);
+			console.log("Error: " + errorThrown);
 		}
 	});
 	
-	document.getElementById("tourlist").style.width = "10%";
+	for(var i = 0; i < mapx.length; i++){
+		console.log(mapx[i]);
+		marker = new google.maps.Marker({
+	  	    position: new google.maps.LatLng(mapx[i], mapy[i]),
+		  	map: map
+		});
+	}
+	
+	document.getElementById("tourlist").style.width = "20%";
 	var tourinfo = document.getElementsByClassName("tourinfo");
 	for(var i = 0; i < tourinfo.length; i++){
 		tourinfo[i].style.width = "100%";
 	}
-	document.getElementById("map").style.width="70%";
+	document.getElementById("map").style.width="67%";
 	$(".center").children().removeClass("selected");
 	$this.addClass('selected');
 	
 });
 
+$(document).on('click', '.plusbutton', function(){
+	var $this = $(this).attr("id");
+	var id = $('.plandiv')
+	alert(id);
+	$('.plandiv').css('width','20%');
+});
 
-$(document).on('click','#sidebar-menu', function(e){
+
+
+
+
+
+
+
+
+
+ $(document).on('click','#sidebar-menu', function(e){
 	    var $this = $(this).attr('data');
 	    if($this == '1'){
+			e.preventDefault();
 		    map.panTo({lat:37.566662, lng:126.978424});
 		    map.setZoom(12, true);
 	    }
@@ -222,7 +298,6 @@ $(document).on('click','#sidebar-menu', function(e){
 	    	var incheon = new google.maps.LatLng(37.4261057, 126.7530724);
 			e.preventDefault();
 		    map.panTo(incheon);
-	    	
 		    map.setZoom(12, true);
 	    }
 	    else if($this == '3'){
@@ -316,9 +391,28 @@ $(document).on('click','#sidebar-menu', function(e){
 		    map.setZoom(11, true);
 	    }	    
 });
-
+ 
+ 
+ function initMap() {
+       var area = document.getElementsByClassName('sidebar-menu');
+	   var center = {lat:36.543583, lng:127.859900};
+       map = new google.maps.Map(document.getElementById('map'), {
+         zoom: 7,
+         center: center,
+         gestureHandling: 'greedy'
+       });  
+	  }
+/* function addMarker(mapx, mapy){
+	marker = new google.maps.Marker({
+  	    position: new google.maps.LatLng(mapx, mapy),
+	  	map: map
+	});
+ } */
 </script>
 
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
+</script>
 </head>
 <body>
 
@@ -342,20 +436,14 @@ $(document).on('click','#sidebar-menu', function(e){
 			
 		</ul>
 
-		<div id="map" class="map"></div>
-		<script>
-		      function initMap() {
-			        var center = {lat:36.543583, lng:127.859900};
-			        map = new google.maps.Map(document.getElementById('map'), {
-			          zoom: 7,
-			          center: center,
-			          gestureHandling: 'greedy'
-			        });  
-		    	  }
-	    </script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
-    </script>
+		<div class="wrapper" id="wrapper">
+			<div class="map" id="map">
+			</div>
+			<div class="plandiv" id="plandiv">
+			엘레렐렐렐 떴당
+			</div>
+		</div>
+		
 </div>
 
 </body>
