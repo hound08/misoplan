@@ -193,6 +193,7 @@ h1 {
 		$('#btnConfirm').click(function() {
 			if (!joinForm.confirmCode.value) { 
 				alert("인증번호를 입력해주세요.");
+				joinForm.confirmCode.focus();
 				
 				return;
 			}
