@@ -34,6 +34,7 @@ public class scheduleFormAction implements CommandProcess{
 						Date tour_date = msdto.getTour_date();
 						Date regi_date = msdto.getRegi_date();
 				}
+				
 			}*/
 			request.setAttribute("planList", planList);
 			request.setAttribute("plan", plan);
