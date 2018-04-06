@@ -81,7 +81,7 @@
 			</div>
 			<div id="schedule">
 				<div id="schedulea">
-					<a href="schedule.do?email=${email }" class="menu"> 내 계획 </a>
+					<a href="scheduleForm.do?email=${email }" class="menu"> 내 계획 </a>
 				</div>
 			
 			</div>
