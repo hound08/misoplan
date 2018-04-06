@@ -109,10 +109,10 @@
 							<h1>내가 신청한 동행</h1>
 							<table border="1">
 								<tr>
-									<th id="aa">제목 </th> <th class="bb">닉네임</th><th class="bb">상태</th><th class="bb">등록일자</th>
+									<th id="aa">여행지 </th> <th class="bb">닉네임</th><th class="bb">상태</th><th class="bb">등록일자</th>
 								 </tr>
 								<tr>
-									<td>동해에서 4월21일 저녘식사 하실분 찾습니다</td><td>장철우</td><td>대기</td><td>2018.04.10</td>
+									<td>서울, 수원, 인천, 부산</td><td>장철우</td><td>대기</td><td>2018.04.10</td>
 								</tr>
 								<tr>
 									<td>메스에서 4월12일 클럽가실분</td><td>장철우</td><td>수락</td><td>2018.04.10</td>

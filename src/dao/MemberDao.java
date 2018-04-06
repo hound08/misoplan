@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -38,13 +40,67 @@ public class MemberDao {
 
 		return conn;
 	}
-
-	public String loginCheck(String email, String password) throws SQLException {
+	
+	public int emailCheck(String email) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT NICKNAME, PASSWORD FROM MEMBER WHERE EMAIL = ?";
-		String result = null;
+		String sql = "SELECT * FROM MEMBER WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public int nicknameCheck(String nickname) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM MEMBER WHERE NICKNAME = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, nickname);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				result = 1;
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+
+	public List<String> loginCheck(String email, String password) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<String> list = new ArrayList<String>();
+		String sql = "SELECT NICKNAME, PASSWORD, PROFILE_URL FROM MEMBER WHERE EMAIL = ?";
 
 		try {
 			conn = getConnection();
@@ -54,21 +110,20 @@ public class MemberDao {
 
 			if (rs.next()) {
 				if (rs.getString(2).equals(password)) {
-					result = rs.getString(1);
+					list.add(email);
+					list.add(rs.getString(1));
+					list.add(rs.getString(3));
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
 		}
 
-		return result;
+		return list;
 	}
 
 	public MemberDto select(String email) throws SQLException {
@@ -93,12 +148,9 @@ public class MemberDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
 		}
 		return dto;
 	}

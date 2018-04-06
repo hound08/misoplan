@@ -11,8 +11,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 * {
-	margin: 0;
-	padding: 0;
+	margin: 0px;
+	padding: 0px;
 }
 
 li {
@@ -28,56 +28,58 @@ a:hover {
 	text-decoration: none;
 }
 
-img {
-	vertical-align: bottom;
-}
-
 .header {
-	width: 100%;
+	width: 1080px;
 	height: 50px;
-	overflow: hidden;
-	margin: 5px auto;
-	display: inline-block;
+	margin: 0px auto;
 	/*	border:solid;  
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
 }
 
 .logo {
-	width: 180px;
-	height: 100%;
-	float: left;
+	display: inline-block;
+	left: 0px;
+	width: 170px;
+	cursor: pointer;
 	/*	border-right: solid;
 	border-color: #EAEAEA;
 	border-width: 2px;
 	margin-right: 90px;	*/
 }
 
-.logo_image {
-	float: right;
-	cursor: pointer;
+.category {
+	display: inline-block;
+	width: 620px;
+	margin-left: 25px;
+	vertical-align: top;
 }
 
-.category {
-	width: 800px;
-	height: 50px;
-	padding: 0px auto;
-	margin-top: auto;
-	margin-bottom: auto;
-	display: flex;
-	float: left;
-	align-items: center;
+.memberImageDiv {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-top: 5px;
+	margin-left: 25px;
+	vertical-align: top;
+}
+
+.memberImage	{
+	width: 40px;
+	height: 40px;
 }
 
 .login_on {
 	/*	border-left:solid;
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
-	padding-top: 5px;
-	width: 200px; 
-	height: 50px;
-	align-items: center;
-	float: right;
+	display: inline-block;
+	width: 180px;
+	height: 45px;
+	margin-top: 5px;
+	vertical-align: top;
+	text-align: left;
+	white-space: nowrap;
 }
 
 .login_off {
@@ -85,18 +87,22 @@ img {
 	border-color: #EAEAEA;
 	border-width: 2px;	*/
 	padding-top: 15px;
-	width: 200px; 
-	height: 50px;
-	align-items: center;
-	float: right;
+	margin-left: 90px;
+	display: inline-block;
+	width: 160px;
+	height: 35px;
+	vertical-align: top;
+	text-align: center;
 }
 
 .login_label {
+	height: 50px;
 	vertical-align: middle;
 	text-decoration: none;
 	font-size: 15px;
 	cursor: pointer;
-	margin-left: 20px;
+	margin-left: 14px;
+	margin-right: 14px;
 }
 
 .login_label:hover {
@@ -105,13 +111,12 @@ img {
 
 .category-menu {
 	list-style-type: none;
-	padding-left: 90px;
 }
 
 .category-menu li {
 	display: inline;
-	padding: 0px;
-	margin-right: 30px;
+	margin-left: 10px;
+	margin-right: 10px;
 }
 
 .category-menu li a {
@@ -120,7 +125,22 @@ img {
 	font-weight: bold;
 	text-decoration: none;
 	color: black;
-	align-content: center;
+}
+
+.btnMyInfo {
+	width: 70px;
+	height: 22px;
+	color: white;
+	background-color: #49B2E9;
+	border-color: transparent;
+}
+
+.btnLogout {
+	width: 70px;
+	height: 22px;
+	color: white;
+	background-color: #49B2E9;
+	border-color: transparent;
 }
 
 </style>
@@ -147,10 +167,13 @@ img {
 					</div>
 				</div>	<%
 			} else if (session.getAttribute("email") != null) {	%>
+				<div class="memberImageDiv">
+					<img class="memberImage" alt="회원 사진" src="${profile_url }">
+				</div>
 				<div class="login_on">
-					<p class="welcome"><strong><% out.println(session.getAttribute("nickname")); %></strong>님 환영합니다!</p>
-					<p class="buttons"><input type="button" value="정보수정" onclick="location.href='myInfoForm.do?email=${email}'">
-					<input type="button" value="로그아웃" onclick="location.href='logoutPro.do'"></p>
+					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
+					<p class="buttons"><input type="button" class="btnMyInfo" value="정보수정" onclick="location.href='mypage.jsp?email=${email}'">
+					<input type="button" value="로그아웃" class="btnLogout" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}
 		%>

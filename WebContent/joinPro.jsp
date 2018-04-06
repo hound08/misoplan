@@ -8,15 +8,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<c:if test="${result > 0}">
+	<% int result = (int)request.getAttribute("result"); %>
+	
+	<c:if test="<%=result > 0 %>">
 		<script type="text/javascript">
-			location.href="listAction.do";
+			alert("회원가입이 완료되었습니다.");
+			location.href="loginForm.do"
 		</script>
 	</c:if>
-	<c:if test="${result == 0}">
+	<c:if test="<%=result == 0 %>">
 		<script type="text/javascript">
-			alert("실패");
-			location.href="listAction.do";
+			alert("회원가입에 실패하였습니다.");
+			location.href="joinForm.do"
 		</script>
 	</c:if>
 </body>

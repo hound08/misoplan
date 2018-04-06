@@ -179,116 +179,15 @@ div {
 					<p>${bs.local_names }</p>
 				</div>
 				<div class="second-text">
-					<h1>제목 : ${bs.title }</h1>
+					<h1>제목 : ${dto.title }</h1>
 				</div>
-				<div class="tag">#eee</div>
-				<div class="idlocal" align="right">아이디 : ${bs.nickname }</div>
+				<div class="tag">${tag }</div>
+				<div class="idlocal" align="right">아이디 : ${dto.nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
 	
 		</c:forEach>
 	</div>
-		<!-- <div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="images/b.png">
-			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			<div class="second-text">
-				<h1>제목 : 여친구함</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : 나야나
-			</div>
-			<div class="datelocal" align="right">
-				2018.03.30
-			</div>
-		</div>
-		<div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="images/c.png">
-			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			
-			<div class="second-text">
-				<h1>제목 : 기회</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : 나야나
-			</div>
-			<div class="datelocal" align="right">
-				2018.03.30
-			</div>
-		</div>
-		<div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="images/d.png">
-			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			<div class="second-text">
-				<h1>제목 :</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : 나야나
-			</div>
-			<div class="datelocal" align="right">
-				2018.03.30
-			</div>
-		</div>
-		<div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="images/e.png">
-			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			<div class="second-text">
-				<h1>제목 :</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : 나야나
-			</div>
-			<div class="datelocal" align="right">
-				2018.03.30
-			</div>
-		</div>
-		<div class="center-second">
-			<div class="second-box">
-				<img alt="image" src="images/f.png">
-			</div>
-			<div class="local">
-				<p>[지역]</p>
-			</div>
-			<div class="second-text">
-				<h1>제목 :</h1>
-			</div>
-			<div class="tag">
-				#eee
-			</div>
-			<div class="idlocal" align="right">
-				아이디 : 나야나
-			</div>
-			<div class="datelocal" align="right">
-				2018.03.30
-			</div>
-		</div> -->
 		<div class="bottom-page" align="center">
 			<div style="text-align: center;">
 				<%-- <c:if test="${startPage > blockSize }">
