@@ -19,6 +19,8 @@ public class BoardInsertAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
+		
+		request.setCharacterEncoding("UTF-8");
 		int maxSize = 5 * 1024 * 1024;
 		String filename = "";
 		String fileSave = "/upload";
@@ -42,12 +44,20 @@ public class BoardInsertAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
-		
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setTour_text(multi.getParameter("tour_text"));
+		
+		if(multi.getFile("image_url") !=null ) {
+			File file = multi.getFile("image_url");
+			dto.setImage_url("/J20180403/upload/" + filename);
+			
+		} else {
+			dto.setImage_url("/J20180403/images/no_profile_image.png");
+			
+		}
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			int result = dao.insertPlan(dto);
@@ -59,7 +69,7 @@ public class BoardInsertAction implements CommandProcess {
 			System.out.println(e.getMessage());
 		}
 		
-		return "plan1.jsp";
+		return "boardPor.jsp";
 	}
 
 }

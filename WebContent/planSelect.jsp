@@ -159,7 +159,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		</div>
 		<div class="main-imagebt">
-			<input class="" type="file" name="plan_image_url" value="" onchange="image(this)">
+			<input class="" type="file" name="image_url" value="" onchange="image(this)">
 		</div>
 	</div>
 	<div class="main-center">
