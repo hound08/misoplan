@@ -11,7 +11,7 @@
 <style type="text/css">
 
 div {
-margin: 0px auto;
+	margin: 0px auto;
 }
 
 * {
