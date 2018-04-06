@@ -207,15 +207,11 @@ public class BoardScheduleDao {
 		   }
 
 
-
-
-
 	public int insertPlan(BoardScheduleDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO BOARDSCHEDULE(TITLE, TAG, NICKNAME, IMAGE_URL, TOUR_TEXT) VALUES(?, ?, ?, ?, ?)";
 		int result = 0;
-		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
@@ -248,6 +244,7 @@ public class BoardScheduleDao {
 		}
 		
 	}*/
+
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
