@@ -9,25 +9,24 @@
 		
 		<style type="text/css">
 			#center {
-				border: 1px solid red;
 				margin: 0px auto;
-				width: 1000px;
+				width: 1200px;
 				height: 100%;
 			}
-			
 			#main {
-					width: 730px;
-					border: 3px solid green;
+					background-color: #f0f0f0;
+					width: 930px;
 					text-align: center;
 					float: left;
 					margin-top: 20px;
+					border-radius: 25px;
+					padding-bottom: 20px;
 				}
 			#main h1 {
 					margin: 20px 0px;
 			}
 			#second {
 				background-color: #d7e4bd;
-				border: 1px solid green;
 				border-radius: 15px;
 				width: 450px;
 				margin: 0px auto;
@@ -55,6 +54,7 @@
 			.input {
 				border-radius :10px;
 			}
+		
 		</style>
 		<script type="text/javascript" src="js/jQuery.js"></script>
 		<script type="text/javascript">
@@ -96,7 +96,7 @@
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
-				<h1>내 정보</h1>   ${ memberdto.profile_url}
+				<h1>내 정보</h1>  
 				<div id="myinfo">
 					<div id="second">
 						<form action="myInfoPro.do" name="frm" onsubmit="return chk()" id="secondbox" method="post" enctype="multipart/form-data">

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
+import dao.mySchduleDao;
+import dao.mySchduleDto;
 
 public class scheduleFormAction implements CommandProcess{
 
@@ -20,16 +22,16 @@ public class scheduleFormAction implements CommandProcess{
 		
 		try {
 			String email = request.getParameter("email");
-			BoardScheduleDao bsdao = BoardScheduleDao.getInstance();
-			List<ArrayList<BoardScheduleDto>> planList = bsdao.getMylist(email);
-			List<ArrayList<BoardScheduleDto>> requestPlanList = null;
-			ArrayList<BoardScheduleDto> requestPlan = null;
+			mySchduleDao msdao = mySchduleDao.getInstance();
+			List<ArrayList<mySchduleDto>> planList = msdao.getMylist(email);
+			List<ArrayList<mySchduleDto>> requestPlanList = null;
+			ArrayList<mySchduleDto> requestPlan = null;
 			
 			
 			for(int i = 0; i < planList.size(); i++){
-				ArrayList<BoardScheduleDto> plan = planList.get(i);
+				ArrayList<mySchduleDto> plan = planList.get(i);
 				for(int j = 0; j < plan.size(); j++){
-					BoardScheduleDto bsdto = plan.get(j);
+					mySchduleDto msdto = plan.get(j);
 					/*if(j == 1){
 						String s_name = bsdto.getS_name();
 						Date regi_Date = bsdto.getRegi_date();

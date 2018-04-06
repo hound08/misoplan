@@ -26,7 +26,6 @@ public class BoardInsertAction implements CommandProcess {
 		MultipartRequest multi = new MultipartRequest(request, realPath,
 				maxSize, "utf-8", new DefaultFileRenamePolicy());
 		Enumeration en = multi.getFileNames();
-		System.out.println("fsegagreagfad");
 		while (en.hasMoreElements()) { // 여러개의 파일을 올릴 때 이런 방식으로 사용
 			String filename1 = (String) en.nextElement();
 			filename = multi.getFilesystemName(filename1);

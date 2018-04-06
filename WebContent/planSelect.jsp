@@ -146,16 +146,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="main-top-second2">
 		
 		<div class="main-second-box2">
-			제 목 : <input type="text" name="title" required="required" value="${dto.title }>
+			제 목 : <input type="text" name="title" required="required">
 		</div>
 		<div class="main-second-box1">
-			태 그 : <input type="text" name="tag" required="required" value="${dto.tag }">
+			태 그 : <input type="text" name="tag" required="required" value="">
 		</div>
 		<div class="main-second-box1">
 			기 간 : <input type="date"> ~ <input type="date">
 		</div>
 		<div class="main-second-box1">
-			작성자: <input type="text" name="nickname" required="required" value="${dto.nickname }">
+			작성자: <input type="text" name="nickname" required="required" value="">
 		</div>
 		</div>
 		<div class="main-imagebt">

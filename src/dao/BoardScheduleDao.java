@@ -158,7 +158,6 @@ public class BoardScheduleDao {
 		return result;
 	}
 
-
 	public List<ArrayList<BoardScheduleDto>> getMylist(String email) throws SQLException {
 		  Connection conn = null;
 	      PreparedStatement ps = null;
@@ -208,13 +207,11 @@ public class BoardScheduleDao {
 		   }
 
 
-
 	public int insertPlan(BoardScheduleDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql = "INSERT INTO BOARDSCHEDULE(TITLE, TAG, NICKNAME, IMAGE_URL, TOUR_TEXT) VALUES(?, ?, ?, ?, ?)";
 		int result = 0;
-
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
@@ -233,6 +230,21 @@ public class BoardScheduleDao {
 		return result;
 	}
 	
+/*	public int sl_code() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int result = 0;
+		String sql = "SELECT SL_CODE FROM BOARDSCHEDULE EMAIL = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+		}
+		
+	}*/
+
 	
 	/*
 	 * public int getTotalCnt() throws SQLException { 선생님 페이지창 참고자료 Connection
