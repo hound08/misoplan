@@ -22,8 +22,6 @@ margin: 0px auto;
 
 .section {
 	width: 1200px;
-	height: 1000px;
-	margin-bottom: 100px;
 }
 
 .main-image {
@@ -34,7 +32,6 @@ margin: 0px auto;
 	height: 400px;
 	overflow: hidden;
 	position: relative;
-	margin-bottom: 20px;
 }
 
 .centerimage {

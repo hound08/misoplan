@@ -22,7 +22,6 @@ div {
 
 .section {
 	width: 1200px;
-	height: 1000px;
 }
 
 .main-image {
@@ -185,16 +184,21 @@ div {
 			<button>최신순</button>
 		</div>
 		<div class="section-card">
-			<div class="card">
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
+			<c:forEach var="board" items="${list}">
+				<div class="card">
+					<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
+					<div class="container">
+						<div style="float: right; color:#2478FF ">태그:${board.tag }</div>
+						<div style="font-size: 20px;">제목:${board.title }</div>
+						<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
+						<div>닉네임:${board.nickname }</div>
+						<div style="float: right;">마감:${board.is_closed }</div>
+						<div>내용:${board.content }</div>
+						<div style="vertical-align: baseline;">조회수:${board.view_count } 추천수:${board.vote_count }</div>
+						<div>등록일:${board.reg_date }</div>
+					</div>
 				</div>
-			</div>
+			</c:forEach>
 		</div>
 		<!--section card -->
 		<div>
@@ -205,11 +209,11 @@ div {
 				<a href="list.do?pageNum=${currentPage-1}">&laquo;</a> 			
 			</c:if>
 			<a href="#">&#9665</a>
-			<a href="#" class="active">1</a> 
-			<a href="#">2</a> 
-			<a href="#">3</a> 
-			<a href="#" >4</a> 
-			<a href="#">5</a> 
+			<a href="#" class="active"></a> 
+			<a href="#"></a> 
+			<a href="#"></a> 
+			<a href="#" ></a> 
+			<a href="#"></a> 
 			<a href="#">&#9655</a>
 			<a href="#">&raquo;</a>
 		</div>
@@ -226,7 +230,7 @@ div {
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
-
+	</div>
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
 		var current = 0;
@@ -237,10 +241,10 @@ div {
 			if (current >= images.length)
 				current = 0;
 			image.src = images[current];
-			
 		}
 
 		setInterval(replacePhoto, 3000);
+		
 	</script>
 </body>
 </html>

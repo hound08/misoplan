@@ -90,8 +90,8 @@ public class AccompanyDao {
 			pstmt = conn.prepareStatement(sql2);
 			pstmt.setString(1, accompanyBoardDto.getEmail());
 			rs = pstmt.executeQuery();
-			rs.next();
-			nickname = rs.getString(1);
+			if(rs.next())
+				nickname = rs.getString(1);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		} finally {
@@ -171,7 +171,7 @@ public class AccompanyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select from (select rownum rn, a.* from (select *from accompanyboard order by post_num desc) a) where rn between ? and ?";
+		String sql = "select * from (select rownum rn, a.* from (select *from accompanyboard order by post_num desc) a) where rn between ? and ?";
 		
 		try {
 			conn = getConnection();
