@@ -9,7 +9,7 @@
 </head>
 <body>
 		<script type="text/javascript">
-			alert("작성한 일정이 없다!! 회갑하고 다시와 ~ 줄임말 오졌구요 지렸구요 20대냄새 폴폴 풍기구욘!!");
+			alert("작성한 일정이 없습니다. 일정을 확인해주세요.");
 			location.href = "main.do"
 		</script>
 </body>
