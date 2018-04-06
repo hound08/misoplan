@@ -31,7 +31,6 @@ div {
 .divEmail {
 	width: 300px;
 	margin-bottom: 5px;
-	text-align: left;
 }
 
 .inputTypeEmail {
@@ -77,7 +76,28 @@ div {
 	margin-bottom: 5px;
 }
 
-.pPassword {
+.divPassword {
+	margin-top: 15px;
+}
+
+.password {
+	width: 300px;
+	height: 30px;
+	margin-bottom: 1px;
+}
+
+.passwordChk {
+	width: 300px;
+	height: 30px;
+	margin-bottom: 5px;
+}
+
+#spanPassword {
+	color: red;
+	font-size: 13px;
+}
+
+.pPhone {
 	margin-top: 15px;
 }
 
@@ -111,6 +131,11 @@ h1 {
 				sendData,
 				function(result) {
 					$('#spanEmail').html(result);
+					
+					if (result.indexOf('이미') > 0) {
+						$('#email').val("");
+						$('#email').focus();
+					}
 			});
 		});
 	});
@@ -124,6 +149,11 @@ h1 {
 				sendData,
 				function(result) {
 					$('#spanNickname').html(result);
+					
+					if (result.indexOf('이미') > 0) {
+						$('#nickname').val("");
+						$('#nickname').focus();
+					}
 			});
 		});
 	});
@@ -155,6 +185,8 @@ h1 {
 			function(result) {
 				confirmNum = result.substr(result.indexOf("authNum:")+8, 6);
 		});
+		
+		alert("해당 이메일로 인증번호가 발송되었습니다.");
 	}
 	
 	$(function() {
@@ -186,6 +218,20 @@ h1 {
 		return;
 	}
 	
+	$(function() {
+		$('#passwordChk').change(function() {
+			if ($('#password').val() != $('#passwordChk').val()) { 
+				$('#passwordChk').val("");
+				$('#passwordChk').focus();
+				$('#spanPassword').html("※ 비밀번호가 일치하지 않습니다.");
+				
+				return;
+			} else {
+				$('#spanPassword').html("　");
+			}
+		});
+	});
+	
 	function chk() {
 		if (joinForm.btnConfirm.value.indexOf("인증완료") < 0) {
 			alert("이메일 인증이 처리되지 않았습니다.");
@@ -209,11 +255,14 @@ h1 {
 				<input type="text" id="confirmCode" name="confirmCode" class="confirmCode" placeholder="인증번호" disabled="disabled"><input type="button" id="btnConfirm" name="btnConfirm" class="btnConfirm" value="확인" disabled="disabled">
 			</div>
 			<span id="spanEmail">　</span>
+			<div class="divPassword">
+				<input type="password" id="password" name="password" class="password" required="required" placeholder="비밀번호"><br>
+				<input type="password" id="passwordChk" name="passwordChk" class="passwordChk" required="required" placeholder="비밀번호 확인"><br>
+				<span id="spanPassword">　</span>
+			</div>
 			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
 			<span id="spanNickname">　</span>
-			<p class="pPassword"><input type="password" name="password" class="inputType" required="required" placeholder="비밀번호"></p>
-			<p class="pPasswordChk"><input type="password" name="pPasswordChk" class="inputType" required="required" placeholder="비밀번호 확인"></p>
-			<p><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
+			<p class="pPhone"><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
 			<p><input type="file" name="profile_url" class="inputType"></p>
 			<p><input type="submit" id="submit" value="회원가입"></p>
 		</form>
