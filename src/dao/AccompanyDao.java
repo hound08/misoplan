@@ -84,21 +84,6 @@ public class AccompanyDao {
 			close(pstmt);
 		}
 		
-		String nickname = null;
-		String sql2 = "select nickname from member where email = ?";
-		try {
-			pstmt = conn.prepareStatement(sql2);
-			pstmt.setString(1, accompanyBoardDto.getEmail());
-			rs = pstmt.executeQuery();
-			rs.next();
-			nickname = rs.getString(1);
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		} finally {
-			close(rs);
-			close(pstmt);
-		}
-		
 		/*String sl_code = null;
 		String sql3 = "select from sl_code schedulelarge where email = ?";
 		try {
@@ -116,7 +101,7 @@ public class AccompanyDao {
 			pstmt = conn.prepareStatement(sql4);
 			pstmt.setInt(1, num);
 			pstmt.setString(2, accompanyBoardDto.getEmail()); 
-			pstmt.setString(3, nickname); 
+			pstmt.setString(3, accompanyBoardDto.getNickname()); 
 			pstmt.setString(4, null); 
 			pstmt.setString(5, accompanyBoardDto.getTitle());
 			pstmt.setString(6, accompanyBoardDto.getImage_url());
@@ -171,7 +156,7 @@ public class AccompanyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select from (select rownum rn, a.* from (select *from accompanyboard order by post_num desc) a) where rn between ? and ?";
+		String sql = "select * from (select rownum rn, a.* from (select *from accompanyboard order by post_num desc) a) where rn between ? and ?";
 		
 		try {
 			conn = getConnection();
@@ -183,6 +168,7 @@ public class AccompanyDao {
 				AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
 				accompanyDto.setNickname(rs.getString(4));
 				accompanyDto.setTitle(rs.getString(6));
+				accompanyDto.setImage_url(rs.getString(7));
 				accompanyDto.setContent(rs.getString(8));
 				accompanyDto.setTag(rs.getString(9));
 				accompanyDto.setView_count(rs.getInt(10));
