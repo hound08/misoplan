@@ -129,7 +129,7 @@ ul {
 				<input type="submit" value="완료" class="submit-button">
 			</form>
 			<div>
-				<a href="accompanyBoard.jsp"><button class="cancel-button">취소</button></a>							
+				<a href="listAction.do"><button class="cancel-button">취소</button></a>							
 			</div>
 		</div>
 	</div>

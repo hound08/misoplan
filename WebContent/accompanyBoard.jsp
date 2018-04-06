@@ -47,8 +47,8 @@ div {
 	margin-left: auto;
 	margin-right: auto;
 	display: inline-block;
-	justify-content: space-between;
 	border: solid;
+	border-color: #F6F6F6;
 }
 
 .pagenumber {
@@ -70,25 +70,21 @@ div {
 .container{
 	padding: 15px;
 	height: 100%;
-	border: solid;
 }
 
 .card {
 	height: 400px;
 	width: 350px;
-	border: solid 2px;
+	border: solid;
 	border-radius: 10px;
 	border-color: #F6F6F6;
 	display: inline-block;
-	overflow: hidden;
+	margin-left: 30px;
+	margin-bottom: 30px
 }
 
 .card:hover{
 	border-color: #A6A6A6
-}
-
-.card p{
-	color:#747474;
 }
 
 .pagination {
@@ -109,7 +105,7 @@ div {
     color: white;
 }
 
-.pagination a:hover:not(.active) {
+.pagination a:hover:not {
     background-color: #ddd;
     border-radius: 5px;
 }
@@ -186,9 +182,14 @@ div {
 		<div class="section-card">
 			<c:forEach var="board" items="${list}">
 				<div class="card">
-					<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
+				<c:if test="${board.image_url == '/J20180403/upload/null'}">
+					<img src="images/plan.jpg" class="card-image" style="width: 100%">
+				</c:if>
+				<c:if test="${board.image_url != '/J20180403/upload/null'}">
+					<img src="${board.image_url }" class="card-image" alt="image" style="width: 100%">
+				</c:if>
 					<div class="container">
-						<div style="float: right; color:#2478FF ">태그:${board.tag }</div>
+						<div style="float: right; color:#2478FF ">${board.tag }</div>
 						<div style="font-size: 20px;">제목:${board.title }</div>
 						<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
 						<div>닉네임:${board.nickname }</div>
@@ -205,17 +206,36 @@ div {
 			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 		</div>
 		<div class="pagination">
-			<c:if test="${pagenum != 1}">
-				<a href="list.do?pageNum=${currentPage-1}">&laquo;</a> 			
+			<c:if test="${startPage!=1 }">
+				<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a> 			
 			</c:if>
-			<a href="#">&#9665</a>
-			<a href="#" class="active"></a> 
-			<a href="#"></a> 
-			<a href="#"></a> 
-			<a href="#" ></a> 
-			<a href="#"></a> 
-			<a href="#">&#9655</a>
-			<a href="#">&raquo;</a>
+			<c:if test="${startPage==1 }">
+				<a href='listAction.do?pageNum=1'>&laquo;</a> 			
+			</c:if>
+			<c:if test="${currentPage!=1 }">
+				<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+			</c:if>
+			<c:if test="${currentPage==1 }">
+				<a href='listAction.do?pageNum=1'>&#9665</a>			
+			</c:if>
+			<a href='listAction.do?pageNum=${startPage }'>${startPage }</a> 
+			<a href='listAction.do?pageNum=${startPage+1 }'>${startPage+1 }</a> 
+			<a href='listAction.do?pageNum=${startPage+2 }'>${startPage+2 }</a> 
+			<a href='listAction.do?pageNum=${startPage+3 }'>${startPage+3 }</a> 
+			<a href='listAction.do?pageNum=${startPage+4 }'>${startPage+4 }</a> 
+			
+			<c:if test="${currentPage==totalPage }">
+				<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+			</c:if>
+			<c:if test="${currentPage!=totalPage }">
+				<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+			</c:if>
+			<c:if test="${endPage>=totalPage }">
+				<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>			
+			</c:if>
+			<c:if test="${endPage<totalPage }">
+				<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>			
+			</c:if>
 		</div>
 		<div class="search">
 			<select class="search-select">
@@ -227,9 +247,9 @@ div {
 			<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 			<button type="submit" class="search-submit">검색</button>
 		</div>
+	</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
-	</div>
 	</div>
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
