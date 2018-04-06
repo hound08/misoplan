@@ -20,6 +20,7 @@ body{
 	width: 100%;
 	margin-left: auto;
 	margin-right: auto;
+	margin-top: 50px;
 	line-height: 25px;
 	padding: 15px 0;
 }

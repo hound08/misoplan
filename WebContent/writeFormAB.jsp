@@ -88,6 +88,9 @@ ul {
 	justify-content: center;
 	margin-top: 20px;
 }
+#footer_wrap{
+	clear: both;
+}
 
 </style>
 </head>
@@ -133,9 +136,10 @@ ul {
 			</div>
 		</div>
 	</div>
-	<div class="footer_wrap">
+	<div id="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
+
 	
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
