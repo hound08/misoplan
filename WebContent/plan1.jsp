@@ -179,10 +179,10 @@ div {
 					<p>${bs.local_names }</p>
 				</div>
 				<div class="second-text">
-					<h1>제목 : ${bs.title }</h1>
+					<h1>제목 : ${dto.title }</h1>
 				</div>
-				<div class="tag">#eee</div>
-				<div class="idlocal" align="right">아이디 : ${bs.nickname }</div>
+				<div class="tag">${tag }</div>
+				<div class="idlocal" align="right">아이디 : ${dto.nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
 	

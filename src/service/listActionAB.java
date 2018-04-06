@@ -27,12 +27,11 @@ public class listActionAB implements CommandProcess{
 		int blockSize = 5; //한번에 보일 페이지 수
 		int startRow = (currentPage - 1) * pageSize + 1; //현재 페이지에서 첫번째 보일 게시물 번호
 		int endRow = startRow + pageSize - 1; //현재 페이지에서 보일 마지막 게시물 번호
-		int startNum = totalPost = startRow +1 ;
-		int totalPage = (int)(Math.ceil(totalPost/pageSize)); //총 페이지 개수
+		int startNum = totalPost - startRow +1 ;
+		int totalPage = (int)Math.ceil((double)totalPost/(double)blockSize);//총 페이지 개수
 		int startPage = (int)((currentPage-1)/blockSize)*blockSize+1; // 페이지 목록 시작
 		int endPage = startPage + blockSize -1; //페이지 목록 끝
 		List<AccompanyBoardDto> list = accompanyDao.list(startRow, endRow);
-		
 		request.setAttribute("totalPost", totalPost);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);
@@ -43,7 +42,15 @@ public class listActionAB implements CommandProcess{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
-		
+		System.out.println("totalPost="+totalPost);
+		System.out.println("pageSize="+pageSize);
+		System.out.println("blockSize="+blockSize);
+		System.out.println("startRow="+startRow);
+		System.out.println("endRow="+endRow);
+		System.out.println("startNum="+startNum);
+		System.out.println("totalPage="+totalPage);
+		System.out.println("startPage="+startPage);
+		System.out.println("endPage="+endPage);
 		return "accompanyBoard.jsp";
 	}
 

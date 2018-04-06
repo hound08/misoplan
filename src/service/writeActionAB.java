@@ -56,6 +56,7 @@ public class writeActionAB implements CommandProcess{
 				
 		AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
 		accompanyDto.setEmail(String.valueOf(session.getAttribute("email")));
+		accompanyDto.setNickname(String.valueOf(session.getAttribute("nickname")));
 		accompanyDto.setTitle(multi.getParameter("title"));
 		accompanyDto.setClosing_date(closing_date);
 		accompanyDto.setTag(multi.getParameter("tag"));
@@ -65,13 +66,10 @@ public class writeActionAB implements CommandProcess{
 
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		int result = accompanyDao.insert(accompanyDto);
-<<<<<<< HEAD
         request.setAttribute("result", result);
 
-=======
 		
         request.setAttribute("result", result);
->>>>>>> 844d8d2bab619b8c54fe8e035f097887d498a7f9
 		return "writeFormAB2.jsp";
 	}//writeFormAction.requestPro
 

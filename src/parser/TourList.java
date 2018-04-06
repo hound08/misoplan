@@ -18,8 +18,8 @@ import org.json.simple.JSONObject;
 /**
  * Servlet implementation class GalleryList
  */
-@WebServlet("/GalleryList")
-public class GalleryList extends HttpServlet {
+@WebServlet("/TourList")
+public class TourList extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

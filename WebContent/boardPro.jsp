@@ -8,9 +8,14 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<% int result = (int)request.getAttribute("result"); %>
+	
+	<c:if test="<%=result > 0 %>">
 		<script type="text/javascript">
-			alert("작성한 일정이 없습니다. 일정을 확인해주세요.");
-			location.href = "main.do"
+			alert("일정 등록이 완료되었습니다.");
+			location.href="boardForm.do"
 		</script>
+	</c:if>
+
 </body>
 </html>
