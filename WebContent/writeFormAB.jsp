@@ -22,7 +22,6 @@ margin: 0px auto;
 
 .section {
 	width: 1200px;
-	height: 1000px;
 	margin-bottom: 100px;
 }
 

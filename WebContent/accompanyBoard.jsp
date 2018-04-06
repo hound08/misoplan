@@ -68,11 +68,6 @@ div {
 	margin-right: auto;
 	margin-left: auto;
 }
-.container{
-	padding: 15px;
-	height: 100%;
-	border: solid;
-}
 
 .card {
 	height: 400px;
@@ -117,7 +112,13 @@ div {
 
 .card-image {
 	width: 300px;
-	height: 250px;
+	height: 60%;
+}
+
+.container{
+	padding: 15px;
+	height: 40%;
+	border: solid;
 }
 
 .search {
@@ -185,7 +186,7 @@ div {
 			<button>최신순</button>
 		</div>
 		<div class="section-card">
-			<div class="card">
+			<div class="card" onmouseout="cardChange()" >
 				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
 				<div class="container">
 					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
@@ -201,10 +202,8 @@ div {
 			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 		</div>
 		<div class="pagination">
-			<c:if test="${pagenum != 1}">
-				<a href="list.do?pageNum=${currentPage-1}">&laquo;</a> 			
-			</c:if>
-			<a href="#">&#9665</a>
+			<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> 						
+			<a href="list.do?pageNum">&#9665</a>
 			<a href="#" class="active">1</a> 
 			<a href="#">2</a> 
 			<a href="#">3</a> 
@@ -221,12 +220,13 @@ div {
 				<option>날짜</option>
 			</select>
 			<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-			<button type="submit" class="search-submit">검색</button>
+			<button type="submit" id="search-submit" class="search-submit" onmouseover="replaceCard()">검색</button>
 		</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
-
+	</div>
+	<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
 		var current = 0;
@@ -237,10 +237,14 @@ div {
 			if (current >= images.length)
 				current = 0;
 			image.src = images[current];
-			
 		}
-
 		setInterval(replacePhoto, 3000);
+		
+		var submit = document.getElementByClassName("search-submit");
+		function replaceCard(){
+			submit.style.color="Orange";
+		}
+		
 	</script>
 </body>
 </html>
