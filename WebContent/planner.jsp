@@ -41,6 +41,7 @@
 		margin: 0px;
 		width: 100%;
 		min-height: 100%;
+		overflow: hidden;
 	}
 	.center{
 		padding: 0px;
@@ -101,8 +102,10 @@
     	height: 0%;
     	padding: 0px;
     	margin:0px;
+    	border: 1px solid gray;
     }
     .citydesc{
+    	text-align: center;
     	width: 0%;
     	margin: 10% 0 0 30%;
     }
@@ -124,8 +127,14 @@
     	padding: 5px;
     }
     .tourImageDiv{
-    	width: 80%;
+    	width: 100%;
     	height: 30%;
+    	margin: 5% 0 0 0;
+    }
+    .tourdescdiv{
+    	float: left;
+    	width: 80%;
+    	overflow: hidden;
     }
     .plusbutton{
     	text-align: center;
@@ -164,8 +173,8 @@ $(document).on('click','#sidebar-menu', function(){
     			    	+   "</li>");
     	}
     	
-    	document.getElementById("center").style.width="10%";
-		document.getElementById("map").style.width="80%";
+    	document.getElementById("center").style.width="8%";
+		document.getElementById("map").style.width="87%";
 		document.getElementById("tourlist").style.width="0px";
 		var cityinfolist = $('.center').children();
 		var cityimagelist = document.getElementsByClassName("cityimage");
@@ -197,7 +206,7 @@ $(document).on('click','#cityinfo', function(){
 	var sigunguCode = $(this).attr('data');
 	$('.tourlist').contents().remove();
 	$.ajax({
-		url : 'GalleryList',
+		url : 'TourList',
 		type : 'get',
 		dataType : 'json',
 		data : {
@@ -218,7 +227,7 @@ $(document).on('click','#cityinfo', function(){
 					firstImage = "images/no_image.jpg";
 				}
 				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='plusbutton'><br>+</div><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></li>");
+				+"<div class='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><br>+</div></li>");
 			}
 			
 		},
@@ -242,11 +251,28 @@ $(document).on('click','#cityinfo', function(){
 	for(var i = 0; i < tourinfo.length; i++){
 		tourinfo[i].style.width = "100%";
 	}
-	document.getElementById("map").style.width="60%";
+	document.getElementById("map").style.width="67%";
 	$(".center").children().removeClass("selected");
 	$this.addClass('selected');
 	
 });
+
+/* $(document).on('click', '.plusbutton', function(){
+	var $this = $(this).attr("id");
+	alert("this id : " + $this);
+	
+	
+	
+}); */
+
+
+
+
+
+
+
+
+
 
  $(document).on('click','#sidebar-menu', function(e){
 	    var $this = $(this).attr('data');
