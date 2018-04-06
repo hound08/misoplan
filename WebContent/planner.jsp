@@ -133,8 +133,9 @@
     }
     .tourdescdiv{
     	float: left;
-    	width: 80%;
+    	width: 79%;
     	overflow: hidden;
+    	border: 1px solid gray;
     }
     .plusbutton{
     	text-align: center;
@@ -147,7 +148,20 @@
     .plusbutton:hover {
 		cursor: pointer;
 	}
-    
+	.plan{
+	}
+	.wrapper{
+		position: relative;
+	}
+    .plandiv{
+		position: absolute;
+		top: 50px;
+		left: 500px;
+		background-color: white;
+		width: 0%;
+		height: 300px;
+		transition:all 0.5s;
+    }
     
 </style>
 
@@ -257,13 +271,12 @@ $(document).on('click','#cityinfo', function(){
 	
 });
 
-/* $(document).on('click', '.plusbutton', function(){
+$(document).on('click', '.plusbutton', function(){
 	var $this = $(this).attr("id");
-	alert("this id : " + $this);
-	
-	
-	
-}); */
+	var id = $('.plandiv')
+	alert(id);
+	$('.plandiv').css('width','20%');
+});
 
 
 
@@ -280,7 +293,6 @@ $(document).on('click','#cityinfo', function(){
 			e.preventDefault();
 		    map.panTo({lat:37.566662, lng:126.978424});
 		    map.setZoom(12, true);
-		    
 	    }
 	    else if($this == '2'){
 	    	var incheon = new google.maps.LatLng(37.4261057, 126.7530724);
@@ -424,7 +436,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 			
 		</ul>
 
-		<div id="map" class="map"></div>
+		<div class="wrapper" id="wrapper">
+			<div class="map" id="map">
+			</div>
+			<div class="plandiv" id="plandiv">
+			엘레렐렐렐 떴당
+			</div>
+		</div>
 		
 </div>
 
