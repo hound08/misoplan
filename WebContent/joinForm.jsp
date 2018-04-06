@@ -101,6 +101,12 @@ div {
 	margin-top: 15px;
 }
 
+.divProfile {
+	border: 1px solid #A9A9A9;
+	width: 298px;
+	text-align: left;
+}
+
 #submit {
 	width: 300px;
 	height: 40px;
@@ -264,7 +270,9 @@ h1 {
 			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
 			<span id="spanNickname">　</span>
 			<p class="pPhone"><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
-			<p><input type="file" name="profile_url" class="inputType"></p>
+			<div class="divProfile">
+				<input type="file" name="profile_url" class="inputFile">
+			</div>
 			<p><input type="submit" id="submit" value="회원가입"></p>
 		</form>
 	</div>
