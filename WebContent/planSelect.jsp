@@ -21,41 +21,52 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 
 .main-top {
 	width: 1200px;
-	height: 300px;
+	height: 330px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
 	
 }
+.main-imagebt{
+	width: 80px;
+	height: 30px;
+	margin: 0 5px 0 50px;
+}
 .main-top-second1 {
-	width: 400px;
+	width: 380px;
 	height: 250px;
  	margin: 25px 0 0 35px; 
 	border: 1px solid gray;
 	display: inline-block;
 }
 .main-top-second2 {
+	padding: 40px 0 0 70px;
 	vertical-align: top;
 	width: 630px;
-	height: 250px;
+	height: 212px;
  	margin: 25px 0 0 40px; 
 	border: 1px solid gray;
 	display: inline-block;
 }
-.main-second-box1{
-	width: 610px;
-	height: 25px;
-	margin: 15px 0 0 5px;
-	font-size: 10pt;
-}
-.main-second-box2{
-	width: 610px;
+#title {
+	width: 300px;
 	height: 30px;
-	margin: 15px 0 0 5px;
+}
+#tag {
+	width: 300px;
+	height: 30px;
+}
+#tour_date {
+	width: 136px;
+	height: 30px;
+}
+#nickname {
+	width: 290px;
+	height: 30px;
 }
 .main-center {
 	width: 1200px;
-	height: 800px;
+	height: 650px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
@@ -99,47 +110,44 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .center-bottom-image {
 	width: 1160px;
-	height: 400px;
-	padding: 0 0 0 0px;
+	height: 200px;
+	margin: 20px 20px;
 	font-size: 10pt;
+	vertical-align: top;
 }
-.bottom-image {
-	width: 300px;
-	height: 380px;
-	margin: 10px 15px;
-	display: inline-block;
-	border: 1px solid gray;
+.button-bottom {
+	width: 1100px;
+	height: 30px;
+	magin : 0 30px;
 }
-.bottom-text {
-	width: 790px;
-	height: 380px;
-	margin: 10px 15px;
-	display: inline-block;
-	border: 1px solid gray;
-}
+
 </style>
+<script type="text/javascript">
+	function previewFile(input){
+   		 var reader=new FileReader();
+    
+   		 reader.onload=function(event){
+    	   $('.main-top-second1').attr('src', event.target.result);
+    	}
+  		  reader.readAsDataURL(input.files[0]);
+ 	}
+</script>
 </head>
 <body>
+<form action="boardinsert.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
-		<div class="main-top-second1" align="left">
-			<img alt="IMG" src="images/k1.jpg">
-		</div>
+		<!-- <div class="main-top-second1" align="left"> -->
+			<img class="main-top-second1" alt="IMG" src="">
+		<!-- </div> -->
 		<div class="main-top-second2">
-		<div class="main-second-box1">
-			2018.04.02
+		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
+		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
+		<p>기   간 : <input type="date" id="tour_date" name="tour_date" required="required"> ~ 
+				<input type="date" id="tour_date" name="tour_date" required="required"></p><br>
+		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
 		</div>
-		<div class="main-second-box2">
-			title
-		</div>
-		<div class="main-second-box1">
-			여행지
-		</div>
-		<div class="main-second-box1">
-			기간
-		</div>
-		<div class="main-second-box1">
-			작성자
-		</div>
+		<div class="main-imagebt">
+			<input class="" type="file" name="image_url" value="" onchange="image(this)">
 		</div>
 	</div>
 	<div class="main-center">
@@ -150,23 +158,24 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box">
 					<div class="card-box-title">
-						날짜 지역${dto.tour_date }
+						${dto.tour_date }
 					</div>
 					<div class="card-box-bottom">
-						내 용${dto.tour_text }
+						${dto.tour_text }
 					</div>
 				</div>
 			</c:forEach>
 			</div>
 		<div class="center-bottom-image">
-			<div class="bottom-image">
-				MAIN-IMG
-			</div>
-			<div class="bottom-text">
-				TEXT
-			</div>
+			<textarea rows="13" cols="163" name="content"></textarea>
+		</div>
+		<div class="button-bottom" align="right">
+			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
+			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
+			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
+	</form>
 	
 	<%@ include file="footer.jsp"%>
 

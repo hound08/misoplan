@@ -8,12 +8,9 @@
 </head>
 <body>
 	<%
-		session.invalidate();
+		String areaCode = request.getParameter("areaCode");
+		String sigunguCode = request.getParameter("sigunguCode");
+		
 	%>
-	
-	<script type="text/javascript">
-		alert("로그아웃 되었습니다.");
-		location.href="main.do";
-	</script>
 </body>
 </html>

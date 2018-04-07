@@ -601,8 +601,57 @@
 		 sigunCode = sigun;
 		 /* alert("@@@@@@@area code = " + areaCode);
 		 alert("@@@@@@@sigun code = " + sigunCode); */
-	}  
+	} 
 	
+	 $(document).ready(function(){
+		alert("document.ready"); 
+		alert(pageNo);
+	 })
+	 
+	function naviPage(area,sigun,page){
+		alert("naviPage");
+		alert("area= " +area+
+			" sigun = " +sigun+
+			" page = " +page);
+		$.ajax({
+ 			url : 'NaviPage', 
+			type : 'get',
+			dataType : 'json',
+			data : {
+				area : areaCode,
+				sigun : sigunCode,
+				pageNum : page
+			},
+			success : function(data) {
+				$("#galleryList").html("");
+				alert("success");
+				/* list 생성 */
+				var myItem 			= data.response.body.items.item;
+				alert("navi page myItem" + myItem);
+				for (var i = 0; i < myItem.length; i++) {
+					console.log(myItem.length);
+					var title = myItem[i].title;
+					var firstImage = myItem[i].firstimage;
+					if(firstImage == undefined){
+						firstImage = "images/no_image.jpg";
+					}					
+					$("#galleryList")
+							.append(
+									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+									+ title + '</p> </li>'
+									);
+				}
+
+			},
+			error : function(request, status, error) {
+				alert("code : " + request.status);
+				alert("message: " + request.responseText);
+				alert("Error: " + error);
+			}
+
+		});
+	}
+	/* search2 : 작은 검색버튼 눌렀을 때 실행 */
 	  function search2(){
 		/* alert("in search2__ area code = " + areaCode);
 		alert("in search2__ sigun code = " + sigunCode); */
@@ -616,8 +665,60 @@
 			},
 			success : function(data) {
 				$("#galleryList").html("");
-				var myItem = data.response.body.items.item;
-				for (var i = 0; myItem.length; i++) {
+				var myItem 			= data.response.body.items.item;
+				var myNumOfRows 	= data.response.body.numOfRows; /* 페이지당 출력 개수  */
+				var myPageNo 		= data.response.body.pageNo;    /*현재 페이지  */
+				var myTotalCount 	= data.response.body.totalCount; /*총 검색 개수  */
+				var myTotalPage		= Math.ceil(myTotalCount/myNumOfRows); /*총 페이지  */
+				var myPageGroup 	= Math.ceil(myPageNo/10); /* 현재 페이지 그룹 */
+				/* alert("numOfRows : " + myNumOfRows);
+				alert("PageNo : " + myPageNo);
+				alert("TotalCount : " + myTotalCount);*/
+				
+/* 				alert("myTotalPage : " + myTotalPage); 
+				alert("myitem length : " + myItem.length); */
+				if(myTotalCount == 0){
+					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
+				}else if(myTotalCount > 1){
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
+										+   '	총 페이지 	: ' + myTotalPage 
+										+	'   페이지 그룹 : ' + myPageGroup
+										+ '</p>'											
+											);
+				}
+				
+				/* 하단에 페이징 넘버 생성  */
+				/*검색 결과 페이지 10개 이하 */
+				if(myTotalPage <=10){
+					$("#pageNavi").html('');
+					 $("#pageNavi").append(
+								'<a href = "" >' + "[처음]" + ' </a>'
+								);
+					 $("#pageNavi").append(
+								'<a href = "" >' + "  [이전]" + ' </a>'
+								); 
+					 /* <a href="?areacode=areacode&siguncode=siguncode&pageNo=(i+1)">2</a>  */
+					$("#pageNavi").append('<span>');
+						
+					 for(var i = 0 ; i < myTotalPage ; i++){
+								$("#pageNavi").append(
+									'<a href = "?areacode='+areaCode+'&siguncode='+sigunCode+'&pagNo='+(i+1)
+											+ '" onclick = "naviPage('+areaCode+','+sigunCode+','+(i+1)+')">' + (i+1) + '  </a>' 		
+								);
+								
+						}
+					$("#pageNavi").append('</span>');
+					
+				 	$("#pageNavi").append(
+							'<a href = "" >' + "  [다음]" + ' </a>'
+								);
+					$("#pageNavi").append(
+							'<a href = "" >' + "  [끝]" + ' </a>'
+								); 
+				}
+				
+				/* list 생성 */
+				for (var i = 0; i < myItem.length; i++) {
 					console.log(myItem.length);
 					var title = myItem[i].title;
 					var firstImage = myItem[i].firstimage;
@@ -846,7 +947,7 @@ div {
 		ArrayList<String> jejuSelList = new ArrayList<>();
 		ArrayList<HashMap<String, Object>> guArrList = new ArrayList<>(); */
 	%>
-	<div id="test">ㅅㅂ</div>
+	<div id="test">test</div>
 	<div class="section">
 		<!--검색창 & 검색 버튼  -->
 		<div class="searchSection">
@@ -1173,12 +1274,16 @@ div {
 
 <!-- 여기부턴 List																															 -->
 	<div class="contents">
-		<div class="contentsTop">제목</div>
+		<div class="contentsTop" id = "contentsTop">ㅅㅂ</div>
 		<div class="listArea"><!--tour3.0에서는 listWrap으로 설정 해놨넹?  -->
 			<ul class = "galleryList" id = "galleryList">
 				
 			</ul>
 		</div> <!--listArea 끝  -->
+		<div class = "pageNavi" id = "pageNavi">
+		<!-- <a href="?langtype=KOR&amp;arrange=A&amp;areacode=1&amp;sigungucode=1&amp;mode=listOk&amp;pageNo=1">1</a> -->
+			<!-- <a href="?areacode=1&siguncode=1&pageNo=2">2</a> -->		
+		</div>
 	</div><!--content 끝  -->
 	<!--section 끝  -->
 	<div class="footer_wrap">

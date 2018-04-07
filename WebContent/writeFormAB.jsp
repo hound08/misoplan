@@ -11,7 +11,7 @@
 <style type="text/css">
 
 div {
-margin: 0px auto;
+	margin: 0px auto;
 }
 
 * {
@@ -22,7 +22,10 @@ margin: 0px auto;
 
 .section {
 	width: 1200px;
+<<<<<<< HEAD
 	margin-bottom: 100px;
+=======
+>>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 }
 
 .main-image {
@@ -33,7 +36,6 @@ margin: 0px auto;
 	height: 400px;
 	overflow: hidden;
 	position: relative;
-	margin-bottom: 20px;
 }
 
 .centerimage {
@@ -90,6 +92,9 @@ ul {
 	justify-content: center;
 	margin-top: 20px;
 }
+#footer_wrap{
+	clear: both;
+}
 
 </style>
 </head>
@@ -131,13 +136,14 @@ ul {
 				<input type="submit" value="완료" class="submit-button">
 			</form>
 			<div>
-				<a href="accompanyBoard.jsp"><button class="cancel-button">취소</button></a>							
+				<a href="listAction.do"><button class="cancel-button">취소</button></a>							
 			</div>
 		</div>
 	</div>
-	<div class="footer_wrap">
+	<div id="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
+
 	
 	<script type="text/javascript">
 		var image = document.getElementById("center-image");
