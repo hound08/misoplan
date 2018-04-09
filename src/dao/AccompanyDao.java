@@ -110,7 +110,7 @@ public class AccompanyDao {
 			pstmt.setInt(9, 0);
 			pstmt.setInt(10, 0);
 			pstmt.setDate(11, accompanyBoardDto.getClosing_date()); 
-			pstmt.setInt(12, accompanyBoardDto.getMinimum_number());
+			pstmt.setInt(12, accompanyBoardDto.getMinimum_num());
 			pstmt.setInt(13, 1);
 			pstmt.setInt(14, 0);
 			result = pstmt.executeUpdate();

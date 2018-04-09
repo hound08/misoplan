@@ -10,43 +10,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+div {
+	margin: 0px auto;
+}
 * {
+	padding: 0px;
+	margin: 0px;
 	font-family: 'NanumSquareRound', sans-serif;
 }
-html, body, div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
-	p, blockquote, pre, a, abbr, acronym, address, big, quotes, code, del,
-	dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, u,
-	i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
-	caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
-	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
-	output, ruby, section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	do: inherit;
-	vertical-align: baseline;
-}
-
-article, aside, details, figcaption, figure, footer, header, hgroup,
-	menu, nav, section {
-	display: block;
-}
-
-blockquote, q {
-	quotes: none;
-}
-
-blockquote : before, blockquote : after, q : before, q : after {
-	content: '';
-	content: none;
-}
-
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
-/*css 초기화*/
 
 .card {
 	height: 400px;
@@ -70,8 +41,6 @@ table {
 	width: 100%;
 	height: 270px;
 	border-radius: 15px 15px 0 0;
-	background-size: 100% 280px;
-	background-repeat: no-repeat;	
 }
 
 .card:hover .card-header  {
@@ -182,7 +151,6 @@ h1 {
 	overflow: hidden;
 	position: relative;
 }
-
 .centerimage {
 	min-height: 100%;
 	min-width: 100%;
@@ -208,14 +176,6 @@ h1 {
 .pagenumber {
 	margin-top: 30px;
 	text-align: center;
-}
-
-.footer_wrap {
-	margin-top: 600px;
-	padding-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 .pagination {
@@ -312,11 +272,11 @@ h1 {
 		
 		<!--section card -->
 		<div class="section-card">
-		
 			<c:forEach var="board" items="${list }">
+			<a href="">
 			<div class="card">
 				<!-- 카드 헤더 -->
-				<div class="card-header" style="background: url('${board.image_url}');">
+				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
 					<div class="card-header-is_closed">
 						<c:if test="${board.is_closed == 0 }">
 							<div class="card-header-text">모집중</div>
@@ -347,6 +307,7 @@ h1 {
 					</div>
 				</div>
 			</div>
+			</a>
 			</c:forEach>
 		</div>
 		
