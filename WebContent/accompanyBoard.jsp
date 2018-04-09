@@ -10,6 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 div {
 	margin: 0px auto;
 }
@@ -61,18 +62,18 @@ div {
 	text-align: center;
 }
 
-<<<<<<< HEAD
 .footer_wrap {
 	margin-top: 600px;
-	padding-top: 20px; margin-left : auto;
+	padding-top: 20px;
+	margin-left: auto;
 	margin-right: auto;
 	margin-left: auto;
-=======
+}
+
 .container {
 	padding: 15px;
 	height: 150px;
 	clear: both;
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 }
 
 .card {
@@ -120,7 +121,7 @@ div {
 	height: 60%;
 }
 
-.container{
+.container {
 	padding: 15px;
 	height: 40%;
 	border: solid;
@@ -194,126 +195,101 @@ div {
 			<button>최신순</button>
 		</div>
 		<div class="section-card">
-<<<<<<< HEAD
-			<div class="card" onmouseout="cardChange()" >
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
+			<div class="card" onmouseout="cardChange()">
+				<img src="images/plan.jpg" class="card-image" alt="1"
+					style="width: 100%">
 				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-=======
-			<c:forEach var="board" items="${list}">
-				<div class="card">
-					<img src="${board.image_url}" class="card-image" alt="image"
-						style="width: 100%">
-					<div class="container">
-						<div style="float: right; color: #2478FF">${board.tag }</div>
-						<div style="font-size: 20px;">제목:${board.title }</div>
-						<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
-						<div>닉네임:${board.nickname }</div>
-						<div style="float: right;">마감:${board.is_closed }</div>
-						<div>내용:${board.content }</div>
-						<div>등록일:${board.reg_date }</div>
-						<div style="position: absolute; bottom: 0; left: 1;">조회수:${board.view_count }
-							추천수:${board.vote_count }</div>
+					
+					<c:forEach var="board" items="${list}">
+						<div class="card">
+							<img src="${board.image_url}" class="card-image" alt="image"
+								style="width: 100%">
+							<div class="container">
+								<div style="float: right; color: #2478FF">${board.tag }</div>
+								<div style="font-size: 20px;">제목:${board.title }</div>
+								<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
+								<div>닉네임:${board.nickname }</div>
+								<div style="float: right;">마감:${board.is_closed }</div>
+								<div>내용:${board.content }</div>
+								<div>등록일:${board.reg_date }</div>
+								<div style="position: absolute; bottom: 0; left: 1;">조회수:${board.view_count }
+									추천수:${board.vote_count }</div>
+							</div>
+						</div>
+					</c:forEach>
 					</div>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 				</div>
-			</c:forEach>
-		</div>
-		<!--section card -->
-		<div>
-			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
-		</div>
-		<div class="pagination">
-<<<<<<< HEAD
-			<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> 						
-			<a href="list.do?pageNum">&#9665</a>
-			<a href="#" class="active">1</a> 
-			<a href="#">2</a> 
-			<a href="#">3</a> 
-			<a href="#" >4</a> 
-			<a href="#">5</a> 
-			<a href="#">&#9655</a>
-			<a href="#">&raquo;</a>
-=======
-			<c:if test="${startPage!=1 }">
-				<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
-			</c:if>
-			<c:if test="${startPage==1 }">
-				<a href='listAction.do?pageNum=1'>&laquo;</a>
-			</c:if>
-			<c:if test="${currentPage!=1 }">
-				<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
-			</c:if>
-			<c:if test="${currentPage==1 }">
-				<a href='listAction.do?pageNum=1'>&#9665</a>
-			</c:if>
+				<!--section card -->
+				<div>
+					<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+				</div>
+				<div class="pagination">
+					<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> <a
+						href="list.do?pageNum">&#9665</a> <a href="#" class="active">1</a>
+					<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
+					<a href="#">&#9655</a> <a href="#">&raquo;</a>
+					<c:if test="${startPage!=1 }">
+						<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+					</c:if>
+					<c:if test="${startPage==1 }">
+						<a href='listAction.do?pageNum=1'>&laquo;</a>
+					</c:if>
+					<c:if test="${currentPage!=1 }">
+						<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+					</c:if>
+					<c:if test="${currentPage==1 }">
+						<a href='listAction.do?pageNum=1'>&#9665</a>
+					</c:if>
 
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<a href='listAction.do?pageNum=${i }'>${i }</a>
-			</c:forEach>
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+						<a href='listAction.do?pageNum=${i }'>${i }</a>
+					</c:forEach>
 
-			<c:if test="${currentPage==totalPage }">
-				<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
-			</c:if>
-			<c:if test="${currentPage!=totalPage }">
-				<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
-			</c:if>
-			<c:if test="${endPage>=totalPage }">
-				<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
-			</c:if>
-			<c:if test="${endPage<totalPage }">
-				<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
-			</c:if>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
+					<c:if test="${currentPage==totalPage }">
+						<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+					</c:if>
+					<c:if test="${currentPage!=totalPage }">
+						<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+					</c:if>
+					<c:if test="${endPage>=totalPage }">
+						<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+					</c:if>
+					<c:if test="${endPage<totalPage }">
+						<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+					</c:if>
+				</div>
+				<div class="search">
+					<select class="search-select">
+						<option>제목</option>
+						<option>지역명</option>
+						<option>닉네임</option>
+						<option>날짜</option>
+					</select> 
+					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
+					<button type="submit" class="search-submit">검색</button>
+				</div>
+			<div class="footer_wrap">
+				<%@ include file="footer.jsp"%>
+			</div>
 		</div>
+		<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var image = document.getElementById("center-image");
+			var current = 0;
+			var images = [ "images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
 
-		<div class="search">
-			<select class="search-select">
-				<option>제목</option>
-				<option>지역명</option>
-				<option>닉네임</option>
-				<option>날짜</option>
-<<<<<<< HEAD
-			</select>
-			<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-			<button type="submit" id="search-submit" class="search-submit" onmouseover="replaceCard()">검색</button>
-=======
-			</select> <input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-			<button type="submit" class="search-submit">검색</button>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
-		</div>
-	</div>
-	<div class="footer_wrap">
-		<%@ include file="footer.jsp"%>
-	</div>
-<<<<<<< HEAD
-	</div>
-	<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
-=======
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
-	<script type="text/javascript">
-		var image = document.getElementById("center-image");
-		var current = 0;
-		var images = [ "images/korea2.jpg", "images/korea3.jpg",
-				"images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
+			function replacePhoto() {
+				++current;
+				if (current >= images.length)
+					current = 0;
+				image.src = images[current];
+			}
+			setInterval(replacePhoto, 3000);
 
-		function replacePhoto() {
-			++current;
-			if (current >= images.length)
-				current = 0;
-			image.src = images[current];
-		}
-		setInterval(replacePhoto, 3000);
-		
-		var submit = document.getElementByClassName("search-submit");
-		function replaceCard(){
-			submit.style.color="Orange";
-		}
-		
-	</script>
+			var submit = document.getElementByClassName("search-submit");
+			function replaceCard() {
+				submit.style.color = "Orange";
+			}
+		</script>
 </body>
 </html>
