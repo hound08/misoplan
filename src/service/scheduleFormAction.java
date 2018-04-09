@@ -50,6 +50,7 @@ public class scheduleFormAction implements CommandProcess{
 					showList.add(dto);
 				}
 			}
+			
 			System.out.println("---------------------------");
 			System.out.println(showList.get(0).getSl_code());
 			System.out.println(showList.get(0).getS_name());
