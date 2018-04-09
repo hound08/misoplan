@@ -44,6 +44,9 @@ div {
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
 			<div class="center-label"><!-- 텍스트 ! --></div>
 		</div>
+		<div>
+			
+		</div>
 	</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>

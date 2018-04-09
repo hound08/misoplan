@@ -207,19 +207,33 @@ public class BoardScheduleDao {
 		   }
 
 
-	public int insertPlan(BoardScheduleDto dto) throws SQLException {
+	public int insertPlan(BoardScheduleDto dto, String nickname) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO BOARDSCHEDULE(TITLE, TAG, NICKNAME, IMAGE_URL, TOUR_TEXT) VALUES(?, ?, ?, ?, ?)";
+		ResultSet rs = null;
+		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
+		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT) VALUES(?, ?, ?, ?, ?, ?)";
+		int bs_num = 0;
 		int result = 0;
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, dto.getTitle());
-			ps.setString(2, dto.getTag());
-			ps.setString(3, dto.getNickname());
-			ps.setString(4, dto.getImage_url());
-			ps.setString(5, dto.getTour_text());
+			ps = conn.prepareStatement(sql1);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				bs_num = rs.getInt(1) + 1;
+			}
+			
+			rs.close();
+			ps.close();
+			
+			ps = conn.prepareStatement(sql2);
+			
+			ps.setInt(1, bs_num);
+			ps.setString(2, dto.getTitle());
+			ps.setString(3, dto.getTag());
+			ps.setString(4, dto.getNickname());
+			ps.setString(5, dto.getImage_url());
+			ps.setString(6, dto.getContent());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

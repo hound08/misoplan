@@ -28,9 +28,13 @@ public class listActionAB implements CommandProcess{
 		int startRow = (currentPage - 1) * pageSize + 1; //현재 페이지에서 첫번째 보일 게시물 번호
 		int endRow = startRow + pageSize - 1; //현재 페이지에서 보일 마지막 게시물 번호
 		int startNum = totalPost - startRow +1 ;
-		int totalPage = (int)Math.ceil((double)totalPost/(double)blockSize);//총 페이지 개수
+		int totalPage = (int)Math.ceil((double)totalPost/(double)pageSize);//총 페이지 개수
 		int startPage = (int)((currentPage-1)/blockSize)*blockSize+1; // 페이지 목록 시작
-		int endPage = startPage + blockSize -1; //페이지 목록 끝
+		int endPage = 0;
+		if(totalPage <= 5) 
+			endPage = totalPage;
+		else
+			endPage = startPage + blockSize -1; //페이지 목록 끝
 		List<AccompanyBoardDto> list = accompanyDao.list(startRow, endRow);
 		request.setAttribute("totalPost", totalPost);
 		request.setAttribute("pageNum", pageNum);
