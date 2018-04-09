@@ -2,7 +2,7 @@ package service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -16,115 +16,75 @@ import dao.mySchduleDto;
 public class scheduleFormAction implements CommandProcess{
 
 	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("@@@@@@scheduleformaction 진입성공");
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
+			
+			// 받아오는 dao
 			mySchduleDao msdao = mySchduleDao.getInstance();
 			List<mySchduleDto> planList = msdao.getMylist(email);
+			
+			// 보낼 dao
+			mySchduleDto dto = null;
 			List<mySchduleDto> showList = new ArrayList<mySchduleDto>();
 			
+			// 변수 세팅
 			String sl_code = planList.get(0).getSl_code();
-			String sl_code_current = "";
-			String[] local_name = new String[planList.size()];
-			Date[] tour_date = new Date[planList.size()];
-			int tour_date_current = 0;
-			
-			for (int i = 0; i <= planList.size(); i++) {
-				sl_code_current = planList.get(i).getSl_code();
+			String s_name = "";
+			List<String> local_name = new ArrayList<String>();
+			Date tour_date_start = null;
+			Date tour_date_end = null;
+			Date regi_date = null;
 
-				if (sl_code_current.equals(sl_code)) {
-					local_name[i] = planList.get(i).getLocal_name();
-					tour_date[i] = planList.get(i).getTour_date_start();
-				} else {
-					tour_date_current = i;
-					sl_code = planList.get(i - 1).getSl_code();
-					mySchduleDto dto = new mySchduleDto();
+			for (int i = 0; i < planList.size(); i++) {
+				if (sl_code.equals(planList.get(i).getSl_code())) {		// SL_CODE가 같다면 덮어쓰면서 값 세팅
+					s_name = planList.get(i).getS_name();
+					local_name.add(planList.get(i).getLocal_name());
+
+					if (i == 0) {
+						tour_date_start = planList.get(i).getTour_date_start();
+					}
+					
+					tour_date_end = planList.get(i).getTour_date_start();
+					regi_date = planList.get(i).getRegi_date();
+				} else {	// SL_CODE가 다르면 지금까지 세팅한 값들 list에 add
+					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
-					dto.setS_name(planList.get(i - 1).getS_name());
-					dto.setLocal_name(Arrays.toString(local_name));
-					dto.setTour_date_start(tour_date[i - tour_date_current]);
-					dto.setTour_date_end(tour_date[i - 1]);
-					dto.setRegi_date(planList.get(i - 1).getRegi_date());
+					dto.setS_name(s_name);
+					local_name.removeAll(Collections.singleton(null));
+					dto.setLocal_name(local_name.toString());
+					dto.setTour_date_start(tour_date_start);
+					dto.setTour_date_end(tour_date_end);
+					dto.setRegi_date(regi_date);
+					showList.add(dto);
+					
+					// 값 새로 세팅
+					local_name.clear();
+					sl_code = planList.get(i).getSl_code();
+					s_name = planList.get(i).getS_name();
+					local_name.add(planList.get(i).getLocal_name());
+					tour_date_start = planList.get(i).getTour_date_start();
+					tour_date_end = planList.get(i).getTour_date_start();
+					regi_date = planList.get(i).getRegi_date();
+
+				}
+				
+				// 가장 마지막 값일 때 세팅한 값 list에 add하고 끝냄
+				if (planList.size() - 1 == i) {
+					dto = new mySchduleDto();
+					dto.setSl_code(sl_code);
+					dto.setS_name(s_name);
+					local_name.removeAll(Collections.singleton(null));
+					dto.setLocal_name(local_name.toString());
+					dto.setTour_date_start(tour_date_start);
+					dto.setTour_date_end(tour_date_end);
+					dto.setRegi_date(regi_date);
 					showList.add(dto);
 				}
+					
 			}
-			
-			System.out.println("---------------------------");
-			System.out.println(showList.get(0).getSl_code());
-			System.out.println(showList.get(0).getS_name());
-			System.out.println(showList.get(0).getLocal_name());
-			System.out.println(showList.get(0).getTour_date_start());
-			System.out.println(showList.get(0).getTour_date_end());
-			System.out.println(showList.get(0).getRegi_date());
-			System.out.println("---------------------------");
-			System.out.println(showList.get(1).getSl_code());
-			System.out.println(showList.get(1).getS_name());
-			System.out.println(showList.get(1).getLocal_name());
-			System.out.println(showList.get(1).getTour_date_start());
-			System.out.println(showList.get(1).getTour_date_end());
-			System.out.println(showList.get(1).getRegi_date());
-			System.out.println("---------------------------");
-			
-//			List<ArrayList<mySchduleDto>> plan = msdao.getMylist(email);
-			
-//			List<ArrayList<mySchduleDto>> requestPlanList = null;
-//			ArrayList<mySchduleDto> requestPlan = null;
-			/*for(int i = 0; i < planList.size(); i++){
-				ArrayList<mySchduleDto> plan = planList.get(i);
-				for(int j = 0; j < plan.size(); j++){
-					mySchduleDto msdto = plan.get(j);
-						String s_name = msdto.getS_name();
-						String local_name = msdto.getLocal_name();
-						Date tour_date = msdto.getTour_date();
-						Date regi_date = msdto.getRegi_date();
-				}
-			}*/
-			System.out.println("planList 사이즈 = "+planList.size());
-			/*for (int i = 0; i < planList.size(); i++) {
-				System.out.println("planlist index -> " + i);
-				for (int j = 0; j < plan.size(); j++) {
-					
-					System.out.println("planList index = "+ i +" value" + planList.get(i).get(j).getLocal_name());
-				}
-			}*/
-			/*for (int i = 0; i < planList.size(); i++) {
-				int index =0;
-				String sl_code="";
-				String s_name="";
-				String local_name="";
-				String tour_date;
-				String regi_date;
-				if(planList.get(i).get(index).getSl_code()==planList.get(i).get(index+1).getSl_code()){
-					for(int j = 0; j < planList.get(i).size(); j++){
-						sl_code = planList.get(i).get(j).getSl_code();
-						s_name = planList.get(i).get(j).getS_name();
-						local_name += "["+ planList.get(i).get(j).getLocal_name() +"]";
-					}
-					
-				}
-					if(Integer.parseInt(planList.get(i).get(index).getSl_code())==11){
-						System.out.println("11번인애들");
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getLocal_name());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getS_name());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getRegi_date());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getTour_date());
-						System.out.println("");
-						index++;
-					}else if(Integer.parseInt(planList.get(i).get(index).getSl_code())==12){
-						System.out.println("12번인애들");
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getLocal_name());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getS_name());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getRegi_date());
-						System.out.println("planList = "+ i +" 번째" + planList.get(i).get(index).getTour_date());
-						System.out.println("");
-					}
-				
-			}*/
 
 			request.setAttribute("showList", showList);
-			//request.setAttribute("plan", plan);
 			request.setAttribute("email", email);
 			
 		} catch (Exception e ) {
