@@ -87,12 +87,12 @@
 			</div>
 			<div id="myWishlist">
 				<div id="myWishlista">
-					<a href="#" class="menu"> 찜 List </a>
+					<a href="myWishList.jsp" class="menu"> 찜 List </a>
 				</div>
 			</div>
 			<div id="companion">
 				<div id="companiona">
-					<a href="#" class="menu"> 동행 </a>
+					<a href="companion.jsp" class="menu"> 동행 </a>
 				</div>
 			</div>
 		

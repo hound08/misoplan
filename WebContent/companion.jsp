@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
    <%@ include file="header.jsp" %>
+   <%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
+   <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html >
 <html>
 	<head>
@@ -65,6 +67,12 @@
 				margin-bottom: 40px;
 			}
 		</style>
+		<script src="jquery-1.11.0.min.js"></script>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script>
+		<script type="text/javascript">
+	
+		</script>
 	</head>
 	<body>
 		
@@ -74,59 +82,20 @@
 				<h1>동행 구하기</h1>
 				<div id="myinfo">
 					<div id="info">
+					<b id="all" onclick="all_click()">전체보기</b> |
+						
 						<table border="1">
 								<tr>
 									<th id="aa">제목 </th> <th class="bb">닉네임</th><th class="bb">동행</th><th class="bb">등록일자</th>
 								 </tr>
-								<tr>
-									<td>동해에서 4월21일 저녘식사 하실분 찾습니다</td><td>장철우</td><td>1 / 10</td><td>2018.04.10</td>
-								</tr>
-								<tr>
-									<td>  ㄴ 같이 저녘 먹어요</td><td>강형묵</td><td>수락 | 거절</td><td>2018.04.10</td>
-								</tr>
-								<tr>
-									<td>  ㄴ 같이 술 한잔 해요</td><td>수연</td><td>수락 | 거절</td><td>2018.04.11</td>
-								</tr>
-								<tr>
-									<td>메스에서 4월12일 클럽가실분</td><td>남상훈</td><td>3 / 10</td><td>2018.04.10</td>
-								</tr>
-								<tr>
-									<td>  ㄴ 가즈아!</td><td>강형묵</td><td>카톡 : aaa</td><td>2018.04.10</td>
-								</tr>
-								<tr>
-									<td>  ㄴ 뿌루루</td><td>장철우</td><td>카톡 : bbb</td><td>2018.04.11</td>
-								</tr>
-							</table>
-							<div class="pagination">
-								<a href="#">&laquo;</a> 
-								<a href="#" class="active">1</a> 
-								<a href="#">2</a> 
-								<a href="#">3</a> 
-								<a href="#" >4</a> 
-								<a href="#">5</a> 
-								<a href="#">&raquo;</a>
-							</div>
-							<h1>내가 신청한 동행</h1>
-							<table border="1">
-								<tr>
-									<th id="aa">여행지 </th> <th class="bb">닉네임</th><th class="bb">상태</th><th class="bb">등록일자</th>
-								 </tr>
-								<tr>
-									<td>서울, 수원, 인천, 부산</td><td>장철우</td><td>대기</td><td>2018.04.10</td>
-								</tr>
-								<tr>
-									<td>메스에서 4월12일 클럽가실분</td><td>장철우</td><td>수락</td><td>2018.04.10</td>
-								</tr>
-							</table>
-							<div class="pagination">
-								<a href="#">&laquo;</a> 
-								<a href="#" class="active">1</a> 
-								<a href="#">2</a> 
-								<a href="#">3</a> 
-								<a href="#" >4</a> 
-								<a href="#">5</a> 
-								<a href="#">&raquo;</a>
-							</div>
+								 <c:forEach var="mylist" items="">
+								 	<tr>
+								 		<td>${title}</td><td>${nickname }</td>
+								 		<td>${current_num } / ${minumum_num }</td>
+								 		<td>${post_date }</td>
+								 	</tr>
+								</c:forEach>
+						</table>
 					</div>
 				</div>
 			</div>
