@@ -103,7 +103,6 @@
 					</table>
 					<button id='btn-delete-row'>행 삭제하기</button>
 
-
 <script src="//code.jquery.com/jquery.min.js"></script>
 <script>
 $(document).on('click','#btn-title', function(){
