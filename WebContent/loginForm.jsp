@@ -52,6 +52,10 @@
 		font-size: 14px;
 		text-align: left;
 	}
+	
+	.find_password a:HOVER {
+		color: #47C83E;
+	}
 </style>
 </head>
 <body>
