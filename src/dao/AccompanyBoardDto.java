@@ -20,7 +20,6 @@ public class AccompanyBoardDto {
 	private int is_closed; //마감 여부
 	
 	
-	
 	public int getPost_num() {
 		return post_num;
 	}
