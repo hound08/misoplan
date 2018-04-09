@@ -133,17 +133,22 @@
     }
     .tourdescdiv{
     	float: left;
-    	width: 79%;
+    	width: 80%;
     	overflow: hidden;
-    	border: 1px solid gray;
+    	border-bottom: 1px solid gray;
     }
+    .descwrapper{
+    	width: 100%;
+    	height: 100%;
+    }
+    
     .plusbutton{
     	text-align: center;
-    	background-color: #ff531a;
-    	color: white;
     	float:right;
     	width: 20%;
-    	height: 55px;
+    	height: 100%;
+    	margin: 10% 0 0 0;
+
     }
     .plusbutton:hover {
 		cursor: pointer;
@@ -200,6 +205,15 @@
     .dayplus:hover{
     	cursor: pointer;
     }
+    .daycount{
+    	float: left;
+    }
+    .daydelete{
+		float: right;    	
+    }
+    .daydelete:hover {
+		cursor: pointer;
+	}
 </style>
 
 
@@ -208,7 +222,8 @@
 <script type="text/javascript">
 var mapx = [];
 var mapy = [];
-  
+var daycount = 1;
+var plandivheight = 45;
   
 $(document).on('click','#sidebar-menu', function(){
     /* load city list */
@@ -273,12 +288,13 @@ $(document).on('click','#cityinfo', function(){
 				var addr1 = myItem[i].addr1;
 				var addr2 = myItem[i].addr2;
 				var contentid = myItem[i].contentid;
+				var parsedinfo = contentid+"-"+title;
 				var firstImage = myItem[i].firstimage;
 				if(firstImage == undefined){
 					firstImage = "images/no_image.jpg";
 				}
-				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><br>+</div></li>");
+				$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
+				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+parsedinfo+" src='images/plusbutton.png'></img></div></li>");
 			}
 			
 		},
@@ -309,24 +325,44 @@ $(document).on('click','#cityinfo', function(){
 });
 
 $(document).on('click', '.plusbutton', function(){
-	var $this = $(this).attr("id");
+	$this = $(this);
+	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).attr("class");
+	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).attr("class");
+	var id = $(this).attr("id");
 	var plandiv = $('.plandiv'); 
+	plandiv.append("<div><p>"+tourtitle+"</p><p>"+touraddr+"</p></div>");
+	
+	/* plandiv.append(); */
 	var day = 1;
-	var area = 0.
+	var area = 0;
 	
 	
 	/* plandiv.prepend("<div class='day'><p class='dayleft'>"+day+"일</p><div class='deleteday'>X</div><p class='dayright'>"++"</p>"); */
 });
 $(document).on('click', '.dayplus', function(){
+	
 	var plandiv = $(".plandiv");
-	plandiv.prepend("<div class='day'>1일</div>");
-	plandiv.css('height', '60px');
-	
-	
+	plandivheight = plandivheight + 20;
+	plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+	plandiv.css('height', plandivheight);
+	daycount = daycount + 1;
 });
 
 
-
+$(document).on('click', '.deleteday', function(){
+	deleteid = $(this).attr('id');
+	plandiv = $('.plandiv');
+	parsedid = deleteid.substring(6,deleteid.length);
+	divid = "#div"+parsedid;
+	pid = "#p"+parsedid;
+	deleteid = "#delete"+parsedid;
+	daycount = daycount - 1;
+	plandivheight = plandivheight - 20;
+	plandiv.css('height', plandivheight);
+	$(divid).remove();
+	$(pid).remove();
+	$(deleteid).remove();
+});
 
 
 

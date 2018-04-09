@@ -11,7 +11,7 @@
 <style type="text/css">
 
 div {
-margin: 0px auto;
+	margin: 0px auto;
 }
 
 * {
@@ -22,6 +22,10 @@ margin: 0px auto;
 
 .section {
 	width: 1200px;
+<<<<<<< HEAD
+	margin-bottom: 100px;
+=======
+>>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 }
 
 .main-image {

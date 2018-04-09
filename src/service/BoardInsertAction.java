@@ -7,6 +7,7 @@ import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.websocket.Session;
 
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
@@ -19,7 +20,6 @@ public class BoardInsertAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("들어오냐고오 !!!!!!!!!!!!!!!!!!!!!");
 		request.setCharacterEncoding("UTF-8");
 		int maxSize = 5 * 1024 * 1024;
 		String filename = "";
@@ -28,7 +28,6 @@ public class BoardInsertAction implements CommandProcess {
 		MultipartRequest multi = new MultipartRequest(request, realPath,
 				maxSize, "utf-8", new DefaultFileRenamePolicy());
 		Enumeration en = multi.getFileNames();
-		System.out.println("11111111111111111111111");
 		while (en.hasMoreElements()) { // 여러개의 파일을 올릴 때 이런 방식으로 사용
 			String filename1 = (String) en.nextElement();
 			filename = multi.getFilesystemName(filename1);
@@ -42,7 +41,6 @@ public class BoardInsertAction implements CommandProcess {
 			System.out.println("파일 타입 : " + type);
 			
 			if (file != null) {
-				System.out.println("222222222222222222");
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
@@ -50,11 +48,9 @@ public class BoardInsertAction implements CommandProcess {
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
-		dto.setTour_text(multi.getParameter("tour_text"));
-		System.out.println("33333333333333333333");
+		dto.setContent(multi.getParameter("content"));
 		
 		if(multi.getFile("image_url") !=null ) {
-			File file = multi.getFile("image_url");
 			dto.setImage_url("/J20180403/upload/" + filename);
 			
 		} else {
@@ -63,9 +59,11 @@ public class BoardInsertAction implements CommandProcess {
 		}
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			int result = dao.insertPlan(dto);
+			String nickname = request.getParameter("nickname");
+			int result = dao.insertPlan(dto, nickname);
 			
 			if (result > 0) {
+				request.setAttribute("nickname", nickname);
 				request.setAttribute("result", result);
 			}
 		} catch (Exception e ) {
