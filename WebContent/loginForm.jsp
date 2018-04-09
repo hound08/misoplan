@@ -17,7 +17,7 @@
 	.loginForm {
 		padding-top: 250px;
 		padding-bottom: 150px;
-		width: 1080px;
+		width: 300px;
 		text-align: center;
 	}
 	
@@ -46,6 +46,16 @@
 		margin-top: 130px;
 		background-color: #0099ff;
 	}
+	
+	.find_password {
+		margin-top: 15px;
+		font-size: 14px;
+		text-align: left;
+	}
+	
+	.find_password a:HOVER {
+		color: #47C83E;
+	}
 </style>
 </head>
 <body>
@@ -59,6 +69,7 @@
 			<p><input type="password" id="password" name="password" required="required" placeholder="비밀번호"></p><br>
 			<p><input type="submit" id="submit" value="로그인"></p>
 		</form>
+		<p class="find_password"><a href="findPasswordForm.do">비밀번호 찾기</a> | <a href="joinForm.do">회원가입</a></p>
 	</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>

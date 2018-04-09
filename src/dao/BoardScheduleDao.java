@@ -113,6 +113,8 @@ public class BoardScheduleDao {
 						dto.setLocal_code(rs.getString("LOCAL_CODE"));
 						dto.setTour_date(rs.getDate("TOUR_DATE"));
 						dto.setTour_text(rs.getString("TOUR_TEXT"));
+						dto.setNickname(rs.getString("NICKNAME"));
+						dto.setTitle(rs.getString("TITLE"));
 						
 /*						System.out.println("TOUR_TEXT : " + rs.getString("LOCAL_CODE"));*/
 						list.add(dto);

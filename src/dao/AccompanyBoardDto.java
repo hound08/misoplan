@@ -19,6 +19,8 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
+	
+	
 	public int getPost_num() {
 		return post_num;
 	}

@@ -35,6 +35,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+					$("#seoulSlt").html("");
 					$("#seoulSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -72,6 +73,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#incheonSlt").html("");
 				$("#incheonSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -106,6 +108,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#daejeonSlt").html("");
 				$("#daejeonSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -140,6 +143,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#daeguSlt").html("");
 				$("#daeguSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -174,6 +178,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#gwangjuSlt").html("");
 				$("#gwangjuSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -208,6 +213,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#busanSlt").html("");
 				$("#busanSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -242,6 +248,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#ulsanSlt").html("");
 				$("#ulsanSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -278,6 +285,7 @@
 				var myItem = data.response.body.items.item;
 				var code = myItem.code;
 				var name = myItem.name;
+				$("#sejongSlt").html("");
 				$("#sejongSlt").append("<option>" + "선택" +"</option>");
 				$("#sejongSlt").append(
 						"<option value = " + code +">" + name + "</option>");
@@ -305,6 +313,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#gyeonggiSlt").html("");
 				$("#gyeonggiSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -339,6 +348,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#gangwonSlt").html("");
 				$("#gangwonSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -373,6 +383,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#chungbukSlt").html("");
 				$("#chungbukSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -407,6 +418,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#chungnamSlt").html("");
 				$("#chungnamSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -441,6 +453,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#gyeongbukSlt").html("");
 				$("#gyeongbukSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -475,6 +488,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#gyeongnamSlt").html("");
 				$("#gyeongnamSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -509,6 +523,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#jeonbukSlt").html("");
 				$("#jeonbukSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -543,6 +558,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#jeonnamSlt").html("");
 				$("#jeonnamSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -577,6 +593,7 @@
 			},
 			success : function(data) {
 				var myItem = data.response.body.items.item;
+				$("#jejuSlt").html("");
 				$("#jejuSlt").append("<option>" + "선택" +"</option>");
 				for (var i = 0; myItem.length; i++) {
 					var code = myItem[i].code;
@@ -603,121 +620,49 @@
 		 alert("@@@@@@@sigun code = " + sigunCode); */
 	} 
 	
-	 $(document).ready(function(){
-		alert("document.ready"); 
-		alert(pageNo);
-	 })
-	 
-	function naviPage(area,sigun,page){
-		alert("naviPage");
-		alert("area= " +area+
-			" sigun = " +sigun+
-			" page = " +page);
-		$.ajax({
- 			url : 'NaviPage', 
-			type : 'get',
-			dataType : 'json',
-			data : {
-				area : areaCode,
-				sigun : sigunCode,
-				pageNum : page
-			},
-			success : function(data) {
-				$("#galleryList").html("");
-				alert("success");
-				/* list 생성 */
-				var myItem 			= data.response.body.items.item;
-				alert("navi page myItem" + myItem);
-				for (var i = 0; i < myItem.length; i++) {
-					console.log(myItem.length);
-					var title = myItem[i].title;
-					var firstImage = myItem[i].firstimage;
-					if(firstImage == undefined){
-						firstImage = "images/no_image.jpg";
-					}					
-					$("#galleryList")
-							.append(
-									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
-									+ title + '</p> </li>'
-									);
-				}
-
-			},
-			error : function(request, status, error) {
-				alert("code : " + request.status);
-				alert("message: " + request.responseText);
-				alert("Error: " + error);
-			}
-
-		});
-	}
-	/* search2 : 작은 검색버튼 눌렀을 때 실행 */
-	  function search2(){
-		/* alert("in search2__ area code = " + areaCode);
-		alert("in search2__ sigun code = " + sigunCode); */
+	
+	/*파싱 결과 리스트 출력  */
+	function listParsing(area, sigun, pageNo){
 		$.ajax({
 			url : 'GalleryList',
 			type : 'get',
 			dataType : 'json',
 			data : {
-				area : areaCode,
-				sigun : sigunCode
+				area 		: area,
+				sigungu 	: sigun,
+				pageNum		: pageNo
 			},
-			success : function(data) {
+			success : function(data){
 				$("#galleryList").html("");
+				$("#pageNavi").html("");
 				var myItem 			= data.response.body.items.item;
-				var myNumOfRows 	= data.response.body.numOfRows; /* 페이지당 출력 개수  */
+				var myNumOfRows 	= data.response.body.numOfRows; /* 페이지당 출력 개수 -> 12개  */
 				var myPageNo 		= data.response.body.pageNo;    /*현재 페이지  */
 				var myTotalCount 	= data.response.body.totalCount; /*총 검색 개수  */
 				var myTotalPage		= Math.ceil(myTotalCount/myNumOfRows); /*총 페이지  */
-				var myPageGroup 	= Math.ceil(myPageNo/10); /* 현재 페이지 그룹 */
-				/* alert("numOfRows : " + myNumOfRows);
-				alert("PageNo : " + myPageNo);
-				alert("TotalCount : " + myTotalCount);*/
+				var myStartPage		= Math.floor((myPageNo-1)/10) * 10 +1;
+				var myEndPage		= (myStartPage + 10) -1;
+				var myFirstPage		= 1;
+				if(myEndPage > myTotalPage)
+					myEndPage = myTotalPage;
 				
-/* 				alert("myTotalPage : " + myTotalPage); 
-				alert("myitem length : " + myItem.length); */
+				/* 검색결과 출력 메시지 */
+				
 				if(myTotalCount == 0){
 					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
 				}else if(myTotalCount > 1){
 					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
 										+   '	총 페이지 	: ' + myTotalPage 
-										+	'   페이지 그룹 : ' + myPageGroup
+										+	'	현재 페이지  : ' + myPageNo
+										+	'  myStartPage :   ' + myStartPage
+										+	'  myEndPage :  ' + myEndPage
+										+	'	29/10 :	  '	+ (29/10)
+										+	' 	29%10 :   '	+ (29%10)
 										+ '</p>'											
 											);
 				}
 				
-				/* 하단에 페이징 넘버 생성  */
-				/*검색 결과 페이지 10개 이하 */
-				if(myTotalPage <=10){
-					$("#pageNavi").html('');
-					 $("#pageNavi").append(
-								'<a href = "" >' + "[처음]" + ' </a>'
-								);
-					 $("#pageNavi").append(
-								'<a href = "" >' + "  [이전]" + ' </a>'
-								); 
-					 /* <a href="?areacode=areacode&siguncode=siguncode&pageNo=(i+1)">2</a>  */
-					$("#pageNavi").append('<span>');
-						
-					 for(var i = 0 ; i < myTotalPage ; i++){
-								$("#pageNavi").append(
-									'<a href = "?areacode='+areaCode+'&siguncode='+sigunCode+'&pagNo='+(i+1)
-											+ '" onclick = "naviPage('+areaCode+','+sigunCode+','+(i+1)+')">' + (i+1) + '  </a>' 		
-								);
-								
-						}
-					$("#pageNavi").append('</span>');
-					
-				 	$("#pageNavi").append(
-							'<a href = "" >' + "  [다음]" + ' </a>'
-								);
-					$("#pageNavi").append(
-							'<a href = "" >' + "  [끝]" + ' </a>'
-								); 
-				}
-				
-				/* list 생성 */
+				/* 검색 list 생성 */
 				for (var i = 0; i < myItem.length; i++) {
 					console.log(myItem.length);
 					var title = myItem[i].title;
@@ -731,6 +676,44 @@
 									+ title + '</p> </li>'
 									);
 				}
+			/* 페이징 */
+				/* 처음으로 가기  */
+				if(myStartPage > 1){
+					$("#pageNavi").append(
+						'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+myFirstPage+')">' + "[처음]" + ' </a>'
+					);
+				}
+				/* 이전버튼 생성 */
+				if(myPageNo>1){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+(myPageNo-1)+')">' + "  [이전]" + ' </a>'
+					);
+				}
+				/*  페이징 넘버 뿌리기  */
+				for (var i = myStartPage; i <= myEndPage; i++){
+					if(i == myPageNo){
+						$("#pageNavi").append(
+								'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+i+')">' +'<strong>' +i +'</strong>' +' </a>'								
+							);	
+					}else{
+						$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+i+')">' + i + ' </a>'								
+						);
+					}
+				}
+				/* 다음버튼 생성 */
+				if(myPageNo < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+(myPageNo+1)+')">' + "  [다음]" + ' </a>'
+					);
+				}
+				/* 맨끝으로 가기 */
+				if(myEndPage < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "pagingBtnClick('+areaCode+','+sigunCode+','+myTotalPage+')">' + "  [끝]" + ' </a>'
+					);
+				}
+			
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("request : " + XMLHttpRequest);
@@ -739,7 +722,138 @@
 			}
 		});
 		
-	  } 
+	}
+	
+	var search = "";
+	/* 검색 결과 리스트 출력  */
+		function searchList(search,num){
+		$.ajax({
+			url : 'SearchList',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				keyword 		: search,
+				pageNum			: num
+			},
+			success : function(data){
+				$("#galleryList").html("");
+				$("#pageNavi").html("");
+				var myItem 			= data.response.body.items.item;
+				var myNumOfRows 	= data.response.body.numOfRows; /* 페이지당 출력 개수 -> 12개  */
+				var myPageNo 		= data.response.body.pageNo;    /*현재 페이지  */
+				var myTotalCount 	= data.response.body.totalCount; /*총 검색 개수  */
+				var myTotalPage		= Math.ceil(myTotalCount/myNumOfRows); /*총 페이지  */
+				var myStartPage		= Math.floor((myPageNo-1)/10) * 10 +1;
+				var myEndPage		= (myStartPage + 10) -1;
+				var myFirstPage		= 1;
+				
+				if(myEndPage > myTotalPage)
+					myEndPage = myTotalPage;
+				
+				/* 검색결과 출력 메시지 */
+				
+				if(myTotalCount == 0){
+					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
+				}else if(myTotalCount > 1){
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
+										+   '	총 페이지 	: ' + myTotalPage 
+										+	'	현재 페이지  : ' + myPageNo
+										+	'  myStartPage :   ' + myStartPage
+										+	'  myEndPage :  ' + myEndPage
+										+	'	29/10 :	  '	+ (29/10)
+										+	' 	29%10 :   '	+ (29%10)
+										+ '</p>'											
+											);
+				}
+				
+				/* 검색 list 생성 */
+				for (var i = 0; i < myItem.length; i++) {
+					console.log(myItem.length);
+					var title = myItem[i].title;
+					var firstImage = myItem[i].firstimage;
+					if(firstImage == undefined){
+						firstImage = "images/no_image.jpg";
+					}					
+					$("#galleryList")
+							.append(
+									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+									+ title + '</p> </li>'
+									);
+				}
+				
+			/* 페이징 */
+				/* 처음으로 가기  */
+				if(myStartPage > 1){
+					$("#pageNavi").append(
+						'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+ myFirstPage +')">' + "[처음]" + ' </a>'
+					);
+				}
+				/* 이전버튼 생성 */
+				if(myPageNo>1){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+(myPageNo-1)+')">' + "  [이전]" + ' </a>'
+					);
+				}
+				/*  페이징 넘버 뿌리기  */
+				for (var i = myStartPage; i <= myEndPage; i++){
+					if(i == myPageNo){
+						$("#pageNavi").append(
+								'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+i+')">' +'<strong>' +i +'</strong>' +' </a>'								
+							);	
+					}else{
+						$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+i+')">' + i + ' </a>'								
+						);
+					}
+				}
+				/* 다음버튼 생성 */
+				if(myPageNo < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+(myPageNo+1)+')">' + "  [다음]" + ' </a>'
+					);
+				}
+				/* 맨끝으로 가기 */
+				if(myEndPage < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+myTotalPage+')">' + "  [끝]" + ' </a>'
+					);
+				}
+			
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("request : " + XMLHttpRequest);
+				alert("Status: " + textStatus);
+				alert("Error: " + errorThrown);
+			}
+		});
+		
+	}
+	
+	/* 페이징  */
+	/* 작은 검색 버튼 눌렀을 때의 페이징 넘버 클릭 */
+	function pagingBtnClick(area, sigun, pageNo){
+		listParsing(area, sigun, pageNo);
+		
+	}
+	/* 통합 검색 버튼 눌렀을 때의 페이징 넘버 클릭 */
+	function searchPagingBtnClick(pageNo){
+		/* alert("searchPagingBtnClick 진입 ->" + search); */
+		searchList(search,pageNo);
+	}
+	
+	/* 작은 검색 버튼 */
+	function searchSub(){
+		/* alert("searchSub 진입"); */
+		listParsing(areaCode, sigunCode, 1);
+	}
+	
+	/* 큰 검색 버튼 */
+	function searchMain(){
+		search = $("#searchBar").val();
+		/* alert("검색 text value" + search); */
+		searchList(search,1);
+	}
+	 
 </script>
 <style type="text/css">
 div {
@@ -826,14 +940,14 @@ div {
  */
 .contentsTop {
 	width: 1000px;
-	height: 100px;
+	height: 50px;
 	border: 1px solid pink;
 	margin: 10px auto;
 }
 
 .listArea {
 	width: 1000px;
-	height: 600px;
+	height: 680px;
 	border: 1px solid blue;
 	margin: 10px auto;
 }
@@ -861,6 +975,11 @@ div {
 	width: 100%;
 }
 /*list   */
+.galleryList{
+	margin : 15px 0 0 15px;
+}
+
+
 .galleryList li {
 	overflow:hidden;
 	float:left;
@@ -870,9 +989,21 @@ div {
 	
 }
 
+.galleryList li p{
+	height : 40px;
+	margin : 15px 0 15px 0;
+	font-size : 14px;
+	text-align: center;
+	letter-spacing: -1px;
+}
+
 .galleryList li img {
 	width : 211px;
 	height : 128px;
+}
+
+.pageNavi{
+	text-align: center;
 }
 
 </style>
@@ -953,8 +1084,8 @@ div {
 		<div class="searchSection">
 			<!--검색창  -->
 			<div class="searchArea">
-				<input type="text" placeholder="검색어 입력" class="searchBar">
-				<button class="searchButton">검색</button>
+				<input type="text" placeholder="검색어 입력" class="searchBar" id = "searchBar">
+				<button class="searchButton" onclick="searchMain()">검색</button>
 			</div>
 			<!--검색창  끝-->
 			<div class="areaButton" id="area">
@@ -1260,7 +1391,7 @@ div {
 				<table class="areaTable" border="0" width="106" style="float: left;" >
 					<tr>
 						<th>
-							<input type = "button" value = "검색" onclick="search2()">
+							<input type = "button" value = "검색" onclick="searchSub()">
 						</th>
 					</tr>
 				</table>

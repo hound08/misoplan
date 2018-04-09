@@ -133,17 +133,22 @@
     }
     .tourdescdiv{
     	float: left;
-    	width: 79%;
+    	width: 80%;
     	overflow: hidden;
-    	border: 1px solid gray;
+    	border-bottom: 1px solid gray;
     }
+    .descwrapper{
+    	width: 100%;
+    	height: 100%;
+    }
+    
     .plusbutton{
     	text-align: center;
-    	background-color: #ff531a;
-    	color: white;
     	float:right;
     	width: 20%;
-    	height: 55px;
+    	height: 100%;
+    	margin: 4% 0 0 0;
+
     }
     .plusbutton:hover {
 		cursor: pointer;
@@ -157,7 +162,7 @@
 		position: absolute;
 		top: 50px;
 		left: 79%;
-		background-color: rgba(255,255,255,1);
+		background-color: rgba(255,255,255,0.5);
 		width: 20%;
 		height: 40px;
 		border: 1px solid white;
@@ -169,6 +174,7 @@
     	height: 20px;
     	background-color: #39A2D8;
     	border-radius: 10px;
+    	color: white;
     }
     .dayleft{
     	float: left;	
@@ -189,6 +195,8 @@
 		text-align: center;    	
     }
     .dayplus{
+    	position: absolute;
+    	bottom: 0px;
     	width: 100%;
     	height: 20px;
     	background-color: #33cc33;
@@ -200,15 +208,42 @@
     .dayplus:hover{
     	cursor: pointer;
     }
+    .daycount{
+    	float: left;
+    }
+    .daydelete{
+		float: right;    	
+    }
+    .daydelete:hover {
+		cursor: pointer;
+	}
+	
+	.planelem{
+		width: 100%;
+    	height: 20px;
+    	border-radius: 10px;
+    	border: 1px solid #a6a6a6;
+    	overflow: hidden;
+	}
+	.elemtitle{
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-overflow: ellipsis;
+		width: 80%;
+		height: 20px;
+	}
+	.deleteelem{
+		float: right;
+	}
+	
 </style>
-
-
-
 
 <script type="text/javascript">
 var mapx = [];
 var mapy = [];
-  
+var daycount = 1;
+var plandivheight = 45;
   
 $(document).on('click','#sidebar-menu', function(){
     /* load city list */
@@ -250,7 +285,6 @@ $(document).on('click','#sidebar-menu', function(){
 });   
 
 
-
 $(document).on('click','#cityinfo', function(){
 	var $this = $(this);
 	var areaCode = $('.selected').attr('data');
@@ -273,14 +307,17 @@ $(document).on('click','#cityinfo', function(){
 				var addr1 = myItem[i].addr1;
 				var addr2 = myItem[i].addr2;
 				var contentid = myItem[i].contentid;
+				var parsedinfo = contentid+"-"+title;
 				var firstImage = myItem[i].firstimage;
 				if(firstImage == undefined){
 					firstImage = "images/no_image.jpg";
 				}
-				$(".tourlist").prepend("<li class= 'tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><br>+</div></li>");
+				if(addr1 == undefined){
+					addr1 = addr2;
+				}
+				$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
+				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+contentid+" src='images/plusbutton.png'></img></div></li>");
 			}
-			
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("request : " + XMLHttpRequest);
@@ -290,7 +327,6 @@ $(document).on('click','#cityinfo', function(){
 	});
 	
 	for(var i = 0; i < mapx.length; i++){
-		console.log(mapx[i]);
 		marker = new google.maps.Marker({
 	  	    position: new google.maps.LatLng(mapx[i], mapy[i]),
 		  	map: map
@@ -308,29 +344,77 @@ $(document).on('click','#cityinfo', function(){
 	
 });
 
+
 $(document).on('click', '.plusbutton', function(){
-	var $this = $(this).attr("id");
+	$this = $(this);
+	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).text();
+	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).text();
+	console.log(tourtitle);
+	var id = $(this).attr("id");
+	console.log(id);
 	var plandiv = $('.plandiv'); 
-	var day = 1;
-	var area = 0.
 	
-	
-	/* plandiv.prepend("<div class='day'><p class='dayleft'>"+day+"일</p><div class='deleteday'>X</div><p class='dayright'>"++"</p>"); */
+	console.log(plandiv.children("#planelem"+id).attr('id'));
+	if(plandiv.children("#planelem"+id).attr('id')){
+		alert("이미 추가된 여행지입니다.");		
+	}else{
+		if(!plandiv.children(".day").attr("id")){
+			plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+			plandivheight = plandivheight + 20;
+			plandiv.css('height', plandivheight);
+			daycount = daycount + 1;
+		}
+		plandiv.append("<div class='planelem' id='planelem"+id+"' dayvalue="+(daycount-1)+"><p class='elemtitle' id='elemtitle"+id+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+id+"'>X&nbsp;</div></div>");
+		plandivheight = plandivheight + 22;
+		plandiv.css('height', plandivheight);
+	}
 });
+
+
+$(document).on('click', '.deleteelem', function(){
+	$this = $(this);
+	var plandiv = $(".plandiv");
+	var deleteid = $this.attr('id');
+	var parsedid = deleteid.substring(6, deleteid.length);
+	var parseddiv = "#planelem"+parsedid;
+	var parsedtitle = "#elemtitle"+parsedid;
+	var parseddelete = "#delete"+parsedid;
+	
+	plandivheight = plandivheight - 22;
+	plandiv.css('height', plandivheight);
+	$(parseddiv).remove();
+	$(parsedtitle).remove();
+	$(parseddelete).remove();
+});	
+
+
 $(document).on('click', '.dayplus', function(){
 	var plandiv = $(".plandiv");
-	plandiv.prepend("<div class='day'>1일</div>");
-	plandiv.css('height', '60px');
+	plandivheight = plandivheight + 20;
+	plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
 	
-	
+	plandiv.css('height', plandivheight);
+	daycount = daycount + 1;
 });
 
 
-
-
-
-
-
+$(document).on('click', '.deleteday', function(){
+	var deleteid = $(this).attr('id');
+	var plandiv = $('.plandiv');
+	var parsedid = deleteid.substring(6,deleteid.length);
+	var divid = "#div"+parsedid;
+	var pid = "#p"+parsedid;
+	
+	deleteid = "#delete"+parsedid;
+	daycount = daycount - 1;
+	plandivheight = plandivheight - 20;
+	plandiv.css('height', plandivheight);
+	
+	
+	$(divid).remove();
+	$(pid).remove();
+	$(deleteid).remove();
+});
 
 
  $(document).on('click','#sidebar-menu', function(e){
@@ -354,7 +438,8 @@ $(document).on('click', '.dayplus', function(){
 	    }
 	    else if($this == '4'){
 	    	var daegu = new google.maps.LatLng(35.8319559, 128.6923414);
-			e.preventDefault();
+			e.preventDefault(); 
+			
 		    map.panTo(daegu);
 		    map.setZoom(12, true);
 	    }
