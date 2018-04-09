@@ -10,15 +10,41 @@ public class AccompanyBoardDto {
 	private String title;	//게시물 제목
 	private String image_url; //대표 이미지 url
 	private String content; //게시물 내용
-	private String tag; //해시태
+	private String tag; //해시태그
 	private int vote_count; //추천수
 	private int view_count; //조회수
-	private int minimum_number; //최소인원
-	private int current_number; //현재인원
+	private int minimum_num; //최소인원
+	private int current_num; //현재인원
 	private Date reg_date; //작성일
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
+<<<<<<< HEAD
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+=======
+	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> de2b761c1bbc24a8a1036d85b0fed8a5a4264407
+	public int getMinimum_num() {
+		return minimum_num;
+	}
+	public void setMinimum_num(int minimum_num) {
+		this.minimum_num = minimum_num;
+	}
+	public int getCurrent_num() {
+		return current_num;
+	}
+	public void setCurrent_num(int current_num) {
+		this.current_num = current_num;
+	}
+>>>>>>> 0f3e9f40a2ac7baeb13ff4ca5843c2097336f59a
 	public int getPost_num() {
 		return post_num;
 	}
@@ -67,18 +93,6 @@ public class AccompanyBoardDto {
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
 	}
-	public int getMinimum_number() {
-		return minimum_number;
-	}
-	public void setMinimum_number(int minimum_number) {
-		this.minimum_number = minimum_number;
-	}
-	public int getCurrent_number() {
-		return current_number;
-	}
-	public void setCurrent_number(int current_number) {
-		this.current_number = current_number;
-	}
 	public Date getReg_date() {
 		return reg_date;
 	}
@@ -97,11 +111,5 @@ public class AccompanyBoardDto {
 	public void setIs_closed(int is_closed) {
 		this.is_closed = is_closed;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-	
+
 }

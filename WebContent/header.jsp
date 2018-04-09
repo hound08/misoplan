@@ -23,9 +23,8 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	text-decoration: underline;
-	text-decoration: none;
+a:VISITED {
+	color: black;
 }
 
 .header {
@@ -105,8 +104,8 @@ a:hover {
 	margin-right: 14px;
 }
 
-.login_label:hover {
-	color: #47C83E
+.login_label:HOVER {
+	color: #47C83E;
 }
 
 .category-menu {

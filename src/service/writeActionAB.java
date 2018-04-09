@@ -66,7 +66,7 @@ public class writeActionAB implements CommandProcess{
 			accompanyDto.setImage_url("/J20180403/upload/" + filename);
 		else
 			accompanyDto.setImage_url("/J20180403/upload/default-image.png");
-		accompanyDto.setMinimum_number(Integer.parseInt(multi.getParameter("minimum_num")));
+		accompanyDto.setMinimum_num(Integer.parseInt(multi.getParameter("minimum_num")));
 
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		int result = accompanyDao.insert(accompanyDto);

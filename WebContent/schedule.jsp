@@ -47,8 +47,11 @@
 			.second-text { /* center-second 텍스트 삽입 */
 				width: 340px;
 				height: 50px;
-				padding: px 10px;
-				overflow: hidden;
+				text-align: left;
+			}
+			.text {
+				text-align: left;
+			
 			}
 		</style>
 	</head>
@@ -60,17 +63,17 @@
 				<h1>나의 일정 리스트</h1>
 				<div id="myinfo">
 					<div id="info">
-						<c:forEach var="bsdto" items="${list }">
+						<c:forEach var="list" items="${showList }">
 							<div class="center-second">
 								<div class="second-box">
 									<img alt="image" src="images/1.jpg">
 								</div>
 								<div class="second-text">
-									<h1>제목 : ${bs.s_name }</h1>
+									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="tag">여행지 : ${bsdto.local_name }</div>
-								<div class="idlocal" align="right">여행기간 : ${bsdto.tour_date }</div>
-								<div class="datelocal" align="right">작성일 : ${bsdto.regi_date }</div>
+								<div class="text">여행지 : ${list.local_name }</div>
+								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
+								<div class="text">작성일 : ${list.regi_date }</div>
 							</div>
 							
 						
