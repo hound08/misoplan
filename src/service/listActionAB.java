@@ -46,15 +46,6 @@ public class listActionAB implements CommandProcess{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
-		System.out.println("totalPost="+totalPost);
-		System.out.println("pageSize="+pageSize);
-		System.out.println("blockSize="+blockSize);
-		System.out.println("startRow="+startRow);
-		System.out.println("endRow="+endRow);
-		System.out.println("startNum="+startNum);
-		System.out.println("totalPage="+totalPage);
-		System.out.println("startPage="+startPage);
-		System.out.println("endPage="+endPage);
 		return "accompanyBoard.jsp";
 	}
 

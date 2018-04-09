@@ -10,14 +10,163 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-div {
-	margin: 0px auto;
+* {
+	font-family: 'NanumSquareRound', sans-serif;
+}
+html, body, div, span, applet, object, iframes, h1, h2, h3, h4, h5, h6,
+	p, blockquote, pre, a, abbr, acronym, address, big, quotes, code, del,
+	dfn, em, img, ins, kbd, q, s, samp, small, strike, sub, sup, tt, var, u,
+	i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table,
+	caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas,
+	details, embed, figure, figcaption, footer, header, hgroup, menu, nav,
+	output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	do: inherit;
+	vertical-align: baseline;
 }
 
-* {
-	padding: 0px;
-	margin: 0px;
-	font-family: 'NanumSquareRound', sans-serif;
+article, aside, details, figcaption, figure, footer, header, hgroup,
+	menu, nav, section {
+	display: block;
+}
+
+blockquote, q {
+	quotes: none;
+}
+
+blockquote : before, blockquote : after, q : before, q : after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+/*css 초기화*/
+
+.card {
+	height: 400px;
+	width: 350px;
+	border-radius: 15px;
+	display: inline-block;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow: hidden;
+}
+
+.card-header {
+	-webkit-transition: 0.5s; /*사파리 & 크롬*/
+    -moz-transition: 0.5s;  /*파이어폭스*/
+    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
+    -o-transition: 0.5s;  /*오페라*/
+    transition: 0.5s;
+	width: 100%;
+	height: 270px;
+	border-radius: 15px 15px 0 0;
+	background-size: 100% 280px;
+	background-repeat: no-repeat;	
+}
+
+.card:hover .card-header  {
+	opacity: 0.8;
+	height: 100px;
+}
+
+.card-header-is_closed{
+    background-color: #EF5A31 ;
+    color: #FFF ;
+    font-weight: bold ;
+    text-align: center ;
+    float: right;
+    margin: 15px 15px 0 0;
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 10px 10px;
+    line-height: 20px;
+}
+
+h1 {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.card-body {
+	
+}
+
+.card-body-header{
+	line-height: 25px;
+	margin: 10px 20px 0px 20px;
+}
+
+.card-body-description  {
+    opacity: 0;
+    color: #757B82;
+    line-height: 25px;
+    -webkit-transition: .2s ease-in-out; /*사파리&크롬*/
+    -moz-transition: .2s ease-in-out; /*파이어폭스*/
+    -ms-transition: .2s ease-in-out; /*익스플로러*/
+    -o-transition: .2s ease-in-out; /*오페라*/
+    transition : .2s ease-in-out;
+    overflow: hidden;
+	height: 180px;
+	margin: 5px 20px;
+}
+
+.card:hover .card-body-description {
+    opacity: 1;
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -ms-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition : .5s ease-in-out;
+    overflow: scroll;
+}
+
+.card-body-hashtag {
+	color: #2478FF;
+	font-style: italic;
+}
+
+.card-body-footer {
+  	position: absolute; 
+  	margin-top: 15px;
+  	margin-bottom: 6px;
+    bottom: 0; 
+    width: 314px;
+    font-size: 14px;
+    color: #9FA5A8;
+    padding: 0 15px;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.icon-view_count {
+    width: 25px;
+    height: 17px;
+	background: url("images/eye.jpg") no-repeat;
+}
+
+.icon-comments_count {
+	margin-left: 5px;
+	width: 25px;
+    height: 17px;
+	background: url("images/comment.jpg") no-repeat;	
+}
+
+.reg_date {
+	float: right;
 }
 
 .section {
@@ -61,34 +210,12 @@ div {
 	text-align: center;
 }
 
-<<<<<<< HEAD
 .footer_wrap {
 	margin-top: 600px;
-	padding-top: 20px; margin-left : auto;
+	padding-top: 20px;
+	margin-left: auto;
 	margin-right: auto;
 	margin-left: auto;
-=======
-.container {
-	padding: 15px;
-	height: 150px;
-	clear: both;
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
-}
-
-.card {
-	height: 400px;
-	width: 350px;
-	border: solid;
-	border-radius: 10px;
-	border-color: #F6F6F6;
-	display: inline-block;
-	margin-left: 30px;
-	margin-bottom: 30px;
-	position: relative;
-}
-
-.card:hover {
-	border-color: #A6A6A6
 }
 
 .pagination {
@@ -113,17 +240,6 @@ div {
 .pagination a:hover:not {
 	background-color: #ddd;
 	border-radius: 5px;
-}
-
-.card-image {
-	width: 300px;
-	height: 60%;
-}
-
-.container{
-	padding: 15px;
-	height: 40%;
-	border: solid;
 }
 
 .search {
@@ -193,127 +309,111 @@ div {
 			<button>인기순</button>
 			<button>최신순</button>
 		</div>
-		<div class="section-card">
-<<<<<<< HEAD
-			<div class="card" onmouseout="cardChange()" >
-				<img src="images/plan.jpg"  class="card-image" alt="1" style="width: 100%">
-				<div class="container">
-					<div style="float: right; color:#2478FF ">#1 #2 #3</div><div style="font-size: 20px;">제목</div>
-					<div style="float: right;">현재인원/최소인원</div><div>닉네임</div>
-					<div style="float: right;">마감?</div><div>내용</div>
-					<div style="vertical-align: baseline;">조회수 추천수</div>
-					<div>등록일</div>
-=======
-			<c:forEach var="board" items="${list}">
-				<div class="card">
-					<img src="${board.image_url}" class="card-image" alt="image"
-						style="width: 100%">
-					<div class="container">
-						<div style="float: right; color: #2478FF">${board.tag }</div>
-						<div style="font-size: 20px;">제목:${board.title }</div>
-						<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
-						<div>닉네임:${board.nickname }</div>
-						<div style="float: right;">마감:${board.is_closed }</div>
-						<div>내용:${board.content }</div>
-						<div>등록일:${board.reg_date }</div>
-						<div style="position: absolute; bottom: 0; left: 1;">조회수:${board.view_count }
-							추천수:${board.vote_count }</div>
-					</div>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
-				</div>
-			</c:forEach>
-		</div>
+		
 		<!--section card -->
-		<div>
-			<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
-		</div>
-		<div class="pagination">
-<<<<<<< HEAD
-			<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> 						
-			<a href="list.do?pageNum">&#9665</a>
-			<a href="#" class="active">1</a> 
-			<a href="#">2</a> 
-			<a href="#">3</a> 
-			<a href="#" >4</a> 
-			<a href="#">5</a> 
-			<a href="#">&#9655</a>
-			<a href="#">&raquo;</a>
-=======
-			<c:if test="${startPage!=1 }">
-				<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
-			</c:if>
-			<c:if test="${startPage==1 }">
-				<a href='listAction.do?pageNum=1'>&laquo;</a>
-			</c:if>
-			<c:if test="${currentPage!=1 }">
-				<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
-			</c:if>
-			<c:if test="${currentPage==1 }">
-				<a href='listAction.do?pageNum=1'>&#9665</a>
-			</c:if>
-
-			<c:forEach var="i" begin="${startPage }" end="${endPage }">
-				<a href='listAction.do?pageNum=${i }'>${i }</a>
+		<div class="section-card">
+		
+			<c:forEach var="board" items="${list }">
+			<div class="card">
+				<!-- 카드 헤더 -->
+				<div class="card-header" style="background: url('${board.image_url}');">
+					<div class="card-header-is_closed">
+						<c:if test="${board.is_closed == 0 }">
+							<div class="card-header-text">모집중</div>
+							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+						</c:if>
+						<c:if test="${board.is_closed == 1 }">
+							<div class="card-header-text">마감</div>
+							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+						</c:if>
+					</div>
+				</div>
+				<!--  카드 바디 -->
+				<div class="card-body">
+					<!--  카드 바디 헤더 -->
+					<div class="card-body-header">
+						<h1>${board.title }</h1>
+						<p class="card-body-hashtag">${board.tag }</p>
+						<p class="card-body-nickname">작성자: ${board.nickname }</p>
+					</div>
+					<!--  카드 바디 본문 -->
+					<p class="card-body-description">${board.content }</p>
+					<!--  카드 바디 푸터 -->
+					<div class="card-body-footer">
+						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
+						<i class="icon icon-comments_count"></i>댓글 4개 
+						<i class="reg_date"></i>${board.reg_date }
+					</div>
+				</div>
+			</div>
 			</c:forEach>
-
-			<c:if test="${currentPage==totalPage }">
-				<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
-			</c:if>
-			<c:if test="${currentPage!=totalPage }">
-				<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
-			</c:if>
-			<c:if test="${endPage>=totalPage }">
-				<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
-			</c:if>
-			<c:if test="${endPage<totalPage }">
-				<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
-			</c:if>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 		</div>
+		
+			<div>
+				<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+			</div>
+			<div class="pagination">
+				<c:if test="${startPage!=1 }">
+					<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+				</c:if>
+				<c:if test="${startPage==1 }">
+					<a href='listAction.do?pageNum=1'>&laquo;</a>
+				</c:if>
+				<c:if test="${currentPage!=1 }">
+					<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+				</c:if>
+				<c:if test="${currentPage==1 }">
+					<a href='listAction.do?pageNum=1'>&#9665</a>
+				</c:if>
 
-		<div class="search">
-			<select class="search-select">
-				<option>제목</option>
-				<option>지역명</option>
-				<option>닉네임</option>
-				<option>날짜</option>
-<<<<<<< HEAD
-			</select>
-			<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-			<button type="submit" id="search-submit" class="search-submit" onmouseover="replaceCard()">검색</button>
-=======
-			</select> <input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-			<button type="submit" class="search-submit">검색</button>
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
+				<c:forEach var="i" begin="${startPage }" end="${endPage }">
+					<a href='listAction.do?pageNum=${i }'>${i }</a>
+				</c:forEach>
+
+				<c:if test="${currentPage==totalPage }">
+					<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+				</c:if>
+				<c:if test="${currentPage!=totalPage }">
+					<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+				</c:if>
+				<c:if test="${endPage>=totalPage }">
+					<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+				</c:if>
+				<c:if test="${endPage<totalPage }">
+					<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+				</c:if>
+			</div>
+
+			<div class="search">
+				<select class="search-select">
+					<option>제목</option>
+					<option>지역명</option>
+					<option>닉네임</option>
+					<option>날짜</option>
+				</select> 
+				<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
+				<button type="submit" id="search-submit" class="search-submit"">검색</button>
+			</div>
 		</div>
-	</div>
-	<div class="footer_wrap">
-		<%@ include file="footer.jsp"%>
-	</div>
-<<<<<<< HEAD
-	</div>
-	<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
-=======
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
-	<script type="text/javascript">
-		var image = document.getElementById("center-image");
-		var current = 0;
-		var images = [ "images/korea2.jpg", "images/korea3.jpg",
-				"images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
+		<div class="footer_wrap">
+			<%@ include file="footer.jsp"%>
+		</div>
+		
+		<script type="text/javascript">
+			var image = document.getElementById("center-image");
+			var current = 0;
+			var images = [ "images/korea2.jpg", "images/korea3.jpg",
+					"images/korea4.jpg", "images/korea5.jpg",
+					"images/korea1.jpg" ]
 
-		function replacePhoto() {
-			++current;
-			if (current >= images.length)
-				current = 0;
-			image.src = images[current];
-		}
-		setInterval(replacePhoto, 3000);
-		
-		var submit = document.getElementByClassName("search-submit");
-		function replaceCard(){
-			submit.style.color="Orange";
-		}
-		
-	</script>
+			function replacePhoto() {
+				++current;
+				if (current >= images.length)
+					current = 0;
+				image.src = images[current];
+			}
+			setInterval(replacePhoto, 3000);
+		</script>
 </body>
 </html>
