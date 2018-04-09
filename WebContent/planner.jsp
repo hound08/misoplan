@@ -200,6 +200,15 @@
     .dayplus:hover{
     	cursor: pointer;
     }
+    .daycount{
+    	float: left;
+    }
+    .daydelete{
+		float: right;    	
+    }
+    .daydelete:hover {
+		cursor: pointer;
+	}
 </style>
 
 
@@ -208,7 +217,8 @@
 <script type="text/javascript">
 var mapx = [];
 var mapy = [];
-  
+var daycount = 1;
+var plandivheight = 45;
   
 $(document).on('click','#sidebar-menu', function(){
     /* load city list */
@@ -312,21 +322,25 @@ $(document).on('click', '.plusbutton', function(){
 	var $this = $(this).attr("id");
 	var plandiv = $('.plandiv'); 
 	var day = 1;
-	var area = 0.
+	var area = 0;
 	
 	
 	/* plandiv.prepend("<div class='day'><p class='dayleft'>"+day+"일</p><div class='deleteday'>X</div><p class='dayright'>"++"</p>"); */
 });
 $(document).on('click', '.dayplus', function(){
+	
 	var plandiv = $(".plandiv");
-	plandiv.prepend("<div class='day'>1일</div>");
-	plandiv.css('height', '60px');
-	
-	
+	plandivheight = plandivheight + 20;
+	plandiv.append("<div class='day'><p class='daycount'>Day"+daycount+"</p><div class='deleteday' id='day"+daycount+"'>X&nbsp;</div></div>");
+	plandiv.css('height', plandivheight);
+	daycount = daycount + 1;
 });
 
 
-
+$(document).on('click', '.deleteday', function(){
+	$this = $(this);
+	$this.remove();
+});
 
 
 
