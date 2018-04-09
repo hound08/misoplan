@@ -92,7 +92,7 @@
 			</div>
 			<div id="companion">
 				<div id="companiona">
-					<a href="companion.jsp" class="menu"> 동행 </a>
+					<a href="companionForm.do?email=${email }" class="menu"> 동행 </a>
 				</div>
 			</div>
 		
