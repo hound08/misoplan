@@ -63,17 +63,17 @@
 				<h1>나의 일정 리스트</h1>
 				<div id="myinfo">
 					<div id="info">
-						<c:forEach var="planList" items="${planList }">
+						<c:forEach var="list" items="${showList }">
 							<div class="center-second">
 								<div class="second-box">
 									<img alt="image" src="images/1.jpg">
 								</div>
 								<div class="second-text">
-									<h1>제목 : ${msdto.s_name }</h1>
+									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="text">여행지 : ${msdto.local_name }</div>
-								<div class="text">여행기간 : ${msdto.tour_date }</div>
-								<div class="text">작성일 : ${msdto.regi_date }</div>
+								<div class="text">여행지 : ${list.local_name }</div>
+								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
+								<div class="text">작성일 : ${list.regi_date }</div>
 							</div>
 							
 						
