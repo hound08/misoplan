@@ -15,11 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONObject;
 
-/**
- * Servlet implementation class GalleryList
- */
-@WebServlet("/GalleryList")
-public class GalleryList extends HttpServlet {
+@WebServlet("/NaviPage")
+public class NaviPage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -30,17 +27,15 @@ public class GalleryList extends HttpServlet {
 		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?ServiceKey=";
 		String serviceKey = "irqglLi1gisI6SuWlVdGZcdGGffwI7ZSmgzhLB4bdWSaPeRPsGqkD7IbkQFI18JgOmG%2BGWCdh5eDW12ZBKoANQ%3D%3D";
 		String parameter = "";
-		//&contentTypeId=&areaCode=1&sigunguCode=1&cat1=&cat2=&cat3=&listYN=Y
-		//&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1
-//		serviceKey = URLEncoder.encode(serviceKey,"utf-8");
+		
 		PrintWriter out = response.getWriter();
-		System.out.println("galleryList 진입");
+		System.out.println("Navipage 진입");
 		String areaCode = request.getParameter("area");
-		String sigunCode = request.getParameter("sigungu");
+		String sigunCode = request.getParameter("sigun");
 		String pageNum = request.getParameter("pageNum");
-		System.out.println("in galleryList__areaCode = " + areaCode);
-		System.out.println("in galleryList__sigunCode = " + sigunCode);
-		System.out.println("in galleryList__pageNum = " + pageNum);
+		System.out.println("NaviPage의 areaCode : " + areaCode);
+		System.out.println("NaviPage의 sigunCode : " + sigunCode);
+		System.out.println("NaviPage의 pageNum : " + pageNum);
 		parameter = parameter + "&" +"contentTypeId=";
 		parameter = parameter + "&" +"areaCode=" + Integer.parseInt(areaCode);
 		parameter = parameter + "&" +"sigunguCode=" + Integer.parseInt(sigunCode);
@@ -50,11 +45,13 @@ public class GalleryList extends HttpServlet {
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
 		parameter = parameter + "&" + "numOfRows=12";
-		parameter = parameter + "&" + "pageNo=" + Integer.parseInt(pageNum);
+//  	parameter = parameter + "&" + "pageNo=" + Integer.parseInt(pageNum);
+		parameter = parameter + "&" + "pageNo=1";
 		parameter = parameter + "&" + "_type=json";
 		
 		
 		addr = addr + serviceKey + parameter;
+		System.out.println("addr->"+addr);
 		URL url = new URL(addr);
 		
 		System.out.println("ListTest " + addr);
@@ -80,6 +77,8 @@ public class GalleryList extends HttpServlet {
 //		json.put("data", data);
 		System.out.println("json: "+json);
 	}
+		
+	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
