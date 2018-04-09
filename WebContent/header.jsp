@@ -23,9 +23,8 @@ a {
 	text-decoration: none;
 }
 
-a:hover {
-	text-decoration: underline;
-	text-decoration: none;
+a:visited {
+	color: black;
 }
 
 .header {
