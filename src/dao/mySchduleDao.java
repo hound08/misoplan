@@ -44,11 +44,10 @@ public class mySchduleDao {
 		  Connection conn = null;
 	      PreparedStatement ps = null;
 	      ResultSet rs = null;
-	      String sql1 = "select min(sl_code) from SCHEDULELARGE where email = ? group by email";
 	      String sql2 = "select l.sl_code,l.s_name, m.LOCAL_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from   SCHEDULELARGE l, "
 	      		+ "schedulemedium m where  l.sl_code = m.sl_code and    email = ? ";
-	      // ArrayList<mySchduleDto> plan = new ArrayList<mySchduleDto>();
 	      List<mySchduleDto> planList = new ArrayList<mySchduleDto>();
+	      
 	      try {
 		         conn = getConnection();
 		         ps = conn.prepareStatement(sql2);
@@ -62,10 +61,8 @@ public class mySchduleDao {
         			 msdto.setLocal_name(rs.getString("local_name"));
         			 msdto.setTour_date_start(rs.getDate("tour_date_start"));
         			 msdto.setRegi_date(rs.getDate("regi_date"));
-        			 // plan.add(msdto);
 		        	 planList.add(msdto);
 		         }
-		        	 
 		      } catch (Exception e) {
 		         e.printStackTrace();
 		      } finally {
@@ -73,6 +70,7 @@ public class mySchduleDao {
 		         if (ps != null)  ps.close();
 		         if (conn != null) conn.close();
 		      }
+	      
 		      return planList;
 		   }
 	
