@@ -76,7 +76,9 @@
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	
+	function titleclick() {
+		
+	}
 </script>
 </head>
 <body>
@@ -98,7 +100,7 @@
 						</tr>
 						<c:forEach var="list" items="${list }">
 							<tr>
-								<td>${list.title}</td>
+								<td><a onclick="titleclick()"> ${list.title} </a></td>
 								<td>${list.nickname }</td>
 								<td>${list.current_number } / ${list.minimum_number } </td>
 								<td>${list.reg_date }</td>
