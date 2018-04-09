@@ -36,9 +36,11 @@ public class GalleryList extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		System.out.println("galleryList 진입");
 		String areaCode = request.getParameter("area");
-		String sigunCode = request.getParameter("sigun");
+		String sigunCode = request.getParameter("sigungu");
+		String pageNum = request.getParameter("pageNum");
 		System.out.println("in galleryList__areaCode = " + areaCode);
 		System.out.println("in galleryList__sigunCode = " + sigunCode);
+		System.out.println("in galleryList__pageNum = " + pageNum);
 		parameter = parameter + "&" +"contentTypeId=";
 		parameter = parameter + "&" +"areaCode=" + Integer.parseInt(areaCode);
 		parameter = parameter + "&" +"sigunguCode=" + Integer.parseInt(sigunCode);
@@ -47,8 +49,8 @@ public class GalleryList extends HttpServlet {
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
 		parameter = parameter + "&" + "arrange=A";
-		parameter = parameter + "&" + "numOfRows=300";
-		parameter = parameter + "&" + "pageNo=1";
+		parameter = parameter + "&" + "numOfRows=12";
+		parameter = parameter + "&" + "pageNo=" + Integer.parseInt(pageNum);
 		parameter = parameter + "&" + "_type=json";
 		
 		
