@@ -724,12 +724,122 @@
 		
 	}
 	
+	var search = "";
+	/* 검색 결과 리스트 출력  */
+		function searchList(search,num){
+		$.ajax({
+			url : 'SearchList',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				keyword 		: search,
+				pageNum			: num
+			},
+			success : function(data){
+				$("#galleryList").html("");
+				$("#pageNavi").html("");
+				var myItem 			= data.response.body.items.item;
+				var myNumOfRows 	= data.response.body.numOfRows; /* 페이지당 출력 개수 -> 12개  */
+				var myPageNo 		= data.response.body.pageNo;    /*현재 페이지  */
+				var myTotalCount 	= data.response.body.totalCount; /*총 검색 개수  */
+				var myTotalPage		= Math.ceil(myTotalCount/myNumOfRows); /*총 페이지  */
+				var myStartPage		= Math.floor((myPageNo-1)/10) * 10 +1;
+				var myEndPage		= (myStartPage + 10) -1;
+				var myFirstPage		= 1;
+				
+				if(myEndPage > myTotalPage)
+					myEndPage = myTotalPage;
+				
+				/* 검색결과 출력 메시지 */
+				
+				if(myTotalCount == 0){
+					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
+				}else if(myTotalCount > 1){
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
+										+   '	총 페이지 	: ' + myTotalPage 
+										+	'	현재 페이지  : ' + myPageNo
+										+	'  myStartPage :   ' + myStartPage
+										+	'  myEndPage :  ' + myEndPage
+										+	'	29/10 :	  '	+ (29/10)
+										+	' 	29%10 :   '	+ (29%10)
+										+ '</p>'											
+											);
+				}
+				
+				/* 검색 list 생성 */
+				for (var i = 0; i < myItem.length; i++) {
+					console.log(myItem.length);
+					var title = myItem[i].title;
+					var firstImage = myItem[i].firstimage;
+					if(firstImage == undefined){
+						firstImage = "images/no_image.jpg";
+					}					
+					$("#galleryList")
+							.append(
+									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+									+ title + '</p> </li>'
+									);
+				}
+				
+			/* 페이징 */
+				/* 처음으로 가기  */
+				if(myStartPage > 1){
+					$("#pageNavi").append(
+						'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+ myFirstPage +')">' + "[처음]" + ' </a>'
+					);
+				}
+				/* 이전버튼 생성 */
+				if(myPageNo>1){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+(myPageNo-1)+')">' + "  [이전]" + ' </a>'
+					);
+				}
+				/*  페이징 넘버 뿌리기  */
+				for (var i = myStartPage; i <= myEndPage; i++){
+					if(i == myPageNo){
+						$("#pageNavi").append(
+								'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+i+')">' +'<strong>' +i +'</strong>' +' </a>'								
+							);	
+					}else{
+						$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+i+')">' + i + ' </a>'								
+						);
+					}
+				}
+				/* 다음버튼 생성 */
+				if(myPageNo < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+(myPageNo+1)+')">' + "  [다음]" + ' </a>'
+					);
+				}
+				/* 맨끝으로 가기 */
+				if(myEndPage < myTotalPage){
+					$("#pageNavi").append(
+							'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+myTotalPage+')">' + "  [끝]" + ' </a>'
+					);
+				}
+			
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("request : " + XMLHttpRequest);
+				alert("Status: " + textStatus);
+				alert("Error: " + errorThrown);
+			}
+		});
+		
+	}
+	
 	/* 페이징  */
+	/* 작은 검색 버튼 눌렀을 때의 페이징 넘버 클릭 */
 	function pagingBtnClick(area, sigun, pageNo){
 		listParsing(area, sigun, pageNo);
 		
 	}
-	
+	/* 통합 검색 버튼 눌렀을 때의 페이징 넘버 클릭 */
+	function searchPagingBtnClick(pageNo){
+		/* alert("searchPagingBtnClick 진입 ->" + search); */
+		searchList(search,pageNo);
+	}
 	
 	/* 작은 검색 버튼 */
 	function searchSub(){
@@ -737,6 +847,12 @@
 		listParsing(areaCode, sigunCode, 1);
 	}
 	
+	/* 큰 검색 버튼 */
+	function searchMain(){
+		search = $("#searchBar").val();
+		/* alert("검색 text value" + search); */
+		searchList(search,1);
+	}
 	 
 </script>
 <style type="text/css">
@@ -968,8 +1084,8 @@ div {
 		<div class="searchSection">
 			<!--검색창  -->
 			<div class="searchArea">
-				<input type="text" placeholder="검색어 입력" class="searchBar">
-				<button class="searchButton">검색</button>
+				<input type="text" placeholder="검색어 입력" class="searchBar" id = "searchBar">
+				<button class="searchButton" onclick="searchMain()">검색</button>
 			</div>
 			<!--검색창  끝-->
 			<div class="areaButton" id="area">

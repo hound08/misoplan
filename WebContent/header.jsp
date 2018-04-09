@@ -23,7 +23,7 @@ a {
 	text-decoration: none;
 }
 
-a:visited {
+a:VISITED {
 	color: black;
 }
 
@@ -104,8 +104,8 @@ a:visited {
 	margin-right: 14px;
 }
 
-.login_label:hover {
-	color: #47C83E
+.login_label:HOVER {
+	color: #47C83E;
 }
 
 .category-menu {
