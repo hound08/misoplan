@@ -110,7 +110,7 @@ public class AccompanyDao {
 			pstmt.setInt(9, 0);
 			pstmt.setInt(10, 0);
 			pstmt.setDate(11, accompanyBoardDto.getClosing_date()); 
-			pstmt.setInt(12, accompanyBoardDto.getMinimum_number());
+			pstmt.setInt(12, accompanyBoardDto.getMinimum_num());
 			pstmt.setInt(13, 1);
 			pstmt.setInt(14, 0);
 			result = pstmt.executeUpdate();
@@ -174,8 +174,8 @@ public class AccompanyDao {
 				accompanyDto.setView_count(rs.getInt(10));
 				accompanyDto.setVote_count(rs.getInt(11));
 				accompanyDto.setReg_date(rs.getDate(12));
-				accompanyDto.setMinimum_number(rs.getInt(14));
-				accompanyDto.setCurrent_number(rs.getInt(15));
+				accompanyDto.setMinimum_num(rs.getInt(14));
+				accompanyDto.setCurrent_num(rs.getInt(15));
 				accompanyDto.setIs_closed(rs.getInt(16));
 				list.add(accompanyDto);
 			}

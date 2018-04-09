@@ -102,6 +102,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	border: 1px solid gray;
 	font-size: 10pt;
 }
+.card-box-title2 {
+	width: 240px;
+	height: 30px;
+	margin: 3px 0 0 0;
+	vertical-align: middle;
+}
 .card-box-bottom {
 	width: 240px;
 	height: 170px;
@@ -131,6 +137,10 @@ div { /* 모두모두 가운데 정렬 !!!!! */
     	}
   		  reader.readAsDataURL(input.files[0]);
  	}
+	function change() {
+		var plan = document.getElementById("")
+		
+	}
 </script>
 </head>
 <body>
@@ -158,11 +168,15 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box">
 					<div class="card-box-title">
-						${dto.tour_date }
+						${dto.sl_code }
+						<div class ="card-box-title2">
+							${dto.regi_date }
+						</div>
 					</div>
 					<div class="card-box-bottom">
-						${dto.tour_text }
+						${dto.s_name }
 					</div>
+					<input type="button" id="refresh" value="일정선택" align="right" >
 				</div>
 			</c:forEach>
 			</div>
