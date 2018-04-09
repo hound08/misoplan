@@ -1,6 +1,9 @@
 package service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 
@@ -17,6 +20,7 @@ import com.sun.org.apache.xpath.internal.operations.Mult;
 
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
+import dao.mySchduleDto;
 
 public class BoardSelectAction implements CommandProcess {
 
@@ -25,7 +29,70 @@ public class BoardSelectAction implements CommandProcess {
 			try {
 				String email = request.getParameter("email");
 				BoardScheduleDao dao = BoardScheduleDao.getInstance();
-				List<BoardScheduleDto> list = dao.selectList(email);
+				List<mySchduleDto> list = dao.selectList(email);
+				
+				mySchduleDto dto = null;
+				List<mySchduleDto> showList = new ArrayList<mySchduleDto>();
+				
+				// 변수 세팅
+				String sl_code = list.get(0).getSl_code();
+				String s_name = "";
+				List<String> local_name = new ArrayList<String>();
+				Date tour_date_start = null;
+				Date tour_date_end = null;
+				Date regi_date = null;
+
+				for (int i = 0; i < list.size(); i++) {
+					if (sl_code.equals(list.get(i).getSl_code())) {		// SL_CODE가 같다면 덮어쓰면서 값 세팅
+						s_name = list.get(i).getS_name();
+						local_name.add(list.get(i).getLocal_name());
+
+						if (i == 0) {
+							tour_date_start = list.get(i).getTour_date_start();
+						}
+						
+						tour_date_end = list.get(i).getTour_date_start();
+						regi_date = list.get(i).getRegi_date();
+					} else {	// SL_CODE가 다르면 지금까지 세팅한 값들 list에 add
+						dto = new mySchduleDto();
+						dto.setSl_code(sl_code);
+						dto.setS_name(s_name);
+						local_name.removeAll(Collections.singleton(null));
+						dto.setLocal_name(local_name.toString());
+						dto.setTour_date_start(tour_date_start);
+						dto.setTour_date_end(tour_date_end);
+						dto.setRegi_date(regi_date);
+						showList.add(dto);
+						
+						// 값 새로 세팅
+						local_name.clear();
+						sl_code = list.get(i).getSl_code();
+						s_name = list.get(i).getS_name();
+						local_name.add(list.get(i).getLocal_name());
+						tour_date_start = list.get(i).getTour_date_start();
+						tour_date_end = list.get(i).getTour_date_start();
+						regi_date = list.get(i).getRegi_date();
+
+					}
+					
+					// 가장 마지막 값일 때 세팅한 값 list에 add하고 끝냄
+					if (list.size() - 1 == i) {
+						dto = new mySchduleDto();
+						dto.setSl_code(sl_code);
+						dto.setS_name(s_name);
+						local_name.removeAll(Collections.singleton(null));
+						dto.setLocal_name(local_name.toString());
+						dto.setTour_date_start(tour_date_start);
+						dto.setTour_date_end(tour_date_end);
+						dto.setRegi_date(regi_date);
+						showList.add(dto);
+					}
+						
+				}
+
+				request.setAttribute("showList", showList);
+				request.setAttribute("email", email);
+								
 				if (list == null) {
 					request.setAttribute("list", list);
 					return "BoardError.jsp";

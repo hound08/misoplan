@@ -19,12 +19,19 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
+<<<<<<< HEAD
 	public String getTag() {
 		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+=======
+	
+<<<<<<< HEAD
+=======
+	
+>>>>>>> de2b761c1bbc24a8a1036d85b0fed8a5a4264407
 	public int getMinimum_num() {
 		return minimum_num;
 	}
@@ -37,6 +44,7 @@ public class AccompanyBoardDto {
 	public void setCurrent_num(int current_num) {
 		this.current_num = current_num;
 	}
+>>>>>>> 0f3e9f40a2ac7baeb13ff4ca5843c2097336f59a
 	public int getPost_num() {
 		return post_num;
 	}
