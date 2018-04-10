@@ -11,7 +11,8 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <style type="text/css">
 	/* 전체 적용   */
 	
@@ -147,7 +148,7 @@
     	float:right;
     	width: 20%;
     	height: 100%;
-    	margin: 10% 0 0 0;
+    	margin: 4% 0 0 0;
 
     }
     .plusbutton:hover {
@@ -162,9 +163,9 @@
 		position: absolute;
 		top: 50px;
 		left: 79%;
-		background-color: rgba(255,255,255,1);
+		background-color: rgba(255,255,255,0.7);
 		width: 20%;
-		height: 40px;
+		height: 65px;
 		border: 1px solid white;
 		border-radius: 10px;
 		transition:all 0.5s;
@@ -174,9 +175,14 @@
     	height: 20px;
     	background-color: #39A2D8;
     	border-radius: 10px;
+    	color: white;
     }
     .dayleft{
     	float: left;	
+    }
+    .daycount{
+    	margin: 0px;
+    	padding: 0px;
     }
     .dayright{
     	float: right;
@@ -194,6 +200,8 @@
 		text-align: center;    	
     }
     .dayplus{
+    	position: absolute;
+    	bottom:22px;
     	width: 100%;
     	height: 20px;
     	background-color: #33cc33;
@@ -208,22 +216,83 @@
     .daycount{
     	float: left;
     }
-    .daydelete{
+    .deleteday{
 		float: right;    	
     }
-    .daydelete:hover {
+    .deleteday:hover {
 		cursor: pointer;
 	}
+	
+	.planelem{
+		width: 100%;
+    	height: 20px;
+    	border-radius: 10px;
+    	border: 1px solid #a6a6a6;
+    	overflow: hidden;
+	}
+	.elemtitle{
+		float: left;
+		margin: 0px;
+		padding: 0px;
+		text-overflow: ellipsis;
+		width: 80%;
+		height: 20px;
+	}
+	.deleteelem{
+		float: right;
+	}
+	.deleteelem:hover{
+		cursor: pointer;
+	}
+	 .completebtn{
+    	position: absolute;
+    	bottom: 0px;
+    	width: 100%;
+    	height: 20px;
+    	background-color: #ff9933;
+    	border: 1px solid #ff9933;
+    	border-radius: 10px;
+    	color: white;
+    	text-align: center;
+    }
+    .completebtn:hover{
+    	cursor: pointer;
+    }
+    #dialog{
+    	background-color: white;
+    }
+	
 </style>
 
+<!--  -->
+<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
+<link rel="stylesheet" href="demo.css">
+<link rel="stylesheet" href="avgrund.css">
 
+<script>
+	function openDialog() {
+		Avgrund.show( "#default-popup" );
+	}
+	function openSecondDialog() {
+		Avgrund.show( "#second-popup" );
+	}
+	function closeDialog() {
+		Avgrund.hide();
+	}
+</script>
+<!--  -->
 
+<script>
+$(document).on('click', '#completebtn', function(){
+	openDialog();
+});
+   </script>
 <script type="text/javascript">
 var mapx = [];
 var mapy = [];
 var daycount = 1;
-var plandivheight = 45;
+var plandivheight = 65;
   
 $(document).on('click','#sidebar-menu', function(){
     /* load city list */
@@ -239,7 +308,7 @@ $(document).on('click','#sidebar-menu', function(){
     			    	+   "</li>");
     	}
     	
-    	document.getElementById("center").style.width="8%";
+    	document.getElementById("center").style.width="8%"
 		document.getElementById("map").style.width="87%";
 		document.getElementById("tourlist").style.width="0px";
 		var cityinfolist = $('.center').children();
@@ -263,7 +332,6 @@ $(document).on('click','#sidebar-menu', function(){
 	
 	});
 });   
-
 
 
 $(document).on('click','#cityinfo', function(){
@@ -293,10 +361,12 @@ $(document).on('click','#cityinfo', function(){
 				if(firstImage == undefined){
 					firstImage = "images/no_image.jpg";
 				}
+				if(addr1 == undefined){
+					addr1 = addr2;
+				}
 				$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+parsedinfo+" src='images/plusbutton.png'></img></div></li>");
+				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+contentid+" src='images/plusbutton.png'></img></div></li>");
 			}
-			
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("request : " + XMLHttpRequest);
@@ -306,7 +376,6 @@ $(document).on('click','#cityinfo', function(){
 	});
 	
 	for(var i = 0; i < mapx.length; i++){
-		console.log(mapx[i]);
 		marker = new google.maps.Marker({
 	  	    position: new google.maps.LatLng(mapx[i], mapy[i]),
 		  	map: map
@@ -324,49 +393,77 @@ $(document).on('click','#cityinfo', function(){
 	
 });
 
+
 $(document).on('click', '.plusbutton', function(){
 	$this = $(this);
-	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).attr("class");
-	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).attr("class");
+	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).text();
+	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).text();
+	console.log(tourtitle);
 	var id = $(this).attr("id");
+	console.log(id);
 	var plandiv = $('.plandiv'); 
-	plandiv.append("<div><p>"+tourtitle+"</p><p>"+touraddr+"</p></div>");
 	
-	/* plandiv.append(); */
-	var day = 1;
-	var area = 0;
-	
-	
-	/* plandiv.prepend("<div class='day'><p class='dayleft'>"+day+"일</p><div class='deleteday'>X</div><p class='dayright'>"++"</p>"); */
+	console.log(plandiv.children("#planelem"+id).attr('id'));
+	if(plandiv.children("#planelem"+id).attr('id')){
+		alert("이미 추가된 여행지입니다.");		
+	}else{
+		if(!plandiv.children(".day").attr("id")){
+			plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+			plandivheight = plandivheight + 20;
+			plandiv.css('height', plandivheight);
+			daycount = daycount + 1;
+		}
+		plandiv.append("<div class='planelem' id='planelem"+id+"' dayvalue="+(daycount-1)+"><p class='elemtitle' id='elemtitle"+id+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+id+"'>X&nbsp;</div></div>");
+		plandivheight = plandivheight + 22;
+		plandiv.css('height', plandivheight);
+	}
 });
-$(document).on('click', '.dayplus', function(){
+
+
+$(document).on('click', '.deleteelem', function(){
+	$this = $(this);
+	var plandiv = $(".plandiv");
+	var deleteid = $this.attr('id');
+	var parsedid = deleteid.substring(6, deleteid.length);
+	var parseddiv = "#planelem"+parsedid;
+	var parsedtitle = "#elemtitle"+parsedid;
+	var parseddelete = "#delete"+parsedid;
 	
+	plandivheight = plandivheight - 22;
+	plandiv.css('height', plandivheight);
+	$(parseddiv).remove();
+	$(parsedtitle).remove();
+	$(parseddelete).remove();
+});	
+
+
+$(document).on('click', '.dayplus', function(){
 	var plandiv = $(".plandiv");
 	plandivheight = plandivheight + 20;
-	plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+	plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "+daycount+"</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+	
 	plandiv.css('height', plandivheight);
 	daycount = daycount + 1;
 });
 
 
 $(document).on('click', '.deleteday', function(){
-	deleteid = $(this).attr('id');
-	plandiv = $('.plandiv');
-	parsedid = deleteid.substring(6,deleteid.length);
-	divid = "#div"+parsedid;
-	pid = "#p"+parsedid;
+	var deleteid = $(this).attr('id');
+	var plandiv = $('.plandiv');
+	var parsedid = deleteid.substring(6,deleteid.length);
+	var divid = "#div"+parsedid;
+	var pid = "#p"+parsedid;
+	
 	deleteid = "#delete"+parsedid;
 	daycount = daycount - 1;
 	plandivheight = plandivheight - 20;
 	plandiv.css('height', plandivheight);
+	
+	
 	$(divid).remove();
 	$(pid).remove();
 	$(deleteid).remove();
 });
-
-
-
-
 
 
  $(document).on('click','#sidebar-menu', function(e){
@@ -390,7 +487,8 @@ $(document).on('click', '.deleteday', function(){
 	    }
 	    else if($this == '4'){
 	    	var daegu = new google.maps.LatLng(35.8319559, 128.6923414);
-			e.preventDefault();
+			e.preventDefault(); 
+			
 		    map.panTo(daegu);
 		    map.setZoom(12, true);
 	    }
@@ -528,10 +626,27 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 				<div class="dayplus" id="dayplus">
 					1일 +
 				</div>		
+				<div class="completebtn" id="completebtn">
+					저장
+				</div>
 			</div>
 		</div>
-		
 </div>
+<!--  -->
+		<aside id="default-popup" class="avgrund-popup">
+			<h2>저장</h2>
+			<label>
+				플랜 제목 : 
+			</label>
+			<input type="text" name="title" id="title">
+						
+			<button onclick="javascript:closeDialog();">Close</button>
+			
+		</aside>
+		<div class="avgrund-cover"></div>
 
+		<script type="text/javascript" src="avgrund.js"></script>
+		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+		<!--  -->
 </body>
 </html>

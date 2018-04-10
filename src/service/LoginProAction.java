@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import security.SecurityUtil;
 import dao.MemberDao;
 import dao.MemberDto;
 
@@ -16,7 +17,10 @@ public class LoginProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
-			String password = request.getParameter("password");
+			
+			// 사용자 비밀번호 암호화 (SHA-256)
+			SecurityUtil securityUtil = new SecurityUtil();
+			String password = securityUtil.encryptSHA256(request.getParameter("password"));
 			
 			MemberDao dao = MemberDao.getInstance();
 			List<String> list = dao.loginCheck(email, password);

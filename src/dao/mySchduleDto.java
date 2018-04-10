@@ -6,8 +6,10 @@ public class mySchduleDto {
 	private String sl_code;
 	private String s_name;
 	private String local_name;
-	private Date tour_date;
+	private Date tour_date_start;
+	private Date tour_date_end;
 	private Date regi_date;
+	
 	public String getSl_code() {
 		return sl_code;
 	}
@@ -26,11 +28,17 @@ public class mySchduleDto {
 	public void setLocal_name(String local_name) {
 		this.local_name = local_name;
 	}
-	public Date getTour_date() {
-		return tour_date;
+	public Date getTour_date_start() {
+		return tour_date_start;
 	}
-	public void setTour_date(Date tour_date) {
-		this.tour_date = tour_date;
+	public void setTour_date_start(Date tour_date_start) {
+		this.tour_date_start = tour_date_start;
+	}
+	public Date getTour_date_end() {
+		return tour_date_end;
+	}
+	public void setTour_date_end(Date tour_date_end) {
+		this.tour_date_end = tour_date_end;
 	}
 	public Date getRegi_date() {
 		return regi_date;
@@ -38,5 +46,7 @@ public class mySchduleDto {
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
 	}
+	
+	
 	
 }

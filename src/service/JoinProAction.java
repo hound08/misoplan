@@ -8,6 +8,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import security.SecurityUtil;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -37,12 +39,16 @@ public class JoinProAction implements CommandProcess {
 			String type = multi.getContentType(filename1);
 			File file = multi.getFile(filename1);
 		}
+		
+		// 사용자 비밀번호 암호화 (SHA-256)
+		SecurityUtil securityUtil = new SecurityUtil();
+		String password = securityUtil.encryptSHA256(multi.getParameter("password"));
 
 		// 회원 정보 관련 코드
 		MemberDto dto = new MemberDto();
 		dto.setEmail(multi.getParameter("email"));
 		dto.setNickname(multi.getParameter("nickname"));
-		dto.setPassword(multi.getParameter("password"));
+		dto.setPassword(password);
 		dto.setPhone(multi.getParameter("phone"));
 		
 		if (multi.getFile("profile_url") != null) {

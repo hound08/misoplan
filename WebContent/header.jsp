@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>미소플랜</title>
 <style type="text/css">
 * {
 	margin: 0px;
@@ -23,7 +23,7 @@ a {
 	text-decoration: none;
 }
 
-a:visited {
+a:VISITED {
 	color: black;
 }
 
@@ -104,8 +104,8 @@ a:visited {
 	margin-right: 14px;
 }
 
-.login_label:hover {
-	color: #47C83E
+.login_label:HOVER {
+	color: #47C83E;
 }
 
 .category-menu {

@@ -6,12 +6,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class FindPasswordFormAction implements CommandProcess {
+public class MyInfoConfirmFormAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		return "findPasswordForm.jsp";
+		return "myInfoConfirmForm.jsp";
 	}
 
 }
