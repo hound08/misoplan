@@ -10,7 +10,7 @@ import java.util.List;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import javax.xml.transform.Result;
+
 
 public class BoardScheduleDao {
 	private static BoardScheduleDao instance;
@@ -81,46 +81,6 @@ public class BoardScheduleDao {
 		}
 		return list;
 
-	}
-
-	public List<mySchduleDto> selectList(String email) throws SQLException {
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql2 = "select l.sl_code,l.s_name, m.LOCAL_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from   SCHEDULELARGE l, "
-				+ "schedulemedium m where  l.sl_code = m.sl_code and    email = ? ";
-		List<mySchduleDto> list = new ArrayList<mySchduleDto>();
-
-		try {
-			conn = getConnection();
-			ps = conn.prepareStatement(sql2);
-			ps.setString(1, email);
-			rs = ps.executeQuery();
-			if(rs.next()) {
-				do {
-					mySchduleDto msdto = new mySchduleDto();
-					msdto.setSl_code(rs.getString("sl_code"));
-					msdto.setS_name(rs.getString("s_name"));
-					msdto.setLocal_name(rs.getString("local_name"));
-					msdto.setTour_date_start(rs.getDate("tour_date_start"));
-					msdto.setRegi_date(rs.getDate("regi_date"));
-					list.add(msdto);
-				} while (rs.next());
-			} else {
-				list = null;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (rs != null)
-				rs.close();
-			if (ps != null)
-				ps.close();
-			if (conn != null)
-				conn.close();
-		}
-
-		return list;
 	}
 
 	public int getTotalCnt() throws SQLException {

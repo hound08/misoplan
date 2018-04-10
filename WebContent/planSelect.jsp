@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.mySchduleDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
@@ -5,6 +8,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -144,9 +148,24 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		var plan = document.getElementById("")
 		
 	}
-	function select_radio() {
-		alert("들어왓!")
-	}
+
+$(document).on('click', '.radio', function(){					 // document 전체  라디오 버튼에 이벤트를 준다. (클래스로 잡아주고)
+	var clickedid = $(this).attr("id"); 					     // 클릭 이벤트시 나 자시냬(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
+	var parsedid = clickedid.substring(5, clickedid.lenght);	 // 변수에 값을 담아주면서 서브스트링 함수를 사용하여 r a d i o 5번째 이후 부터 값을 출력하게 됨
+	parsedid = "#"+parsedid;									 // 가지고올 값 id   # 을 변수명에 더해줌
+	console.log(parsedid);										 // 값이 제대로 들어오는지 확인하기 위한 과정 콘솔찍어보기
+	var centerCardBox = $(parsedid);							 // center-box에 있는 값을 뽑아본다.
+	console.log(centerCardBox);			
+	var cardBoxTitle = centerCardBox.children().children().eq(0).text();	 // 가지고올 값이 title 에 있으므로 box에서 두번 타고 내려가 값을 뽑아온다.
+	var cardBoxBottom = centerCardBox.children().children().eq(1).text();	 // 위와 동일한 방법
+	console.log(cardBoxTitle);
+	console.log(cardBoxBottom);
+	
+	$("#local").text(cardBoxTitle);							// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
+	$("#date").text(cardBoxBottom);							// 위와 동일!!
+});
+
+
 </script>
 </head>
 <body>
@@ -158,8 +177,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="main-top-second2">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>지   역 : </p><span id="sapn_local"></span><br>
-		<p>기   간 : </p>
+		<p>지   역 : <span id="local"></span></p><br>
+		<p>기   간 : <span id="date"></span></p>
 		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
 		</div>
 		<div class="main-imagebt">
@@ -172,7 +191,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 			<div class="center-main-card">
 			<c:forEach var="dto" items="${showList }">
-				<div class="center-card-box" align="center">
+				<div class="center-card-box" align="center" id=${dto.sl_code}>
 					<div class="card-box-title">
 						${dto.sl_code }
 						<div>
@@ -185,7 +204,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<div class="card-box-bottom">
 						${dto.s_name }
 					</div>
-					<input type="radio" id="radio" name="radio" value="일정선택" onclick="select_radio()">
+					<input type="radio" class="radio" id='radio${dto.sl_code }' name="radio">
 				</div>
 			</c:forEach>
 			</div>
