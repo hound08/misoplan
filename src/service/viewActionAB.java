@@ -22,6 +22,7 @@ public class viewActionAB implements CommandProcess{
 		
 		request.setAttribute("post_num", post_num);
 		request.setAttribute("board", board);
+		request.setAttribute("tag", board.getTag());
 		
 		return "accompanyBoardView.jsp";
 	}

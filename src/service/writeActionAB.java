@@ -71,6 +71,7 @@ public class writeActionAB implements CommandProcess{
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		int result = accompanyDao.insert(accompanyDto);
         request.setAttribute("result", result);
+        request.setAttribute("tag", accompanyDto.getTag());
 		
 		return "writeFormAB2.jsp";
 	}//writeFormAction.requestPro
