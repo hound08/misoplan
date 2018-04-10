@@ -4,8 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
@@ -13,19 +12,14 @@
 div {
 	margin: 0px auto;
 }
-
 * {
-	padding:0px;
+	padding: 0px;
 	margin: 0px;
 	font-family: 'NanumSquareRound', sans-serif;
 }
 
 .section {
 	width: 1200px;
-<<<<<<< HEAD
-	margin-bottom: 100px;
-=======
->>>>>>> 3c43caefdb37bcfbfb31904abd97ca3b420a0de9
 }
 
 .main-image {
@@ -37,10 +31,9 @@ div {
 	overflow: hidden;
 	position: relative;
 }
-
 .centerimage {
 	min-height: 100%;
-  	min-width: 100%;
+	min-width: 100%;
 	width: 100%;
 	height: auto;
 }
@@ -71,7 +64,7 @@ hr {
 
 ul {
 	display: block;
-    list-style-type: disc;
+    list-style-type: circle;
     margin-top: 1em;
     margin-bottom: 1 em;
     margin-left: 0;
@@ -92,8 +85,12 @@ ul {
 	justify-content: center;
 	margin-top: 20px;
 }
-#footer_wrap{
-	clear: both;
+
+#output {
+	width: 150px;
+	height: 150px;
+	background-size: 100% 100%;
+	display: inline-block;
 }
 
 </style>
@@ -102,7 +99,9 @@ ul {
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
-			<div class="center-label"><!-- 텍스트 ! --></div>
+			<div class="center-label">
+				<!-- 텍스트 ! -->
+			</div>
 		</div>
 		<div class="write-form">
 			<h3>새로운 글 등록</h3>
@@ -115,7 +114,7 @@ ul {
 			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
 				<table>
 				<tr><td>제목</td><td><input type="text" class="input" name="title"></td></tr>
-				<tr><td>최소 인원(본인포함)</td>
+				<tr><td>최소 인원</td>
 					<td><select name="minimum_num">
 							<option value="2">2명</option>
 							<option value="3">3명</option>
@@ -131,14 +130,16 @@ ul {
 				<tr><td>마감날짜</td><td><input type="date" class="input" name="closing_date"></td></tr>
 				<tr><td>태그</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
 				<tr><td>내용</td><td><div><textarea rows="20" cols="140" name="content"></textarea></div></td></tr>
-				<tr><td>이미지</td><td><input type="file" class="input" name="image_url"></td></tr>
+				<tr><td>이미지</td><td><img id="output"/></td></tr>
+				<tr><td></td><td><input type="file" accept="image/*" onchange="loadFile(event)"></td>
 				</table>
+				
+				<a href="listAction.do"><button class="cancel-button">취소</button></a>							
 				<input type="submit" value="완료" class="submit-button">
 			</form>
-			<div>
-				<a href="listAction.do"><button class="cancel-button">취소</button></a>							
-			</div>
 		</div>
+			
+			
 	</div>
 	<div id="footer_wrap">
 		<%@ include file="footer.jsp"%>
@@ -158,6 +159,11 @@ ul {
 		}
 
 		setInterval(replacePhoto, 3000);
+		  
+		 var loadFile = function(event) {
+			    var output = document.getElementById('output');
+			    output.src = URL.createObjectURL(event.target.files[0]);
+			  };
 	</script>
 </body>
 </html>

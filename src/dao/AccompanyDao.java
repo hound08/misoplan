@@ -121,6 +121,7 @@ public class AccompanyDao {
 			close(pstmt);
 			close(conn);
 		}
+		System.out.println("result = " + result);
 		return result;
 	}
 	
@@ -197,7 +198,7 @@ public class AccompanyDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update accomapanyboard set view_count = view_count+1 where post_num = ?";
+		String sql = "update accompanyboard set view_count = view_count+1 where post_num = ?";
 		
 		try {
 			conn = getConnection();
