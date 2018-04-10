@@ -16,6 +16,7 @@ public class MyInfoFormAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
+			
 			MemberDao memberdao = MemberDao.getInstance();
 			MemberDto memberdto = memberdao.select(email);
 			
