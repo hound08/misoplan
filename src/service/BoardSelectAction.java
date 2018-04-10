@@ -5,17 +5,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import dao.BoardScheduleDao;
-<<<<<<< HEAD
 import dao.BoardScheduleDto;
 import dao.mySchduleDao;
-=======
->>>>>>> c513431273c9a0c46db78b895593968364654c83
 import dao.mySchduleDto;
 
 public class BoardSelectAction implements CommandProcess {
