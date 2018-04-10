@@ -55,10 +55,11 @@ public class mycompanionDao {
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				AccompanyBoardDto dto = new AccompanyBoardDto();
+				dto.setPost_num(rs.getInt("post_num"));
 				dto.setTitle(rs.getString("title"));
 				dto.setNickname(rs.getString("nickname"));
-				dto.setCurrent_number(rs.getInt("current_number"));
-				dto.setMinimum_number(rs.getInt("minimum_number"));
+				dto.setCurrent_num(rs.getInt("current_num"));
+				dto.setMinimum_num(rs.getInt("minimum_num"));
 				dto.setReg_date(rs.getDate("reg_date"));
 				list.add(dto);
 			}

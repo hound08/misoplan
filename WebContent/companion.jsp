@@ -95,23 +95,31 @@
 								</td>
 								
 								<td>${list.nickname }</td>
-								<td>${list.current_number } / ${list.minimum_number } </td>
+								<td>${list.current_num } / ${list.minimum_num } </td>
 								<td>${list.reg_date }</td>
 							</tr>
 							<tbody></tbody>
 						</c:forEach>
 					</table>
 					<button id='btn-delete-row'>행 삭제하기</button>
-
-<script src="//code.jquery.com/jquery.min.js"></script>
-<script>
-$(document).on('click','#btn-title', function(){
-    $('#mytable > tbody:last').append('<tr>${applist.message}<td> </td><td></td><td></td><td></td></tr>');
-  });
-  $('#btn-delete-row').click(function() {
-    $('#mytable > tbody:last > tr:last').remove();
-  });
-</script>
+					
+					<script src="//code.jquery.com/jquery.min.js"></script>
+					<script>
+					$(document).on('click','#btn-title', function(){
+						$.ajax({
+							url:"applicants.java",
+							type: "get",
+							data: "list.post_num",
+							 success: function (data, status, xhr) {
+								 
+					  	  $('#mytable > tbody:last').append('<tr>${applist}<td> </td><td></td><td></td><td></td></tr>');
+							 },
+						});
+					  });
+					  $('#btn-delete-row').click(function() {
+					    $('#mytable > tbody:last > tr:last').remove();
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

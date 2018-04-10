@@ -20,8 +20,6 @@ public class AccompanyBoardDto {
 	private int is_closed; //마감 여부
 	
 	
-<<<<<<< HEAD
-=======
 	
 	public int getMinimum_num() {
 		return minimum_num;
@@ -35,7 +33,6 @@ public class AccompanyBoardDto {
 	public void setCurrent_num(int current_num) {
 		this.current_num = current_num;
 	}
->>>>>>> 0f3e9f40a2ac7baeb13ff4ca5843c2097336f59a
 	public int getPost_num() {
 		return post_num;
 	}

@@ -40,16 +40,16 @@ public class ApplicantsDao {
 		return conn;
 	}
 	
-	private List<ApplicantsDto> list(int bp_num) throws SQLException{
+	public List<ApplicantsDto> appselect(int post_num) throws SQLException{
 		Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
-		String sql = "select * from applicants where post_num ";
+		String sql = "select * from applicants where post_num = ?";
 		List<ApplicantsDto> applist = new ArrayList<ApplicantsDto>();
 		try {
 			 conn = getConnection();
 	         ps = conn.prepareStatement(sql);
-	         ps.setInt(1, bp_num);
+	         ps.setInt(1, post_num);
 	         rs = ps.executeQuery();
 	         while(rs.next()){
 	        	 ApplicantsDto dto = new ApplicantsDto();
@@ -59,6 +59,7 @@ public class ApplicantsDao {
 	        	 dto.setStatus(rs.getString("status"));
 	        	 dto.setMessage(rs.getString("message"));
 	        	 dto.setKkkao_id(rs.getString("kakao_id"));
+	        	 dto.setApplicants_date(rs.getDate("applicants_date"));
 	        	 applist.add(dto);
 	         }
 		} catch (Exception e) {
