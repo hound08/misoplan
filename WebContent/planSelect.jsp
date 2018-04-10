@@ -98,7 +98,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 70px;
 	overflow: hidden;
 	overflow: auto;
-	margin: 0 0 5px 4px;
+	margin: 0 0 5px 2px;
 	border: 1px solid gray;
 	font-size: 10pt;
 }
@@ -126,6 +126,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
+#radio {
+	: center;
+}
 
 </style>
 <script type="text/javascript">
@@ -152,8 +155,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="main-top-second2">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>기   간 : <input type="date" id="tour_date" name="tour_date" required="required"> ~ 
-				<input type="date" id="tour_date" name="tour_date" required="required"></p><br>
+		<p>지   역 : </p><br>
+		<p>기   간 : </p>
 		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
 		</div>
 		<div class="main-imagebt">
@@ -165,18 +168,21 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			세부 일정
 		</div>
 			<div class="center-main-card">
-			<c:forEach var="dto" items="${list }">
-				<div class="center-card-box">
+			<c:forEach var="dto" items="${showList }">
+				<div class="center-card-box" align="center">
 					<div class="card-box-title">
 						${dto.sl_code }
+						<div>
+							${dto.local_name }
+						</div>
 						<div class ="card-box-title2">
-							${dto.regi_date }
+							${dto.tour_date_start } ~ ${dto.tour_date_end }
 						</div>
 					</div>
 					<div class="card-box-bottom">
 						${dto.s_name }
 					</div>
-					<input type="button" id="refresh" value="일정선택" align="right" >
+					<input type="radio" id="radio" name="radio" value="일정선택">
 				</div>
 			</c:forEach>
 			</div>
