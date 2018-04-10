@@ -14,8 +14,8 @@
 	}
 	
 	p {
-		margin-top: 30px;
-		margin-bottom: 30px;
+		margin-top: 15px;
+		margin-bottom: 15px;
 	}
 	
 	h1 {
@@ -56,12 +56,24 @@
 		border-color: transparent;
 	}
 	
+	#password {
+		width: 300px;
+		height: 30px;
+		margin-bottom: 2px;
+	}
+	
+	#passwordChk {
+		width: 300px;
+		height: 30px;
+	}
+	
 	.btnSubmit {
 		width: 300px;
 		height: 40px;
 		color: white;
 		background-color: #1A7AD9;
 		border-color: transparent;
+		margin-top: 15px;
 	}
 	
 	.footer_wrap {
@@ -84,15 +96,13 @@
 				'joinCheck.jsp',
 				sendData,
 				function(result) {
-					if (result.indexOf('이미') > 0) {
-						emailChk = true;
-						$('#spanEmail').css('color', 'green');
-						$('#spanEmail').html('※가입된 이메일 주소입니다.');
-					} else {
+					if (result.indexOf('이미') < 0) {
 						emailChk = false;
-						$('#spanEmail').css('color', 'red');
 						$('#spanEmail').html('※가입되지 않은 이메일 주소입니다.');
 						$('#email').focus();
+					} else {
+						emailChk = true;
+						$('#spanEmail').html('　');
 					}
 			});
 		});
@@ -124,7 +134,7 @@
 		
 		var sendData = 'email=' + $('#email').val();
 		
-		if (confirm("해당 이메일로 임시 비밀번호가 발송됩니다.\n계속 진행하시겠습니까?" == true)) {
+		if (confirm("해당 이메일로 임시 비밀번호가 발송됩니다.\n계속 진행하시겠습니까?")) {
 			$.post(
 				'emailCheck.jsp',
 				sendData,
@@ -132,7 +142,10 @@
 					confirmNum = result.substr(result.indexOf("authNum:")+8, 6);
 			});
 			
-			alert("임시 비밀번호가 발송되었습니다.\n반드시 새로운 비밀번호로 변경하기를");
+			alert("임시 비밀번호가 발송되었습니다.\n반드시 새로운 비밀번호로 변경하시기 바랍니다.");
+		} else {
+			alert("진행을 취소하셨습니다.");
+			location.href="findPasswordForm.do";
 		}
 	}
 	
@@ -161,9 +174,22 @@
 			$("#btnConfirm").prop('disabled', true);
 			$("#btnConfirm").css('color', '#808080');
 			$("#btnConfirm").css('background-color', '#DDDDDD');
+			
+			$('#password').prop('disabled', false);
+			$('#passwordChk').prop('disabled', false);
+			$('#password').focus();
 		}
 		
 		return;
+	}
+	
+	function chk() {
+		if (formFindPassword.btnConfirm.value.indexOf("인증완료") < 0) {
+			alert("이메일 인증이 처리되지 않았습니다.");
+			formFindPassword.email.focus();
+			
+			return false;
+		}
 	}
 </script>
 </head>
@@ -172,11 +198,15 @@
 		<%@ include file="header.jsp"%>
 	</div>
 	<div class="divForm">
-		<form action="#" name="formFindPassword">
+		<form action="#" name="formFindPassword" onsubmit="return chk()">
 			<h1>비밀번호 찾기</h1>
 			<input type="email" id="email" name="email" class="email" required="required" placeholder="가입한 이메일 주소"><input type="button" class="btnEmailChk" value="인증하기" onclick="emailCheck(formFindPassword.email.value)"><br>
 			<input type="text" id="inputConfirm" name="inputConfirm" class="inputConfirm" required="required" placeholder="인증번호 입력" disabled="disabled"><input type="button" id="btnConfirm" name="btnConfirm" class="btnConfirm" value="확인" disabled="disabled"><br>
-			<span id="spanEmail" style="font-size: 13px">　</span>
+			<span id="spanEmail" style="font-size: 13px; color: red">　</span>
+			<p>
+				<input type="password" id="password" required="required" placeholder="새로운 비밀번호 입력" disabled="disabled"><br>
+				<input type="password" id="passwordChk" required="required" placeholder="비밀번호 확인" disabled="disabled">
+			</p>
 			<p><input type="submit" class="btnSubmit" value="비밀번호 재설정"></p>
 		</form>
 	</div>
