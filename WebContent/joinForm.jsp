@@ -186,7 +186,7 @@ h1 {
 		var sendData = 'email=' + $('#email').val();
 		
 		$.post(
-			'emailCheck.jsp',
+			'emailConfirmPro.jsp',
 			sendData,
 			function(result) {
 				confirmNum = result.substr(result.indexOf("authNum:")+8, 6);

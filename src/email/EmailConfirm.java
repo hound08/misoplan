@@ -13,19 +13,34 @@ import javax.mail.internet.MimeUtility;
 
 public class EmailConfirm {
 	
-	public String connectEmail(String email){
+	public String connectEmail(String email, int type){
 		String to1 = email; // 인증위해 사용자가 입력한 이메일주소
 		String host = "smtp.gmail.com"; // smtp 서버
-		String subject = "미소플랜 회원가입 이메일 인증번호 전달"; // 보내는 제목 설정
+		String subject = ""; // 보내는 제목 설정
 		String fromName = "미소플랜"; // 보내는 이름 설정
 		String from = "misoplanmail@gmail.com"; // 보내는 사람(구글계정)
-		String authNum = EmailConfirm.authNum(); // 인증번호 위한 난수 발생부분
-		String content =
-			"<img alt='미소플랜' src='https://i.imgur.com/HftX1AR.png'>" +
-			"<p>안녕하세요. 여행 플래너 전문 웹사이트 '미소플랜' 입니다.</p>" +
-			"<p>귀하의 이메일 주소 인증번호는 아래와 같습니다. 해당 번호를 입력란에 입력해주세요.</p>" +
-			"<h2>인증번호 [" + authNum + "]</h2>" +
-			"<p>감사합니다.</p>";
+		String authNum = ""; // 인증번호 위한 난수 발생부분
+		String content = ""; // 메시지
+		
+		if (type == 0) {
+			subject = "미소플랜 회원가입 이메일 인증번호 발송";
+			authNum = EmailConfirm.authNum(0);
+			content =
+				"<img alt='미소플랜' src='https://i.imgur.com/HftX1AR.png'>" +
+				"<p>안녕하세요. 여행 플래너 전문 웹사이트 '미소플랜' 입니다.</p>" +
+				"<p>귀하의 이메일 주소 인증번호는 아래와 같습니다. 해당 번호를 입력란에 입력해주세요.</p>" +
+				"<h2>인증번호 [" + authNum + "]</h2>" +
+				"<p>감사합니다.</p>";
+		} else {
+			subject = "미소플랜 계정 새 비밀번호 발송";
+			authNum = EmailConfirm.authNum(1);
+			content =
+				"<img alt='미소플랜' src='https://i.imgur.com/HftX1AR.png'>" +
+				"<p>안녕하세요. 여행 플래너 전문 웹사이트 '미소플랜' 입니다.</p>" +
+				"<p>귀하의 새로운 비밀번호는 아래와 같습니다. 로그인 후 반드시 비밀번호를 변경해 주세요.</p>" +
+				"<h2>비밀번호 [" + authNum + "]</h2>" +
+				"<p>감사합니다.</p>";
+		}
 		
         // SMTP 이용하기 위해 설정해주는 설정값들
 		try{
@@ -66,12 +81,19 @@ public class EmailConfirm {
 	}
 
     // 난수발생 function
-	public static String authNum(){
+	public static String authNum(int type){
 		StringBuffer buffer=new StringBuffer();
 		
-		for(int i = 0; i <= 5; i++){
-			int num = (int)(Math.random() * 9+1);
-			buffer.append(num);
+		if (type == 0) {
+			for(int i = 0; i <= 5; i++){
+				int num = (int)(Math.random() * 9+1);
+				buffer.append(num);
+			}
+		} else {
+			for(int i = 0; i <= 17; i++){
+				int num = (int)(Math.random() * 9+1);
+				buffer.append(num);
+			}
 		}
 		
 		return buffer.toString();
