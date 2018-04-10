@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.mySchduleDao"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
@@ -181,7 +184,7 @@ div {
 					<img alt="image" class="card_image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					${bs.local_names }
+					${bs.local_name }
 				</div>
 				<div class="second-text">
 					<h1>제목 : ${bs.title }</h1>
