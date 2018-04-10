@@ -22,7 +22,6 @@ public class companionFormAction implements CommandProcess {
 			mycompanionDao comdao = mycompanionDao.getInstance();
 			List<AccompanyBoardDto> list = comdao.select(email);
 			
-			
 			request.setAttribute("list", list);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
