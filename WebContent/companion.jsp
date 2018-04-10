@@ -71,15 +71,7 @@
 	margin-bottom: 40px;
 }
 </style>
-<script src="jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script type="text/javascript">
-	function titleclick() {
-		
-	}
-</script>
+
 </head>
 <body>
 
@@ -90,8 +82,7 @@
 			<div id="myinfo">
 				<div id="info">
 					<b id="all" onclick="all_click()">전체보기</b> |
-
-					<table border="1" onclick="">
+					<table border="1" id="mytable">
 						<tr>
 							<th id="aa">제목</th>
 							<th class="bb">닉네임</th>
@@ -100,13 +91,35 @@
 						</tr>
 						<c:forEach var="list" items="${list }">
 							<tr>
-								<td><a onclick="titleclick()"> ${list.title} </a></td>
+								<td><a id='btn-title' onclick = "test(applist)"> ${list.title} </a>
+								</td>
+								
 								<td>${list.nickname }</td>
-								<td>${list.current_number } / ${list.minimum_number } </td>
+								<td>${list.current_num } / ${list.minimum_num } </td>
 								<td>${list.reg_date }</td>
 							</tr>
+							<tbody></tbody>
 						</c:forEach>
 					</table>
+					<button id='btn-delete-row'>행 삭제하기</button>
+					
+					<script src="//code.jquery.com/jquery.min.js"></script>
+					<script>
+					$(document).on('click','#btn-title', function(){
+						$.ajax({
+							url:"applicants.java",
+							type: "get",
+							data: "list.post_num",
+							 success: function (data, status, xhr) {
+								 
+					  	  $('#mytable > tbody:last').append('<tr>${applist}<td> </td><td></td><td></td><td></td></tr>');
+							 },
+						});
+					  });
+					  $('#btn-delete-row').click(function() {
+					    $('#mytable > tbody:last > tr:last').remove();
+					  });
+					</script>
 				</div>
 			</div>
 		</div>

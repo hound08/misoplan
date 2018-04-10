@@ -14,8 +14,8 @@
 	}
 	
 	p {
-		margin-top: 30px;
-		margin-bottom: 30px;
+		margin-top: 15px;
+		margin-bottom: 15px;
 	}
 	
 	h1 {
@@ -25,14 +25,15 @@
 	.divForm {
 		padding-top: 250px;
 		padding-bottom: 150px;
-		width: 1080px;
+		width: 300px;
 		text-align: center;
 	}
 	
 	.email {
-		width: 225px;
+		width: 226px;
 		height: 30px;
 		margin-right: 4px;
+		margin-bottom: 5px;
 	}
 	
 	.btnEmailChk {
@@ -40,19 +41,6 @@
 		height: 30px;
 		color: white;
 		background-color: #1A7AD9;
-		border-color: transparent;
-	}
-	
-	.inputConfirm {
-		width: 225px;
-		height: 30px;
-		margin-right: 4px;
-		margin-bottom: 5px;
-	}
-	
-	.btnConfirm {
-		width: 70px;
-		height: 30px;
 		border-color: transparent;
 	}
 	
@@ -84,15 +72,15 @@
 				'joinCheck.jsp',
 				sendData,
 				function(result) {
-					if (result.indexOf('이미') > 0) {
-						emailChk = true;
-						$('#spanEmail').css('color', 'green');
-						$('#spanEmail').html('※가입된 이메일 주소입니다.');
-					} else {
+					if (result.indexOf('이미') < 0) {
 						emailChk = false;
 						$('#spanEmail').css('color', 'red');
 						$('#spanEmail').html('※가입되지 않은 이메일 주소입니다.');
 						$('#email').focus();
+					} else {
+						emailChk = true;
+						$('#spanEmail').css('color', 'green');
+						$('#spanEmail').html('※회원가입이 확인되었습니다.');
 					}
 			});
 		});
@@ -116,54 +104,30 @@
 			return;
 		}
 		
-		formFindPassword.btnConfirm.value = "확인";
-		$("#inputConfirm").prop('disabled', false);
-		$("#btnConfirm").prop('disabled', false);
-		$("#btnConfirm").css('color', 'white');
-		$("#btnConfirm").css('background-color', '#1A7AD9');
-		
-		var sendData = 'email=' + $('#email').val();
-		
-		if (confirm("해당 이메일로 임시 비밀번호가 발송됩니다.\n계속 진행하시겠습니까?" == true)) {
-			$.post(
-				'emailCheck.jsp',
-				sendData,
-				function(result) {
-					confirmNum = result.substr(result.indexOf("authNum:")+8, 6);
-			});
-			
-			alert("임시 비밀번호가 발송되었습니다.\n반드시 새로운 비밀번호로 변경하기를");
-		}
+		alert("회원가입이 확인되었습니다.\n비밀번호 재설정을 진행하시면 해당 주소로 이메일이 발송됩니다.");
 	}
 	
-	$(function() {
-		$('#btnConfirm').click(function() {
-			if (!formFindPassword.inputConfirm.value) { 
-				alert("인증번호를 입력해주세요.");
-				formFindPassword.inputConfirm.focus();
-				
-				return;
-			}
+	function newPasswordSend(email) {
+		if (emailChk == false) {
+			alert("회원 가입 여부가 확인되지 않았습니다.");
 			
-			confirmEmail(formFindPassword.inputConfirm.value, confirmNum);
-		});
-	});
-	
-	function confirmEmail(emailconfirm_value, authNum){
-		if(!emailconfirm_value || emailconfirm_value != authNum){	// 인증코드가 일치하지 않을 경우
-			alert("인증번호가 일치하지 않습니다!");
-			formFindPassword.inputConfirm.value = "";
-			formFindPassword.inputConfirm.focus();
-		} else if(emailconfirm_value == authNum){	// 일치할 경우
-			alert("인증에 성공하였습니다.");
-			formFindPassword.btnConfirm.value = "인증완료";
-			$("#inputConfirm").prop('disabled', true);
-			$("#btnConfirm").prop('disabled', true);
-			$("#btnConfirm").css('color', '#808080');
-			$("#btnConfirm").css('background-color', '#DDDDDD');
+			return;
 		}
 		
-		return;
+		if (confirm("해당 이메일 주소로 새로운 비밀번호가 발송됩니다.\n계속 진행하시겠습니까?")) {
+			var sendData = 'email=' + $('#email').val();
+
+			$.post('newPasswordPro.jsp', sendData,
+				function(result) {
+					confirmNum = result.substr(result.indexOf("authNum:")+8, 18);
+				});
+						
+				alert("임시 비밀번호가 발송되었습니다.\n반드시 새로운 비밀번호로 변경하시기 바랍니다.");
+				location.href="loginForm.do";
+		} else {
+			alert("진행을 취소하셨습니다.");
+			location.href="findPasswordForm.do";
+		}
 	}
 </script>
 </head>
@@ -174,10 +138,9 @@
 	<div class="divForm">
 		<form action="#" name="formFindPassword">
 			<h1>비밀번호 찾기</h1>
-			<input type="email" id="email" name="email" class="email" required="required" placeholder="가입한 이메일 주소"><input type="button" class="btnEmailChk" value="인증하기" onclick="emailCheck(formFindPassword.email.value)"><br>
-			<input type="text" id="inputConfirm" name="inputConfirm" class="inputConfirm" required="required" placeholder="인증번호 입력" disabled="disabled"><input type="button" id="btnConfirm" name="btnConfirm" class="btnConfirm" value="확인" disabled="disabled"><br>
+			<input type="email" id="email" name="email" class="email" required="required" placeholder="가입한 이메일 주소"><input type="button" class="btnEmailChk" value="확인" onclick="emailCheck(formFindPassword.email.value)"><br>
 			<span id="spanEmail" style="font-size: 13px">　</span>
-			<p><input type="submit" class="btnSubmit" value="비밀번호 재설정"></p>
+			<p><input type="button" class="btnSubmit" value="비밀번호 재설정" onclick="newPasswordSend(formFindPassword.email.value)"></p>
 		</form>
 	</div>
 	<div class="footer_wrap">

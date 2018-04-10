@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.AccompanyBoardDto;
+import dao.ApplicantsDao;
+import dao.ApplicantsDto;
 import dao.mycompanionDao;
 
 public class companionFormAction implements CommandProcess {
@@ -17,9 +19,8 @@ public class companionFormAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
-			mycompanionDao dao = mycompanionDao.getInstance();
-			List<AccompanyBoardDto> list = dao.select(email);
-			System.out.println("@@@"+ request.getParameter("email"));
+			mycompanionDao comdao = mycompanionDao.getInstance();
+			List<AccompanyBoardDto> list = comdao.select(email);
 			
 			request.setAttribute("list", list);
 		} catch (Exception e) {

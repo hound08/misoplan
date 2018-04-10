@@ -11,7 +11,7 @@
 		String email = request.getParameter("email");
 
 		EmailConfirm confirm = new EmailConfirm();
-		String authNum = confirm.connectEmail(email);
+		String authNum = confirm.connectEmail(email, 0);
 		out.println("authNum:" + authNum);
 	%>
 </body>
