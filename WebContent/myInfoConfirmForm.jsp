@@ -1,15 +1,65 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ include file="header.jsp" %>
 <html>
 <head>
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>계정 확인</title>
+<style type="text/css">
+	body {
+		font-family: 'NanumSquareRound', sans-serif;
+	}
+	
+	#center {
+		margin: 0px auto;
+		width: 1200px;
+		height: 100%;
+	}
+	
+	#main {
+		background-color: #f0f0f0;
+		width: 930px;
+		text-align: center;
+		float: left;
+		margin-top: 20px;
+		border-radius: 25px;
+		padding-bottom: 20px;
+	}
+	
+	h1 {
+		margin: 50px;
+	}
+	
+	#password {
+		margin: 15px;
+		width: 300px;
+		height: 30px;
+	}
+	
+	.submit {
+		width: 300px;
+		height: 40px;
+		color: white;
+		background-color: #1A7AD9;
+		border-color: transparent;
+		margin-bottom: 50px;
+	}
+	
+</style>
 </head>
 <body>
+	<% request.setAttribute("email", session.getAttribute("email")); %>
+	
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
 		<div id="main">
-			<h1>씨발</h1>
+			<form name="form" action="myInfoConfirmPro.do">
+				<h1>계정 정보 확인</h1>
+				<p><input type="password" id="password" name="password" required="required" placeholder="비밀번호 입력"></p>
+				<p><input type="submit" class="submit" value="확인"></p>
+			</form>
 		</div>
 	</div>
 </body>

@@ -12,6 +12,7 @@
 			width: 100%;
 		}
 		body{
+			font-family: 'NanumSquareRound', sans-serif;
 			height: 100%;
 			width: 100%;
 		}

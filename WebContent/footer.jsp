@@ -6,7 +6,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ㅈㅔ목</title>
+<title>미소플랜</title>
 <style type="text/css">
 body{
 	margin: 0px;
