@@ -19,12 +19,17 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
+<<<<<<< HEAD
+	
+	
+=======
 	public String getTag() {
 		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
 	}
+>>>>>>> 68fcb89f3a725c346d99eafb05c35bce77d74859
 	public int getMinimum_num() {
 		return minimum_num;
 	}

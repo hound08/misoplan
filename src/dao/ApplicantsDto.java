@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Date;
+
 public class ApplicantsDto {
 	private int post_num;
 	private String email;
@@ -7,6 +9,15 @@ public class ApplicantsDto {
 	private String status;
 	private String message;
 	private String kkkao_id;
+	private Date   applicants_date;
+	
+	
+	public Date getApplicants_date() {
+		return applicants_date;
+	}
+	public void setApplicants_date(Date applicants_date) {
+		this.applicants_date = applicants_date;
+	}
 	public int getPost_num() {
 		return post_num;
 	}
