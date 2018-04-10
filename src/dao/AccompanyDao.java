@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -166,6 +167,7 @@ public class AccompanyDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
+				accompanyDto.setPost_num(rs.getInt(2));
 				accompanyDto.setNickname(rs.getString(4));
 				accompanyDto.setTitle(rs.getString(6));
 				accompanyDto.setImage_url(rs.getString(7));
@@ -188,5 +190,64 @@ public class AccompanyDao {
 		}
 		
 		return list;
+	}
+
+	public void view_count(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update accomapanyboard set view_count = view_count+1 where post_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+	}
+
+	public AccompanyBoardDto select(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		AccompanyBoardDto board = new AccompanyBoardDto();
+		String sql = "select * from accompanyboard where post_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			board.setEmail(rs.getString(2));
+			board.setNickname(rs.getString(3));
+			board.setTitle(rs.getString(5));
+			board.setImage_url(rs.getString(6));
+			board.setContent(rs.getString(7));
+			board.setTag(rs.getString(8));
+			board.setView_count(rs.getInt(9));
+			board.setVote_count(rs.getInt(10));
+			board.setReg_date(rs.getDate(11));
+			board.setClosing_date(rs.getDate(12));
+			board.setMinimum_num(rs.getInt(13));
+			board.setCurrent_num(rs.getInt(14));
+			board.setIs_closed(rs.getInt(15));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		return board;
 	}
 }
