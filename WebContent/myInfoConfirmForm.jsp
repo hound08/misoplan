@@ -50,13 +50,14 @@
 </style>
 </head>
 <body>
-	<% request.setAttribute("email", session.getAttribute("email")); %>
+	<% String email = (String)session.getAttribute("email"); %>
 	
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
 		<div id="main">
 			<form name="form" action="myInfoConfirmPro.do">
 				<h1>계정 정보 확인</h1>
+				<input type="hidden" name="email" value="<%=email %>">
 				<p><input type="password" id="password" name="password" required="required" placeholder="비밀번호 입력"></p>
 				<p><input type="submit" class="submit" value="확인"></p>
 			</form>
