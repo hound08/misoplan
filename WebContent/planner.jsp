@@ -9,6 +9,8 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" href="css/pikaday.css">
+<link rel="stylesheet" href="css/triangle.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -113,7 +115,7 @@
     #cityinfo:hover{
     	cursor: pointer;
     }
-    .selected{
+    .city_selected{
     	background-color: gray;
     	color: white;
     }
@@ -261,14 +263,20 @@
     #dialog{
     	background-color: white;
     }
-	
+	.inputs{
+		width: 300px;
+		height: 30px;	
+		margin: 5px;
+		border-radius: 5px;
+		font-size: 20px;
+	}
 </style>
 
 <!--  -->
 <link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
-<link rel="stylesheet" href="demo.css">
-<link rel="stylesheet" href="avgrund.css">
+<link rel="stylesheet" href="css/demo.css">
+<link rel="stylesheet" href="css/avgrund.css">
 
 <script>
 	function openDialog() {
@@ -283,17 +291,28 @@
 </script>
 <!--  -->
 
-<script>
-$(document).on('click', '#completebtn', function(){
-	openDialog();
-});
-   </script>
 <script type="text/javascript">
 var mapx = [];
 var mapy = [];
 var daycount = 1;
 var plandivheight = 65;
-  
+
+$(document).on('click', '#completebtn', function(){
+	var plandiv = $(".plandiv");
+	var contents = plandiv.children();
+	var jsonArr = [];
+	
+	
+	
+	jQuery.each(contents, function(index, value){
+		jsonArr.push({"dayvalue" : $(value).attr('dayvalue'), "parsedinfo" : $(value).attr('parsedinfo')});	
+	});
+	
+	console.log(jsonArr);
+	openDialog();
+});
+
+
 $(document).on('click','#sidebar-menu', function(){
     /* load city list */
     var $this = $(this);
@@ -324,8 +343,8 @@ $(document).on('click','#sidebar-menu', function(){
     
     
     /* select, unselect */
-	$(".sidebar").children().removeClass("selected");
-	$this.addClass('selected');
+	$(".sidebar").children().removeClass("area_selected");
+	$this.addClass('area_selected');
 	
 	/* select, unselect end */
 	
@@ -336,7 +355,7 @@ $(document).on('click','#sidebar-menu', function(){
 
 $(document).on('click','#cityinfo', function(){
 	var $this = $(this);
-	var areaCode = $('.selected').attr('data');
+	var areaCode = $('.area_selected').attr('data');
 	var sigunguCode = $(this).attr('data');
 	$('.tourlist').contents().remove();
 	$.ajax({
@@ -388,8 +407,8 @@ $(document).on('click','#cityinfo', function(){
 		tourinfo[i].style.width = "100%";
 	}
 	document.getElementById("map").style.width="67%";
-	$(".center").children().removeClass("selected");
-	$this.addClass('selected');
+	$(".center").children().removeClass("city_selected");
+	$this.addClass('city_selected');
 	
 });
 
@@ -398,12 +417,11 @@ $(document).on('click', '.plusbutton', function(){
 	$this = $(this);
 	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).text();
 	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).text();
-	console.log(tourtitle);
 	var id = $(this).attr("id");
-	console.log(id);
 	var plandiv = $('.plandiv'); 
-	
-	console.log(plandiv.children("#planelem"+id).attr('id'));
+	var areaCode = $('.area_selected').attr('data');
+	var cityCode = $('.city_selected').attr('data');
+	var parsedinfo = areaCode + "-" + cityCode + "-" + id;
 	if(plandiv.children("#planelem"+id).attr('id')){
 		alert("이미 추가된 여행지입니다.");		
 	}else{
@@ -413,7 +431,7 @@ $(document).on('click', '.plusbutton', function(){
 			plandiv.css('height', plandivheight);
 			daycount = daycount + 1;
 		}
-		plandiv.append("<div class='planelem' id='planelem"+id+"' dayvalue="+(daycount-1)+"><p class='elemtitle' id='elemtitle"+id+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+id+"'>X&nbsp;</div></div>");
+		plandiv.append("<div class='planelem' id='planelem"+id+"' dayvalue="+(daycount-1)+" parsedinfo="+parsedinfo+"><p class='elemtitle' id='elemtitle"+id+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+id+"'>X&nbsp;</div></div>");
 		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 	}
@@ -427,7 +445,7 @@ $(document).on('click', '.deleteelem', function(){
 	var parsedid = deleteid.substring(6, deleteid.length);
 	var parseddiv = "#planelem"+parsedid;
 	var parsedtitle = "#elemtitle"+parsedid;
-	var parseddelete = "#delete"+parsedid;
+	var parseddelete = "#delete"+parsedid; 
 	
 	plandivheight = plandivheight - 22;
 	plandiv.css('height', plandivheight);
@@ -635,18 +653,31 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 <!--  -->
 		<aside id="default-popup" class="avgrund-popup">
 			<h2>저장</h2>
-			<label>
-				플랜 제목 : 
-			</label>
-			<input type="text" name="title" id="title">
+			<form action="#" method="post">
+				<label>플랜 제목 : </label>
+				<input type="text" name="title" id="title" class="inputs">
+				<br>
+				<label>출발일 : </label>
+				<input type="text" id="datepicker-triangle" class="inputs">
+				<br>
+				<button onclick="javascript:document.getElementById('title').submit();">완료</button>
+			</form>
 						
-			<button onclick="javascript:closeDialog();">Close</button>
 			
 		</aside>
 		<div class="avgrund-cover"></div>
 
-		<script type="text/javascript" src="avgrund.js"></script>
+		<script type="text/javascript" src="js/avgrund.js"></script>
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 		<!--  -->
+		
+		<script src="js/pikaday.js"></script>
+		<script>
+			var pickerTriangle = new Pikaday(
+			    {
+			        field: document.getElementById('datepicker-triangle'),
+			        theme: 'triangle-theme'
+			    });
+		</script>
 </body>
-</html>
+</html>\
