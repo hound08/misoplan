@@ -3,10 +3,9 @@
 <%@ include file="header.jsp"%>
 <%@ include file="pageLoginCheck.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 /* 	절대위치(absolute)
@@ -145,6 +144,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		var plan = document.getElementById("")
 		
 	}
+	function select_radio() {
+		alert("들어왓!")
+	}
 </script>
 </head>
 <body>
@@ -156,7 +158,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="main-top-second2">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>지   역 : </p><br>
+		<p>지   역 : </p><span id="sapn_local"></span><br>
 		<p>기   간 : </p>
 		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
 		</div>
@@ -183,7 +185,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<div class="card-box-bottom">
 						${dto.s_name }
 					</div>
-					<input type="radio" id="radio" name="radio" value="일정선택" onclick="">
+					<input type="radio" id="radio" name="radio" value="일정선택" onclick="select_radio()">
 				</div>
 			</c:forEach>
 			</div>
