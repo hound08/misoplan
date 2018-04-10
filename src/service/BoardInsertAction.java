@@ -63,7 +63,6 @@ public class BoardInsertAction implements CommandProcess {
 			int result = dao.insertPlan(dto, nickname);
 			
 			if (result > 0) {
-				request.setAttribute("nickname", nickname);
 				request.setAttribute("result", result);
 			}
 		} catch (Exception e ) {

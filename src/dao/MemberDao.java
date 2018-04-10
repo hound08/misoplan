@@ -125,6 +125,35 @@ public class MemberDao {
 
 		return list;
 	}
+	
+	public int myInfoLogin(String email, String password) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT PASSWORD FROM MEMBER WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				if (rs.getString(1).equals(password)) {
+					result = 1;
+				}
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
 
 	public MemberDto select(String email) throws SQLException {
 		MemberDto dto = new MemberDto();
@@ -213,6 +242,28 @@ public class MemberDao {
 			ps.setString(3, dto.getPassword());
 			ps.setString(4, dto.getPhone());
 			ps.setString(5, dto.getProfile_url());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public int updatePassword(String email, String password) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE MEMBER SET PASSWORD = ? WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, password);
+			ps.setString(2, email);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

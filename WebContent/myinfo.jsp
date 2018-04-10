@@ -109,8 +109,7 @@
 							<tr><td>닉 네 임 : </td><td><input type="text" class="input" required="required" name="Nickname" id="Nickname" value="${memberdto.nickname }" oninput="checkId()"></td>
 													<td><input type="button" class="but" value="중복확인" id="nameclice" onclick="winop()"></td></tr>
 							<tr><td>		   </td><td><span id="name_result"></span></td></tr>
-							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" name="password" value="${memberdto.password }"></td><td></td></tr>
-							<tr><td>비밀번호 확인 : </td><td><input type="password" class="input" required="required" name="password1" ></td><td></td></tr>
+							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" name="password"></td><td></td></tr>
 							<tr><td>핸드폰 번호 : </td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td><td></td></tr>
 							<tr></tr>
 							<tr><td></td><td><input type="submit" class="but" value="정보 수정"> 

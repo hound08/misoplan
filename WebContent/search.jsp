@@ -15,7 +15,7 @@
 <title>Insert title here</title>
 <script src="jquery-1.11.0.min.js"></script>
 <script type="text/javascript" src="js/jquery.js"></script>
-<script type="text/javascript" src = "http://code.jquery.com/jquery-latest.min.js"></script>
+
 <script type="text/javascript">
 	var areaCode;
 	var sigunCode;
@@ -623,6 +623,7 @@
 	
 	/*파싱 결과 리스트 출력  */
 	function listParsing(area, sigun, pageNo){
+		var email = $("#email").val();
 		$.ajax({
 			url : 'GalleryList',
 			type : 'get',
@@ -645,19 +646,19 @@
 				var myFirstPage		= 1;
 				if(myEndPage > myTotalPage)
 					myEndPage = myTotalPage;
-				
+
 				/* 검색결과 출력 메시지 */
 				
 				if(myTotalCount == 0){
 					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
 				}else if(myTotalCount > 1){
-					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount + '</p>'											
+											);
+					$("#test").html('<p> 총 검색개수 : ' + myTotalCount 
 										+   '	총 페이지 	: ' + myTotalPage 
 										+	'	현재 페이지  : ' + myPageNo
 										+	'  myStartPage :   ' + myStartPage
 										+	'  myEndPage :  ' + myEndPage
-										+	'	29/10 :	  '	+ (29/10)
-										+	' 	29%10 :   '	+ (29%10)
 										+ '</p>'											
 											);
 				}
@@ -672,8 +673,16 @@
 					}					
 					$("#galleryList")
 							.append(
-									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+									'<a href = "searchDetail.do?contentTypeId='
+									+ myItem[i].contenttypeid +'&'
+									+ 'contendtid='
+									+ myItem[i].contentid +'&'
+									+ 'email='
+									+ email
+									+ '">'
+									+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
 									+ title + '</p> </li>'
+									+ '</a>'
 									);
 				}
 			/* 페이징 */
@@ -727,6 +736,7 @@
 	var search = "";
 	/* 검색 결과 리스트 출력  */
 		function searchList(search,num){
+		var email = $("#email").val();
 		$.ajax({
 			url : 'SearchList',
 			type : 'get',
@@ -755,7 +765,9 @@
 				if(myTotalCount == 0){
 					$("#contentsTop").html('<p> 검색결과가 없습니다.</p>');
 				}else if(myTotalCount > 1){
-					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount 
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount + '</p>'											
+											);
+					$("#test").html('<p> 총 검색개수 : ' + myTotalCount 
 										+   '	총 페이지 	: ' + myTotalPage 
 										+	'	현재 페이지  : ' + myPageNo
 										+	'  myStartPage :   ' + myStartPage
@@ -766,6 +778,7 @@
 											);
 				}
 				
+				
 				/* 검색 list 생성 */
 				for (var i = 0; i < myItem.length; i++) {
 					console.log(myItem.length);
@@ -774,11 +787,20 @@
 					if(firstImage == undefined){
 						firstImage = "images/no_image.jpg";
 					}					
+					
 					$("#galleryList")
-							.append(
-									'<li> <img src =' + firstImage + ' alt = ""> <p>' 
-									+ title + '</p> </li>'
-									);
+					.append(
+							'<a href = "searchDetail.do?contentTypeId='
+							+ myItem[i].contenttypeid +'&'
+							+ 'contendtid='
+							+ myItem[i].contentid + '&'
+							+ 'email='
+							+ email
+							+ '">'
+							+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+							+ title + '</p> </li>'
+							+ '</a>'
+							);
 				}
 				
 			/* 페이징 */
@@ -1030,23 +1052,25 @@ div {
 	<c:set var="jeonnam" value="전라남도" />
 	<c:set var="jeju" value="제주도" />
 	<%
-		String seoulB = (String) pageContext.getAttribute("seoul");
-		String incheonB = (String) pageContext.getAttribute("incheon");
-		String daejeonB = (String) pageContext.getAttribute("daejeon");
-		String daeguB = (String) pageContext.getAttribute("daegu");
-		String gwangjuB = (String) pageContext.getAttribute("gwangju");
-		String busanB = (String) pageContext.getAttribute("busan");
-		String ulsanB = (String) pageContext.getAttribute("ulsan");
-		String sejongB = (String) pageContext.getAttribute("sejong");
-		String gyeonggiB = (String) pageContext.getAttribute("gyeonggi");
-		String gangwonB = (String) pageContext.getAttribute("gangwon");
-		String chungbukB = (String) pageContext.getAttribute("chungbuk");
-		String chungnamB = (String) pageContext.getAttribute("chungnam");
-		String gyeongbukB = (String) pageContext.getAttribute("gyeongbuk");
-		String gyeongnamB = (String) pageContext.getAttribute("gyeongnam");
-		String jeonbukB = (String) pageContext.getAttribute("jeonbuk");
-		String jeonnamB = (String) pageContext.getAttribute("jeonnam");
-		String jejuB = (String) pageContext.getAttribute("jeju");
+		String email		= (String)session.getAttribute("email");
+		
+		String seoulB 		= (String) pageContext.getAttribute("seoul");
+		String incheonB 	= (String) pageContext.getAttribute("incheon");
+		String daejeonB 	= (String) pageContext.getAttribute("daejeon");
+		String daeguB 		= (String) pageContext.getAttribute("daegu");
+		String gwangjuB 	= (String) pageContext.getAttribute("gwangju");
+		String busanB 		= (String) pageContext.getAttribute("busan");
+		String ulsanB 		= (String) pageContext.getAttribute("ulsan");
+		String sejongB 		= (String) pageContext.getAttribute("sejong");
+		String gyeonggiB 	= (String) pageContext.getAttribute("gyeonggi");
+		String gangwonB 	= (String) pageContext.getAttribute("gangwon");
+		String chungbukB 	= (String) pageContext.getAttribute("chungbuk");
+		String chungnamB 	= (String) pageContext.getAttribute("chungnam");
+		String gyeongbukB 	= (String) pageContext.getAttribute("gyeongbuk");
+		String gyeongnamB 	= (String) pageContext.getAttribute("gyeongnam");
+		String jeonbukB 	= (String) pageContext.getAttribute("jeonbuk");
+		String jeonnamB 	= (String) pageContext.getAttribute("jeonnam");
+		String jejuB 		= (String) pageContext.getAttribute("jeju");
 
 /* 		AreaParserSearch aps = new AreaParserSearch();
 		ArrayList<HashMap<String, Object>> areaList = aps.areaParser();
@@ -1417,6 +1441,7 @@ div {
 		</div>
 	</div><!--content 끝  -->
 	<!--section 끝  -->
+	<input type = "text" value = "${email }" id = "email">
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>

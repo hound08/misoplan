@@ -5,137 +5,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link href="accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
+
 div {
 	margin: 0px auto;
 }
+
 * {
 	padding: 0px;
 	margin: 0px;
 	font-family: 'NanumSquareRound', sans-serif;
-}
-
-.card {
-	height: 400px;
-	width: 350px;
-	border-radius: 15px;
-	display: inline-block;
-	margin-top: 30px;
-	margin-left: 30px;
-	margin-bottom: 30px;
-	position: relative;
-	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	overflow: hidden;
-}
-
-.card-header {
-	-webkit-transition: 0.5s; /*사파리 & 크롬*/
-    -moz-transition: 0.5s;  /*파이어폭스*/
-    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
-    -o-transition: 0.5s;  /*오페라*/
-    transition: 0.5s;
-	width: 100%;
-	height: 270px;
-	border-radius: 15px 15px 0 0;
-}
-
-.card:hover .card-header  {
-	opacity: 0.8;
-	height: 100px;
-}
-
-.card-header-is_closed{
-    background-color: #EF5A31 ;
-    color: #FFF ;
-    font-weight: bold ;
-    text-align: center ;
-    float: right;
-    margin: 15px 15px 0 0;
-    border-radius: 50%;
-    font-weight: bold;
-    padding: 10px 10px;
-    line-height: 20px;
-}
-
-h1 {
-    font-size: 22px;
-    font-weight: bold;
-}
-
-.card-body {
-	
-}
-
-.card-body-header{
-	line-height: 25px;
-	margin: 10px 20px 0px 20px;
-}
-
-.card-body-description  {
-    opacity: 0;
-    color: #757B82;
-    line-height: 25px;
-    -webkit-transition: .2s ease-in-out; /*사파리&크롬*/
-    -moz-transition: .2s ease-in-out; /*파이어폭스*/
-    -ms-transition: .2s ease-in-out; /*익스플로러*/
-    -o-transition: .2s ease-in-out; /*오페라*/
-    transition : .2s ease-in-out;
-    overflow: hidden;
-	height: 180px;
-	margin: 5px 20px;
-}
-
-.card:hover .card-body-description {
-    opacity: 1;
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition : .5s ease-in-out;
-    overflow: scroll;
-}
-
-.card-body-hashtag {
-	color: #2478FF;
-	font-style: italic;
-}
-
-.card-body-footer {
-  	position: absolute; 
-  	margin-top: 15px;
-  	margin-bottom: 6px;
-    bottom: 0; 
-    width: 314px;
-    font-size: 14px;
-    color: #9FA5A8;
-    padding: 0 15px;
-}
-
-.icon {
-    display: inline-block;
-    vertical-align: middle;
-    margin-right: 2px;
-}
-
-.icon-view_count {
-    width: 25px;
-    height: 17px;
-	background: url("images/eye.jpg") no-repeat;
-}
-
-.icon-comments_count {
-	margin-left: 5px;
-	width: 25px;
-    height: 17px;
-	background: url("images/comment.jpg") no-repeat;	
-}
-
-.reg_date {
-	float: right;
 }
 
 .section {
@@ -151,6 +34,7 @@ h1 {
 	overflow: hidden;
 	position: relative;
 }
+
 .centerimage {
 	min-height: 100%;
 	min-width: 100%;
@@ -178,6 +62,36 @@ h1 {
 	text-align: center;
 }
 
+.footer_wrap {
+	margin-top: 600px;
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.container {
+	padding: 15px;
+	height: 150px;
+	clear: both;
+}
+
+.card {
+	height: 400px;
+	width: 350px;
+	border: solid;
+	border-radius: 10px;
+	border-color: #F6F6F6;
+	display: inline-block;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	position: relative;
+}
+
+.card:hover {
+	border-color: #A6A6A6
+}
+
 .pagination {
 	display: flex;
 	justify-content: center;
@@ -200,6 +114,17 @@ h1 {
 .pagination a:hover:not {
 	background-color: #ddd;
 	border-radius: 5px;
+}
+
+.card-image {
+	width: 300px;
+	height: 60%;
+}
+
+.container {
+	padding: 15px;
+	height: 40%;
+	border: solid;
 }
 
 .search {
@@ -255,6 +180,7 @@ h1 {
 	margin-top: 20px;
 }
 </style>
+
 </head>
 <body>
 	<div class="section">
@@ -272,8 +198,91 @@ h1 {
 		
 		<!--section card -->
 		<div class="section-card">
+			<div class="card" onmouseout="cardChange()">
+				<img src="images/plan.jpg" class="card-image" alt="1"
+					style="width: 100%">
+				<div class="container">
+					
+					<c:forEach var="board" items="${list}">
+						<div class="card">
+							<img src="${board.image_url}" class="card-image" alt="image"
+								style="width: 100%">
+							<div class="container">
+								<div style="float: right; color: #2478FF">${board.tag }</div>
+								<div style="font-size: 20px;">제목:${board.title }</div>
+								<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
+								<div>닉네임:${board.nickname }</div>
+								<div style="float: right;">마감:${board.is_closed }</div>
+								<div>내용:${board.content }</div>
+								<div>등록일:${board.reg_date }</div>
+								<div style="position: absolute; bottom: 0; left: 1;">조회수:${board.view_count }
+									추천수:${board.vote_count }</div>
+							</div>
+						</div>
+					</c:forEach>
+					</div>
+				</div>
+				<!--section card -->
+				<div>
+					<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+				</div>
+				<div class="pagination">
+					<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> <a
+						href="list.do?pageNum">&#9665</a> <a href="#" class="active">1</a>
+					<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
+					<a href="#">&#9655</a> <a href="#">&raquo;</a>
+					<c:if test="${startPage!=1 }">
+						<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+					</c:if>
+					<c:if test="${startPage==1 }">
+						<a href='listAction.do?pageNum=1'>&laquo;</a>
+					</c:if>
+					<c:if test="${currentPage!=1 }">
+						<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+					</c:if>
+					<c:if test="${currentPage==1 }">
+						<a href='listAction.do?pageNum=1'>&#9665</a>
+					</c:if>
+
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+						<a href='listAction.do?pageNum=${i }'>${i }</a>
+					</c:forEach>
+
+					<c:if test="${currentPage==totalPage }">
+						<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+					</c:if>
+					<c:if test="${currentPage!=totalPage }">
+						<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+					</c:if>
+					<c:if test="${endPage>=totalPage }">
+						<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+					</c:if>
+					<c:if test="${endPage<totalPage }">
+						<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+					</c:if>
+				</div>
+				<div class="search">
+					<select class="search-select">
+						<option>제목</option>
+						<option>지역명</option>
+						<option>닉네임</option>
+						<option>날짜</option>
+					</select> 
+					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
+					<button type="submit" class="search-submit">검색</button>
+				</div>
+			<div class="footer_wrap">
+				<%@ include file="footer.jsp"%>
+			</div>
+		</div>
+		<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			var image = document.getElementById("center-image");
+			var current = 0;
+			var images = [ "images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
+
 			<c:forEach var="board" items="${list }">
-			<a href="">
+			<a href="viewActionAB.do?post_num=${board.post_num }">
 			<div class="card">
 				<!-- 카드 헤더 -->
 				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
@@ -364,10 +373,11 @@ h1 {
 		<script type="text/javascript">
 			var image = document.getElementById("center-image");
 			var current = 0;
-			var images = [ "images/korea2.jpg", "images/korea3.jpg",
-					"images/korea4.jpg", "images/korea5.jpg",
-					"images/korea1.jpg" ]
-
+			var images = [ "images/korea2.jpg", 
+			               "images/korea3.jpg",
+						   "images/korea4.jpg", 
+						   "images/korea5.jpg",
+						   "images/korea1.jpg" ]
 			function replacePhoto() {
 				++current;
 				if (current >= images.length)
@@ -375,6 +385,11 @@ h1 {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
+
+			var submit = document.getElementByClassName("search-submit");
+			function replaceCard() {
+				submit.style.color = "Orange";
+			}
 		</script>
 </body>
 </html>

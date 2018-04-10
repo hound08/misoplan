@@ -10,7 +10,7 @@ public class AccompanyBoardDto {
 	private String title;	//게시물 제목
 	private String image_url; //대표 이미지 url
 	private String content; //게시물 내용
-	private String tag; //해시태
+	private String tag; //해시태그
 	private int vote_count; //추천수
 	private int view_count; //조회수
 	private int minimum_num; //최소인원
@@ -19,8 +19,12 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
-	
-	
+	public String getTag() {
+		return tag;
+	}
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
 	public int getMinimum_num() {
 		return minimum_num;
 	}
@@ -99,11 +103,5 @@ public class AccompanyBoardDto {
 	public void setIs_closed(int is_closed) {
 		this.is_closed = is_closed;
 	}
-	public String getTag() {
-		return tag;
-	}
-	public void setTag(String tag) {
-		this.tag = tag;
-	}
-	
+
 }

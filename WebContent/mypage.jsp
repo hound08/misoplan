@@ -12,6 +12,7 @@
 			width: 100%;
 		}
 		body{
+			font-family: 'NanumSquareRound', sans-serif;
 			height: 100%;
 			width: 100%;
 		}
@@ -76,7 +77,7 @@
 	<div id="main">
 			<div id="myinfo" background="images/03.jpg">
 				<div id="myinfoa">
-					<a href="myInfoForm.do?email=${email}" class="menu"> 개인 정보 수정 </a>
+					<a href="myInfoConfirmForm.do?email=${email}" class="menu"> 개인 정보 수정 </a>
 				</div>
 			</div>
 			<div id="schedule">

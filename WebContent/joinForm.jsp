@@ -17,7 +17,7 @@ div {
 .joinDiv {
 	padding-top: 100px;
 	padding-bottom: 100px;
-	width: 1080px;
+	width: 300px;
 	text-align: center;
 }
 
@@ -186,7 +186,7 @@ h1 {
 		var sendData = 'email=' + $('#email').val();
 		
 		$.post(
-			'emailCheck.jsp',
+			'emailConfirmPro.jsp',
 			sendData,
 			function(result) {
 				confirmNum = result.substr(result.indexOf("authNum:")+8, 6);
@@ -270,6 +270,7 @@ h1 {
 			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
 			<span id="spanNickname">　</span>
 			<p class="pPhone"><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
+			<h3>프로필 사진</h3>
 			<div class="divProfile">
 				<input type="file" name="profile_url" class="inputFile">
 			</div>
