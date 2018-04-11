@@ -161,8 +161,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	console.log(cardBoxTitle);
 	console.log(cardBoxBottom);
 	
-	$("#localhidden").val(cardBoxTitle);							// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
-	$("#local").text(cardBoxTitle);									// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
+	$("#areahidden").val(cardBoxTitle);							// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
+	$("#area").text(cardBoxTitle);									// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
 	$("#date").text(cardBoxBottom);									// 위와 동일!!
 	
 });
@@ -179,8 +179,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 		<div class="main-top-second2" id = "test">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>지   역 : <span id="local"></span></p><br>
-				 <input type="hidden" name="local" id="localhidden">
+		<p>지   역 : <span id="area"></span></p><br>
+				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
 		<p>기   간 : <span id="date"></span></p>
 		</div>
 		<div class="main-imagebt">
@@ -197,8 +197,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 					<div class="card-box-title">
 						${dto.sl_code }
 						<div> <!--지역 -->
-							${dto.local_name } 
-							<input type = "hidden" value ="${dto.local_name }">
+							${dto.area_name } 
+							<input type = "hidden" value ="${dto.area_name }">
 						</div>
 						<div class ="card-box-title2"> <!-- 날짜 -->
 							${dto.tour_date_start } ~ ${dto.tour_date_end }
@@ -218,7 +218,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
 			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
 			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
-			onclick="location.href='boardschedule.do?localName='">
+			onclick="location.href='boardschedule.do?areaName='">
 		</div>
 	</div>
 	</form>

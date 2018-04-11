@@ -31,7 +31,7 @@ public class scheduleFormAction implements CommandProcess{
 			// 변수 세팅
 			String sl_code = planList.get(0).getSl_code();
 			String s_name = "";
-			List<String> local_name = new ArrayList<String>();
+			List<String> area_name = new ArrayList<String>();
 			Date tour_date_start = null;
 			Date tour_date_end = null;
 			Date regi_date = null;
@@ -39,7 +39,7 @@ public class scheduleFormAction implements CommandProcess{
 			for (int i = 0; i < planList.size(); i++) {
 				if (sl_code.equals(planList.get(i).getSl_code())) {		// SL_CODE가 같다면 덮어쓰면서 값 세팅
 					s_name = planList.get(i).getS_name();
-					local_name.add(planList.get(i).getArea_name());
+					area_name.add(planList.get(i).getArea_name());
 
 					if (i == 0) {
 						tour_date_start = planList.get(i).getTour_date_start();
@@ -51,18 +51,18 @@ public class scheduleFormAction implements CommandProcess{
 					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
 					dto.setS_name(s_name);
-					local_name.removeAll(Collections.singleton(null));
-					dto.setArea_name(local_name.toString());
+					area_name.removeAll(Collections.singleton(null));
+					dto.setArea_name(area_name.toString());
 					dto.setTour_date_start(tour_date_start);
 					dto.setTour_date_end(tour_date_end);
 					dto.setRegi_date(regi_date);
 					showList.add(dto);
 					
 					// 값 새로 세팅
-					local_name.clear();
+					area_name.clear();
 					sl_code = planList.get(i).getSl_code();
 					s_name = planList.get(i).getS_name();
-					local_name.add(planList.get(i).getArea_name());
+					area_name.add(planList.get(i).getArea_name());
 					tour_date_start = planList.get(i).getTour_date_start();
 					tour_date_end = planList.get(i).getTour_date_start();
 					regi_date = planList.get(i).getRegi_date();
@@ -74,8 +74,8 @@ public class scheduleFormAction implements CommandProcess{
 					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
 					dto.setS_name(s_name);
-					local_name.removeAll(Collections.singleton(null));
-					dto.setArea_name(local_name.toString());
+					area_name.removeAll(Collections.singleton(null));
+					dto.setArea_name(area_name.toString());
 					dto.setTour_date_start(tour_date_start);
 					dto.setTour_date_end(tour_date_end);
 					dto.setRegi_date(regi_date);

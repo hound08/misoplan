@@ -184,7 +184,7 @@ div {
 					<img alt="image" class="card_image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					${bs.local_names }
+					${bs.area_names }
 				</div>
 				<div class="second-text">
 					<h1>제목 : ${bs.title }</h1>
