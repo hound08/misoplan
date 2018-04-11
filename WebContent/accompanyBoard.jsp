@@ -13,7 +13,6 @@
 <link href="css/accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <style type="text/css">
 
 div {
@@ -186,8 +185,6 @@ div {
 }
 </style>
 
-=======
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 </head>
 <body>
 
@@ -204,30 +201,7 @@ div {
 			<button>최신순</button>
 		</div>
 		<div class="section-card">
-<<<<<<< HEAD
-			<div class="card" onmouseout="cardChange()">
-				<img src="images/plan.jpg" class="card-image" alt="1"
-					style="width: 100%">
-				<div class="container">
-					
-					<c:forEach var="board" items="${list}">
-						<div class="card">
-							<img src="${board.image_url}" class="card-image" alt="image"
-								style="width: 100%">
-							<div class="container">
-								<div style="float: right; color: #2478FF">${board.tag }</div>
-								<div style="font-size: 20px;">제목:${board.title }</div>
-								<div style="float: right;">${board.current_number }/${board.minimum_number }</div>
-								<div>닉네임:${board.nickname }</div>
-								<div style="float: right;">마감:${board.is_closed }</div>
-								<div>내용:${board.content }</div>
-								<div>등록일:${board.reg_date }</div>
-								<div style="position: absolute; bottom: 0; left: 1;">조회수:${board.view_count }
-									추천수:${board.vote_count }</div>
-							</div>
-						</div>
-					</c:forEach>
-=======
+			
 		<c:forEach var="board" items="${list }">
 			<a href="viewActionAB.do?post_num=${board.post_num }">
 			<div class="card">
@@ -242,7 +216,6 @@ div {
 							<div class="card-header-text">마감</div>
 							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
 						</c:if>
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 					</div>
 				</div>
 				<!--  카드 바디 -->
@@ -320,107 +293,11 @@ div {
 					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 					<button type="submit" class="search-submit">검색</button>
 				</div>
-<<<<<<< HEAD
 			<div class="footer_wrap">
 				<%@ include file="footer.jsp"%>
 			</div>
 		</div>
-		<script src="Scripts/jquery-1.4.1.min.js" type="text/javascript"></script>
-		<script type="text/javascript">
-			var image = document.getElementById("center-image");
-			var current = 0;
-			var images = [ "images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
 
-			<c:forEach var="board" items="${list }">
-			<a href="viewActionAB.do?post_num=${board.post_num }">
-			<div class="card">
-				<!-- 카드 헤더 -->
-				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
-					<div class="card-header-is_closed">
-						<c:if test="${board.is_closed == 0 }">
-							<div class="card-header-text">모집중</div>
-							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
-						</c:if>
-						<c:if test="${board.is_closed == 1 }">
-							<div class="card-header-text">마감</div>
-							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
-						</c:if>
-					</div>
-				</div>
-				<!--  카드 바디 -->
-				<div class="card-body">
-					<!--  카드 바디 헤더 -->
-					<div class="card-body-header">
-						<h1>${board.title }</h1>
-						<p class="card-body-hashtag">${board.tag }</p>
-						<p class="card-body-nickname">작성자: ${board.nickname }</p>
-					</div>
-					<!--  카드 바디 본문 -->
-					<p class="card-body-description">${board.content }</p>
-					<!--  카드 바디 푸터 -->
-					<div class="card-body-footer">
-						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
-						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
-						<i class="icon icon-comments_count"></i>댓글 4개 
-						<i class="reg_date"></i>${board.reg_date }
-					</div>
-				</div>
-			</div>
-			</a>
-			</c:forEach>
-		</div>
-		
-			<div>
-				<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
-			</div>
-			<div class="pagination">
-				<c:if test="${startPage!=1 }">
-					<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
-				</c:if>
-				<c:if test="${startPage==1 }">
-					<a href='listAction.do?pageNum=1'>&laquo;</a>
-				</c:if>
-				<c:if test="${currentPage!=1 }">
-					<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
-				</c:if>
-				<c:if test="${currentPage==1 }">
-					<a href='listAction.do?pageNum=1'>&#9665</a>
-				</c:if>
-
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<a href='listAction.do?pageNum=${i }'>${i }</a>
-				</c:forEach>
-
-				<c:if test="${currentPage==totalPage }">
-					<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
-				</c:if>
-				<c:if test="${currentPage!=totalPage }">
-					<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
-				</c:if>
-				<c:if test="${endPage>=totalPage }">
-					<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
-				</c:if>
-				<c:if test="${endPage<totalPage }">
-					<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
-				</c:if>
-			</div>
-
-			<div class="search">
-				<select class="search-select">
-					<option>제목</option>
-					<option>지역명</option>
-					<option>닉네임</option>
-					<option>날짜</option>
-				</select> 
-				<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-				<button type="submit" id="search-submit" class="search-submit"">검색</button>
-			</div>
-=======
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
-		</div>
-		<div class="footer_wrap">
-			<%@ include file="footer.jsp"%>
-		</div>
 		<script type="text/javascript">
 						var image = document.getElementById("center-image");
 			var current = 0;
@@ -436,14 +313,11 @@ div {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
-<<<<<<< HEAD
 
 			var submit = document.getElementByClassName("search-submit");
 			function replaceCard() {
 				submit.style.color = "Orange";
 			}
-=======
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 		</script>
 </body>
 </html>
