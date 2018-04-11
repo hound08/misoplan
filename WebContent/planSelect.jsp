@@ -150,7 +150,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	}
 
 $(document).on('click', '.radio', function(){					 // document 전체  라디오 버튼에 이벤트를 준다. (클래스로 잡아주고)
-	var clickedid = $(this).attr("id"); 					     // 클릭 이벤트시 나 자시냬(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
+	var clickedid = $(this).attr("id"); 					     // 클릭 이벤트시 나 자신의(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
 	var parsedid = clickedid.substring(5, clickedid.lenght);	 // 변수에 값을 담아주면서 서브스트링 함수를 사용하여 r a d i o 5번째 이후 부터 값을 출력하게 됨
 	parsedid = "#"+parsedid;									 // 가지고올 값 id   # 을 변수명에 더해줌
 	console.log(parsedid);										 // 값이 제대로 들어오는지 확인하기 위한 과정 콘솔찍어보기
@@ -161,8 +161,10 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	console.log(cardBoxTitle);
 	console.log(cardBoxBottom);
 	
-	$("#local").text(cardBoxTitle);							// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
-	$("#date").text(cardBoxBottom);							// 위와 동일!!
+	$("#areahidden").val(cardBoxTitle);							// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
+	$("#area").text(cardBoxTitle);									// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
+	$("#date").text(cardBoxBottom);									// 위와 동일!!
+	
 });
 
 
@@ -174,12 +176,12 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 		<!-- <div class="main-top-second1" align="left"> -->
 			<img class="main-top-second1" alt="IMG" src="">
 		<!-- </div> -->
-		<div class="main-top-second2">
-		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
+		<div class="main-top-second2" id = "test">
+		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>지   역 : <span id="local"></span></p><br>
+		<p>지   역 : <span id="area"></span></p><br>
+				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
 		<p>기   간 : <span id="date"></span></p>
-		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
 		</div>
 		<div class="main-imagebt">
 			<input class="" type="file" name="image_url" value="" onchange="image(this)">
@@ -194,10 +196,11 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 				<div class="center-card-box" align="center" id=${dto.sl_code}>
 					<div class="card-box-title">
 						${dto.sl_code }
-						<div>
-							${dto.local_name }
+						<div> <!--지역 -->
+							${dto.area_name } 
+							<input type = "hidden" value ="${dto.area_name }">
 						</div>
-						<div class ="card-box-title2">
+						<div class ="card-box-title2"> <!-- 날짜 -->
 							${dto.tour_date_start } ~ ${dto.tour_date_end }
 						</div>
 					</div>
@@ -214,7 +217,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
 			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
-			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
+			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
+			onclick="location.href='boardschedule.do?areaName='">
 		</div>
 	</div>
 	</form>

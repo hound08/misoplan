@@ -5,10 +5,12 @@ import java.util.Date;
 public class mySchduleDto {
 	private String sl_code;
 	private String s_name;
-	private String local_name;
+	private String area_name;
 	private Date tour_date_start;
 	private Date tour_date_end;
 	private Date regi_date;
+	
+	
 	
 	public String getSl_code() {
 		return sl_code;
@@ -22,11 +24,11 @@ public class mySchduleDto {
 	public void setS_name(String s_name) {
 		this.s_name = s_name;
 	}
-	public String getLocal_name() {
-		return local_name;
+	public String getArea_name() {
+		return area_name;
 	}
-	public void setLocal_name(String local_name) {
-		this.local_name = local_name;
+	public void setArea_name(String area_name) {
+		this.area_name = area_name;
 	}
 	public Date getTour_date_start() {
 		return tour_date_start;
@@ -46,7 +48,8 @@ public class mySchduleDto {
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
 	}
-	
-	
-	
+
+
+
+
 }

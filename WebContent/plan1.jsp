@@ -179,12 +179,13 @@ div {
 				onClick="location.href='###'">
 		</div>
 		<c:forEach var="bs" items="${list }">
+			<a href="planview.do?bs_num=${bs.bs_num }">
 			<div class="center-second">
 				<div class="second-box">
 					<img alt="image" class="card_image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					${bs.local_name }
+					${bs.area_names }
 				</div>
 				<div class="second-text">
 					<h1>제목 : ${bs.title }</h1>
@@ -193,6 +194,7 @@ div {
 				<div class="idlocal">아이디 : ${nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
+			</a>
 		</c:forEach>
 	</div>
 		<div class="bottom-page" align="center">
