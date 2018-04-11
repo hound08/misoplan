@@ -24,8 +24,7 @@ div {
 
 .main-image {
 	border-radius: 5px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: 0 auto 1em auto;
 	width: 100%;
 	height: 400px;
 	overflow: hidden;
@@ -40,17 +39,21 @@ div {
 
 table {
 	margin: 10px auto;
-	width: 80%;
+	width: 100%;
 }
 
-td:first-child{
-	width: 10%;
+textarea {
+	width: 100%;
+}
+
+td:FIRST-CHILD{
+	vertical-align: middle;
 	text-align: right;
 }
 
 .input {
+	width: 100%;
 	height : 30px;
-	width : 100%;
 	font-size: 15px;
 }
 
@@ -63,13 +66,13 @@ hr {
 }
 
 ul {
-	display: block;
-    list-style-type: circle;
-    margin-top: 1em;
-    margin-bottom: 1 em;
-    margin-left: 0;
-    margin-right: 0;
+    margin: 1em 0 1em 0;
     padding-left: 40px;
+}
+
+ul li {
+    list-style-type: circle;
+    line-height: 30px;
 }
 
 #hashtag{
@@ -93,6 +96,15 @@ ul {
 	display: inline-block;
 }
 
+tr.highlight td {
+	padding-top: 1px; 
+	padding-bottom: 1px
+}
+
+submit-button {
+	
+}
+
 </style>
 </head>
 <body>
@@ -103,7 +115,6 @@ ul {
 				<!-- 텍스트 ! -->
 			</div>
 		</div>
-		<div class="write-form">
 			<h3>새로운 글 등록</h3>
 			<ul>
 				<li>동행을 찾기 위한 게시판입니다.</li>
@@ -111,9 +122,11 @@ ul {
 				<li>본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</li>
 			</ul>
 			<hr>
+		<div class="write-form">
 			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
 				<table>
 				<tr><td>제목</td><td><input type="text" class="input" name="title"></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>최소 인원</td>
 					<td><select name="minimum_num">
 							<option value="2">2명</option>
@@ -127,9 +140,14 @@ ul {
 							<option value="10">10명</option>
 						</select></td>
 				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>마감날짜</td><td><input type="date" class="input" name="closing_date"></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>태그</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
-				<tr><td>내용</td><td><div><textarea rows="20" cols="140" name="content"></textarea></div></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td>내용</td><td><div><textarea rows="20" name="content"></textarea></div></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지</td><td><img id="output"/></td></tr>
 				<tr><td></td><td><input type="file" accept="image/*" onchange="loadFile(event)"></td>
 				</table>

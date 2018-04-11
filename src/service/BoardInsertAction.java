@@ -49,6 +49,7 @@ public class BoardInsertAction implements CommandProcess {
 		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setContent(multi.getParameter("content"));
+		dto.setArea_names(multi.getParameter("area"));
 		
 		if(multi.getFile("image_url") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);

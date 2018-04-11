@@ -1,7 +1,11 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.AccompanyBoardDto"%>
+<%@page import="dao.AccompanyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -11,6 +15,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
@@ -45,7 +50,12 @@
 					<!--  카드 바디 헤더 -->
 					<div class="card-body-header">
 						<h1>${board.title }</h1>
-						<p class="card-body-hashtag">${board.tag }</p>
+						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
+						<p class="card-body-hashtag">
+							<c:forEach var="t" items="${tags }">
+								<c:out value="${t }"></c:out>
+							</c:forEach>
+						</p>
 						<p class="card-body-nickname">작성자: ${board.nickname }</p>
 					</div>
 					<!--  카드 바디 본문 -->

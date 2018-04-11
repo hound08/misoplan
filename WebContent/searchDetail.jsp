@@ -9,11 +9,13 @@
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="jquery-1.11.0.min.js"></script>
+
 <script type="text/javascript" src="js/jquery.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 	window.onload = function(){
+		alert("onload");
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
 		/* alert("contentTypeId = " + contentTypeId);
@@ -58,14 +60,15 @@
 				);
 				$("#overview").append(
 						'<strong class = "tit">개요</strong>'
-						+ '<p>'
+						+ '<p id = "con" class = "con" >'
 						+ overview
-						+ '<br></p>'
+						+ '</p>' 
 				);
 				$("#hidden").append(
 						'<input type = "text" value = "'
 						+title
-						+'" id = "title">'
+						+'" id = "title">' 
+						
 				);
 				
 			},
@@ -75,7 +78,39 @@
 				alert("Error: " + errorThrown);
 			}
 		});
-	}
+		$(function () {
+			alert("확인");
+		$("#con").each(function () {
+	        alert("con");
+	        // Run formatWord function and specify the length of words display to viewer
+	        $(this).html(formatWords($(this).html(), 100));
+	        
+	        // Hide the extra words
+	        $(this).children('span').hide();
+	        
+	        // Apply click event to read more link
+	    }).click(function () {
+	    	alert("click");
+	        // Grab the hidden span and anchor
+	        var more_text = $(this).children('span.more_text');
+	        var more_link = $(this).children('a.more_link');
+	        
+	        // Toggle visibility using hasClass
+	        // I know you can use is(':visible') but it doesn't work in IE8 somehow...
+	        if (more_text.hasClass('hide')) {
+	            more_text.show();
+	            more_link.html(' &raquo; hide');        
+	            more_text.removeClass('hide');
+	        } else {
+	            more_text.hide();
+	            more_link.html(' &laquo; more');            
+	            more_text.addClass('hide');
+	        }
+	        return false;
+	        
+	    });
+		});
+	};
 	
 	function isAddWish(type, id, email){
 		/* alert("type = " + type);
@@ -99,15 +134,47 @@
 							+ 'title=' 
 							+ title;
 		}
-		
-		/* href = "searchDetail.do?contentTypeId='
-			+ myItem[i].contenttypeid +'&'
-			+ 'contendtid='
-			+ myItem[i].contentid + '&'
-			+ 'email='
-			+ email */
-		
 	}
+	
+/* 	function formatWords(sentence, show) {
+		 alert("formatWords");
+		    // split all the words and store it in an array
+		    var words = sentence.split(' ');
+		    var new_sentence = '';
+		    // loop through each word
+		    for (i = 0; i < words.length; i++) {
+		        // process words that will visible to viewer
+		        if (i <= show) {
+		            new_sentence += words[i] + ' ';
+		            
+		            // process the rest of the words
+		        } else {
+		            
+		            // add a span at start
+		            if (i == (show + 1)) new_sentence += '... <span class="more_text hide">';        
+		            new_sentence += words[i] + ' ';
+		            
+		            // close the span tag and add read more link in the very end
+		            if (words[i+1] == null) new_sentence += '</span><a href="#" class="more_link"> &raquo; more</a>';
+		        }         
+		    }
+		    return new_sentence;
+		} */
+	
+
+
+	
+	
+	/* .overview(개요) 더보기 기능 구현 */
+	/* $(function () { */
+    // Grab all the excerpt class
+   
+   
+/* }); */
+
+	// Accept a paragraph and return a formatted paragraph with additional html tags
+	 
+	 
 	
 </script>
 <style type="text/css">
@@ -216,7 +283,7 @@ div {
 	width: 100%;
 }
 
-
+.con { padding:10px; border:1px solid #ddd; }
 
 </style>
 </head>
@@ -263,8 +330,8 @@ div {
 
 <!-- 여기부턴 List																															 -->
 	<div class="section2">
-		<div class="overview" id = "overview">
-		
+		<div class="overview" id = "overview" style = "overflow:scroll;" >
+			
 		</div>
 		<div class="info" id = "info">
 		소개정보
@@ -273,10 +340,10 @@ div {
 	<!--section 끝  -->
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
-		<input type = "text" value ="${contentTypeId}" id = "contentTypeId">
-		<input type = "text" value ="${contendtid}" id = "contendtid"> 
-	 	<!-- <input type = "text" value ="39" id = "contentTypeId">
-		<input type = "text" value ="135696" id = "contendtid"> --> 
+		<%-- <input type = "text" value ="${contentTypeId}" id = "contentTypeId">
+		<input type = "text" value ="${contendtid}" id = "contendtid">  --%>
+	 	<input type = "text" value ="12" id = "contentTypeId">
+		<input type = "text" value ="127213" id = "contendtid"> 
 		<input type = "text" value ="${email }" id = "email">
 		<input type = "text" value = "${result }" id = "result">
 	</div>

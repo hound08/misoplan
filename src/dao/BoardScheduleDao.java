@@ -66,7 +66,7 @@ public class BoardScheduleDao {
 				bs.setVote_count(rs.getInt(9));
 				bs.setView_count(rs.getInt(10));
 				bs.setBoard_date(rs.getDate(11));
-				bs.setLocal_names(rs.getString(12));
+				bs.setArea_names(rs.getString(12));
 				list.add(bs);
 			}
 		} catch (Exception e) {
@@ -116,7 +116,7 @@ public class BoardScheduleDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT) VALUES(?, ?, ?, ?, ?, ?)";
+		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES) VALUES(?, ?, ?, ?, ?, ?, ?)";
 		int bs_num = 0;
 		int result = 0;
 		try {
@@ -138,6 +138,7 @@ public class BoardScheduleDao {
 			ps.setString(4, dto.getNickname());
 			ps.setString(5, dto.getImage_url());
 			ps.setString(6, dto.getContent());
+			ps.setString(7, dto.getArea_names());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
