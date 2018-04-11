@@ -142,6 +142,12 @@ a:VISITED {
 	border-color: transparent;
 }
 
+.memberImage {
+	background-image: url("${profile_url }");
+	background-size: 100% 100%;
+	border-radius: 50%;
+}
+
 </style>
 </head>
 <body>
@@ -167,7 +173,7 @@ a:VISITED {
 				</div>	<%
 			} else if (session.getAttribute("email") != null) {	%>
 				<div class="memberImageDiv">
-					<img class="memberImage" alt="회원 사진" src="${profile_url }">
+					<div class="memberImage" alt="회원 사진"></div>
 				</div>
 				<div class="login_on">
 					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>

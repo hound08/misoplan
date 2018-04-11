@@ -41,6 +41,23 @@ div {
 	width: 100%;
 	height: auto;
 }	
+.post-header {
+	width: 100%;
+	height: 150px;
+	border: solid;
+	display: flex;
+	left: 1em;
+ 	align-items: center; 
+ 	background-color: #EAEAEA;
+}
+.post-header-img {
+	height: 120px;
+	width: 120px;
+	background-image: url("${profile_url}");
+	border-radius: 50%;
+	background-size: 100% 100%;
+	border: solid;
+}
 </style>
 </head>
 <body>
@@ -51,11 +68,16 @@ div {
 				<!-- 텍스트 ! -->
 			</div>
 		</div>
-		제목: ${board.title }<p>
-		작성자: ${board.nickname }<p>
-		해쉬태그: ${board.tag }<p>
-		이미지: <div style="background-image: url('{board.image_url}');"></div><p>
-		현재인원 / 최소인원 : ${board.current_num } / ${board.minimum_num }<p>
+		
+		<div class="post-header">
+			<div class="post-header-img"></div>
+			제목: ${board.title }<br/>
+			작성자: ${board.nickname } 등록일: ${board.reg_date }<br/>
+			
+		</div>
+			
+			
+		</div>
 		
 	</div>
 	<div class="footer_wrap">
