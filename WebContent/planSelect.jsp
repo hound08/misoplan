@@ -1,11 +1,15 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.mySchduleDto"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ include file="pageLoginCheck.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
 /* 	절대위치(absolute)
@@ -98,7 +102,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 70px;
 	overflow: hidden;
 	overflow: auto;
-	margin: 0 0 5px 4px;
+	margin: 0 0 5px 2px;
 	border: 1px solid gray;
 	font-size: 10pt;
 }
@@ -126,6 +130,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
+#radio {
+	: center;
+}
 
 </style>
 <script type="text/javascript">
@@ -141,6 +148,26 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		var plan = document.getElementById("")
 		
 	}
+
+$(document).on('click', '.radio', function(){					 // document 전체  라디오 버튼에 이벤트를 준다. (클래스로 잡아주고)
+	var clickedid = $(this).attr("id"); 					     // 클릭 이벤트시 나 자신의(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
+	var parsedid = clickedid.substring(5, clickedid.lenght);	 // 변수에 값을 담아주면서 서브스트링 함수를 사용하여 r a d i o 5번째 이후 부터 값을 출력하게 됨
+	parsedid = "#"+parsedid;									 // 가지고올 값 id   # 을 변수명에 더해줌
+	console.log(parsedid);										 // 값이 제대로 들어오는지 확인하기 위한 과정 콘솔찍어보기
+	var centerCardBox = $(parsedid);							 // center-box에 있는 값을 뽑아본다.
+	console.log(centerCardBox);			
+	var cardBoxTitle = centerCardBox.children().children().eq(0).text();	 // 가지고올 값이 title 에 있으므로 box에서 두번 타고 내려가 값을 뽑아온다.
+	var cardBoxBottom = centerCardBox.children().children().eq(1).text();	 // 위와 동일한 방법
+	console.log(cardBoxTitle);
+	console.log(cardBoxBottom);
+	
+	$("#areahidden").val(cardBoxTitle);							// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
+	$("#area").text(cardBoxTitle);									// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
+	$("#date").text(cardBoxBottom);									// 위와 동일!!
+	
+});
+
+
 </script>
 </head>
 <body>
@@ -149,12 +176,13 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<!-- <div class="main-top-second1" align="left"> -->
 			<img class="main-top-second1" alt="IMG" src="">
 		<!-- </div> -->
-		<div class="main-top-second2">
-		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
+		<div class="main-top-second2" id = "test">
+		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>기   간 : <input type="date" id="tour_date" name="tour_date" required="required"> ~ 
-				<input type="date" id="tour_date" name="tour_date" required="required"></p><br>
-		<!-- <p>작성자 : <input type="text" id="nickname" name="nickname" required="required"></p><br> -->
+		<p>지   역 : <span id="area"></span></p><br>
+				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
+				 <input type="hidden" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
+		<p>기   간 : <span id="date"></span></p>
 		</div>
 		<div class="main-imagebt">
 			<input class="" type="file" name="image_url" value="" onchange="image(this)">
@@ -165,18 +193,22 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			세부 일정
 		</div>
 			<div class="center-main-card">
-			<c:forEach var="dto" items="${list }">
-				<div class="center-card-box">
+			<c:forEach var="dto" items="${showList }">
+				<div class="center-card-box" align="center" id=${dto.sl_code}>
 					<div class="card-box-title">
 						${dto.sl_code }
-						<div class ="card-box-title2">
-							${dto.regi_date }
+						<div> <!--지역 -->
+							${dto.area_name } 
+							<input type = "hidden" value ="${dto.area_name }">
+						</div>
+						<div class ="card-box-title2"> <!-- 날짜 -->
+							${dto.tour_date_start } ~ ${dto.tour_date_end }
 						</div>
 					</div>
 					<div class="card-box-bottom">
 						${dto.s_name }
 					</div>
-					<input type="button" id="refresh" value="일정선택" align="right" >
+					<input type="radio" class="radio" id='radio${dto.sl_code }' name="radio">
 				</div>
 			</c:forEach>
 			</div>
@@ -186,7 +218,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
 			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
-			<input type="button" value="취소" style="width: 40pt; height: 20pt" onclick="location.href='boardschedule.do'">
+			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
+			onclick="location.href='boardschedule.do?areaName='">
 		</div>
 	</div>
 	</form>

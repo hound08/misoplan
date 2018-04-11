@@ -14,6 +14,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import security.SecurityUtil;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -22,8 +24,7 @@ import dao.MemberDto;
 
 public class MyInfoProAction implements CommandProcess {
 	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			// 사진 업로드 관련 코드
 			request.setCharacterEncoding("utf-8");
 			
@@ -53,44 +54,48 @@ public class MyInfoProAction implements CommandProcess {
 			request.setCharacterEncoding("UTF-8");
 			MemberDto memberdto = new MemberDto();
 			String email = multi.getParameter("email");
+			String password = "";
 			
 			memberdto.setEmail(multi.getParameter("email"));
-			memberdto.setNickname(multi.getParameter("Nickname"));	
-			memberdto.setPassword(multi.getParameter("password"));
+			memberdto.setNickname(multi.getParameter("nickname"));	
+			request.setAttribute("nickname", multi.getParameter("nickname"));
+			
+			if (!multi.getParameter("password").equals("")) {
+				// 사용자 비밀번호 암호화 (SHA-256)
+				SecurityUtil securityUtil = new SecurityUtil();
+				password = securityUtil.encryptSHA256(multi.getParameter("password"));
+			}
+			
+			memberdto.setPassword(password);
 			memberdto.setPhone(multi.getParameter("phone"));
-			System.out.println("phone : " + multi.getParameter("phone"));
-			if(multi.getFile("profile_url")!=null){
-			    File file=multi.getFile("profile_url");
+			
+			if(multi.getFile("profile_url")!=null) {
 			    memberdto.setProfile_url("/J20180403/upload/" + filename);
-			    
-			    // 수정된 이미지가 헤더에도 적용되도록 주소를 request에 저장 (이후 jsp에서 받아오기 위해)
 			    request.setAttribute("profile_url", "/J20180403/upload/" + filename);
-			}else{
+			} else {
 				MemberDao memberdao = MemberDao.getInstance();
 				MemberDto memberdto2;
 				try {
 					memberdto2 = memberdao.select(email);
 					memberdto.setProfile_url(memberdto2.getProfile_url());
-					
-					// memberdto에 저장한 주소를 request에 저장 (이후 jsp에서 받아오기 위해)
 					request.setAttribute("profile_url", memberdto.getProfile_url());
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
+			}
+			
+			try {
+				MemberDao memberdao = MemberDao.getInstance();
+				int result = memberdao.update(memberdto);
 				
+				if (result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("email", email);
+				}
+			} catch (Exception e) {
+				System.out.println(e.getMessage());
 			}
-			// memberdto.setProfile_url("/J20180403/upload/" + filename);
-			System.out.println("kk aa : "+ "/J20180403/upload/" + filename);
-		try {
-			MemberDao memberdao = MemberDao.getInstance();
-			int result = memberdao.update(memberdto);
-			if (result > 0) {
-				request.setAttribute("result", result);
-				request.setAttribute("email", email);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		return "myinfopro.jsp";
+			
+			return "myinfopro.jsp";
 	}
 }

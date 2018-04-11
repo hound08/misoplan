@@ -57,7 +57,8 @@ h1 {
 }
 
 .card-body {
-	
+	width: 100%;
+	height: 100%;
 }
 
 .card-body-header{
@@ -74,18 +75,16 @@ h1 {
     -ms-transition: .2s ease-in-out; /*익스플로러*/
     -o-transition: .2s ease-in-out; /*오페라*/
     transition : .2s ease-in-out;
-    overflow: hidden;
-	height: 180px;
 	margin: 5px 20px;
 }
 
 .card:hover .card-body-description {
     opacity: 1;
-    -webkit-transition: .5s ease-in-out;
-    -moz-transition: .5s ease-in-out;
-    -ms-transition: .5s ease-in-out;
-    -o-transition: .5s ease-in-out;
-    transition : .5s ease-in-out;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -ms-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition : .2s ease-in-out;
     overflow: hidden;
 }
 
@@ -193,7 +192,6 @@ h1 {
 }
 
 .search {
-	display: inline-flex;
 	clear: both;
 }
 

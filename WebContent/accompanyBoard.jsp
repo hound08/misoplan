@@ -1,14 +1,19 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.AccompanyBoardDto"%>
+<%@page import="dao.AccompanyDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link href="accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
 <style type="text/css">
 
 div {
@@ -181,8 +186,11 @@ div {
 }
 </style>
 
+=======
+>>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 </head>
 <body>
+
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
@@ -195,9 +203,8 @@ div {
 			<button>인기순</button>
 			<button>최신순</button>
 		</div>
-		
-		<!--section card -->
 		<div class="section-card">
+<<<<<<< HEAD
 			<div class="card" onmouseout="cardChange()">
 				<img src="images/plan.jpg" class="card-image" alt="1"
 					style="width: 100%">
@@ -220,17 +227,59 @@ div {
 							</div>
 						</div>
 					</c:forEach>
+=======
+		<c:forEach var="board" items="${list }">
+			<a href="viewActionAB.do?post_num=${board.post_num }">
+			<div class="card">
+				<!-- 카드 헤더 -->
+				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
+					<div class="card-header-is_closed">
+						<c:if test="${board.is_closed == 0 }">
+							<div class="card-header-text">모집중</div>
+							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+						</c:if>
+						<c:if test="${board.is_closed == 1 }">
+							<div class="card-header-text">마감</div>
+							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+						</c:if>
+>>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 					</div>
 				</div>
+				<!--  카드 바디 -->
+				<div class="card-body">
+					<!--  카드 바디 헤더 -->
+					<div class="card-body-header">
+						<h1>${board.title }</h1>
+						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
+						<p class="card-body-hashtag">
+							<c:forEach var="t" items="${tags }">
+								<c:out value="${t }"></c:out>
+							</c:forEach>
+						</p>
+						<p class="card-body-nickname">작성자: ${board.nickname }</p>
+					</div>
+					<!--  카드 바디 본문 -->
+					<pre><p class="card-body-description">${board.content }</p></pre>
+					<!--  카드 바디 푸터 -->
+					<div class="card-body-footer">
+						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
+						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
+						<i class="icon icon-comments_count"></i>댓글 4개 
+						<i class="reg_date"></i>${board.reg_date }
+					</div>
+				</div>
+			</div>
+			</a>
+			</c:forEach>
+			</div>
 				<!--section card -->
 				<div>
-					<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+					<c:if test="${email != null }">
+						<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+					</c:if>
 				</div>
 				<div class="pagination">
-					<a href="list.do?pageNum=${currentPage-5}">&laquo;</a> <a
-						href="list.do?pageNum">&#9665</a> <a href="#" class="active">1</a>
-					<a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a>
-					<a href="#">&#9655</a> <a href="#">&raquo;</a>
+					
 					<c:if test="${startPage!=1 }">
 						<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
 					</c:if>
@@ -271,6 +320,7 @@ div {
 					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 					<button type="submit" class="search-submit">검색</button>
 				</div>
+<<<<<<< HEAD
 			<div class="footer_wrap">
 				<%@ include file="footer.jsp"%>
 			</div>
@@ -365,13 +415,14 @@ div {
 				<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 				<button type="submit" id="search-submit" class="search-submit"">검색</button>
 			</div>
+=======
+>>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 		</div>
 		<div class="footer_wrap">
 			<%@ include file="footer.jsp"%>
 		</div>
-		
 		<script type="text/javascript">
-			var image = document.getElementById("center-image");
+						var image = document.getElementById("center-image");
 			var current = 0;
 			var images = [ "images/korea2.jpg", 
 			               "images/korea3.jpg",
@@ -385,11 +436,14 @@ div {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
+<<<<<<< HEAD
 
 			var submit = document.getElementByClassName("search-submit");
 			function replaceCard() {
 				submit.style.color = "Orange";
 			}
+=======
+>>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 		</script>
 </body>
 </html>

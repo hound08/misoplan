@@ -121,6 +121,7 @@ public class AccompanyDao {
 			close(pstmt);
 			close(conn);
 		}
+		System.out.println("result = " + result);
 		return result;
 	}
 	
@@ -197,7 +198,7 @@ public class AccompanyDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = "update accomapanyboard set view_count = view_count+1 where post_num = ?";
+		String sql = "update accompanyboard set view_count = view_count+1 where post_num = ?";
 		
 		try {
 			conn = getConnection();
@@ -249,5 +250,31 @@ public class AccompanyDao {
 			close(conn);
 		}
 		return board;
+	}
+	
+	public String get_profile_url(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select profile_url from member where email = (select email from accompanyboard where post_num = ?)";
+		String profile_url = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			profile_url = rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		return profile_url;
 	}
 }

@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.mySchduleDao"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
@@ -164,7 +167,9 @@ div {
 		setInterval(replacePhoto, 3000);
 	</script>
 	<%
-		request.setAttribute("email", session.getAttribute("email"));
+		String email = (String)session.getAttribute("email");
+		System.out.println("test ==> " + email);
+		//request.setAttribute("email", session.getAttribute("email"));
 		request.setAttribute("nickname", session.getAttribute("nickname"));
 	%>
 	<div class="center">
@@ -176,20 +181,22 @@ div {
 				onClick="location.href='###'">
 		</div>
 		<c:forEach var="bs" items="${list }">
+			<a href="planview.do?bs_num=${bs.bs_num }">
 			<div class="center-second">
 				<div class="second-box">
 					<img alt="image" class="card_image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					${bs.local_names }
+					${bs.area_names }
 				</div>
 				<div class="second-text">
 					<h1>제목 : ${bs.title }</h1>
 				</div>
 				<div class="tag">${bs.tag }</div>
-				<div class="idlocal">아이디 : ${nickname }</div>
+				<div class="idlocal">아이디 : ${bs.nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
+			</a>
 		</c:forEach>
 	</div>
 		<div class="bottom-page" align="center">
@@ -213,6 +220,7 @@ div {
 				</select> <input type="text" name="search"> 돋보기 이미지
 			</div>
 		</div>
+		<input type = "text" value = "${test }">
 		<%@ include file="footer.jsp"%>
 </body>
 </html>

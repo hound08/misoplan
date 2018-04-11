@@ -9,16 +9,18 @@
 </head>
 <body>
    <c:if test="${result > 0 }">
-   	  <!-- MyInfoProAction.java에서 request에 저장한 이미지 주소를 session에 저장 (헤더에 적용하기 위해서) -->
-   	  <% session.setAttribute("profile_url", request.getAttribute("profile_url")); %>
+   	  <%
+   	  	session.setAttribute("profile_url", request.getAttribute("profile_url"));
+   		session.setAttribute("nickname", request.getAttribute("nickname"));
+   	  %>
       <script type="text/javascript">
-         alert("수정 성공");
+         alert("회원 정보가 정상적으로 수정 되었습니다.");
          location.href = "myInfoForm.do?email=${email }";
       </script>
    </c:if>
    <c:if test="${result == 0}">
       <script type="text/javascript">
-         alert("수정 실패");
+         alert("회원 정보 수정이 실패하였습니다.");
          location.href="myInfoForm.do?email=${email}"
       </script>   
    </c:if>

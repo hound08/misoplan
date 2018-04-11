@@ -6,7 +6,7 @@
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>미소플랜</title>
 <style type="text/css">
 /* ---------------------------- 화면 전체 적용 ---------------------------- */
 * {

@@ -44,7 +44,11 @@
 	<div id="sidemenu">
 		<ul>
 			<h1>My Page</h1>
+<<<<<<< HEAD
 			<li class="sidemenus"><a href="myInfoForm.do?email=${email}" class="a">내정보</a></li>
+=======
+			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내정보</a></li>
+>>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 			<li class="sidemenus"><a href="scheduleForm.do?email=${email }" class="a">내 계획</a></li>
 			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 List</a></li>
 			<li class="sidemenus" ><a href="companionForm.do?email=${email }" class="a">동행</a></li>
