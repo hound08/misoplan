@@ -15,7 +15,6 @@
 
 <script type="text/javascript">
 	window.onload = function(){
-		alert("onload");
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
 		/* alert("contentTypeId = " + contentTypeId);
@@ -78,38 +77,7 @@
 				alert("Error: " + errorThrown);
 			}
 		});
-		$(function () {
-			alert("확인");
-		$("#con").each(function () {
-	        alert("con");
-	        // Run formatWord function and specify the length of words display to viewer
-	        $(this).html(formatWords($(this).html(), 100));
-	        
-	        // Hide the extra words
-	        $(this).children('span').hide();
-	        
-	        // Apply click event to read more link
-	    }).click(function () {
-	    	alert("click");
-	        // Grab the hidden span and anchor
-	        var more_text = $(this).children('span.more_text');
-	        var more_link = $(this).children('a.more_link');
-	        
-	        // Toggle visibility using hasClass
-	        // I know you can use is(':visible') but it doesn't work in IE8 somehow...
-	        if (more_text.hasClass('hide')) {
-	            more_text.show();
-	            more_link.html(' &raquo; hide');        
-	            more_text.removeClass('hide');
-	        } else {
-	            more_text.hide();
-	            more_link.html(' &laquo; more');            
-	            more_text.addClass('hide');
-	        }
-	        return false;
-	        
-	    });
-		});
+	
 	};
 	
 	function isAddWish(type, id, email){
@@ -136,44 +104,7 @@
 		}
 	}
 	
-/* 	function formatWords(sentence, show) {
-		 alert("formatWords");
-		    // split all the words and store it in an array
-		    var words = sentence.split(' ');
-		    var new_sentence = '';
-		    // loop through each word
-		    for (i = 0; i < words.length; i++) {
-		        // process words that will visible to viewer
-		        if (i <= show) {
-		            new_sentence += words[i] + ' ';
-		            
-		            // process the rest of the words
-		        } else {
-		            
-		            // add a span at start
-		            if (i == (show + 1)) new_sentence += '... <span class="more_text hide">';        
-		            new_sentence += words[i] + ' ';
-		            
-		            // close the span tag and add read more link in the very end
-		            if (words[i+1] == null) new_sentence += '</span><a href="#" class="more_link"> &raquo; more</a>';
-		        }         
-		    }
-		    return new_sentence;
-		} */
-	
 
-
-	
-	
-	/* .overview(개요) 더보기 기능 구현 */
-	/* $(function () { */
-    // Grab all the excerpt class
-   
-   
-/* }); */
-
-	// Accept a paragraph and return a formatted paragraph with additional html tags
-	 
 	 
 	
 </script>
@@ -205,6 +136,14 @@ div {
 	border: 1px solid #1b5ac2;
 	background: #ffffff;
 	margin-bottom: 20px;
+}
+
+.wishImg{
+	width : 50px;
+	height : 50px;
+	border : 1px solid red;
+	margin-left : 20px;
+	float : left;
 }
 
 .touristImg{
@@ -300,9 +239,17 @@ div {
 		<c:choose>
 			<c:when test="${result=='0' }">
 				즐겨 찾기 추가 안됨
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
+				</button>
 			</c:when>
 			<c:when test="${result=='1' }">
 				즐겨 찾기 추가 됨
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+				</button>
 			</c:when>
 		</c:choose>
 	</div>
@@ -310,8 +257,12 @@ div {
 	<div class="section1">
 		<!--이미지 & 간략 설명  -->
 		<div class="search1Area">
+		
+			<div class = "wishImg">
+				
+			</div>
 			
-			<div class="touristName" id = "touristName">
+			<div class="touristName" id = "touristName" style='text-align:center'>
 				 
 			</div>
 			
@@ -340,10 +291,10 @@ div {
 	<!--section 끝  -->
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
-		<%-- <input type = "text" value ="${contentTypeId}" id = "contentTypeId">
-		<input type = "text" value ="${contendtid}" id = "contendtid">  --%>
-	 	<input type = "text" value ="12" id = "contentTypeId">
-		<input type = "text" value ="127213" id = "contendtid"> 
+		<input type = "text" value ="${contentTypeId}" id = "contentTypeId">
+		<input type = "text" value ="${contendtid}" id = "contendtid">  
+<!-- 	 	<input type = "text" value ="12" id = "contentTypeId">
+		<input type = "text" value ="127213" id = "contendtid">  -->
 		<input type = "text" value ="${email }" id = "email">
 		<input type = "text" value = "${result }" id = "result">
 	</div>

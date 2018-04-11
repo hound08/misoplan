@@ -40,6 +40,51 @@ public class BoardScheduleDao {
 
 		return conn;
 	}
+	
+	public List<BoardScheduleDto> selectlist() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM BOARDSCHEDULE";
+		List<BoardScheduleDto> selectlist = new ArrayList<BoardScheduleDto>();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				BoardScheduleDto bsdto = new BoardScheduleDto();
+				bsdto.setBs_num(rs.getInt(1));
+				bsdto.setSl_code(rs.getString(2));
+				bsdto.setEmail(rs.getString(3));
+				bsdto.setNickname(rs.getString(4));
+				bsdto.setTitle(rs.getString(5));
+				bsdto.setTag(rs.getString(6));
+				bsdto.setContent(rs.getString(7));
+				bsdto.setImage_url(rs.getString(8));
+				bsdto.setVote_count(rs.getInt(9));
+				bsdto.setView_count(rs.getInt(10));
+				bsdto.setBoard_date(rs.getDate(11));
+				bsdto.setArea_names(rs.getString(12));
+				selectlist.add(bsdto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		}
+		return selectlist;
+
+	}
+
+		
+	
 
 	public List<BoardScheduleDto> list() throws SQLException {
 		Connection conn = null;
@@ -116,7 +161,7 @@ public class BoardScheduleDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES) VALUES(?, ?, ?, ?, ?, ?, ?)";
+		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 		int bs_num = 0;
 		int result = 0;
 		try {
@@ -139,6 +184,7 @@ public class BoardScheduleDao {
 			ps.setString(5, dto.getImage_url());
 			ps.setString(6, dto.getContent());
 			ps.setString(7, dto.getArea_names());
+			ps.setString(8, dto.getEmail());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
