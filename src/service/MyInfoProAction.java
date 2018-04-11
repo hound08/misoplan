@@ -56,7 +56,7 @@ public class MyInfoProAction implements CommandProcess {
 			String email = multi.getParameter("email");
 			
 			memberdto.setEmail(multi.getParameter("email"));
-			memberdto.setNickname(multi.getParameter("Nickname"));	
+			memberdto.setNickname(multi.getParameter("nickname"));	
 			
 			// 사용자 비밀번호 암호화 (SHA-256)
 			SecurityUtil securityUtil = new SecurityUtil();

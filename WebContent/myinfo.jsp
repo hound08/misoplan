@@ -1,124 +1,245 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="dao.*" errorPage="Error.jsp"%>
-   <%@ include file="header.jsp" %>
+	pageEncoding="UTF-8" import="dao.*" errorPage="Error.jsp"%>
+<%@ include file="header.jsp"%>
 <!DOCTYPE html >
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>내 정보</title>
-		
-		<style type="text/css">
-			#center {
-				margin: 0px auto;
-				width: 1200px;
-				height: 100%;
-			}
-			#main {
-					background-color: #f0f0f0;
-					width: 930px;
-					text-align: center;
-					float: left;
-					margin-top: 20px;
-					border-radius: 25px;
-					padding-bottom: 20px;
-				}
-			#main h1 {
-					margin: 20px 0px;
-			}
-			#second {
-				background-color: #d7e4bd;
-				border-radius: 15px;
-				width: 450px;
-				margin: 0px auto;
-				padding: 30px;
-			}
-			
-			#previewImg {
-				margin: 0px auto;
-				border: 1px solid red;
-				width: 100px;
-				height: 100px;
-			}
-			#img input {
-		
-			}
-			#secondbox table{
-				margin: 0px auto;
-				background-color:  #d7e4bd
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>내 정보</title>
+<style type="text/css">
+body {
+	font-family: 'NanumSquareRound', sans-serif;
+}
+
+hr {
+	margin-bottom: 15px;
+}
+
+table {
+	width: 315px;
+	text-align: left;
+}
+
+td {
+	width: 200px;
+	font-weight: bold; 
+}
+
+.td {
+	width: 100px;
+	font-size: 15px;
+}
+
+.tdEmail {
+	font-weight: normal;
+}
+
+.tdPassword {
+	width: 100px;
+	vertical-align: bottom;
+	padding-bottom: 6px;
+	font-size: 15px;
+}
+
+.tdPasswordChk {
+	width: 100px;
+	vertical-align: top;
+	padding-top: 8px;
+	font-size: 15px;
+}
+
+.tdSubmit {
+	text-align: center;
+}
+
+#center {
+	margin: 0px auto;
+	width: 1200px;
+	height: 100%;
+}
+
+#main {
+	background-color: #f0f0f0;
+	width: 930px;
+	text-align: center;
+	float: left;
+	margin-top: 20px;
+	border-radius: 25px;
+	padding-bottom: 20px;
+}
+
+#main h1 {
+	margin: 20px 0px;
+}
+
+#second {
+	background-color: #d7e4bd;
+	border-radius: 5px;
+	width: 450px;
+	margin: 0px auto;
+	padding: 30px;
+}
+
+#previewImg {
+	border: 1px solid gray;
+	width: 150px;
+	height: 150px;
+}
+
+#secondbox table {
+	margin: 0px auto;
+	background-color: #d7e4bd
+}
+
+#secondbox table tr {
+	height: 40px;
+}
+
+.input {
+	width: 200px;
+	height: 30px;
+	margin-top: 15px;
+	margin-bottom: 15px;
+	margin-right: 0px;
+}
+
+#nickname {
+	margin-bottom: 3px;
+}
+
+#spanNickname {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.password {
+	width: 200px;
+	height: 30px;
+	margin-top: 15px;
+	margin-bottom: 0px;
+}
+
+.passwordChk {
+	width: 200px;
+	height: 30px;
+	margin-top: 0px;
+	margin-bottom: 3px;
+}
+
+#spanPassword {
+	font-size: 13px;
+	color: red;
+	font-weight: normal;
+	margin-bottom: 15px;
+}
+
+.btn {
+	margin-top: 15px;
+	width: 305px;
+	height: 40px;
+	color: white;
+	background-color: #1A7AD9;
+	border-color: transparent;
+}
+</style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	var myInfoComplete = false;
+
+	$(function() {
+		$('#nickname').change(function() {
+			if (!frm.nickname.value || frm.nickname.value == "") {
+				$('#spanNickname').html("　");
+			} else if (frm.nickname.value != frm.nicknameOriginal.value) {
+				var sendData = 'nickname=' + $('#nickname').val();
 				
-				}
-			#secondbox table tr {
-				height: 40px;
-				}
+				$.post(
+					'myinfocheck.jsp',
+					sendData,
+					function(result) {
+						if (result.indexOf('이미') > 0) {
+							$('#spanNickname').css('color', 'red');
+							$('#spanNickname').html("※이미 사용중인 별명입니다.");
+							$('#nickname').focus();
+							myInfoComplete = false;
+						} else {
+							$('#spanNickname').html("※사용 가능한 별명입니다.");
+							$('#spanNickname').css('color', 'green');
+							myInfoComplete = true;
+						}
+				});
+			} else {
+				$('#spanNickname').html("　");
+				myInfoComplete = true;
+			}
+		});
+	});
+	
+	$(function() {
+		$('#password').change(function() {
+			$('#passwordChk').val("");
+			$('#passwordChk').focus();
+		});
+	});
+	
+	$(function() {
+		$('#passwordChk').change(function() {
+			if ($('#password').val() != $('#passwordChk').val()) { 
+				$('#passwordChk').val("");
+				$('#passwordChk').focus();
+				$('#spanPassword').html("※ 비밀번호가 일치하지 않습니다.");
 				
-			.input {
-				border-radius :10px;
+				return;
+			} else {
+				$('#spanPassword').html("　");
 			}
-		
-		</style>
-		<script type="text/javascript" src="js/jQuery.js"></script>
-		<script type="text/javascript">
-		 function winop() {
-			if (!frm.Nickname.value) {
-				alert("닉네임을 입력해주세요.");
-				frm.Nickname.focus();
-				return false;
-			} 
-				window.open("myinfocheck.jsp?Nickname=" + frm.Nickname.value, "",
-				"width=300 height=300");
+		});
+	});
+
+	function chk() {
+		if (myInfoComplete == false) {
+			alert("회원 정보 수정이 실패하였습니다.\n입력하신 정보를 다시 한번 확인해 보시기 바랍니다.");
 			
-		} 
-		function chk() {
-			if (frm.password.value != frm.password1.value) {
-				alert("암호가 다릅니다");
-				frm.password.focus();
-				return false;
-			}
-			return true;
+			return false;
 		}
 		
-		
-		function previewFile(input){
-		      var reader=new FileReader();
-		      
-		      reader.onload=function(event){
-		         $('#previewImg').attr('src', event.target.result);
-		      }
-		      reader.readAsDataURL(input.files[0]);
-		   }
-
-		 
-
-		</script>
-	</head>
-	<%request.setAttribute("email", session.getAttribute("email")); %>
-	<body>
-		<div id="center">
-			<%@ include file="sidemenu.jsp" %>
-			<div id="main">
-				<h1>내 정보</h1>  
-				<div id="myinfo">
-					<div id="second">
-						<form action="myInfoPro.do" name="frm" onsubmit="return chk()" id="secondbox" method="post" enctype="multipart/form-data">
+		return true;
+	}
+</script>
+</head>
+<%
+	request.setAttribute("email", session.getAttribute("email"));
+%>
+<body>
+	<div id="center">
+		<%@ include file="sidemenu.jsp"%>
+		<div id="main">
+			<h1>내 정보</h1>
+			<div id="myinfo">
+				<div id="second">
+					<form action="myInfoPro.do" name="frm" onsubmit="return chk()" id="secondbox" method="post" enctype="multipart/form-data">
 						<div id="img_div">
-								<img id="previewImg" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
-								<input type="file" name="profile_url" value="${ memberdto.profile_url}" onchange="preview(this)">
+							<img id="previewImg" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
+							<table>
+								<tr><td class="td">사진 변경</td><td><input type="file" name="profile_url" class="input"></td></tr>
+							</table>
 						</div>
+						<hr color="gray" size="1px">
 						<table>
-							<tr><td>이 메 일 : </td><td><input type="text" class="input" readonly="readonly" name="email" value="${memberdto.email }"></td><td></td></tr>
-							<tr><td>닉 네 임 : </td><td><input type="text" class="input" required="required" name="Nickname" id="Nickname" value="${memberdto.nickname }" oninput="checkId()"></td>
-													<td><input type="button" class="but" value="중복확인" id="nameclice" onclick="winop()"></td></tr>
-							<tr><td>		   </td><td><span id="name_result"></span></td></tr>
-							<tr><td>비밀번호 : </td><td><input type="password" class="input" required="required" name="password"></td><td></td></tr>
-							<tr><td>핸드폰 번호 : </td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td><td></td></tr>
-							<tr></tr>
-							<tr><td></td><td><input type="submit" class="but" value="정보 수정"> 
-											 <input type="button" value="회원탈퇴"></td><td></td></tr>		
+							<tr><td class="td">계정명</td><td class="tdEmail">${memberdto.email }<input type="hidden" name="email" value="${memberdto.email }"><td></tr>
+							<tr><td class="td">별명</td><td><input type="text" id="nickname" class="input" required="required" name="nickname" id="nickname" value="${memberdto.nickname }">
+							<input type="hidden" id="nicknameOriginal" value="${memberdto.nickname }"><br>
+							<span id="spanNickname">　</span><td></tr>
+							<tr><td class="tdPassword"><p>새 비밀번호</td><td><input type="password" id="password" class="password" required="required" name="password"></td></tr>
+							<tr><td class="tdPasswordChk">비밀번호 확인</td><td><input type="password" id="passwordChk" class="passwordChk" required="required" name="passwordChk">
+							<span id="spanPassword">　</span></td></tr>
+							<tr><td class="td">연락처</td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td></tr>
+							<tr><td colspan="2" class="tdSubmit"><input type="submit" class="btn" value="정보 수정"></td></tr>
 						</table>
-						</form>
-					</div>
+					</form>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 </html>

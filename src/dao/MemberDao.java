@@ -191,14 +191,13 @@ public class MemberDao {
 		String sql = "update member set nickname =?, password =?, phone =?, profile_url = ? where email = ?" ;
 		try {
 			conn = getConnection();
-			   ps = conn.prepareStatement(sql);
-			   ps.setString(1, memberdto.getNickname());
-			   ps.setString(2, memberdto.getPassword());
-			   ps.setString(3, memberdto.getPhone());
-				   ps.setString(4, memberdto.getProfile_url());			   
-			   ps.setString(5, memberdto.getEmail());
-			   System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+ memberdto.getProfile_url() );
-			   result = ps.executeUpdate();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, memberdto.getNickname());
+			ps.setString(2, memberdto.getPassword());
+			ps.setString(3, memberdto.getPhone());
+			ps.setString(4, memberdto.getProfile_url());			   
+			ps.setString(5, memberdto.getEmail());
+			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
