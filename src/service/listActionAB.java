@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.AccompanyBoardDto;
 import dao.AccompanyDao;
@@ -16,12 +17,11 @@ public class listActionAB implements CommandProcess{
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
-		
 		String pageNum = request.getParameter("pageNum");
+		HttpSession session = request.getSession();
 		if(pageNum ==null ||pageNum.equals(""))
 			pageNum = "1";
 		int currentPage = Integer.parseInt(pageNum);//현재 페이지 번호
-		
 		int totalPost = accompanyDao.getTotalPost(); //게시물 개수
 		int pageSize = 9; //한페이지에 보일 게시물 수
 		int blockSize = 5; //한번에 보일 페이지 수
@@ -46,6 +46,7 @@ public class listActionAB implements CommandProcess{
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
+		request.setAttribute("email", session.getAttribute("email"));
 		return "accompanyBoard.jsp";
 	}
 

@@ -42,21 +42,35 @@ div {
 	height: auto;
 }	
 .post-header {
+	margin: 20px 0 0 0;
 	width: 100%;
 	height: 150px;
 	border: solid;
 	display: flex;
 	left: 1em;
- 	align-items: center; 
  	background-color: #EAEAEA;
 }
+
 .post-header-img {
+	margin: auto 20px;
 	height: 120px;
 	width: 120px;
 	background-image: url("${profile_url}");
+	background-color: white;
 	border-radius: 50%;
 	background-size: 100% 100%;
 	border: solid;
+}
+
+.post-body {
+	width: 100%;
+	border: solid;
+	padding : 1em 0 1em 1em;
+}
+
+tr.highlight td {
+	padding-top: 1px; 
+	padding-bottom: 1px
 }
 </style>
 </head>
@@ -71,11 +85,25 @@ div {
 		
 		<div class="post-header">
 			<div class="post-header-img"></div>
-			제목: ${board.title }<br/>
-			작성자: ${board.nickname } 등록일: ${board.reg_date }<br/>
-			
+			<table>
+				<tr><td><h2>제목: </h2></td><td><h2>${board.title }</h2></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td>작성자: </td><td>${board.nickname } | 등록일: ${board.reg_date }</td></tr>
+			</table>
 		</div>
+		<div class="post-body">
+			<pre>${board.content }</pre>
+			<img src="${board.image_url }">
+		</div>
+		<div class="post-footer">
+			<form>
+				<textarea rows="12" style="width: 70%;"></textarea>
+				<input type="submit" value="확인">
+			</form>
+		</div>
+		<form>
 			
+		</form>
 			
 		</div>
 		

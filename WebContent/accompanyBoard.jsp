@@ -10,7 +10,7 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link href="accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -59,7 +59,7 @@
 						<p class="card-body-nickname">작성자: ${board.nickname }</p>
 					</div>
 					<!--  카드 바디 본문 -->
-					<p class="card-body-description">${board.content }</p>
+					<pre><p class="card-body-description">${board.content }</p></pre>
 					<!--  카드 바디 푸터 -->
 					<div class="card-body-footer">
 						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
@@ -74,7 +74,9 @@
 			</div>
 				<!--section card -->
 				<div>
-					<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+					<c:if test="${email != null }">
+						<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
+					</c:if>
 				</div>
 				<div class="pagination">
 					
