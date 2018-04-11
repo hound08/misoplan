@@ -9,7 +9,6 @@
 <link href="accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<<<<<<< HEAD
 <style type="text/css">
 
 div {
@@ -181,9 +180,7 @@ div {
 	margin-top: 20px;
 }
 </style>
-=======
 
->>>>>>> 42f7408d08586953000c42e756a266f253b58fe3
 </head>
 <body>
 	<div class="section">
@@ -201,7 +198,6 @@ div {
 		
 		<!--section card -->
 		<div class="section-card">
-<<<<<<< HEAD
 			<div class="card" onmouseout="cardChange()">
 				<img src="images/plan.jpg" class="card-image" alt="1"
 					style="width: 100%">
@@ -285,7 +281,6 @@ div {
 			var current = 0;
 			var images = [ "images/korea2.jpg", "images/korea3.jpg","images/korea4.jpg", "images/korea5.jpg", "images/korea1.jpg" ]
 
-=======
 			<c:forEach var="board" items="${list }">
 			<a href="viewActionAB.do?post_num=${board.post_num }">
 			<div class="card">
@@ -383,7 +378,6 @@ div {
 						   "images/korea4.jpg", 
 						   "images/korea5.jpg",
 						   "images/korea1.jpg" ]
->>>>>>> 42f7408d08586953000c42e756a266f253b58fe3
 			function replacePhoto() {
 				++current;
 				if (current >= images.length)
@@ -391,14 +385,11 @@ div {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
-<<<<<<< HEAD
 
 			var submit = document.getElementByClassName("search-submit");
 			function replaceCard() {
 				submit.style.color = "Orange";
 			}
-=======
->>>>>>> 42f7408d08586953000c42e756a266f253b58fe3
 		</script>
 </body>
 </html>
