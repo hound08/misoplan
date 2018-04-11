@@ -12,16 +12,7 @@ public class mySchduleDto {
 	
 	
 	
-<<<<<<< HEAD
 	
-	public String getArea_name() {
-		return area_name;
-	}
-	public void setArea_name(String area_name) {
-		this.area_name = area_name;
-	}
-=======
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 	public String getSl_code() {
 		return sl_code;
 	}
@@ -34,15 +25,12 @@ public class mySchduleDto {
 	public void setS_name(String s_name) {
 		this.s_name = s_name;
 	}
-<<<<<<< HEAD
-=======
 	public String getArea_name() {
 		return area_name;
 	}
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
 	}
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 	public Date getTour_date_start() {
 		return tour_date_start;
 	}
