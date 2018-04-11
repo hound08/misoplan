@@ -17,8 +17,8 @@ public class BoardScheduleDto {
 	private Date board_date;
 	private String local_names;
 	private String sm_code;
-	private String local_name;
-	private String local_code;
+	private String area_name;
+	private String area_code;
 	private Date tour_date;
 	private String tour_text;
 	private String ss_code;
@@ -135,16 +135,16 @@ public class BoardScheduleDto {
 		this.sm_code = sm_code;
 	}
 	public String getLocal_name() {
-		return local_name;
+		return area_name;
 	}
 	public void setLocal_name(String local_name) {
-		this.local_name = local_name;
+		this.area_name = local_name;
 	}
 	public String getLocal_code() {
-		return local_code;
+		return area_code;
 	}
 	public void setLocal_code(String local_code) {
-		this.local_code = local_code;
+		this.area_code = local_code;
 	}
 	public Date getTour_date() {
 		return tour_date;
