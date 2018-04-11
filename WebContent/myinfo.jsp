@@ -144,7 +144,7 @@ td {
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
-	var myInfoComplete = false;
+	var myInfoComplete = true;
 
 	$(function() {
 		$('#nickname').change(function() {
@@ -188,9 +188,11 @@ td {
 				$('#passwordChk').val("");
 				$('#passwordChk').focus();
 				$('#spanPassword').html("※ 비밀번호가 일치하지 않습니다.");
+				myInfoComplete = false;
 				
 				return;
 			} else {
+				myInfoComplete = true;
 				$('#spanPassword').html("　");
 			}
 		});
@@ -230,8 +232,8 @@ td {
 							<tr><td class="td">별명</td><td><input type="text" id="nickname" class="input" required="required" name="nickname" id="nickname" value="${memberdto.nickname }">
 							<input type="hidden" id="nicknameOriginal" value="${memberdto.nickname }"><br>
 							<span id="spanNickname">　</span><td></tr>
-							<tr><td class="tdPassword"><p>새 비밀번호</td><td><input type="password" id="password" class="password" required="required" name="password"></td></tr>
-							<tr><td class="tdPasswordChk">비밀번호 확인</td><td><input type="password" id="passwordChk" class="passwordChk" required="required" name="passwordChk">
+							<tr><td class="tdPassword"><p>새 비밀번호</td><td><input type="password" id="password" class="password" name="password"></td></tr>
+							<tr><td class="tdPasswordChk">비밀번호 확인</td><td><input type="password" id="passwordChk" class="passwordChk" name="passwordChk">
 							<span id="spanPassword">　</span></td></tr>
 							<tr><td class="td">연락처</td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td></tr>
 							<tr><td colspan="2" class="tdSubmit"><input type="submit" class="btn" value="정보 수정"></td></tr>

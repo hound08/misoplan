@@ -34,7 +34,7 @@ public class AreaParser {
 		parameter = parameter + "&" + "MobileApp=AppTest";
 		
 		addr = addr + serviceKey + parameter;
-		
+		System.out.println(addr);
 		DocumentBuilderFactory f = DocumentBuilderFactory.newInstance();
 		DocumentBuilder parser = f.newDocumentBuilder();
 		
