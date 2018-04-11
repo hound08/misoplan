@@ -188,15 +188,27 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String sql = "update member set nickname =?, password =?, phone =?, profile_url = ? where email = ?" ;
+		String sql1 = "update member set nickname =?, phone =?, profile_url = ? where email = ?" ;
+		String sql2 = "update member set nickname =?, password =?, phone =?, profile_url = ? where email = ?" ;
+		
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, memberdto.getNickname());
-			ps.setString(2, memberdto.getPassword());
-			ps.setString(3, memberdto.getPhone());
-			ps.setString(4, memberdto.getProfile_url());			   
-			ps.setString(5, memberdto.getEmail());
+			
+			if (memberdto.getPassword() == null || memberdto.getPassword().equals("")) {
+				ps = conn.prepareStatement(sql1);
+				ps.setString(1, memberdto.getNickname());
+				ps.setString(2, memberdto.getPhone());
+				ps.setString(3, memberdto.getProfile_url());			   
+				ps.setString(4, memberdto.getEmail());
+			} else {
+				ps = conn.prepareStatement(sql2);
+				ps.setString(1, memberdto.getNickname());
+				ps.setString(2, memberdto.getPassword());
+				ps.setString(3, memberdto.getPhone());
+				ps.setString(4, memberdto.getProfile_url());			   
+				ps.setString(5, memberdto.getEmail());
+			}
+
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -204,6 +216,7 @@ public class MemberDao {
 			 if (ps != null) ps.close();; 
 		     if (conn != null) conn.close();
 		}
+		
 		return result;
 	}
 	
