@@ -181,7 +181,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
 		<p>지   역 : <span id="area"></span></p><br>
 				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
-				 <input type="hidden" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
+				 <input type="text" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
 		<p>기   간 : <span id="date"></span></p>
 		</div>
 		<div class="main-imagebt">
@@ -213,7 +213,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 			</c:forEach>
 			</div>
 		<div class="center-bottom-image">
-			<textarea rows="13" cols="163" name="content"></textarea>
+			<textarea rows="13" cols="163" name="content" required="required"></textarea>
 		</div>
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">

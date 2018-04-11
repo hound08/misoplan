@@ -168,13 +168,11 @@ div {
 	</script>
 	<%
 		String email = (String)session.getAttribute("email");
-		System.out.println("test ==> " + email);
-		//request.setAttribute("email", session.getAttribute("email"));
-		request.setAttribute("nickname", session.getAttribute("nickname"));
+		String nickname = (String)session.getAttribute("nickname");
 	%>
 	<div class="center">
 		<div id="button1" align="right">
-			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardselect.do?email=${email}'">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"

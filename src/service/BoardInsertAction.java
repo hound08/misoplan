@@ -45,8 +45,9 @@ public class BoardInsertAction implements CommandProcess {
 			}
 		}
 		String email = request.getParameter("email");
-		System.out.println("board insert email확인 " + email);
 		String nickname = request.getParameter("nickname");
+		System.out.println( "nickname = " + nickname );
+		System.out.println("board insert email확인 " + email);
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
