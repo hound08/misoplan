@@ -19,9 +19,12 @@ public class mySchduleDto {
 	}
 =======
 	
+<<<<<<< HEAD
+=======
 	
 	
 >>>>>>> 35de9a84c4e3e8aa677038f93712a926a6f770a6
+>>>>>>> 5ca149f149f792b974afedaf62d8ebd5fd0bffc0
 	public String getSl_code() {
 		return sl_code;
 	}
