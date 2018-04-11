@@ -98,7 +98,6 @@
 			</div>
 		
 		
-		
 			<!-- <img alt="myinfo" src="images/03.jpg" id="myinfo">
 			<img alt="schedule" src="images/03.jpg" id="schedule">
 			<img alt="myWishlist" src="images/03.jpg" id="myWishlist">
