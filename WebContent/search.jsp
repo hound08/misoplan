@@ -1429,7 +1429,7 @@ div {
 
 <!-- 여기부턴 List																															 -->
 	<div class="contents">
-		<div class="contentsTop" id = "contentsTop">ㅅㅂ</div>
+		<div class="contentsTop" id = "contentsTop"></div>
 		<div class="listArea"><!--tour3.0에서는 listWrap으로 설정 해놨넹?  -->
 			<ul class = "galleryList" id = "galleryList">
 				
