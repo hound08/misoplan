@@ -62,11 +62,8 @@ public class mycompanionDao {
 				dto.setNickname(rs.getString("nickname"));
 				dto.setCurrent_num(rs.getInt("current_num"));
 				dto.setMinimum_num(rs.getInt("minimum_num"));
-<<<<<<< HEAD
-=======
 				dto.setCurrent_num(rs.getInt("current_number"));
 				dto.setMinimum_num(rs.getInt("minimum_number"));
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 				dto.setReg_date(rs.getDate("reg_date"));
 				list.add(dto);
 			}

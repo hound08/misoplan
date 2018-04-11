@@ -11,8 +11,6 @@ public class mySchduleDto {
 	private Date regi_date;
 	
 	
-	
-	
 	public String getSl_code() {
 		return sl_code;
 	}
