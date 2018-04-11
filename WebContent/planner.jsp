@@ -178,6 +178,8 @@
     	background-color: #39A2D8;
     	border-radius: 10px;
     	color: white;
+    	margin: 0px;
+    	padding: 0px;
     }
     .dayleft{
     	float: left;	
@@ -273,7 +275,6 @@
 </style>
 
 <!--  -->
-<link href='http://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
 
 <link rel="stylesheet" href="css/demo.css">
 <link rel="stylesheet" href="css/avgrund.css">
@@ -301,14 +302,22 @@ $(document).on('click', '#completebtn', function(){
 	var plandiv = $(".plandiv");
 	var contents = plandiv.children();
 	var jsonArr = [];
-	
-	
-	
 	jQuery.each(contents, function(index, value){
-		jsonArr.push({"dayvalue" : $(value).attr('dayvalue'), "parsedinfo" : $(value).attr('parsedinfo')});	
+		if($(value).attr('dayvalue')){
+			jsonArr.push({"dayvalue" : $(value).attr('dayvalue'), 
+						  "areaCode" : $(value).attr('areaCode'),
+						  "sigunguCode" : $(value).attr('sigunguCode'),
+						  "contentId" : $(value).attr('contentId'),
+						  "mapx" : $(value).attr('mapx'),
+						  "mapy" : $(value).attr('mapy'),
+						  "imagePath" : $(value).attr('imagePath')
+			});	
+		}
 	});
 	
-	console.log(jsonArr);
+	var stringArr = JSON.stringify(jsonArr);
+	var form = $('#form');
+	form.append("<input type='hidden' name='jsonArr' value="+stringArr+">");
 	openDialog();
 });
 
@@ -374,6 +383,9 @@ $(document).on('click','#cityinfo', function(){
 				var title = myItem[i].title;
 				var addr1 = myItem[i].addr1;
 				var addr2 = myItem[i].addr2;
+				var coordx = myItem[i].mapx;
+				var coordy = myItem[i].mapy;
+				
 				var contentid = myItem[i].contentid;
 				var parsedinfo = contentid+"-"+title;
 				var firstImage = myItem[i].firstimage;
@@ -384,7 +396,7 @@ $(document).on('click','#cityinfo', function(){
 					addr1 = addr2;
 				}
 				$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv'><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+contentid+" src='images/plusbutton.png'></img></div></li>");
+				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+contentid+" src='images/plusbutton.png'></img></div></li>");
 			}
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -417,12 +429,15 @@ $(document).on('click', '.plusbutton', function(){
 	$this = $(this);
 	var tourtitle = $this.prevAll("#tourdescdiv").children().eq(0).text();
 	var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).text();
-	var id = $(this).attr("id");
+	var coordx = $this.prevAll("#tourdescdiv").attr("mapx");
+	var coordy = $this.prevAll("#tourdescdiv").attr("mapy");
+	var imagePath = $this.parent().prevAll(".tourImageDiv").children(".tourImage").attr("src");
+	var contentId = $(this).attr("id");
 	var plandiv = $('.plandiv'); 
 	var areaCode = $('.area_selected').attr('data');
-	var cityCode = $('.city_selected').attr('data');
-	var parsedinfo = areaCode + "-" + cityCode + "-" + id;
-	if(plandiv.children("#planelem"+id).attr('id')){
+	var sigunguCode = $('.city_selected').attr('data');
+	var parsedinfo = areaCode + "-" + sigunguCode + "-" + contentId;
+	if(plandiv.children("#planelem"+contentId).attr('id')){
 		alert("이미 추가된 여행지입니다.");		
 	}else{
 		if(!plandiv.children(".day").attr("id")){
@@ -431,7 +446,7 @@ $(document).on('click', '.plusbutton', function(){
 			plandiv.css('height', plandivheight);
 			daycount = daycount + 1;
 		}
-		plandiv.append("<div class='planelem' id='planelem"+id+"' dayvalue="+(daycount-1)+" parsedinfo="+parsedinfo+"><p class='elemtitle' id='elemtitle"+id+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+id+"'>X&nbsp;</div></div>");
+		plandiv.append("<div class='planelem' id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaCode="+areaCode+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
 		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 	}
@@ -653,17 +668,15 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 <!--  -->
 		<aside id="default-popup" class="avgrund-popup">
 			<h2>저장</h2>
-			<form action="#" method="post">
+			<form action="plannerDetail.jsp" method="post" id="form">
 				<label>플랜 제목 : </label>
 				<input type="text" name="title" id="title" class="inputs">
 				<br>
 				<label>출발일 : </label>
-				<input type="text" id="datepicker-triangle" class="inputs">
+				<input type="text" id="datepicker-triangle" name='date' class="inputs">
 				<br>
-				<button onclick="javascript:document.getElementById('title').submit();">완료</button>
+				<button onclick="javascript:document.getElementById('form').submit();">완료</button>
 			</form>
-						
-			
 		</aside>
 		<div class="avgrund-cover"></div>
 
@@ -680,4 +693,4 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 			    });
 		</script>
 </body>
-</html>\
+</html>
