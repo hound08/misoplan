@@ -167,7 +167,9 @@ div {
 		setInterval(replacePhoto, 3000);
 	</script>
 	<%
-		request.setAttribute("email", session.getAttribute("email"));
+		String email = (String)session.getAttribute("email");
+		System.out.println("test ==> " + email);
+		//request.setAttribute("email", session.getAttribute("email"));
 		request.setAttribute("nickname", session.getAttribute("nickname"));
 	%>
 	<div class="center">
@@ -191,7 +193,7 @@ div {
 					<h1>제목 : ${bs.title }</h1>
 				</div>
 				<div class="tag">${bs.tag }</div>
-				<div class="idlocal">아이디 : ${nickname }</div>
+				<div class="idlocal">아이디 : ${bs.nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
 			</a>
@@ -218,6 +220,7 @@ div {
 				</select> <input type="text" name="search"> 돋보기 이미지
 			</div>
 		</div>
+		<input type = "text" value = "${test }">
 		<%@ include file="footer.jsp"%>
 </body>
 </html>
