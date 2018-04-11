@@ -9,7 +9,7 @@ public class AccompanyReplyDto {
 	private String email;
 	private String nickname;
 	private String content;
-	private Date replay_date;
+	private Date reply_date;
 	
 	public int getRp_num() {
 		return rp_num;
@@ -41,10 +41,10 @@ public class AccompanyReplyDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Date getReplay_date() {
-		return replay_date;
+	public Date getReply_date() {
+		return reply_date;
 	}
-	public void setReplay_date(Date replay_date) {
-		this.replay_date = replay_date;
+	public void setReply_date(Date replay_date) {
+		this.reply_date = replay_date;
 	}
 }
