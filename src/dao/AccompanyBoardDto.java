@@ -19,10 +19,6 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	
-<<<<<<< HEAD
-	
-=======
->>>>>>> 6dacc26b944950a07beb76d20151e9102a109db3
 	public String getTag() {
 		return tag;
 	}

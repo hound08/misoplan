@@ -19,6 +19,8 @@ public class PlanViewAction implements CommandProcess {
 		try {
 			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			BoardScheduleDao bsd = BoardScheduleDao.getInstance();
+		} finally {
+			
 		}
 		
 		return "planview.jsp";
