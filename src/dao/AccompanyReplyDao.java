@@ -4,11 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import javax.websocket.CloseReason;
 
 public class AccompanyReplyDao {
 	
@@ -61,7 +62,7 @@ public class AccompanyReplyDao {
 			}
 	}
 	
-	public void insert(AccompanyReplyDto accompanyReplyDto) {
+	public int insert(AccompanyReplyDto accompanyReplyDto) {
 		
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -74,7 +75,8 @@ public class AccompanyReplyDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql1);
 			rs = pstmt.executeQuery();
-			num = rs.getInt(1) + 1;
+			rs.next();
+			num = rs.getInt(1)+1;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -82,8 +84,57 @@ public class AccompanyReplyDao {
 			close(pstmt);
 		}
 		
-		String sql2 = "insert ";
+		String sql2 = "insert into replyaccompany values(?,?,?,?,?,sysdate)";
+		int result = 0;
+		try {
+			pstmt = conn.prepareStatement(sql2);
+			pstmt.setInt(1, num);
+			pstmt.setInt(2, accompanyReplyDto.getPost_num());
+			pstmt.setString(3, accompanyReplyDto.getEmail());
+			pstmt.setString(4, accompanyReplyDto.getNickname());
+			pstmt.setString(5, accompanyReplyDto.getContent());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
 		
+		return result;
 	}
 	
+	public List<AccompanyReplyDto> list(int post_num){
+		
+		List<AccompanyReplyDto> list = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num desc) a)";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				AccompanyReplyDto dto = new AccompanyReplyDto();
+				dto.setRp_num(rs.getInt(2));
+				dto.setPost_num(rs.getInt(3));
+				dto.setEmail(rs.getString(4));
+				dto.setNickname(rs.getString(5));
+				dto.setContent(rs.getString(6));
+				dto.setReply_date(rs.getDate(7));
+				list.add(dto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		return list;
+	}
 }
