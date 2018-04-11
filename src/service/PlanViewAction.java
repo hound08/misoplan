@@ -18,16 +18,13 @@ public class PlanViewAction implements CommandProcess {
 		try {
 			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			BoardScheduleDao bsd = BoardScheduleDao.getInstance();
-<<<<<<< HEAD
+		} 
+		
+			
+		catch (Exception e) {
 		} finally {
 			
 		}
-		
-=======
-			
-		} catch (Exception e) {
-		} 
->>>>>>> 35de9a84c4e3e8aa677038f93712a926a6f770a6
 		return "planview.jsp";
 	}
 
