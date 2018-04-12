@@ -44,12 +44,17 @@ public class BoardInsertAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
+		String email = request.getParameter("email");
+		String nickname = request.getParameter("nickname");
+		System.out.println( "nickname = " + nickname );
+		System.out.println("board insert email확인 " + email);
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setContent(multi.getParameter("content"));
 		dto.setArea_names(multi.getParameter("area"));
+		dto.setEmail(multi.getParameter("email"));
 		
 		if(multi.getFile("image_url") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);
@@ -60,7 +65,6 @@ public class BoardInsertAction implements CommandProcess {
 		}
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			String nickname = request.getParameter("nickname");
 			int result = dao.insertPlan(dto, nickname);
 			
 			if (result > 0) {

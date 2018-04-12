@@ -3,6 +3,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -88,16 +89,26 @@ tr.highlight td {
 			<table>
 				<tr><td><h2>제목: </h2></td><td><h2>${board.title }</h2></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>작성자: </td><td>${board.nickname } | 등록일: ${board.reg_date }</td></tr>
+				<tr><td>작성자: </td><td>${board.nickname } | 등록일:${board.reg_date }</td></tr>
+				<tr><td>게시물 번호: </td><td>${post_num }</td></tr>
 			</table>
 		</div>
 		<div class="post-body">
 			<pre>${board.content }</pre>
 			<img src="${board.image_url }">
 		</div>
+		<c:forEach var="reply" items="${list }">
+			 <table>
+				<tr><td><h2>작성자: </h2></td><td><h2>${reply.nickname }</h2></td></tr>
+				<tr><td>내용: </td><td>${reply.content } </td></tr>
+				<tr><td>등록일: </td><td>${reply.reply_date } </td></tr>
+				<tr><td>게시물 번호: </td><td>${post_num }</td></tr>
+			</table>
+		</c:forEach>
 		<div class="post-footer">
-			<form>
-				<textarea rows="12" style="width: 70%;"></textarea>
+			<form action="writeReplyAB.do">
+				<input type="hidden" value="${post_num }"name="post_num">
+				<textarea rows="12" style="width: 70%;" name="content"></textarea>
 				<input type="submit" value="확인">
 			</form>
 		</div>
@@ -127,6 +138,6 @@ tr.highlight td {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
-		</script>
+	</script>
 </body>
 </html>
