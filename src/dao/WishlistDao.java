@@ -46,12 +46,13 @@ public class WishlistDao {
 		ResultSet rs = null;
 		int result=0;
 		
-		String sql= "SELECT EMAIL FROM WISHLIST WHERE CONTENTTYPEID=? AND CONTENDTID=?";
+		String sql= "SELECT EMAIL FROM WISHLIST WHERE CONTENTTYPEID=? AND CONTENDTID=? AND EMAIL = ?";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, contentTypeId);
 			ps.setInt(2, contendtid);
+			ps.setString(3, email);
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println("wishcheck IF");
@@ -75,7 +76,7 @@ public class WishlistDao {
 		return result;
 	}
 
-	public int addWishList(int contentTypeId, int contendtid, String email, String title) {
+	public int addWishList(int contentTypeId, int contendtid, String email, String title) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result=0;
@@ -92,6 +93,11 @@ public class WishlistDao {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}finally {
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
 		}
 		
 		return result;

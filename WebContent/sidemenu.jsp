@@ -1,23 +1,20 @@
+<%@page import="dao.MemberDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css">
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>사이드 메뉴</title>
 	<style type="text/css">
 		*{ margin:0; padding:0; }
 		li{ list-style:none; }
-		a{ text-decoration:none;}
 		img {vertical-align:bottom;}
 		#sidemenu  {
 				margin-top: 60px;
 				background-color: #f0f0f0;
 				border-radius: 25px;
 				width: 200px;
-				height: 630px;
 				float: left;
 				margin: 20px;
 			}
@@ -41,14 +38,19 @@
 	</style>
 </head>
 <body>
+	<%
+		MemberDao dao = MemberDao.getInstance();
+		session.setAttribute("admin", dao.selectAdminChk(request.getParameter("email")));
+	%>
 	<div id="sidemenu">
 		<ul>
-			<h1>My Page</h1>
-			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내정보</a></li>
+			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내 정보</a></li>
 			<li class="sidemenus"><a href="scheduleForm.do?email=${email }" class="a">내 계획</a></li>
-			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 List</a></li>
-			<li class="sidemenus" ><a href="companionForm.do?email=${email }" class="a">동행</a></li>
-			<li class="sidemenus" ><a href="#" id="b" >관리자</a></li>
+			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 리스트</a></li>
+			<li class="sidemenus"><a href="companionForm.do?email=${email }" class="a">동행</a></li>
+			<c:if test="${admin == 1}">
+				<li class="sidemenus"><a href="adminMainForm.do?email=${email }" id="b" >관리자 메뉴</a></li>
+			</c:if>
 		</ul>
 	</div>
 </body>

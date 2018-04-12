@@ -12,10 +12,12 @@
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
+</script>
 <script type="text/javascript">
 	window.onload = function(){
-		alert("onload");
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
 		/* alert("contentTypeId = " + contentTypeId);
@@ -37,6 +39,8 @@
 				var zipcode		= myItem.zipcode;
 				var title 		= myItem.title;		//touristName
 				var overview	= myItem.overview;
+				mapx		= myItem.mapx;
+				mapy		= myItem.mapy;
 				
 				$("#touristName").append('<h2>' + title +'<h2>');
 				$("#touristImg").append(
@@ -71,6 +75,8 @@
 						
 				);
 				
+				
+				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("request : " + XMLHttpRequest);
@@ -78,39 +84,26 @@
 				alert("Error: " + errorThrown);
 			}
 		});
-		$(function () {
-			alert("확인");
-		$("#con").each(function () {
-	        alert("con");
-	        // Run formatWord function and specify the length of words display to viewer
-	        $(this).html(formatWords($(this).html(), 100));
-	        
-	        // Hide the extra words
-	        $(this).children('span').hide();
-	        
-	        // Apply click event to read more link
-	    }).click(function () {
-	    	alert("click");
-	        // Grab the hidden span and anchor
-	        var more_text = $(this).children('span.more_text');
-	        var more_link = $(this).children('a.more_link');
-	        
-	        // Toggle visibility using hasClass
-	        // I know you can use is(':visible') but it doesn't work in IE8 somehow...
-	        if (more_text.hasClass('hide')) {
-	            more_text.show();
-	            more_link.html(' &raquo; hide');        
-	            more_text.removeClass('hide');
-	        } else {
-	            more_text.hide();
-	            more_link.html(' &laquo; more');            
-	            more_text.addClass('hide');
-	        }
-	        return false;
-	        
-	    });
-		});
+	
 	};
+		function initMap(){
+			var mapx = $("#mapx").val();
+			var mapy = $("#mapy").val();
+			var mapLocation = new google.maps.LatLng(mapy, mapx); // 지도에서 가운데로 위치할 위도와 경도
+			//var mapLocation = new google.maps.LatLng('37.51', '127.03');
+			var mapOptions = {
+			          center: mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+			          zoom: 15, // 지도 zoom단계
+			          mapTypeId: google.maps.MapTypeId.ROADMAP
+			        };
+			        var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+			            mapOptions);
+			        var marker = new google.maps.Marker({
+			            position: mapLocation,
+			            map: map
+			          });
+		}
+	
 	
 	function isAddWish(type, id, email){
 		/* alert("type = " + type);
@@ -136,47 +129,11 @@
 		}
 	}
 	
-/* 	function formatWords(sentence, show) {
-		 alert("formatWords");
-		    // split all the words and store it in an array
-		    var words = sentence.split(' ');
-		    var new_sentence = '';
-		    // loop through each word
-		    for (i = 0; i < words.length; i++) {
-		        // process words that will visible to viewer
-		        if (i <= show) {
-		            new_sentence += words[i] + ' ';
-		            
-		            // process the rest of the words
-		        } else {
-		            
-		            // add a span at start
-		            if (i == (show + 1)) new_sentence += '... <span class="more_text hide">';        
-		            new_sentence += words[i] + ' ';
-		            
-		            // close the span tag and add read more link in the very end
-		            if (words[i+1] == null) new_sentence += '</span><a href="#" class="more_link"> &raquo; more</a>';
-		        }         
-		    }
-		    return new_sentence;
-		} */
-	
 
-
-	
-	
-	/* .overview(개요) 더보기 기능 구현 */
-	/* $(function () { */
-    // Grab all the excerpt class
-   
-   
-/* }); */
-
-	// Accept a paragraph and return a formatted paragraph with additional html tags
-	 
 	 
 	
 </script>
+
 <style type="text/css">
 div {
 	margin: 0px auto;
@@ -207,6 +164,14 @@ div {
 	margin-bottom: 20px;
 }
 
+.wishImg{
+	width : 50px;
+	height : 50px;
+	border : 1px solid red;
+	margin-left : 20px;
+	float : left;
+}
+
 .touristImg{
 	width: 500px;
 	height: 400px;
@@ -228,7 +193,8 @@ div {
 } */
 
 .touristImg img{
-	width : 400px;
+	width : 500px;
+	height: 400px;
 	vertical-align: middle;
 	border:1px;
 	
@@ -251,7 +217,7 @@ div {
 
 .section2 {
 	width: 1080px;
-	height: 650px;
+	height: 850px;
 	border: 1px solid black;
 }
 
@@ -265,9 +231,9 @@ div {
 	
 }
 
-.info {
+.map {
 	width: 1000px;
-	height: 300px;
+	height: 500px;
 	border: 1px solid blue;
 	
 }
@@ -293,6 +259,8 @@ div {
 	String contendtid 		= (String)request.getAttribute("contendtid");
 	String result			= (String)request.getAttribute("result");
 	String email			= (String)session.getAttribute("email");
+	String mapx				= (String)request.getAttribute("mapx");
+	String mapy				= (String)request.getAttribute("mapy");
 %>
 
 	<div id="test">test
@@ -300,18 +268,47 @@ div {
 		<c:choose>
 			<c:when test="${result=='0' }">
 				즐겨 찾기 추가 안됨
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
+				</button>
 			</c:when>
 			<c:when test="${result=='1' }">
 				즐겨 찾기 추가 됨
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+				</button>
 			</c:when>
 		</c:choose>
 	</div>
+	<!--test div  -->
 	
 	<div class="section1">
 		<!--이미지 & 간략 설명  -->
 		<div class="search1Area">
+		
+			<div class = "wishImg">
+				<c:choose>
+			<c:when test="${result=='0' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+			<c:when test="${result=='1' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+		</c:choose>
+				
+			</div>
 			
-			<div class="touristName" id = "touristName">
+			<div class="touristName" id = "touristName" style='text-align:center'>
 				 
 			</div>
 			
@@ -333,19 +330,23 @@ div {
 		<div class="overview" id = "overview" style = "overflow:scroll;" >
 			
 		</div>
-		<div class="info" id = "info">
-		소개정보
+		<div class="map" id = "map">
+		
 		</div> <!--listArea 끝  -->
 	</div><!--content 끝  -->
 	<!--section 끝  -->
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
-		<%-- <input type = "text" value ="${contentTypeId}" id = "contentTypeId">
-		<input type = "text" value ="${contendtid}" id = "contendtid">  --%>
-	 	<input type = "text" value ="12" id = "contentTypeId">
-		<input type = "text" value ="127213" id = "contendtid"> 
+		<input type = "text" value ="${contentTypeId}" id = "contentTypeId">
+		<input type = "text" value ="${contendtid}" id = "contendtid">  
+<!-- 	 	<input type = "text" value ="12" id = "contentTypeId">
+		<input type = "text" value ="127213" id = "contendtid">  -->
 		<input type = "text" value ="${email }" id = "email">
 		<input type = "text" value = "${result }" id = "result">
+		<input type = "text" value = "${mapx }" id = "mapx">
+		<input type = "text" value = "${mapy }" id = "mapy">
+		<!-- <input type = "text" value = "127.0336840818" id = "mapx">
+		<input type = "text" value = "37.5163582893" id = "mapy"> -->
 	</div>
 		<%@ include file="footer.jsp"%>
 	

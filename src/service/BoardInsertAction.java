@@ -7,8 +7,6 @@ import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -44,12 +42,16 @@ public class BoardInsertAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
+		String email = request.getParameter("email");
+		String nickname = request.getParameter("nickname");
+
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setContent(multi.getParameter("content"));
 		dto.setArea_names(multi.getParameter("area"));
+		dto.setEmail(multi.getParameter("email"));
 		
 		if(multi.getFile("image_url") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);
@@ -60,7 +62,6 @@ public class BoardInsertAction implements CommandProcess {
 		}
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			String nickname = request.getParameter("nickname");
 			int result = dao.insertPlan(dto, nickname);
 			
 			if (result > 0) {

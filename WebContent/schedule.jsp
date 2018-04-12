@@ -71,7 +71,7 @@
 								<div class="second-text">
 									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="text">여행지 : ${list.local_name }</div>
+								<div class="text">여행지 : ${list.area_name }</div>
 								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
 								<div class="text">작성일 : ${list.regi_date }</div>
 							</div>
