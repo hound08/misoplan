@@ -225,21 +225,21 @@ div {
 					<div class="card-body-header">
 						<h1>${board.title }</h1>
 						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
-						<p class="card-body-hashtag">
-							<c:forEach var="t" items="${tags }">
-								<c:out value="${t }"></c:out>
-							</c:forEach>
-						</p>
+						<div class="card-body-hashtag">
+								<c:forEach var="t" items="${tags }">
+									<c:out value="${t }"></c:out>
+								</c:forEach>
+						</div>
 						<p class="card-body-nickname">작성자: ${board.nickname }</p>
 					</div>
 					<!--  카드 바디 본문 -->
-					<pre><p class="card-body-description">${board.content }</p></pre>
+					<textarea class="card-body-description" rows="7" disabled="disabled" style="background-color: white; width:87%; border:none; overflow:hidden; resize: none">${board.content }</textarea>
 					<!--  카드 바디 푸터 -->
 					<div class="card-body-footer">
 						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
 						<i class="icon icon-comments_count"></i>댓글 ${board.comment_count }개
-						<i class="reg_date"></i>${board.reg_date }
+						<i class="reg_date"></i>${board.post_date }
 					</div>
 				</div>
 			</div>

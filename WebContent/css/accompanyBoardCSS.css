@@ -76,21 +76,27 @@ h1 {
     -o-transition: .2s ease-in-out; /*오페라*/
     transition : .2s ease-in-out;
 	margin: 5px 20px;
+	overflow: hidden;
 }
 
 .card:hover .card-body-description {
     opacity: 1;
+    height: 200px;
     -webkit-transition: .2s ease-in-out;
     -moz-transition: .2s ease-in-out;
     -ms-transition: .2s ease-in-out;
     -o-transition: .2s ease-in-out;
     transition : .2s ease-in-out;
+    border: solid;
     overflow: hidden;
 }
 
 .card-body-hashtag {
+	height: 30px;
 	color: #2478FF;
 	font-style: italic;
+	overflow: hidden;
+	border: solid;
 }
 
 .card-body-footer {
