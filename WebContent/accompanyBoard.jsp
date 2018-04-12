@@ -207,6 +207,7 @@ div {
 			<div class="card">
 				<!-- 카드 헤더 -->
 				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
+					
 					<div class="card-header-is_closed">
 						<c:if test="${board.is_closed == 0 }">
 							<div class="card-header-text">모집중</div>

@@ -149,7 +149,7 @@ submit-button {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지</td><td><img id="output"/></td></tr>
-				<tr><td></td><td><input type="file" accept="image/*" onchange="loadFile(event)"></td>
+				<tr><td></td><td><input type="file" accept="image/*" onchange="loadFile(event)" name="image"></td>
 				</table>
 				
 				<a href="listAction.do"><button class="cancel-button">취소</button></a>							

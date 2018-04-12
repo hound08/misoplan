@@ -62,10 +62,11 @@ public class writeActionAB implements CommandProcess{
 		accompanyDto.setClosing_date(closing_date);
 		accompanyDto.setTag(multi.getParameter("tag"));
 		accompanyDto.setContent(multi.getParameter("content"));
-		if(file != null)
+		if(multi.getFile("image") != null)
 			accompanyDto.setImage_url("/J20180403/upload/" + filename);
 		else
 			accompanyDto.setImage_url("/J20180403/upload/default-image.png");
+		
 		accompanyDto.setMinimum_num(Integer.parseInt(multi.getParameter("minimum_num")));
 		
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
