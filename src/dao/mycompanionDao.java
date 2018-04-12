@@ -47,6 +47,7 @@ public class mycompanionDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "select * from accompanyboard where email = ?";
+		System.out.println("select email= "+ email);
 		List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
 		try {
 			conn = getConnection();
@@ -54,6 +55,7 @@ public class mycompanionDao {
 			ps.setString(1, email);
 			rs = ps.executeQuery();
 			while (rs.next()) {
+				System.out.println("dao야 돌자 빙빙");
 				AccompanyBoardDto dto = new AccompanyBoardDto();
 				dto.setPost_num(rs.getInt("post_num"));
 				dto.setTitle(rs.getString("title"));

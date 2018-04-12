@@ -167,12 +167,12 @@ div {
 		setInterval(replacePhoto, 3000);
 	</script>
 	<%
-		request.setAttribute("email", session.getAttribute("email"));
-		request.setAttribute("nickname", session.getAttribute("nickname"));
+		String email = (String)session.getAttribute("email");
+		String nickname = (String)session.getAttribute("nickname");
 	%>
 	<div class="center">
 		<div id="button1" align="right">
-			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardselect.do?email=${email}'">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
@@ -191,7 +191,7 @@ div {
 					<h1>제목 : ${bs.title }</h1>
 				</div>
 				<div class="tag">${bs.tag }</div>
-				<div class="idlocal">아이디 : ${nickname }</div>
+				<div class="idlocal">아이디 : ${bs.nickname }</div>
 				<div class="datelocal" align="right">${bs.board_date }</div>
 			</div>
 			</a>
@@ -218,6 +218,7 @@ div {
 				</select> <input type="text" name="search"> 돋보기 이미지
 			</div>
 		</div>
+		<input type = "text" value = "${test }">
 		<%@ include file="footer.jsp"%>
 </body>
 </html>

@@ -42,6 +42,10 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	vertical-align: top;
 	
 }
+.card_image {
+	width: 350px;
+	height: 250px;
+}
 .main-top-second2 {
 	padding: 40px 0 0 70px;
 	vertical-align: top;
@@ -140,12 +144,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 <body>
 
 	<div class="main-top">
-			<img class="main-top-second1" alt="IMG" src="">
-		<div class="main-top-second2">
-		
+		<div class="main-top-second1">
+			<img alt="image" src="${bs.image_url }">		
 		</div>
-		<div class="main-imagebt">
-		
+		<div class="main-top-second2">
+			${ bsdto.title}
 		</div>
 	</div>
 	<div class="main-center">
@@ -153,12 +156,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			My Plan List
 		</div>
 			<div class="center-main-card">
-			<c:forEach var="dto" items="${showList }">
+			<c:forEach var="dto" items="${list }">
 				<div class="center-card-box" align="center">
 					<div class="card-box-title">
-						
+						${bs.title }
 						<div> 
-						 
+						
 						
 						</div>
 						<div class ="card-box-title2"> <!-- 날짜 -->
