@@ -188,6 +188,7 @@ div {
 				</div>
 				<div class="second-text">
 					<h2>제목 : ${bs.title }</h2>
+					 ${schedule_date }
 				</div>
 				<div class="tag">${bs.tag }</div>
 				<div class="idlocal">아이디 : ${bs.nickname }</div>
