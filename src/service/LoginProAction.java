@@ -1,7 +1,6 @@
 package service;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +22,12 @@ public class LoginProAction implements CommandProcess {
 			String password = securityUtil.encryptSHA256(request.getParameter("password"));
 			
 			MemberDao dao = MemberDao.getInstance();
-			List<String> list = dao.loginCheck(email, password);
+			MemberDto dto = dao.loginCheck(email, password);
 			
-			request.setAttribute("email", list.get(0));
-			request.setAttribute("nickname", list.get(1));
-			request.setAttribute("profile_url", list.get(2));
+			request.setAttribute("email", dto.getEmail());
+			request.setAttribute("nickname", dto.getNickname());
+			request.setAttribute("profile_url", dto.getProfile_url());
+			request.setAttribute("admin", dto.getMember_admin());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

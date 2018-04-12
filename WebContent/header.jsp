@@ -181,7 +181,7 @@ a:VISITED {
 				</div>
 				<div class="login_on">
 					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
-					<p class="buttons"><input type="button" class="btnMyInfo" value="내 정보" onclick="location.href='myInfoConfirmForm.do?email=${email}'">
+					<p class="buttons"><input type="button" class="btnMyInfo" value="내 정보" onclick="location.href='mypage.jsp'">
 					<input type="button" value="로그아웃" class="btnLogout" onclick="location.href='logoutPro.do'"></p>
 				</div>	<%
 			}
