@@ -44,10 +44,8 @@ public class BoardInsertAction implements CommandProcess {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
 		}
-		String email = request.getParameter("email");
 		String nickname = request.getParameter("nickname");
-		System.out.println( "nickname = " + nickname );
-		System.out.println("board insert email확인 " + email);
+
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));
@@ -55,6 +53,7 @@ public class BoardInsertAction implements CommandProcess {
 		dto.setContent(multi.getParameter("content"));
 		dto.setArea_names(multi.getParameter("area"));
 		dto.setEmail(multi.getParameter("email"));
+		dto.setNickname(multi.getParameter("nickname"));
 		
 		if(multi.getFile("image_url") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);

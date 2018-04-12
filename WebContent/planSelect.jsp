@@ -182,6 +182,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 		<p>지   역 : <span id="area"></span></p><br>
 				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
 				 <input type="text" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
+				 <input type="text" name="nickname" id="nickname" value="${nickname }"> <!-- nickname 넘어가는지 확인 -->
 		<p>기   간 : <span id="date"></span></p>
 		</div>
 		<div class="main-imagebt">
