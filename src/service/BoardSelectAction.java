@@ -19,7 +19,7 @@ public class BoardSelectAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String email = request.getParameter("email");
-			String nickname = request.getParameter("nickname");
+/*			String nickname = request.getParameter("nickname");*/
 /*			System.out.println("nickname = " + nickname);*/
 			// 받아오는 dao
 			mySchduleDao msdao = mySchduleDao.getInstance();
