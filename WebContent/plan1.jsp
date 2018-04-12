@@ -20,7 +20,6 @@
 	margin: 0px;
 	padding: 0px;
 }
-
 div {
 	margin: 0px auto;
 	/* border: 1px solid black;  */
@@ -185,10 +184,11 @@ div {
 					<img alt="image" class="card_image" src="${bs.image_url }">
 				</div>
 				<div class="local">
-					${bs.area_names }
+					${bs.area_names } ${bs.sl_code }
 				</div>
 				<div class="second-text">
-					<h1>제목 : ${bs.title }</h1>
+					<h2>제목 : ${bs.title }</h2>
+					 ${schedule_date }
 				</div>
 				<div class="tag">${bs.tag }</div>
 				<div class="idlocal">아이디 : ${bs.nickname }</div>

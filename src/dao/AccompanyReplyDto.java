@@ -8,9 +8,16 @@ public class AccompanyReplyDto {
 	private int post_num;
 	private String email;
 	private String nickname;
+	private String profile_url;
 	private String content;
 	private Date reply_date;
 	
+	public String getProfile_url() {
+		return profile_url;
+	}
+	public void setProfile_url(String profile_url) {
+		this.profile_url = profile_url;
+	}
 	public int getRp_num() {
 		return rp_num;
 	}

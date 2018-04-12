@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -313,6 +315,45 @@ public class MemberDao {
 		}
 		
 		return result;
+	}
+	
+	public List<MemberDto> selectMemberList() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<MemberDto> list = new ArrayList<MemberDto>();
+		MemberDto dto = new MemberDto();
+		String sql = "SELECT * FROM MEMBER";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					dto = new MemberDto();
+					dto.setEmail(rs.getString(1));
+					dto.setNickname(rs.getString(2));
+					dto.setPhone(rs.getString(4));
+					dto.setMember_score(rs.getInt(6));
+					dto.setMember_admin(rs.getInt(7));
+					dto.setBan(rs.getInt(8));
+					dto.setBan_date(rs.getDate(9));
+					dto.setLeave(rs.getInt(10));
+					dto.setJoin_date(rs.getDate(11));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return list;
 	}
 
 }

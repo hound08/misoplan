@@ -52,12 +52,21 @@ public class BoardInsertAction implements CommandProcess {
 		dto.setContent(multi.getParameter("content"));
 		dto.setArea_names(multi.getParameter("area"));
 		dto.setEmail(multi.getParameter("email"));
+		dto.setSl_code(multi.getParameter("sl_code"));
+		dto.setSchedule_date(multi.getParameter("schedule_date"));
+		
+		String schedule = dto.getSchedule_date();
+		System.out.println("@#@#@#@#@#@ schedule 확인 -> " + schedule);
+		String area = dto.getArea_names();
+		System.out.println("@#@#@#@#@#@ area 확인 -> " + area);
+		String test = dto.getSl_code();
+		System.out.println("@#@#@##@### test 확인 " + test);
 		
 		if(multi.getFile("image_url") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);
 			
 		} else {
-			dto.setImage_url("/J20180403/images/no_profile_image.png");
+			dto.setImage_url("/J20180403/images/no_image.jpg");
 			
 		}
 		try {

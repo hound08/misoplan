@@ -25,6 +25,9 @@ public class BoardScheduleDto {
 	private String tour_name;
 	private String s_name;
 	private Date regi_date;
+	private String schedule_date;
+	
+	
 	public int getBs_num() {
 		return bs_num;
 	}
@@ -150,6 +153,12 @@ public class BoardScheduleDto {
 	}
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
+	}
+	public String getSchedule_date() {
+		return schedule_date;
+	}
+	public void setSchedule_date(String schedule_date) {
+		this.schedule_date = schedule_date;
 	}
 	
 	

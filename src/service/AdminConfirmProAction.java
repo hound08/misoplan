@@ -1,31 +1,36 @@
 package service;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import security.SecurityUtil;
 import dao.MemberDao;
-import dao.MemberDto;
 
-public class AdminMainFormAction implements CommandProcess {
+public class AdminConfirmProAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<MemberDto> list = null;
+		String email = request.getParameter("email");
+		
+		// 사용자 비밀번호 암호화 (SHA-256)
+		SecurityUtil securityUtil = new SecurityUtil();
+		String password = securityUtil.encryptSHA256(request.getParameter("password"));
+		
+		int result = 0;
 		
 		try {
 			MemberDao dao = MemberDao.getInstance();
-			list = dao.selectMemberList();
+			result = dao.myInfoLogin(email, password);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		request.setAttribute("memberList", list);
-		
-		return "adminMainForm.jsp";
+		request.setAttribute("result", result);
+
+		return "adminConfirmPro.jsp";
 	}
 
 }

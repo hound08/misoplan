@@ -14,13 +14,13 @@
 	
 	<c:if test="<%=result > 0 %>">
 		<script type="text/javascript">
-			location.href="myInfoForm.do?email=<%=email%>";
+			location.href="adminMainForm.do?email=<%=email%>";
 		</script>
 	</c:if>
 	<c:if test="<%=result <= 0 %>">
 		<script type="text/javascript">
 			alert("비밀번호가 일치하지 않습니다.");
-			location.href="myInfoConfirmForm.do?email=<%=email%>";
+			location.href="adminConfirmForm.do?email=<%=email%>";
 		</script>
 	</c:if>
 </body>

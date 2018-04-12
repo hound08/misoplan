@@ -5,7 +5,17 @@ public class WishlistDto {
 	private int contendtid;
 	private String email;
 	private String tour_name;
+	private String img_src;
 	
+	
+	
+	
+	public String getImg_src() {
+		return img_src;
+	}
+	public void setImg_src(String img_src) {
+		this.img_src = img_src;
+	}
 	public int getContenttypeid() {
 		return contenttypeid;
 	}
@@ -29,6 +39,12 @@ public class WishlistDto {
 	}
 	public void setTour_name(String tour_name) {
 		this.tour_name = tour_name;
+	}
+	public String getImg_src() {
+		return img_src;
+	}
+	public void setImg_src(String img_src) {
+		this.img_src = img_src;
 	}
 	
 	
