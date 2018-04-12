@@ -60,7 +60,7 @@ public class mycompanionDao {
 				dto.setTitle(rs.getString("title"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setCurrent_num(rs.getInt("current_num"));
-				dto.setMinumum_num(rs.getInt("minumum_num"));
+				dto.setMinimum_num(rs.getInt("minimum_num"));
 				dto.setPost_date(rs.getDate("post_date"));
 				list.add(dto);
 			}

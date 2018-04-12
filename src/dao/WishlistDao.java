@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 public class WishlistDao {
 	private static WishlistDao instance;
 
@@ -101,5 +102,14 @@ public class WishlistDao {
 		}
 		
 		return result;
+	}
+
+	public List<WishlistDto> select(String email) {
+		
+		
+		
+		
+		
+		return null;
 	}
 }

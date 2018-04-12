@@ -10,14 +10,11 @@ public class mySchduleDto {
 	private Date tour_date_end;
 	private Date regi_date;
 	
-<<<<<<< HEAD
 	
 	
 	
-=======
 
 
->>>>>>> 9944be15db2d3df0eedeabbc92b02ea7a0acfd45
 	public String getSl_code() {
 		return sl_code;
 	}
@@ -30,20 +27,14 @@ public class mySchduleDto {
 	public void setS_name(String s_name) {
 		this.s_name = s_name;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 9944be15db2d3df0eedeabbc92b02ea7a0acfd45
 	public String getArea_name() {
 		return area_name;
 	}
 	public void setArea_name(String area_name) {
 		this.area_name = area_name;
 	}
-<<<<<<< HEAD
-=======
 
->>>>>>> 9944be15db2d3df0eedeabbc92b02ea7a0acfd45
 	public Date getTour_date_start() {
 		return tour_date_start;
 	}
