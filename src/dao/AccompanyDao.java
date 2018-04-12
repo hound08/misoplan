@@ -177,7 +177,7 @@ public class AccompanyDao {
 				accompanyDto.setTag(rs.getString(9));
 				accompanyDto.setView_count(rs.getInt(10));
 				accompanyDto.setVote_count(rs.getInt(11));
-				accompanyDto.setReg_date(rs.getDate(12));
+				accompanyDto.setPost_date(rs.getDate(12));
 				accompanyDto.setMinimum_num(rs.getInt(14));
 				accompanyDto.setCurrent_num(rs.getInt(15));
 				accompanyDto.setIs_closed(rs.getInt(16));
@@ -261,7 +261,7 @@ public class AccompanyDao {
 			board.setTag(rs.getString(8));
 			board.setView_count(rs.getInt(9));
 			board.setVote_count(rs.getInt(10));
-			board.setReg_date(rs.getDate(11));
+			board.setPost_date(rs.getDate(11));
 			board.setClosing_date(rs.getDate(12));
 			board.setMinimum_num(rs.getInt(13));
 			board.setCurrent_num(rs.getInt(14));
