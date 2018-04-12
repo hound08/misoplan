@@ -45,11 +45,11 @@
 		<ul>
 			<h1>My Page</h1>
 			<%-- <li class="sidemenus"><a href="myInfoForm.do?email=${email}" class="a">내정보</a></li> --%>
-			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내정보</a></li>
+			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내 정보</a></li>
 			<li class="sidemenus"><a href="scheduleForm.do?email=${email }" class="a">내 계획</a></li>
-			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 List</a></li>
+			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 리스트</a></li>
 			<li class="sidemenus" ><a href="companionForm.do?email=${email }" class="a">동행</a></li>
-			<li class="sidemenus" ><a href="#" id="b" >관리자</a></li>
+			<li class="sidemenus" ><a href="adminMainForm.do" id="b" >관리자</a></li>
 		</ul>
 	</div>
 </body>
