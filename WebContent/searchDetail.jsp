@@ -112,6 +112,10 @@
 		var email = $("#email").val();
 		var title = $("#title").val();
 		var result = $("#result").val();
+		var mapx = $("#mapx").val();
+		var mapy = $("#mapy").val();
+		var firstImage = $("#firstImage").val();
+		/* alert("fitstImage  -> " + firstImage); */
 		/* alert("title = " + title); */
 		if(email == ""){
 			alert("로그인을 먼저하세요!");
@@ -125,7 +129,13 @@
 							+ 'email='
 							+ email + '&'
 							+ 'title=' 
-							+ title;
+							+ title + '&'
+							+ 'mapx='
+							+ mapx + '&'
+							+ 'mapy='
+							+ mapy + '&'
+							+ 'firstImage='
+							+ firstImage;
 		}
 	}
 	
@@ -261,6 +271,7 @@ div {
 	String email			= (String)session.getAttribute("email");
 	String mapx				= (String)request.getAttribute("mapx");
 	String mapy				= (String)request.getAttribute("mapy");
+	String firstImage		= (String)request.getAttribute("firstImg");
 %>
 
 	<div id="test">test
@@ -269,15 +280,15 @@ div {
 			<c:when test="${result=='0' }">
 				즐겨 찾기 추가 안됨
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
-					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
 					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
 				</button>
 			</c:when>
 			<c:when test="${result=='1' }">
 				즐겨 찾기 추가 됨
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
-					style = "width:50px; height:50px;background-color: transparent; border:none;">
-					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px; ">
 				</button>
 			</c:when>
 		</c:choose>
@@ -293,14 +304,14 @@ div {
 			<c:when test="${result=='0' }">
 				
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
-					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
 					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
 				</button>
 			</c:when>
 			<c:when test="${result=='1' }">
 				
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
-					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
 					<img src = "images/wish.png" style = "width:50px; height : 50px;">
 				</button>
 			</c:when>
@@ -345,6 +356,7 @@ div {
 		<input type = "text" value = "${result }" id = "result">
 		<input type = "text" value = "${mapx }" id = "mapx">
 		<input type = "text" value = "${mapy }" id = "mapy">
+		<input type = "text" value = "${firstImage }" id = firstImage>
 		<!-- <input type = "text" value = "127.0336840818" id = "mapx">
 		<input type = "text" value = "37.5163582893" id = "mapy"> -->
 	</div>

@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<title>찜 리스트</title>
 		<style type="text/css">
 			#center {
@@ -13,8 +14,6 @@
 				margin: 0px auto;
 				width: 1200px;
 			}
-			
-			
 			#main {
 					width: 930px;
 					border: 3px solid green;
@@ -31,9 +30,10 @@
 			
 			.card {
 				float: left;
-				width: 300px;
+				width: 290px;
 				height: 200px;
 				border: 1px solid;
+				margin-right:10px;
 			}
 			.cardhead  img{
 				border-radius: 15px;
@@ -70,26 +70,27 @@
 		</style>
 	</head>
 	<body>
-		
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
 				<h1>나의 찜 리스트</h1>
 				<div id="myinfo">
-					<%-- <c:forEach var="" items=""> --%>
-					
+				
+				<form action="myWishListPro.do">
+					<c:forEach var="list" items="${list }">
 						<div class="card">
 							<div class="cardhead">
 								<img alt="tour_img" src="images/1.jpg">
+								<input type="checkbox" name="wishlist">
 							</div>
 							<div class="cardbody">
-								<a href="#">${list.tour_name}</a>								
+								<a href="#">${list.tour_name }</a>
 							</div>
 						</div>
-					
-					
-					<%-- </c:forEach> --%>
-						
+					</c:forEach>
+					<input type="submit" value="삭제">
+					<input type="reset" value="취소">
+				</form>
 							<div class="pagination">
 										<a href="#">&laquo;</a> 
 										<a href="#" class="active">1</a> 

@@ -683,7 +683,9 @@
 									+ 'mapx='
 									+ myItem[i].mapx + '&'
 									+ 'mapy='
-									+ myItem[i].mapy
+									+ myItem[i].mapy + '&'
+									+ 'firstImage=' 
+									+ firstImage
 									+ '">'
 									+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
 									+ title + '</p> </li>'
@@ -803,7 +805,9 @@
 							+ 'mapx='
 							+ myItem[i].mapx + '&'
 							+ 'mapy='
-							+ myItem[i].mapy
+							+ myItem[i].mapy + '&'
+							+ 'firstImage='
+							+ firstImage
 							+ '">'
 							+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
 							+ title + '</p> </li>'

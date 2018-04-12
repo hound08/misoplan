@@ -104,7 +104,7 @@ tr.highlight td {
 			<table>
 				<tr><td><h2>제목: </h2></td><td><h2>${board.title }</h2></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>작성자: </td><td>${board.nickname } | 등록일:${board.reg_date }</td></tr>
+				<tr><td>작성자: </td><td>${board.nickname } | 등록일:${board.post_date }</td></tr>
 				<tr><td>게시물 번호: </td><td>${post_num }</td></tr>
 			</table>
 		</div>
