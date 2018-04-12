@@ -69,6 +69,7 @@
 						+'" id = "title">' 
 						
 				);
+				test();
 				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -79,6 +80,10 @@
 		});
 	
 	};
+	
+	function test(){
+		alert("test");
+	}
 	
 	function isAddWish(type, id, email){
 		/* alert("type = " + type);
@@ -167,7 +172,8 @@ div {
 } */
 
 .touristImg img{
-	width : 400px;
+	width : 500px;
+	height: 400px;
 	vertical-align: middle;
 	border:1px;
 	
@@ -204,7 +210,7 @@ div {
 	
 }
 
-.info {
+.map {
 	width: 1000px;
 	height: 300px;
 	border: 1px solid blue;
@@ -253,12 +259,29 @@ div {
 			</c:when>
 		</c:choose>
 	</div>
+	<!--test div  -->
 	
 	<div class="section1">
 		<!--이미지 & 간략 설명  -->
 		<div class="search1Area">
 		
 			<div class = "wishImg">
+				<c:choose>
+			<c:when test="${result=='0' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+			<c:when test="${result=='1' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+		</c:choose>
 				
 			</div>
 			
@@ -284,8 +307,8 @@ div {
 		<div class="overview" id = "overview" style = "overflow:scroll;" >
 			
 		</div>
-		<div class="info" id = "info">
-		소개정보
+		<div class="map" id = "map">
+		
 		</div> <!--listArea 끝  -->
 	</div><!--content 끝  -->
 	<!--section 끝  -->
