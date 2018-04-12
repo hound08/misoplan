@@ -12,7 +12,10 @@
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
+</script>
 <script type="text/javascript">
 	window.onload = function(){
 		var contentTypeId = $("#contentTypeId").val();
@@ -36,6 +39,8 @@
 				var zipcode		= myItem.zipcode;
 				var title 		= myItem.title;		//touristName
 				var overview	= myItem.overview;
+				mapx		= myItem.mapx;
+				mapy		= myItem.mapy;
 				
 				$("#touristName").append('<h2>' + title +'<h2>');
 				$("#touristImg").append(
@@ -69,7 +74,8 @@
 						+'" id = "title">' 
 						
 				);
-				test();
+				
+				
 				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -80,10 +86,24 @@
 		});
 	
 	};
+		function initMap(){
+			var mapx = $("#mapx").val();
+			var mapy = $("#mapy").val();
+			var mapLocation = new google.maps.LatLng(mapy, mapx); // 지도에서 가운데로 위치할 위도와 경도
+			//var mapLocation = new google.maps.LatLng('37.51', '127.03');
+			var mapOptions = {
+			          center: mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+			          zoom: 15, // 지도 zoom단계
+			          mapTypeId: google.maps.MapTypeId.ROADMAP
+			        };
+			        var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+			            mapOptions);
+			        var marker = new google.maps.Marker({
+			            position: mapLocation,
+			            map: map
+			          });
+		}
 	
-	function test(){
-		alert("test");
-	}
 	
 	function isAddWish(type, id, email){
 		/* alert("type = " + type);
@@ -113,6 +133,7 @@
 	 
 	
 </script>
+
 <style type="text/css">
 div {
 	margin: 0px auto;
@@ -196,7 +217,7 @@ div {
 
 .section2 {
 	width: 1080px;
-	height: 650px;
+	height: 850px;
 	border: 1px solid black;
 }
 
@@ -212,7 +233,7 @@ div {
 
 .map {
 	width: 1000px;
-	height: 300px;
+	height: 500px;
 	border: 1px solid blue;
 	
 }
@@ -238,6 +259,8 @@ div {
 	String contendtid 		= (String)request.getAttribute("contendtid");
 	String result			= (String)request.getAttribute("result");
 	String email			= (String)session.getAttribute("email");
+	String mapx				= (String)request.getAttribute("mapx");
+	String mapy				= (String)request.getAttribute("mapy");
 %>
 
 	<div id="test">test
@@ -320,6 +343,10 @@ div {
 		<input type = "text" value ="127213" id = "contendtid">  -->
 		<input type = "text" value ="${email }" id = "email">
 		<input type = "text" value = "${result }" id = "result">
+		<input type = "text" value = "${mapx }" id = "mapx">
+		<input type = "text" value = "${mapy }" id = "mapy">
+		<!-- <input type = "text" value = "127.0336840818" id = "mapx">
+		<input type = "text" value = "37.5163582893" id = "mapy"> -->
 	</div>
 		<%@ include file="footer.jsp"%>
 	

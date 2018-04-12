@@ -646,6 +646,7 @@
 				var myFirstPage		= 1;
 				if(myEndPage > myTotalPage)
 					myEndPage = myTotalPage;
+				
 
 				/* 검색결과 출력 메시지 */
 				
@@ -678,7 +679,11 @@
 									+ 'contendtid='
 									+ myItem[i].contentid +'&'
 									+ 'email='
-									+ email
+									+ email + '&'
+									+ 'mapx='
+									+ myItem[i].mapx + '&'
+									+ 'mapy='
+									+ myItem[i].mapy
 									+ '">'
 									+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
 									+ title + '</p> </li>'
@@ -788,14 +793,17 @@
 						firstImage = "images/no_image.jpg";
 					}					
 					
-					$("#galleryList")
-					.append(
+					$("#galleryList").append(
 							'<a href = "searchDetail.do?contentTypeId='
 							+ myItem[i].contenttypeid +'&'
 							+ 'contendtid='
-							+ myItem[i].contentid + '&'
+							+ myItem[i].contentid +'&'
 							+ 'email='
-							+ email
+							+ email + '&'
+							+ 'mapx='
+							+ myItem[i].mapx + '&'
+							+ 'mapy='
+							+ myItem[i].mapy
 							+ '">'
 							+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
 							+ title + '</p> </li>'
