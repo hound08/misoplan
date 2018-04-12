@@ -161,7 +161,7 @@ public class BoardScheduleDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL) VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int bs_num = 0;
 		int result = 0;
 		try {
@@ -174,9 +174,19 @@ public class BoardScheduleDao {
 
 			rs.close();
 			ps.close();
-
+			
+			System.out.println("2 -> " + dto.getTitle());
+			System.out.println("3 -> " + dto.getTag());
+			System.out.println("4 -> " + dto.getNickname());
+			System.out.println("5 -> " + dto.getImage_url());
+			System.out.println("6 -> " + dto.getContent());
+			System.out.println("7 -> " + dto.getArea_names());
+			System.out.println("8 -> " + dto.getEmail());
+			System.out.println("9-> " + dto.getSl_code());
+			
 			ps = conn.prepareStatement(sql2);
-
+			System.out.println("bs_num" + bs_num);
+/*			System.out.println("sl_code" + sl_code);*/
 			ps.setInt(1, bs_num);
 			ps.setString(2, dto.getTitle());
 			ps.setString(3, dto.getTag());
@@ -185,6 +195,7 @@ public class BoardScheduleDao {
 			ps.setString(6, dto.getContent());
 			ps.setString(7, dto.getArea_names());
 			ps.setString(8, dto.getEmail());
+			ps.setString(9, dto.getSl_code());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

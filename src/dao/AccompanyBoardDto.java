@@ -13,24 +13,34 @@ public class AccompanyBoardDto {
 	private String tag; //해시태그
 	private int vote_count; //추천수
 	private int view_count; //조회수
-	private int minimum_num; //최소인원
+	private int minumum_num; //최소인원
 	private int current_num; //현재인원
-	private Date reg_date; //작성일
+	private Date post_date; //작성일
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	private int comment_count; //댓글수
 	
+	
+	
+	
+	
+	public int getMinumum_num() {
+		return minumum_num;
+	}
+	public void setMinumum_num(int minumum_num) {
+		this.minumum_num = minumum_num;
+	}
+	public Date getPost_date() {
+		return post_date;
+	}
+	public void setPost_date(Date post_date) {
+		this.post_date = post_date;
+	}
 	public String getTag() {
 		return tag;
 	}
 	public void setTag(String tag) {
 		this.tag = tag;
-	}
-	public int getMinimum_num() {
-		return minimum_num;
-	}
-	public void setMinimum_num(int minimum_num) {
-		this.minimum_num = minimum_num;
 	}
 	public int getCurrent_num() {
 		return current_num;
@@ -85,12 +95,6 @@ public class AccompanyBoardDto {
 	}
 	public void setView_count(int view_count) {
 		this.view_count = view_count;
-	}
-	public Date getReg_date() {
-		return reg_date;
-	}
-	public void setReg_date(Date reg_date) {
-		this.reg_date = reg_date;
 	}
 	public Date getClosing_date() {
 		return closing_date;

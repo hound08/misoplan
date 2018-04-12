@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="header.jsp" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 	<head>
@@ -24,22 +25,25 @@
 			#main h1 {
 					margin: 20px 0px;
 			}
-			 #info {
+			 #myinfo {
 				border: 1px solid green;
 			}
-			 #info .wishlist{
+			
+			.card {
 				float: left;
-				margin: 15px;
-				border: 1px solid red;
+				width: 300px;
+				height: 200px;
+				border: 1px solid;
+			}
+			.cardhead  img{
 				border-radius: 15px;
-				width: 200px;               /*  이미지 사이즈 */
+				width: 100%;
 				height: 150px;
 			}
-			.mainimage {
-				width: 150px;
-				height: 120px;
+			.cardbody {
+				border: 1px solid yellow;
+				height: 45px;
 			}
-			
 			
 			.pagination {
 				clear: both;
@@ -72,32 +76,20 @@
 			<div id="main">
 				<h1>나의 찜 리스트</h1>
 				<div id="myinfo">
-					<div id="info">
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-							
+					<%-- <c:forEach var="" items=""> --%>
+					
+						<div class="card">
+							<div class="cardhead">
+								<img alt="tour_img" src="images/1.jpg">
+							</div>
+							<div class="cardbody">
+								<a href="#">${list.tour_name}</a>								
+							</div>
 						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						 <div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
+					
+					
+					<%-- </c:forEach> --%>
+						
 							<div class="pagination">
 										<a href="#">&laquo;</a> 
 										<a href="#" class="active">1</a> 
@@ -107,7 +99,6 @@
 										<a href="#">5</a> 
 										<a href="#">&raquo;</a>
 							</div>
-					</div>
 				</div>
 			</div>
 		</div>
