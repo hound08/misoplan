@@ -41,7 +41,7 @@ public class WishlistDao {
 		return conn;
 	}
 
-	public int wishCheck(int contentTypeId, int contendtid, String email) throws SQLException {
+	public int wishCheck(WishlistDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -51,9 +51,9 @@ public class WishlistDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, contentTypeId);
-			ps.setInt(2, contendtid);
-			ps.setString(3, email);
+			ps.setInt(1, dto.getContenttypeid());
+			ps.setInt(2, dto.getContendtid());
+			ps.setString(3, dto.getEmail());
 			rs = ps.executeQuery();
 			if(rs.next()){
 				System.out.println("wishcheck IF");
@@ -77,19 +77,20 @@ public class WishlistDao {
 		return result;
 	}
 
-	public int addWishList(int contentTypeId, int contendtid, String email, String title) throws SQLException {
+	public int addWishList(WishlistDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result=0;
-		String sql = "INSERT INTO WISHLIST VALUES (?,?,?,?)";
+		String sql = "INSERT INTO WISHLIST VALUES (?,?,?,?,?)";
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, contentTypeId);
-			ps.setInt(2, contendtid);
-			ps.setString(3, email);
-			ps.setString(4, title);
+			ps.setInt(1, dto.getContenttypeid());
+			ps.setInt(2, dto.getContendtid());
+			ps.setString(3, dto.getEmail());
+			ps.setString(4, dto.getTour_name());
+			ps.setString(5, dto.getImg_src());
 			result = ps.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -104,12 +105,32 @@ public class WishlistDao {
 		return result;
 	}
 
-	public List<WishlistDto> select(String email) {
-		
-		
-		
-		
-		
-		return null;
+	public List<WishlistDto> select(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from wishlist where email = ?";
+		List<WishlistDto> list = new ArrayList<WishlistDto>();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				WishlistDto dto = new WishlistDto();
+				dto.setContenttypeid(rs.getInt("contenttypeid"));
+				dto.setContendtid(rs.getInt("contendtid"));
+				dto.setImg_src(rs.getString("img_src"));
+				dto.setTour_name(rs.getString("tour_name"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return list;
 	}
 }

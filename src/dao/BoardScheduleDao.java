@@ -45,7 +45,10 @@ public class BoardScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARDSCHEDULE";
+		String sql = "select b.bs_num, b.email, b.nickname, b.title, b.tag, b.content,"
+				   + "b.image_url, b.vote_count, b.view_count, b.area_names, s.sm_code,"
+				   + "s.area_name, s.tour_date, b.board_date from BOARDSCHEDULE b, SCHEDULEMEDIUM s"
+				   + "where b.sl_code = s.sl_code and s.sl_code = ?";
 		List<BoardScheduleDto> selectlist = new ArrayList<BoardScheduleDto>();
 		try {
 			conn = getConnection();
@@ -161,7 +164,7 @@ public class BoardScheduleDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int bs_num = 0;
 		int result = 0;
 		try {
@@ -182,7 +185,8 @@ public class BoardScheduleDao {
 			System.out.println("6 -> " + dto.getContent());
 			System.out.println("7 -> " + dto.getArea_names());
 			System.out.println("8 -> " + dto.getEmail());
-			System.out.println("9-> " + dto.getSl_code());
+			System.out.println("9 -> " + dto.getSl_code());
+			System.out.println("10 -> " + dto.getSchedule_date());
 			
 			ps = conn.prepareStatement(sql2);
 			System.out.println("bs_num" + bs_num);
@@ -196,6 +200,7 @@ public class BoardScheduleDao {
 			ps.setString(7, dto.getArea_names());
 			ps.setString(8, dto.getEmail());
 			ps.setString(9, dto.getSl_code());
+			ps.setString(10, dto.getSchedule_date());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

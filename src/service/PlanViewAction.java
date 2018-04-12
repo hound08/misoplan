@@ -16,8 +16,9 @@ public class PlanViewAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
-			BoardScheduleDao bsd = BoardScheduleDao.getInstance();
+			BoardScheduleDao dao = BoardScheduleDao.getInstance();
+			List<BoardScheduleDto> selectlist = dao.selectlist();
+			request.setAttribute("selectlist", selectlist);
 		} 
 		
 			

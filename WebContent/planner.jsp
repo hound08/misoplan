@@ -8,9 +8,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link rel="stylesheet" href="css/pikaday.css">
-<link rel="stylesheet" href="css/triangle.css">
+<link rel="stylesheet" type="text/css" hrefs="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -674,24 +672,16 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 				<input type="text" name="title" id="title" class="inputs" required>
 				<br>
 				<label>출발일 : </label>
-				<input type="text" id="datepicker-triangle" name='date' class="inputs" required>
+			  	<input type="date" name="date" class="inputs">
 				<br>
-				<button onclick="javascript:document.getElementById('form').submit();">완료</button>
+			<!-- <button onclick="javascript:document.getElementById('form').submit();">완료</button> -->
+			<input type="submit" value="전송">
 			</form>
 		</aside>
 		<div class="avgrund-cover"></div>
-
+	
 		<script type="text/javascript" src="js/avgrund.js"></script>
 		<script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-		<!--  -->
 		
-		<script src="js/pikaday.js"></script>
-		<script>
-			var pickerTriangle = new Pikaday(
-			    {
-			        field: document.getElementById('datepicker-triangle'),
-			        theme: 'triangle-theme'
-			    });
-		</script>
 </body>
 </html>
