@@ -18,6 +18,7 @@ public class AccompanyBoardDto {
 	private Date post_date; //작성일
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
+	private int comment_count; //댓글수
 	
 	
 	
@@ -106,6 +107,12 @@ public class AccompanyBoardDto {
 	}
 	public void setIs_closed(int is_closed) {
 		this.is_closed = is_closed;
+	}
+	public int getComment_count() {
+		return comment_count;
+	}
+	public void setComment_count(int comment_count) {
+		this.comment_count = comment_count;
 	}
 
 }

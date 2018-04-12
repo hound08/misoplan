@@ -237,7 +237,7 @@ div {
 					<div class="card-body-footer">
 						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
-						<i class="icon icon-comments_count"></i>댓글 4개 
+						<i class="icon icon-comments_count"></i>댓글 ${board.comment_count }개
 						<i class="reg_date"></i>${board.reg_date }
 					</div>
 				</div>
