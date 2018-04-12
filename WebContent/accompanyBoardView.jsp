@@ -88,9 +88,24 @@ tr.highlight td {
 	padding-top: 1px; 
 	padding-bottom: 1px
 }
+
+#apply-div {
+	position: absolute;
+	top:50%;
+	left: 50%;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
 </style>
 </head>
 <body>
+	<div id="apply-div" style="display: none">
+		<form action="">
+			메시지: <textarea rows="5" style="width: 100%"></textarea>
+			카카오톡 아이디: <input type="text">
+		</form>
+	</div>
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
@@ -113,7 +128,7 @@ tr.highlight td {
 			<img src="${board.image_url }">
 		</div>
 		<c:if test="${email != null }">
-			<a href=""><button class="">동행 신청하기</button></a>
+			<button onclick="apply()">동행 신청하기</button>
 		</c:if>
 		<hr>
 		<c:forEach var="reply" items="${list }">
@@ -160,6 +175,17 @@ tr.highlight td {
 				image.src = images[current];
 			}
 			setInterval(replacePhoto, 3000);
+			
+	</script>
+	<script type="text/javascript">
+	function apply() {
+	    var apply_div = document.getElementById("apply-div");
+	    if (apply_div.style.display === "none") {
+	    	apply_div.style.display = "block";
+	    } else {
+	    	apply_div.style.display = "none";
+	    }
+	}
 	</script>
 </body>
 </html>

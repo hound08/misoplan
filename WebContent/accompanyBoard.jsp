@@ -67,7 +67,6 @@ div {
 }
 
 .footer_wrap {
-	margin-top: 600px;
 	padding-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
@@ -223,7 +222,7 @@ div {
 				<div class="card-body">
 					<!--  카드 바디 헤더 -->
 					<div class="card-body-header">
-						<h1>${board.title }</h1>
+						<p style="overflow: hidden"><h2>제목: ${board.title }</h2></p>
 						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
 						<div class="card-body-hashtag">
 								<c:forEach var="t" items="${tags }">
@@ -294,9 +293,9 @@ div {
 					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
 					<button type="submit" class="search-submit">검색</button>
 				</div>
-			<div class="footer_wrap">
-				<%@ include file="footer.jsp"%>
-			</div>
+		</div>
+		<div class="footer_wrap">
+			<%@ include file="footer.jsp"%>
 		</div>
 
 		<script type="text/javascript">
