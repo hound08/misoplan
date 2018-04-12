@@ -47,7 +47,6 @@ public class mycompanionDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "select * from accompanyboard where email = ?";
-		System.out.println("select email= "+ email);
 		List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
 		try {
 			conn = getConnection();
@@ -61,10 +60,8 @@ public class mycompanionDao {
 				dto.setTitle(rs.getString("title"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setCurrent_num(rs.getInt("current_num"));
-				dto.setMinimum_num(rs.getInt("minimum_num"));
-				dto.setCurrent_num(rs.getInt("current_number"));
-				dto.setMinimum_num(rs.getInt("minimum_number"));
-				dto.setReg_date(rs.getDate("reg_date"));
+				dto.setMinumum_num(rs.getInt("minumum_num"));
+				dto.setPost_date(rs.getDate("post_date"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
