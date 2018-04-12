@@ -22,12 +22,14 @@ public class writeReplyActionAB implements CommandProcess{
 		AccompanyReplyDto dto = new AccompanyReplyDto();
 		AccompanyDao accompanyDao = AccompanyDao.getInstance();
 		
-		dto.setProfile_url(accompanyDao.get_profile_url(Integer.parseInt(request.getParameter("post_num"))));
-		dto.setPost_num(Integer.parseInt(request.getParameter("post_num")));
+		int post_num = Integer.parseInt(request.getParameter("post_num"));
+		dto.setProfile_url(accompanyDao.get_profile_url(post_num));
+		dto.setPost_num(post_num);
 		dto.setEmail((String)session.getAttribute("email"));
 		dto.setNickname((String)session.getAttribute("nickname"));
 		dto.setContent(request.getParameter("content"));
 		
+		accompanyDao.comment_count(post_num);
 		dao.insert(dto);
 		
 		return "viewActionAB.do?post_num="+request.getParameter("post_num");

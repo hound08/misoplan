@@ -97,7 +97,7 @@ public class AccompanyDao {
 			e1.printStackTrace();
 		}*/
 		
-		String sql4 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?)";
+		String sql4 = "insert into accompanyboard values(?,?,?,?,?,?,?,?,?,?,sysdate,?,?,?,?,?)";
 		try {
 			pstmt = conn.prepareStatement(sql4);
 			pstmt.setInt(1, num);
@@ -114,6 +114,7 @@ public class AccompanyDao {
 			pstmt.setInt(12, accompanyBoardDto.getMinimum_num());
 			pstmt.setInt(13, 1);
 			pstmt.setInt(14, 0);
+			pstmt.setInt(15, 0);
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -180,6 +181,8 @@ public class AccompanyDao {
 				accompanyDto.setMinimum_num(rs.getInt(14));
 				accompanyDto.setCurrent_num(rs.getInt(15));
 				accompanyDto.setIs_closed(rs.getInt(16));
+				accompanyDto.setComment_count(rs.getInt(17));
+				
 				list.add(accompanyDto);
 			}
 		} catch (SQLException e) {
@@ -199,6 +202,27 @@ public class AccompanyDao {
 		PreparedStatement pstmt = null;
 		
 		String sql = "update accompanyboard set view_count = view_count+1 where post_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+	}
+	
+	public void comment_count(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update accompanyboard set comment_count = comment_count+1 where post_num = ?";
 		
 		try {
 			conn = getConnection();
