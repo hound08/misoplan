@@ -56,7 +56,7 @@ public class AreaCode extends HttpServlet {
 		bos1.close();
 	    
 		String mbos = bos1.toString("UTF-8");
-		System.out.println("mbos: "+mbos);
+		//System.out.println("mbos: "+mbos);
 	    
 		byte[] b = mbos.getBytes("UTF-8");
 		String s = new String(b, "UTF-8");

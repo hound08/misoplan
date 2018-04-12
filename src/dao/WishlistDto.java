@@ -40,6 +40,12 @@ public class WishlistDto {
 	public void setTour_name(String tour_name) {
 		this.tour_name = tour_name;
 	}
+	public String getImg_src() {
+		return img_src;
+	}
+	public void setImg_src(String img_src) {
+		this.img_src = img_src;
+	}
 	
 	
 	
