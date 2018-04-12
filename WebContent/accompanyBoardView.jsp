@@ -62,6 +62,21 @@ div {
 	background-size: 100% 100%;
 	border: solid;
 }
+.reply-wrapper{
+	margin: 20px 0 0 0;
+	width: 100%;
+	border: solid;
+	display: flex;
+	left: 1em;
+ 	background-color: #EAEAEA;
+}
+.reply-image { 
+	margin: auto 20px;
+	background-size: 100% 100%; 
+	width: 80px; 
+	height: 80px; 
+	border-radius: 50%;
+}
 
 .post-body {
 	width: 100%;
@@ -97,27 +112,34 @@ tr.highlight td {
 			<pre>${board.content }</pre>
 			<img src="${board.image_url }">
 		</div>
+		<c:if test="${email != null }">
+			<a href=""><button class="">동행 신청하기</button></a>
+		</c:if>
+		<hr>
 		<c:forEach var="reply" items="${list }">
-			 <table>
-				<tr><td><h2>작성자: </h2></td><td><h2>${reply.nickname }</h2></td></tr>
-				<tr><td>내용: </td><td>${reply.content } </td></tr>
-				<tr><td>등록일: </td><td>${reply.reply_date } </td></tr>
-				<tr><td>게시물 번호: </td><td>${post_num }</td></tr>
-			</table>
+		<div class="reply-wrapper">
+			 <div class ="reply-image" style="background-image: url('${reply.profile_url}');"></div>
+				<h2>작성자: ${reply.nickname }</h2>
+				등록일: ${reply.reply_date }<br>
+				<pre>내용: ${reply.content }</pre>
+		</div>
 		</c:forEach>
 		<div class="post-footer">
-			<form action="writeReplyAB.do">
-				<input type="hidden" value="${post_num }"name="post_num">
-				<textarea rows="12" style="width: 70%;" name="content"></textarea>
-				<input type="submit" value="확인">
-			</form>
-		</div>
-		<form>
-			
-		</form>
-			
-		</div>
-		
+			<c:if test="${email != null }">
+				<form action="writeReplyAB.do">
+					<input type="hidden" value="${post_num }"name="post_num">
+					<textarea rows="12" style="width: 70%;" name="content"></textarea>
+					<input type="submit" value="확인">
+				</form>
+			</c:if>
+			<c:if test="${email == null }">
+				<form action="writeReplyAB.do">
+					<input type="hidden" value="${post_num }"name="post_num">
+					<textarea rows="12" style="width: 70%;" name="content" placeholder="로그인하고 댓글을 작성해 주세요!" disabled></textarea>
+				</form>
+			</c:if>
+		</div>		
+		</div>	
 	</div>
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
