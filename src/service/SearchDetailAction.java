@@ -18,10 +18,14 @@ public class SearchDetailAction implements CommandProcess{
 		int contentTypeId 			= Integer.parseInt(request.getParameter("contentTypeId"));
 		int contendtid				= 	Integer.parseInt(request.getParameter("contendtid"));	
 		String email					= request.getParameter("email");
+		String mapx					= request.getParameter("mapx");
+		String mapy					= request.getParameter("mapy");
 		String result ="";
 		System.out.println("@@ searchdetailaction contentTypeId " + contentTypeId);
 		System.out.println("@@ searchdetailaction contendtid " + contendtid);
 		System.out.println("@@ searchdetailaction email " + email);
+		System.out.println("@@ searchdetailaction mapx " + mapx);
+		System.out.println("@@ searchdetailaction mapy " + mapy);
 		
 		if(email == ""){
 			System.out.println("이메일 없음");
@@ -47,6 +51,8 @@ public class SearchDetailAction implements CommandProcess{
 		request.setAttribute("contentTypeId", contentTypeId_);
 		request.setAttribute("contendtid", contendtid_);
 		request.setAttribute("result", result);
+		request.setAttribute("mapx", mapx);
+		request.setAttribute("mapy", mapy);
 		
 		
 

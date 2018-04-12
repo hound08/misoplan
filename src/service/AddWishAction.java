@@ -26,7 +26,12 @@ public class AddWishAction implements CommandProcess{
 		
 		try {
 			WishlistDao dao = WishlistDao.getInstance();
-			result = "" + dao.addWishList(contentTypeId,contendtid,email,title);
+			int wishchk = dao.wishCheck(contentTypeId, contendtid, email);
+			if(wishchk ==1) {
+				result = "" + 1;
+			}else{
+				result = "" + dao.addWishList(contentTypeId,contendtid,email,title);
+			}
 			System.out.println("addwishaction의 result 값 확인 -> " + result);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

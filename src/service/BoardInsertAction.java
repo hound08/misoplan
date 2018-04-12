@@ -7,8 +7,6 @@ import java.util.Enumeration;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.websocket.Session;
-
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
@@ -45,8 +43,8 @@ public class BoardInsertAction implements CommandProcess {
 			}
 		}
 		String email = request.getParameter("email");
-		System.out.println("board insert email확인 " + email);
 		String nickname = request.getParameter("nickname");
+
 		BoardScheduleDto dto = new BoardScheduleDto();
 		dto.setTitle(multi.getParameter("title"));
 		dto.setTag(multi.getParameter("tag"));

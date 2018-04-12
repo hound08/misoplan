@@ -12,7 +12,10 @@
 
 <script type="text/javascript" src="js/jquery.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
+</script>
 <script type="text/javascript">
 	window.onload = function(){
 		var contentTypeId = $("#contentTypeId").val();
@@ -36,6 +39,8 @@
 				var zipcode		= myItem.zipcode;
 				var title 		= myItem.title;		//touristName
 				var overview	= myItem.overview;
+				mapx		= myItem.mapx;
+				mapy		= myItem.mapy;
 				
 				$("#touristName").append('<h2>' + title +'<h2>');
 				$("#touristImg").append(
@@ -70,6 +75,8 @@
 						
 				);
 				
+				
+				
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("request : " + XMLHttpRequest);
@@ -79,6 +86,24 @@
 		});
 	
 	};
+		function initMap(){
+			var mapx = $("#mapx").val();
+			var mapy = $("#mapy").val();
+			var mapLocation = new google.maps.LatLng(mapy, mapx); // 지도에서 가운데로 위치할 위도와 경도
+			//var mapLocation = new google.maps.LatLng('37.51', '127.03');
+			var mapOptions = {
+			          center: mapLocation, // 지도에서 가운데로 위치할 위도와 경도(변수)
+			          zoom: 15, // 지도 zoom단계
+			          mapTypeId: google.maps.MapTypeId.ROADMAP
+			        };
+			        var map = new google.maps.Map(document.getElementById("map"), // id: map-canvas, body에 있는 div태그의 id와 같아야 함
+			            mapOptions);
+			        var marker = new google.maps.Marker({
+			            position: mapLocation,
+			            map: map
+			          });
+		}
+	
 	
 	function isAddWish(type, id, email){
 		/* alert("type = " + type);
@@ -108,6 +133,7 @@
 	 
 	
 </script>
+
 <style type="text/css">
 div {
 	margin: 0px auto;
@@ -167,7 +193,8 @@ div {
 } */
 
 .touristImg img{
-	width : 400px;
+	width : 500px;
+	height: 400px;
 	vertical-align: middle;
 	border:1px;
 	
@@ -190,7 +217,7 @@ div {
 
 .section2 {
 	width: 1080px;
-	height: 650px;
+	height: 850px;
 	border: 1px solid black;
 }
 
@@ -204,9 +231,9 @@ div {
 	
 }
 
-.info {
+.map {
 	width: 1000px;
-	height: 300px;
+	height: 500px;
 	border: 1px solid blue;
 	
 }
@@ -232,6 +259,8 @@ div {
 	String contendtid 		= (String)request.getAttribute("contendtid");
 	String result			= (String)request.getAttribute("result");
 	String email			= (String)session.getAttribute("email");
+	String mapx				= (String)request.getAttribute("mapx");
+	String mapy				= (String)request.getAttribute("mapy");
 %>
 
 	<div id="test">test
@@ -253,12 +282,29 @@ div {
 			</c:when>
 		</c:choose>
 	</div>
+	<!--test div  -->
 	
 	<div class="section1">
 		<!--이미지 & 간략 설명  -->
 		<div class="search1Area">
 		
 			<div class = "wishImg">
+				<c:choose>
+			<c:when test="${result=='0' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+			<c:when test="${result=='1' }">
+				
+				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
+					style = "width:50px; height:50px;background-color: transparent; border:none;">
+					<img src = "images/wish.png" style = "width:50px; height : 50px;">
+				</button>
+			</c:when>
+		</c:choose>
 				
 			</div>
 			
@@ -284,8 +330,8 @@ div {
 		<div class="overview" id = "overview" style = "overflow:scroll;" >
 			
 		</div>
-		<div class="info" id = "info">
-		소개정보
+		<div class="map" id = "map">
+		
 		</div> <!--listArea 끝  -->
 	</div><!--content 끝  -->
 	<!--section 끝  -->
@@ -297,6 +343,10 @@ div {
 		<input type = "text" value ="127213" id = "contendtid">  -->
 		<input type = "text" value ="${email }" id = "email">
 		<input type = "text" value = "${result }" id = "result">
+		<input type = "text" value = "${mapx }" id = "mapx">
+		<input type = "text" value = "${mapy }" id = "mapy">
+		<!-- <input type = "text" value = "127.0336840818" id = "mapx">
+		<input type = "text" value = "37.5163582893" id = "mapy"> -->
 	</div>
 		<%@ include file="footer.jsp"%>
 	

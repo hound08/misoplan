@@ -300,7 +300,7 @@ var plandivheight = 65;
 
 $(document).on('click', '#completebtn', function(){
 	var plandiv = $(".plandiv");
-	var contents = plandiv.children();
+	var contents = $(".planelem");
 	var jsonArr = [];
 	jQuery.each(contents, function(index, value){
 		if($(value).attr('dayvalue')){
@@ -308,6 +308,7 @@ $(document).on('click', '#completebtn', function(){
 						  "areaCode" : $(value).attr('areaCode'),
 						  "sigunguCode" : $(value).attr('sigunguCode'),
 						  "contentId" : $(value).attr('contentId'),
+						  "elemTitle" : $(value).children(".elemtitle").text().replace(/ /gi,""),
 						  "mapx" : $(value).attr('mapx'),
 						  "mapy" : $(value).attr('mapy'),
 						  "imagePath" : $(value).attr('imagePath')
@@ -670,10 +671,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 			<h2>저장</h2>
 			<form action="plannerDetail.jsp" method="post" id="form">
 				<label>플랜 제목 : </label>
-				<input type="text" name="title" id="title" class="inputs">
+				<input type="text" name="title" id="title" class="inputs" required>
 				<br>
 				<label>출발일 : </label>
-				<input type="text" id="datepicker-triangle" name='date' class="inputs">
+				<input type="text" id="datepicker-triangle" name='date' class="inputs" required>
 				<br>
 				<button onclick="javascript:document.getElementById('form').submit();">완료</button>
 			</form>

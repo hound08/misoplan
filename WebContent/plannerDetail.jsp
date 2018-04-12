@@ -1,5 +1,6 @@
-<%@page import="org.json.simple.JSONArray"%>
-<%@page import="org.json.simple.JSONObject"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONArray"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp" %>
@@ -7,6 +8,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <title>Insert title here</title>
 <style>
 * {
@@ -75,13 +77,24 @@ div {
 	width: 1200px;
 	height: 30px;
 	border-radius: 10px;
+	border-color: #39A2D8;
+	color: white;
+	
 }
+.dayP{
+	margin: 10px 0 0 5px;
+}
+
 .contentDiv{
 	width: 1200px;
 	height: 30px;
 	border: 1px solid gray;
 	border-radius: 10px;
-	
+	background-color: #33cc33;
+	color: white;
+}
+.contentP{
+	margin: 5px 0 0 5px;
 }
 .contentTextDiv{
 	
@@ -93,31 +106,40 @@ div {
 	height: 100px;
 }
 </style>
+
+<script type="text/javascript">
+	$(document).on('click', '#saveBtn', function(){
+		var jsonArr = [];
+		var wrapper = $(".wrapper");
+		jQuery.each(wrapper, function(index, value){
+			jsonArr.push({"dayvalue" :  $(value).children(".contentTextDiv").children().attr('dayValue'),
+						  "areaCode" : $(value).children(".contentTextDiv").children().attr('areaCode'),
+						  "sigunguCode" : $(value).children(".contentTextDiv").children().attr('sigunguCode'),
+						  "contentId" : $(value).children(".contentTextDiv").children().attr('contentId'),
+						  "elemTitle" : $(value).children(".contentDiv").children(".contentP").text(),
+						  "mapx" : $(value).children(".contentTextDiv").children().attr('mapx'),
+						  "mapy" : $(value).children(".contentTextDiv").children().attr('mapy'),
+						  "imagePath" : $(value).children(".contentTextDiv").children().attr('imagePath'),
+						  "detail" : $(value).children(".contentTextDiv").children().val()
+			});	
+		});
+		var jsonString = JSON.stringify(jsonArr);
+		$("#jsonArr").val(jsonString);
+		//console.log(jsonArr);
+	});
+</script>
+
 </head>
 <body>
 	<%
+		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String jsonString = request.getParameter("jsonArr");
-		jsonString = jsonString.substring(1, jsonString.length()-1);
-		System.out.println();
-		
-		
 		String date = request.getParameter("date");
+		//System.out.println("jsonString = " + jsonString);
 		
-		System.out.println("jsonString = " + jsonString);
-		 
-		JSONObject jo = new JSONObject();
-		jo.put("data", jsonString);
-		System.out.println("jo = " + jo);
-		System.out.println("jo length = " + jo.size());
-		System.out.println("jo get dayvalue = " + jo.get("data")); 
-		JSONArray ja = (JSONArray)jo.get("data");
-		System.out.println(ja);
-		//JSONArray ja = new JSONArray();
-	//	ja.add(jsonString);
-		//System.out.println("ja get 0 = " + ja.get(0));
-	//	System.out.println("ja : " + ja);
-	//	System.out.println("ja length : " + ja.size());
+		
+		
 	%>
 
 	<div class="section">
@@ -130,30 +152,80 @@ div {
 		
 		<div class="pageDesc">
 			<br>
-			<h2>세부일정 작성</h2><br>
-			<p>
-				세부일정을 작성하는 페이지 입니다.
-			</p><br>
+			<h2><%=title %></h2><br>
+			
+			<br>
 		</div>
 		
 		<div class="planDiv">
+			<form action="#" id="form">
 			<div class="planTop">
 				<div class="planTopInner">
 					PLAN
 				</div>
 			</div>
-			
+			<%
+				JSONArray ja = new JSONArray(jsonString);
+				JSONObject firstObj = ja.getJSONObject(0);
+				String min = (String)firstObj.get("dayvalue");
+			%>	
+						<div class="dayDiv">
+							<p class="dayP">
+								Day <%=min %>
+							</p>
+						</div>
+			<%
+				for(int i = 0; i < ja.length(); i++){
 					
-			<div class="dayDiv">
-			</div>
-			<div class="contentDiv">
-			</div>
-			<div class="contentTextDiv">
-				<textarea class="textarea"></textarea>
-			</div>
+					JSONObject jo = ja.getJSONObject(i);
+					String dayValue = (String)jo.get("dayvalue");
+					String areaCode = (String)jo.get("areaCode");
+					String sigunguCode = (String)jo.get("sigunguCode");
+					String planTitle = (String)jo.get("elemTitle");
+					String contentId = (String)jo.get("contentId");
+					String mapx = (String)jo.get("mapx");
+					String mapy = (String)jo.get("mapy");
+					String imagePath = (String)jo.get("imagePath");
+					
+					if(!dayValue.equals(min)){
+						min = dayValue;
+					%>
+						<div class="dayDiv">
+							<p class="dayP">
+								Day <%=dayValue %>
+							</p>
+						</div>
+						<div class="wrapper">
+							<div class="contentDiv">
+								<input type="hidden" name="jsonArr" id="jsonArr">
+								<p class="contentP">
+									<%= planTitle %>
+								</p>
+							</div>
+						
+							<div class="contentTextDiv">
+								<textarea class="textarea" dayValue="<%=dayValue%>" areaCode="<%=areaCode%>" sigunguCode="<%=sigunguCode%>" planTitle="<%=planTitle%>" contentdId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							</div>
+						</div>	
+					<%}else{%>
+						<div class="wrapper">
+							<div class="contentDiv">
+								<input type="hidden" name="jsonArr" id="jsonArr">
+								<p class="contentP">
+									<%= planTitle %>
+								</p>
+							</div>
+						
+							<div class="contentTextDiv">
+								<textarea class="textarea" dayValue="<%=dayValue%>" areaCode="<%=areaCode%>" sigunguCode="<%=sigunguCode%>" planTitle="<%=planTitle%>" contentId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							</div>
+						</div>
+					<%}%>
+				<%}%>
+			</form>
 		</div>
-		<div>
-		
+		<div class= "bottom">
+			<button id="saveBtn">저장</button>
 		</div>
 	</div>
 </body>
