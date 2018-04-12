@@ -80,7 +80,7 @@
 					<c:forEach var="list" items="${list }">
 						<div class="card">
 							<div class="cardhead">
-								<img alt="tour_img" src="images/1.jpg">
+								<img alt="tour_img" src="${list.img_src }">
 								<input type="checkbox" name="wishlist">
 							</div>
 							<div class="cardbody">

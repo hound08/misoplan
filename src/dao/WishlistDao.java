@@ -120,6 +120,7 @@ public class WishlistDao {
 				WishlistDto dto = new WishlistDto();
 				dto.setContenttypeid(rs.getInt("contenttypeid"));
 				dto.setContendtid(rs.getInt("contendtid"));
+				dto.setImg_src(rs.getString("img_src"));
 				dto.setTour_name(rs.getString("tour_name"));
 				list.add(dto);
 			}
