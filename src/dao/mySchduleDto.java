@@ -10,6 +10,9 @@ public class mySchduleDto {
 	private Date tour_date_end;
 	private Date regi_date;
 	
+	
+	
+	
 
 
 	public String getSl_code() {

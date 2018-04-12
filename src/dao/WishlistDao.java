@@ -11,6 +11,7 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+
 public class WishlistDao {
 	private static WishlistDao instance;
 
@@ -102,5 +103,33 @@ public class WishlistDao {
 		}
 		
 		return result;
+	}
+
+	public List<WishlistDto> select(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select * from wishlist where email = ?";
+		List<WishlistDto> list = new ArrayList<WishlistDto>();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			while (rs.next()) {
+				WishlistDto dto = new WishlistDto();
+				dto.setContenttypeid(rs.getInt("contenttypeid"));
+				dto.setContendtid(rs.getInt("contendtid"));
+				dto.setTour_name(rs.getString("tour_name"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return list;
 	}
 }

@@ -88,7 +88,7 @@
 			</div>
 			<div id="myWishlist">
 				<div id="myWishlista">
-					<a href="myWishList.jsp" class="menu"> 찜 List </a>
+					<a href="myWishListForm.do?email=${email }" class="menu"> 찜 List </a>
 				</div>
 			</div>
 			<div id="companion">

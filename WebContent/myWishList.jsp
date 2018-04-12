@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
  <%@ include file="header.jsp" %>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html >
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<title>찜 리스트</title>
 		<style type="text/css">
 			#center {
@@ -12,8 +14,6 @@
 				margin: 0px auto;
 				width: 1200px;
 			}
-			
-			
 			#main {
 					width: 930px;
 					border: 3px solid green;
@@ -24,22 +24,26 @@
 			#main h1 {
 					margin: 20px 0px;
 			}
-			 #info {
+			 #myinfo {
 				border: 1px solid green;
 			}
-			 #info .wishlist{
+			
+			.card {
 				float: left;
-				margin: 15px;
-				border: 1px solid red;
+				width: 290px;
+				height: 200px;
+				border: 1px solid;
+				margin-right:10px;
+			}
+			.cardhead  img{
 				border-radius: 15px;
-				width: 200px;               /*  이미지 사이즈 */
+				width: 100%;
 				height: 150px;
 			}
-			.mainimage {
-				width: 150px;
-				height: 120px;
+			.cardbody {
+				border: 1px solid yellow;
+				height: 45px;
 			}
-			
 			
 			.pagination {
 				clear: both;
@@ -66,38 +70,27 @@
 		</style>
 	</head>
 	<body>
-		
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
 				<h1>나의 찜 리스트</h1>
 				<div id="myinfo">
-					<div id="info">
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-							
+				
+				<form action="myWishListPro.do">
+					<c:forEach var="list" items="${list }">
+						<div class="card">
+							<div class="cardhead">
+								<img alt="tour_img" src="images/1.jpg">
+								<input type="checkbox" name="wishlist">
+							</div>
+							<div class="cardbody">
+								<a href="#">${list.tour_name }</a>
+							</div>
 						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						 <div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
-						<div class="wishlist">
-							<img class="mainimage" alt="accompanyimage" src="images/accompany.jpg" style="width: 100%">
-							<p class="menutitle" >동해</p>
-						</div>
+					</c:forEach>
+					<input type="submit" value="삭제">
+					<input type="reset" value="취소">
+				</form>
 							<div class="pagination">
 										<a href="#">&laquo;</a> 
 										<a href="#" class="active">1</a> 
@@ -107,7 +100,6 @@
 										<a href="#">5</a> 
 										<a href="#">&raquo;</a>
 							</div>
-					</div>
 				</div>
 			</div>
 		</div>

@@ -21,13 +21,13 @@ public class companionFormAction implements CommandProcess {
 			String email = request.getParameter("email");
 			mycompanionDao comdao = mycompanionDao.getInstance();
 			List<AccompanyBoardDto> list = comdao.select(email);
-			
+			System.out.println("action email = "+ email);
 			ApplicantsDao appdao = ApplicantsDao.getInstance();
 			List<ApplicantsDto> myapplist = appdao.myappselect(email);
 			
 			
-			
-			System.out.println("myapplist"+ myapplist);
+			System.out.println("list" + list.size());
+			System.out.println("myapplist"+ myapplist.size());
 			request.setAttribute("list", list);
 			request.setAttribute("myapplist", myapplist);
 		} catch (Exception e) {

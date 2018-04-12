@@ -127,7 +127,7 @@ var aa= $(document).on('click', '.postnums', function(){
 								<td class="postnums" id='${list.post_num }'>${list.title}</td>
 								<td>${list.nickname } </td>
 								<td>${list.current_num } / ${list.minimum_num } </td>
-								<td>${list.reg_date }</td>
+								<td>${list.post_date }</td>
 							</tr>
 						</c:forEach>
 					</table>
