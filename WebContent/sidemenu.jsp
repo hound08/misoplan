@@ -49,7 +49,7 @@
 			<li class="sidemenus"><a href="myWishList.jsp" class="a">찜 리스트</a></li>
 			<li class="sidemenus"><a href="companionForm.do?email=${email }" class="a">동행</a></li>
 			<c:if test="${admin == 1}">
-				<li class="sidemenus"><a href="adminMainForm.do?email=${email }" id="b" >관리자 메뉴</a></li>
+				<li class="sidemenus"><a href="adminConfirmForm.do?email=${email }" id="b" >관리자 메뉴</a></li>
 			</c:if>
 		</ul>
 	</div>

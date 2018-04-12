@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
-<title>계정 확인</title>
+<title>관리자 계정 확인</title>
 <style type="text/css">
 	body {
 		font-family: 'NanumSquareRound', sans-serif;
@@ -59,9 +59,9 @@
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
 		<div id="main">
-			<form name="form" action="myInfoConfirmPro.do">
-				<h1>계정 정보 확인</h1>
-				<h4>개인 정보 보안을 위해 계정 비밀번호를 입력해 주시기 바랍니다.</h4>
+			<form name="form" action="adminConfirmPro.do">
+				<h1>관리자 계정 정보 확인</h1>
+				<h4>관리자 계정 비밀번호를 입력해 주시기 바랍니다.</h4>
 				<input type="hidden" name="email" value="<%=email %>">
 				<p><input type="password" id="password" name="password" required="required" placeholder="비밀번호 입력"></p>
 				<p><input type="submit" class="submit" value="확인"></p>
