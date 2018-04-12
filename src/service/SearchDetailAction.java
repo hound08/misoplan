@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.TourRankDao;
 import dao.WishlistDao;
+import dao.WishlistDto;
 
 public class SearchDetailAction implements CommandProcess{
 
@@ -20,12 +21,20 @@ public class SearchDetailAction implements CommandProcess{
 		String email					= request.getParameter("email");
 		String mapx					= request.getParameter("mapx");
 		String mapy					= request.getParameter("mapy");
+		String firstImage			= request.getParameter("firstImage");
 		String result ="";
-		System.out.println("@@ searchdetailaction contentTypeId " + contentTypeId);
-		System.out.println("@@ searchdetailaction contendtid " + contendtid);
-		System.out.println("@@ searchdetailaction email " + email);
-		System.out.println("@@ searchdetailaction mapx " + mapx);
-		System.out.println("@@ searchdetailaction mapy " + mapy);
+		System.out.println("@@ searchdetailaction contentTypeId ->" + contentTypeId);
+		System.out.println("@@ searchdetailaction contendtid ->" + contendtid);
+		System.out.println("@@ searchdetailaction email ->" + email);
+		System.out.println("@@ searchdetailaction mapx ->" + mapx);
+		System.out.println("@@ searchdetailaction mapy ->" + mapy);
+		System.out.println("@@ searchdetailaction img ->" + firstImage);
+		
+		//dto에 담기
+		WishlistDto dto = new WishlistDto();
+		dto.setContendtid(contendtid);
+		dto.setContenttypeid(contentTypeId);
+		dto.setEmail(email);
 		
 		if(email == ""){
 			System.out.println("이메일 없음");
@@ -33,7 +42,7 @@ public class SearchDetailAction implements CommandProcess{
 			System.out.println("이메일 있음, 이메일 : " + email);
 			try {
 				WishlistDao dao =WishlistDao.getInstance(); 
-				result = ""+dao.wishCheck(contentTypeId,contendtid,email);
+				result = ""+dao.wishCheck(dto);
 				System.out.println("searchDetailAction result 값 확인 -> " + result);
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -53,6 +62,7 @@ public class SearchDetailAction implements CommandProcess{
 		request.setAttribute("result", result);
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
+		request.setAttribute("firstImage", firstImage);
 		
 		
 
