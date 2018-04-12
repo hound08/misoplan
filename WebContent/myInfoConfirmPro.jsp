@@ -20,7 +20,7 @@
 	<c:if test="<%=result <= 0 %>">
 		<script type="text/javascript">
 			alert("비밀번호가 일치하지 않습니다.");
-			location.href="myInfoConfirmForm.do";
+			location.href="myInfoConfirmForm.do?email=<%=email%>";
 		</script>
 	</c:if>
 </body>
