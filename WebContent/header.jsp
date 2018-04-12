@@ -23,6 +23,10 @@ a {
 	text-decoration: none;
 }
 
+a:LINK {
+	color: black;
+}
+
 a:VISITED {
 	color: black;
 }
