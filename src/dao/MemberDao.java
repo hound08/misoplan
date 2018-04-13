@@ -350,7 +350,7 @@ public class MemberDao {
 		List<MemberDto> list = new ArrayList<MemberDto>();
 		MemberDto dto = new MemberDto();
 		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, JOIN_DATE " +
-					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A) " +
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER ORDER BY NICKNAME) A) " +
 					 "WHERE RN BETWEEN ? AND ?";
 		
 		try {
