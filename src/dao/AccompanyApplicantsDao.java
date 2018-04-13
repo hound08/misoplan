@@ -77,7 +77,7 @@ private static AccompanyApplicantsDao instance; //instance
 			pstmt.setInt(4, 0);
 			pstmt.setString(5, dto.getMessage());
 			pstmt.setString(6, dto.getKakao_id());
-			pstmt.setInt(6, dto.getNum_people());
+			pstmt.setInt(7, dto.getNum_people());
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

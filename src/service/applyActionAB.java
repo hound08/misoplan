@@ -14,13 +14,12 @@ public class applyActionAB implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8"); //encode to UTF-8
 		HttpSession session = request.getSession();
 		AccompanyApplicantsDao dao = AccompanyApplicantsDao.getInstance();
 		AccompanyApplicantsDto dto = new AccompanyApplicantsDto();
 		dto.setPost_num(Integer.parseInt(request.getParameter("post_num")));
-		dto.setEmail(request.getParameter("email"));
+		dto.setEmail((String)session.getAttribute("email"));
 		dto.setNickname((String)session.getAttribute("nickname"));
 		dto.setKakao_id(request.getParameter("kakao_id"));
 		dto.setMessage(request.getParameter("message"));
@@ -28,7 +27,7 @@ public class applyActionAB implements CommandProcess{
 		String result = String.valueOf(dao.insert(dto));
 		request.setAttribute(result, "result");
 		
-		return "accompanyBoardView.jsp?postnum="+Integer.parseInt(request.getParameter("post_num"));
+		return "viewActionAB.do?post_num="+Integer.parseInt(request.getParameter("post_num"));
 	}
 
 }

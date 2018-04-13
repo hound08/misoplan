@@ -49,22 +49,25 @@ div {
 .post-header {
 	margin: 20px 0 0 0;
 	width: 100%;
-	height: 150px;
-	border: solid;
+	height: 120px;
 	display: flex;
 	left: 1em;
  	background-color: #EAEAEA;
 }
 
 .post-header-img {
-	margin: auto 20px;
-	height: 120px;
-	width: 120px;
+	margin: auto 0px auto 20px;
+	height: 100px;
+	width: 100px;
 	background-image: url("${profile_url}");
 	background-color: white;
 	border-radius: 50%;
 	background-size: 100% 100%;
 	border: solid;
+}
+
+table {
+	margin: auto 20px;
 }
 .reply-wrapper{
 	margin: 20px 0 0 0;
@@ -111,13 +114,27 @@ fieldset {
 	left: 50%;
 	border: none;
 }
+
+tr.highlight td {
+	padding-top: 1px; 
+	padding-bottom: 1px
+}
+
+span {
+	border: solid;
+	border-color: gray;
+}
+
+.icon-view {
+	background: url("images/eye.jpg");
+}
+
 </style>
 </head>
 <body>
 	<div id="apply-div" style="display: none;">
 	<fieldset>
 		<form class ="form" action="applyActionAB.do">
-			글번호: <input type="hidden" name="post_num" value="${post_num }"><p>
 			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
 			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
 			카카오톡 아이디: <input type="text" name="kakao_id""><p>
@@ -150,10 +167,17 @@ fieldset {
 		<div class="post-header">
 			<div class="post-header-img"></div>
 			<table>
-				<tr><td><h2>제목: </h2></td><td><h2>${board.title }</h2></td></tr>
+				<tr><td><h1>${board.title }</h1></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>작성자: </td><td>${board.nickname } | 등록일:${board.post_date }</td></tr>
-				<tr><td>게시물 번호: </td><td>${post_num }</td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr style="font-size: 18px;"><td>작성자: ${board.nickname } | 등록일:${board.post_date } | 게시물 번호: ${post_num }</td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr style="font-size: 18px;">
+					<td> 
+						<span><i class="icon-view"></i>${board.view_count }명이 보았습니다.</span>
+						<span><i class="icon-vote"></i>${board.view_count }명이 좋아합니다.</span>
+					</td>
+				</tr>
 			</table>
 		</div>
 		<div class="post-body">
