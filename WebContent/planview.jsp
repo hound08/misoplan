@@ -25,6 +25,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 * {
 	font-family: 'NanumSquareRound', sans-serif;
 }
+.main-title {
+	width: 1000px;
+	heidht: 100px;
+	padding: 15px 20px 0 20px;
+/* 	vertical-align: top; */
+}
 .main-top {
 	width: 1200px;
 	height: 450px;
@@ -32,37 +38,26 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
 }
-.main-title {
-	width: 1000px;
-	heidht: 100px;
-/* 	vertical-align: top; */
-}
-.main-top2 {
-	width: 1100px;
-	width: 500px;
-}
 
 .main-top-second1 {
 	width: 610px;
-	height: 320px;
- 	margin: 25px 0 0 30px; 
+	height: 410px;
+ 	margin: 5px 0 0 20px; 
 	border: 1px solid gray;
-	/* display: inline-block; */
-/* 	vertical-align: middle; */
-	float: left;
+	display: inline-block;
+ 	vertical-align: top;
 }
 .image-size {
 	width: 610px;
-	height: 320px;
+	height: 410px;
 }
 .card_image {
 	width: 350px;
 	height: 250px;
 }
 .main-top-second2 {
-	padding: 40px 0 0 70px;
-/* 	vertical-align: middle; */
-	float: right;
+	padding: 60px 40px 10px 60px;
+ 	vertical-align: top; 
 	width: 400px;
 	height: 280px;
  	margin: 25px 0 0 40px; 
@@ -139,16 +134,24 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 </head>
 <body>
 
+	<div class ="main-title">
+		<h3>title</h3>
+	</div>
 	<div class="main-top">
-		<div class ="main-title">
-			
-		</div>
 		
 		<div class="main-top-second1">
 			<img alt="image" class="image-size" src="${dto.image_url }">		
 		</div>
 		<div class="main-top-second2">
-			${dto.nickname} ${dto.bs_num } ${dto.title }
+			<p>${dto.nickname }</p>
+			<p>${dto.tag}</p>
+ 			<p>${dto.area_names }</p>
+			<p>${dto.schedule_date }</p>
+			<p>${dto.vote_count }</p>
+			<p>${dto.view_count }</p> 
+			<p>${dto.board_date }</p>
+			<p>${dto.content }</p>
+			
 		</div>
 	</div>
 	<div class="main-center">
