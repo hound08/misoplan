@@ -15,41 +15,28 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.json.simple.JSONObject;
 
-/**
- * Servlet implementation class Detail1
- */
-@WebServlet("/Detail1")
-public class Detail1 extends HttpServlet {
+@WebServlet("/DetailIntro")
+public class DetailIntro extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=utf-8");
 		
-		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=";
+		String addr = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=";
 		String serviceKey = "irqglLi1gisI6SuWlVdGZcdGGffwI7ZSmgzhLB4bdWSaPeRPsGqkD7IbkQFI18JgOmG%2BGWCdh5eDW12ZBKoANQ%3D%3D";
 		String parameter = "";
-		//&contentTypeId=&areaCode=1&sigunguCode=1&cat1=&cat2=&cat3=&listYN=Y
-		//&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1
-//		serviceKey = URLEncoder.encode(serviceKey,"utf-8");
 		PrintWriter out = response.getWriter();
-		System.out.println("parser/Detail1 진입");
+		System.out.println("parser/DetailIntro 진입");
 		String contentTypeId = request.getParameter("typeId");
 		String contendtid = request.getParameter("id");
-		System.out.println("in Detail1_contentTypeId = " + contentTypeId);
-		System.out.println("in Detail1_contendtid = " + contendtid);
+		System.out.println("in DetailIntro_contentTypeId = " + contentTypeId);
+		System.out.println("in DetailIntro_contendtid = " + contendtid);
 		parameter = parameter + "&" +"contentTypeId=" + Integer.parseInt(contentTypeId);
 		parameter = parameter + "&" +"contentId=" + Integer.parseInt(contendtid);
 		parameter = parameter + "&" + "MobileOS=ETC";
 		parameter = parameter + "&" + "MobileApp=TourAPI3.0_Guide";
-		parameter = parameter + "&" + "defaultYN=Y";
-		parameter = parameter + "&" + "firstImageYN=Y";
-		parameter = parameter + "&" +"areacodeYN=Y";
-		parameter = parameter + "&" +"catcodeYN=Y";
-		parameter = parameter + "&" +"addrinfoYN=Y";
-		parameter = parameter + "&" +"mapinfoYN=Y";
-		parameter = parameter + "&" +"overviewYN=Y";
-		parameter = parameter + "&" +"transGuideYN=Y";
+		parameter = parameter + "&" +"introYN=Y";
 		parameter = parameter + "&" + "_type=json";
 		
 		
