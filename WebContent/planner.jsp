@@ -64,6 +64,8 @@
 		transition:all 0.5s;
 	}
 	.tourinfo{
+		width: 100%;
+		height: 400px;
 		border: 1px solid gray;
 	}
 	
@@ -119,7 +121,7 @@
     }
     .tourImage{
     	width: 100%;
-    	height: 100%;
+    	height: 300px;
     }
     .tourtitle{
     	padding: 5px;
@@ -129,25 +131,26 @@
     }
     .tourImageDiv{
     	width: 100%;
-    	height: 30%;
-    	margin: 5% 0 0 0;
+    	height: 300px;
+    	/* margin: 5% 0 0 0; */
     }
     .tourdescdiv{
     	float: left;
     	width: 80%;
+    	height: 70px;
     	overflow: hidden;
     	border-bottom: 1px solid gray;
     }
     .descwrapper{
     	width: 100%;
-    	height: 100%;
+    	height: 70px;
     }
     
     .plusbutton{
     	text-align: center;
     	float:right;
     	width: 20%;
-    	height: 100%;
+    	height: 30px;
     	margin: 4% 0 0 0;
 
     }
@@ -224,7 +227,6 @@
     .deleteday:hover {
 		cursor: pointer;
 	}
-	
 	.planelem{
 		width: 100%;
     	height: 20px;
