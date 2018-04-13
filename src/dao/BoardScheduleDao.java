@@ -41,36 +41,31 @@ public class BoardScheduleDao {
 		return conn;
 	}
 	
-	public List<BoardScheduleDto> selectlist() throws SQLException {
+	public BoardScheduleDto planselect(int bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select b.bs_num, b.email, b.nickname, b.title, b.tag, b.content,"
-				   + "b.image_url, b.vote_count, b.view_count, b.area_names, s.sm_code,"
-				   + "s.area_name, s.tour_date, b.board_date from BOARDSCHEDULE b, SCHEDULEMEDIUM s"
-				   + "where b.sl_code = s.sl_code and s.sl_code = ?";
-		List<BoardScheduleDto> selectlist = new ArrayList<BoardScheduleDto>();
+		String sql = "select * from BOARDSCHEDULE b, SCHEDULEMEDIUM s where b.bs_num = ?";
+		BoardScheduleDto dto = new BoardScheduleDto();
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-
+			ps.setInt(1, bs_num);
 			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				BoardScheduleDto bsdto = new BoardScheduleDto();
-				bsdto.setBs_num(rs.getInt(1));
-				bsdto.setSl_code(rs.getString(2));
-				bsdto.setEmail(rs.getString(3));
-				bsdto.setNickname(rs.getString(4));
-				bsdto.setTitle(rs.getString(5));
-				bsdto.setTag(rs.getString(6));
-				bsdto.setContent(rs.getString(7));
-				bsdto.setImage_url(rs.getString(8));
-				bsdto.setVote_count(rs.getInt(9));
-				bsdto.setView_count(rs.getInt(10));
-				bsdto.setBoard_date(rs.getDate(11));
-				bsdto.setArea_names(rs.getString(12));
-				selectlist.add(bsdto);
+			if (rs.next()) {
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setSl_code(rs.getString("sl_code"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setView_count(rs.getInt("view_conut"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setSchedule_date(rs.getString("schedule_date"));
+				dto.setArea_name(rs.getString("area_name"));
+				dto.setArea_names(rs.getString("area_names"));
+				dto.setEmail(rs.getString("email"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -82,7 +77,7 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
-		return selectlist;
+		return dto;
 
 	}
 
