@@ -79,9 +79,6 @@ public class BoardScheduleDao {
 
 	}
 
-		
-	
-
 	public List<BoardScheduleDto> list() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -182,5 +179,40 @@ public class BoardScheduleDao {
 		System.out.println("result : " +  result);
 		
 		return result;
+	}
+	public BoardScheduleDto update(int bs_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM BOARDSCHEDULE WHERE BS_NUM = ?";
+		BoardScheduleDto dto = new BoardScheduleDto();
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setSl_code(rs.getString("sl_code"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setView_count(rs.getInt("view_count"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setSchedule_date(rs.getString("schedule_date"));
+				dto.setArea_names(rs.getString("area_names"));
+			}
+		} catch (Exception e ) {
+			System.out.println(e.getMessage());
+		} finally {
+			 if (rs != null) rs.close(); 
+	         if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		return dto;
 	}
 }

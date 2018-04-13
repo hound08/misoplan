@@ -205,38 +205,15 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	</div>
 	<div class="main-center">
 		<div class="center-text">
-			세부 일정
+			일정 내용
 		</div>
-			<div class="center-main-card">
-			<c:forEach var="dto" items="${showList }">
-				<div class="center-card-box" align="center" id=${dto.sl_code}>
-					<div class="card-box-title">
-						<div class="card-box-title0">
-							${dto.sl_code }
-						</div>
-						<div class="card-box-title1"> <!--지역 -->
-							${dto.area_name } 
-							<input type = "hidden" value ="${dto.area_name }">
-						</div>
-						<div class ="card-box-title2"> <!-- 날짜 -->
-							${dto.tour_date_start } ~ ${dto.tour_date_end }
-						</div>
-					</div>
-					<div class="card-box-bottom">
-						${dto.s_name }
-					</div>
-					<input type="radio" class="radio" id='radio${dto.sl_code }' name="radio">  <!-- sl_code가 기준 잡고 위 데이터 뽑기 -->
-				</div>
-			</c:forEach>
-			</div>
 		<div class="center-bottom-image">
 			<textarea rows="13" cols="163" name="content" required="required"></textarea>
 		</div>
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
-			<!-- submit --><!-- onclick="location.href='boardinsetAction.do'" -->
 			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
-			onclick="location.href='boardschedule.do?areaName='">
+			onclick="location.href='planview.do?areaName='">
 		</div>
 	</div>
 	</form>
