@@ -43,7 +43,7 @@
 	padding: 10px;
 }
 
-#aa {
+.title {
 	width: 500px;
 }
 
@@ -81,7 +81,7 @@
 </style>
 <script type="text/javascript">
 var onoff = 0;
-var aa= $(document).on('click', '.postnums', function(){
+ $(document).on('click', '.postnums', function(){
 	var post_num = $(this).attr("id");
 	var send_data = "post_num="+post_num;  
 	console.log("send_data : " + send_data);
@@ -95,7 +95,7 @@ var aa= $(document).on('click', '.postnums', function(){
 				$.each(data,function(){
 					var date = new Date();
 					 var str = 
-						('<tr class= "send_data"><td>'+this.message+'<div .class="result"><a href="">수락</a> | <a href="">거절</a><div></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
+						('<tr class= "send_data"><td class="title">'+this.message+'<div .class="result"><a href="">수락</a> | <a href="">거절</a><div></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
 					 $(trpost).after(str);
 				});
 				onoff = onoff + 1;
@@ -117,14 +117,14 @@ var aa= $(document).on('click', '.postnums', function(){
 					<b id="all" onclick="all_click()">전체보기</b> |
 					<table border="1" id="mytable">
 						<tr>
-							<th id="aa">제목</th>
+							<th class="title">제목</th>
 							<th class="bb">닉네임</th>
 							<th class="bb">동행</th>
 							<th class="bb">등록일자</th>
 						</tr>
 						<c:forEach var="list" items="${list }" >
 							<tr id="z${list.post_num }"> 
-								<td class="postnums" id='${list.post_num }'>${list.title}</td>
+								<td class="postnums" id='${list.post_num }' width="500px">${list.title}</td>
 								<td>${list.nickname } </td>
 								<td>${list.current_num } / ${list.minimum_num } </td>
 								<td>${list.post_date }</td>
@@ -136,20 +136,22 @@ var aa= $(document).on('click', '.postnums', function(){
 					<h1>내가 시청한 동행</h1>
 					<table border="1" id="mytable2">
 						<tr>
-							<th id="aa">제목</th>
+							<th class="title">제목</th>
 							<th class="bb">닉네임</th>
 							<th class="bb">동행상태</th>
 							<th class="bb">등록일자</th>
 						</tr>
 						<c:forEach var="myapplist" items="${myapplist }" >
 							<tr> 
-								<td>${myapplist.message}</td>
+								<td class="title">${myapplist.message}</td>
 								<td>${myapplist.nickname } </td>
 								<td>${myapplist.status }</td>
 								<td>${myapplist.applicants_date }</td>
 							</tr>
 						</c:forEach>
 					</table>
+					
+					
 				</div>
 		</div>
 	</div>

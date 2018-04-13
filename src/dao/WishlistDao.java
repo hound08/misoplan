@@ -123,6 +123,7 @@ public class WishlistDao {
 				dto.setContendtid(rs.getInt("contendtid"));
 				dto.setImg_src(rs.getString("img_src"));
 				dto.setTour_name(rs.getString("tour_name"));
+				dto.setEmail(rs.getString("email"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
