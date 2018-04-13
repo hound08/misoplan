@@ -70,7 +70,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-center {
 	width: 1200px;
-	height: 650px;
+	height: 350px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
@@ -185,18 +185,12 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 <form action="planupdate.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
 		<!-- <div class="main-top-second1" align="left"> -->
-			<img class="main-top-second1" alt="IMG" src="">
+			<img class="main-top-second1" alt="IMG" src="${dto.image_url }">
 		<!-- </div> -->
-		<div class="main-top-second2" id = "test">
-		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
-		<p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
-		<p>지   역 : <span id="area"></span></p><br>
-				 <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
-				 <input type="hidden" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
-				 <input type="hidden" name="nickname" id="nickname" value="${nickname }"> <!-- nickname 넘어가는지 확인 -->
-				 <input type="hidden" name="sl_code" id="sl_codehidden"> <!-- sl_code 값을 넘겨 oracle로 받기위해 -->
-		<p>기   간 : <span id="date"></span></p>
-				 <input type="hidden" name="schedule_date" id="datehidden">
+		<div class="main-top-second2" id ="test">
+		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value ="${dto.title }"></p><br>
+		<p>태   그 : <input type="text" id="tag" name="tag" required="required" value="${dto.tag }"></p><br>
+		<h2>수정할 내용을 입력하여 주세요</h2>
 				<!--  <span id="sl_codehidden"></span> -->
 		</div>
 		<div class="main-imagebt">
@@ -205,30 +199,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	</div>
 	<div class="main-center">
 		<div class="center-text">
-			세부 일정
+			일정 내용
 		</div>
-			<div class="center-main-card">
-			<c:forEach var="dto" items="${showList }">
-				<div class="center-card-box" align="center" id=${dto.sl_code}>
-					<div class="card-box-title">
-						<div class="card-box-title0">
-							${dto.sl_code }
-						</div>
-						<div class="card-box-title1"> <!--지역 -->
-							${dto.area_name } 
-							<input type = "hidden" value ="${dto.area_name }">
-						</div>
-						<div class ="card-box-title2"> <!-- 날짜 -->
-							${dto.tour_date_start } ~ ${dto.tour_date_end }
-						</div>
-					</div>
-					<div class="card-box-bottom">
-						${dto.s_name }
-					</div>
-					<input type="radio" class="radio" id='radio${dto.sl_code }' name="radio">  <!-- sl_code가 기준 잡고 위 데이터 뽑기 -->
-				</div>
-			</c:forEach>
-			</div>
 		<div class="center-bottom-image">
 			<textarea rows="13" cols="163" name="content" required="required"></textarea>
 		</div>
