@@ -172,9 +172,10 @@ tr.highlight td {
 	<div id="apply-div" style="display: none;">
 	<fieldset>
 		<form class ="form" action="applyActionAB.do">
+			<input type="hidden" value="${post_num }" name="post_num">
 			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
 			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
-			카카오톡 아이디: <input type="text" name="kakao_id""><p>
+			카카오톡 아이디: <input type="text" name="kakao_id"><p>
 			참가 인원 : 
 			<select name="num_people">
 				<option value="1">1명</option>
