@@ -317,13 +317,12 @@ public class MemberDao {
 		return result;
 	}
 	
-	public List<MemberDto> selectMemberList() throws SQLException {
+	public int selectTotalCnt() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		List<MemberDto> list = new ArrayList<MemberDto>();
-		MemberDto dto = new MemberDto();
-		String sql = "SELECT * FROM MEMBER";
+		String sql = "SELECT COUNT(*) FROM MEMBER";
+		int result = 0;
 		
 		try {
 			conn = getConnection();
@@ -331,17 +330,48 @@ public class MemberDao {
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public List<MemberDto> selectMemberList(int startRow, int endRow) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<MemberDto> list = new ArrayList<MemberDto>();
+		MemberDto dto = new MemberDto();
+		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, JOIN_DATE " +
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER) A) " +
+					 "WHERE RN BETWEEN ? AND ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
 				do {
 					dto = new MemberDto();
 					dto.setEmail(rs.getString(1));
 					dto.setNickname(rs.getString(2));
-					dto.setPhone(rs.getString(4));
-					dto.setMember_score(rs.getInt(6));
-					dto.setMember_admin(rs.getInt(7));
-					dto.setBan(rs.getInt(8));
-					dto.setBan_date(rs.getDate(9));
-					dto.setLeave(rs.getInt(10));
-					dto.setJoin_date(rs.getDate(11));
+					dto.setPhone(rs.getString(3));
+					dto.setMember_score(rs.getInt(4));
+					dto.setMember_admin(rs.getInt(5));
+					dto.setBan(rs.getInt(6));
+					dto.setBan_date(rs.getDate(7));
+					dto.setLeave(rs.getInt(8));
+					dto.setJoin_date(rs.getDate(9));
 					list.add(dto);
 				} while (rs.next());
 			}

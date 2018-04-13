@@ -1,13 +1,11 @@
 <%@page import="dao.MemberDto"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <title>미소플랜</title>
 <style type="text/css">
 * {
@@ -82,7 +80,6 @@ a:VISITED {
 	margin-top: 5px;
 	vertical-align: top;
 	text-align: left;
-	white-space: nowrap;
 }
 
 .login_off {
@@ -152,6 +149,9 @@ a:VISITED {
 	border-radius: 50%;
 }
 
+.welcome {
+	white-space: nowrap;
+}
 </style>
 </head>
 <body>
@@ -177,7 +177,7 @@ a:VISITED {
 				</div>	<%
 			} else if (session.getAttribute("email") != null) {	%>
 				<div class="memberImageDiv">
-					<div class="memberImage" alt="회원 사진"></div>
+					<div class="memberImage"></div>
 				</div>
 				<div class="login_on">
 					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
