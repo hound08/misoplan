@@ -75,16 +75,15 @@
 			<div id="main">
 				<h1>나의 찜 리스트</h1>
 				<div id="myinfo">
-				
 				<form action="myWishListPro.do">
 					<c:forEach var="list" items="${list }">
 						<div class="card">
 							<div class="cardhead">
 								<img alt="tour_img" src="${list.img_src }">
-								<input type="checkbox" name="wishlist">
+								<input type="checkbox" name="wishlist" value="${list.contendtid }">
 							</div>
 							<div class="cardbody">
-								<a href="#">${list.tour_name }</a>
+								<a href="#">${list.tour_name } </a>
 							</div>
 						</div>
 					</c:forEach>

@@ -1,5 +1,6 @@
 package dao;
 
+import java.sql.Array;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -132,5 +133,27 @@ public class WishlistDao {
 			if (conn != null) conn.close();
 		}
 		return list;
+	}
+
+	public int mydelete(String email, ArrayList<Integer> list) throws SQLException{
+		Connection conn= null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "delete from wishlist where email = ? and contendtid = ?";
+		conn = getConnection();
+		try {
+			ps = conn.prepareStatement(sql);
+			for(Integer contendtid : list){
+			ps.setString(1, email);
+			ps.setInt(2, contendtid);
+			result = ps.executeUpdate();
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if(ps != null) ps.close();
+			if(conn != null) conn.close();
+		}
+		return result;
 	}
 }
