@@ -28,7 +28,6 @@ public class writeReplyActionAB implements CommandProcess{
 		dto.setEmail((String)session.getAttribute("email"));
 		dto.setNickname((String)session.getAttribute("nickname"));
 		dto.setContent(request.getParameter("content"));
-		
 		accompanyDao.comment_count(post_num);
 		dao.insert(dto);
 		

@@ -20,11 +20,15 @@ public class applyActionAB implements CommandProcess{
 		AccompanyApplicantsDao dao = AccompanyApplicantsDao.getInstance();
 		AccompanyApplicantsDto dto = new AccompanyApplicantsDto();
 		dto.setPost_num(Integer.parseInt(request.getParameter("post_num")));
-		dto.setEmail((String)session.getAttribute("email"));
+		dto.setEmail(request.getParameter("email"));
 		dto.setNickname((String)session.getAttribute("nickname"));
+		dto.setKakao_id(request.getParameter("kakao_id"));
+		dto.setMessage(request.getParameter("message"));
+		dto.setNum_people(Integer.parseInt(request.getParameter("num_people")));
+		String result = String.valueOf(dao.insert(dto));
+		request.setAttribute(result, "result");
 		
-		
-		return null;
+		return "accompanyBoardView.jsp?postnum="+Integer.parseInt(request.getParameter("post_num"));
 	}
 
 }

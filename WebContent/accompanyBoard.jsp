@@ -222,7 +222,7 @@ div {
 				<div class="card-body">
 					<!--  카드 바디 헤더 -->
 					<div class="card-body-header">
-						<p style="overflow: hidden"><h2>제목: ${board.title }</h2></p>
+						<div class="card-body-title"><h2>제목: ${board.title }</h2></div>
 						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
 						<div class="card-body-hashtag">
 								<c:forEach var="t" items="${tags }">
@@ -232,7 +232,7 @@ div {
 						<p class="card-body-nickname">작성자: ${board.nickname }</p>
 					</div>
 					<!--  카드 바디 본문 -->
-					<textarea class="card-body-description" rows="7" disabled="disabled" style="background-color: white; width:87%; border:none; overflow:hidden; resize: none">${board.content }</textarea>
+					<textarea class="card-body-description" disabled="disabled" style="background-color: white; width:87%; border:none; overflow:hidden; resize: none">${board.content }</textarea>
 					<!--  카드 바디 푸터 -->
 					<div class="card-body-footer">
 						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">

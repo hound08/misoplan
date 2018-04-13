@@ -60,8 +60,32 @@ private static AccompanyApplicantsDao instance; //instance
 			}
 	}
 	
-	public int insert() {
+	public int insert(AccompanyApplicantsDto dto) {
 		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "insert into applicants values(?,?,?,?,?,?,sysdate,?)";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, dto.getPost_num());
+			pstmt.setString(2, dto.getEmail());
+			pstmt.setString(3, dto.getNickname());
+			pstmt.setInt(4, 0);
+			pstmt.setString(5, dto.getMessage());
+			pstmt.setString(6, dto.getKakao_id());
+			pstmt.setInt(6, dto.getNum_people());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
 	}
 	
 }

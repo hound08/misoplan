@@ -13,6 +13,10 @@
 <title>Insert title here</title>
 <style type="text/css">
 
+body, html {
+    height: 100%;
+}
+
 div {
 	margin: 0px auto;
 }
@@ -90,21 +94,50 @@ tr.highlight td {
 }
 
 #apply-div {
-	position: absolute;
-	top:50%;
-	left: 50%;
-    width: 100%;
-    height: 100%;
+	position: fixed;
+	top:0;
+	left:0;
+    min-width: 100%;
+    min-height: 100%;
     background-color: black;
+    opacity: 0.8;
+    z-index: 999;  /*stack order*/
+}
+
+fieldset {
+	color: white;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	border: none;
 }
 </style>
 </head>
 <body>
-	<div id="apply-div" style="display: none">
-		<form action="">
-			메시지: <textarea rows="5" style="width: 100%"></textarea>
-			카카오톡 아이디: <input type="text">
+	<div id="apply-div" style="display: none;">
+	<fieldset>
+		<form class ="form" action="applyActionAB.do">
+			글번호: <input type="hidden" name="post_num" value="${post_num }"><p>
+			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
+			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
+			카카오톡 아이디: <input type="text" name="kakao_id""><p>
+			참가 인원 : 
+			<select name="num_people">
+				<option value="1">1명</option>
+				<option value="2">2명</option>
+				<option value="3">3명</option>
+				<option value="4">4명</option>
+				<option value="5">5명</option>
+				<option value="6">6명</option>
+				<option value="7">7명</option>
+				<option value="8">8명</option>
+				<option value="9">9명</option>
+				<option value="10">10명</option>
+			</select>
+			<input type="submit">
 		</form>
+		<button onclick="apply()">취소</button>
+	</fieldset>
 	</div>
 	<div class="section">
 		<div class="main-image">
@@ -161,31 +194,33 @@ tr.highlight td {
 	</div>
 	
 	<script type="text/javascript">
-						var image = document.getElementById("center-image");
-			var current = 0;
-			var images = [ "images/korea2.jpg", 
-			               "images/korea3.jpg",
-						   "images/korea4.jpg", 
-						   "images/korea5.jpg",
-						   "images/korea1.jpg" ]
-			function replacePhoto() {
-				++current;
-				if (current >= images.length)
-					current = 0;
-				image.src = images[current];
-			}
-			setInterval(replacePhoto, 3000);
+		var image = document.getElementById("center-image");
+		var current = 0;
+		var images = [ "images/korea2.jpg", 
+		               "images/korea3.jpg",
+					   "images/korea4.jpg", 
+					   "images/korea5.jpg", ]
+		function replacePhoto() {
+			++current;
+			if (current >= images.length)
+				current = 0;
+			image.src = images[current];
+		}
+		setInterval(replacePhoto, 3000);
 			
-	</script>
-	<script type="text/javascript">
-	function apply() {
-	    var apply_div = document.getElementById("apply-div");
-	    if (apply_div.style.display === "none") {
-	    	apply_div.style.display = "block";
-	    } else {
-	    	apply_div.style.display = "none";
-	    }
-	}
+		function apply() {
+		    var apply_div = document.getElementById("apply-div");
+		    if (apply_div.style.display === "none") {
+		    	apply_div.style.display = "block";
+		    	document.documentElement.style.overflow = 'hidden';
+			    document.body.scroll = "no";
+		    } else {
+		    	apply_div.style.display = "none";
+		    	document.documentElement.style.overflow = 'auto'; 
+		        document.body.scroll = "yes";
+		    }
+		    
+		}
 	</script>
 </body>
 </html>
