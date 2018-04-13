@@ -68,16 +68,6 @@ hr {
 	margin: 30px 0;
 }
 
-ul {
-    margin: 1em 0 1em 0;
-    padding-left: 40px;
-}
-
-ul li {
-    list-style-type: circle;
-    line-height: 30px;
-}
-
 #hashtag{
 	color: #2478FF;
 }
@@ -151,11 +141,9 @@ input[type="file"] {
 			</div>
 		</div>
 			<h3>새로운 글 등록</h3>
-			<ul>
-				<li>동행을 찾기 위한 게시판입니다.</li>
-				<li>음담패설,모욕,명예훼손,허위사실기재,성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사,형사소송의 대상이 될 수 있으며, 모두 글 작성자의 책임입니다.</li>
-				<li>본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</li>
-			</ul>
+				동행을 찾기 위한 게시판입니다.
+				음담패설,모욕,명예훼손,허위사실기재,성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사,형사소송의 대상이 될 수 있으며, 모두 글 작성자의 책임입니다.
+				본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.
 			<hr>
 		<div class="write-form">
 			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
