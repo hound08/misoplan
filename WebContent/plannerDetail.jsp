@@ -123,7 +123,9 @@ div {
 			jsonArr.push({
 				"dayvalue" : $(value).children(".contentTextDiv").children().attr('dayValue'),
 				"areaCode" : $(value).children(".contentTextDiv").children().attr('areaCode'),
+				"areaName" : $(value).children(".contentTextDiv").children().attr('areaName'),
 				"sigunguCode" : $(value).children(".contentTextDiv").children().attr('sigunguCode'),
+				"sigunguName" : $(value).children(".contentTextDiv").children().attr('sigunguName'),
 				"contentId" : $(value).children(".contentTextDiv").children().attr('contentId'),
 				"elemTitle" : $(value).children(".contentDiv").children(".contentP").text().trim(),
 				"mapx" : $(value).children(".contentTextDiv").children().attr('mapx'),
@@ -142,28 +144,45 @@ div {
 </head>
 <body>
 	<%
+		
 		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String jsonString = request.getParameter("jsonArr");
 		String date = request.getParameter("date");
-		
-		System.out.println("jsonString : " + jsonString);
+		date = date.replace("-", "/");
+		String paraDay = "";
+		System.out.println("date parameter : " + date);
+		//System.out.println("jsonString : " + jsonString);
 		
 		JSONArray ja1 = new JSONArray(jsonString);
 		JSONObject lastObj = ja1.getJSONObject(ja1.length()-1);
 		int max = Integer.parseInt((String) lastObj.get("dayvalue"));
 		
 		System.out.println("date : " +date);
-		Date firstDay = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+		Date firstDay = new SimpleDateFormat("yyyy/MM/dd").parse(date);
 		String strFirstDay = new SimpleDateFormat("yyyy/MM/dd").format(firstDay);
-		System.out.println(strFirstDay);
+		//System.out.println(strFirstDay);
 		
 		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		cal.setTime(firstDay);
 		cal.add(Calendar.DAY_OF_YEAR, max-1);
 		Date lastDay = cal.getTime();
 		String strLastDay = new SimpleDateFormat("yyyy/MM/dd").format(lastDay);
-		System.out.println(strLastDay);
+		//System.out.println(strLastDay);
+		
+		for(int i = 0; i < ja1.length(); i++){
+			JSONObject jo1 = ja1.getJSONObject(i);
+			int dayValue = Integer.parseInt((String)jo1.get("dayvalue"));
+			Date dayf = new SimpleDateFormat("yyyy/MM/dd").parse(date);
+			Calendar calendar = new GregorianCalendar(Locale.KOREA);
+			cal.setTime(dayf);
+			cal.add(Calendar.DAY_OF_YEAR, dayValue);
+			Date day = cal.getTime();
+			String strDay = new SimpleDateFormat("yyyy/MM/dd").format(day);
+			paraDay += "," + strDay;			
+		}
+		paraDay = paraDay.substring(1, paraDay.length());
+		System.out.println("paraDay : " + paraDay);
 		
 	%>
 
@@ -183,12 +202,14 @@ div {
 		</div>
 
 		<div class="planDiv">
-			<form action="insertPlan.do" id="form">
+			<form action="insertPlanAction.do" id="form">
 				<div class="planTop">
+				<input type="hidden" name="email" value="<%=session.getAttribute("email")%>">
 				<input type="hidden" name="title" value="<%=title %>">
 				<input type="hidden" name="firstDate" value="<%=strFirstDay %>">
 				<input type="hidden" name="lastDate" value="<%=strLastDay %>">
 				<input type="hidden" name="jsonString" id="jsonString">
+				<input type="hidden" name="strDays" id="strDays" value="<%=paraDay%>">
 					<div class="planTopInner">PLAN</div>
 				</div>
 				<%
@@ -208,13 +229,15 @@ div {
 						JSONObject jo = ja.getJSONObject(i);
 						String dayValue = (String) jo.get("dayvalue");
 						String areaCode = (String) jo.get("areaCode");
+						String areaName = (String) jo.get("areaName");
 						String sigunguCode = (String) jo.get("sigunguCode");
+						String sigunguName = (String) jo.get("sigunguName");
 						String planTitle = (String) jo.get("elemTitle");
 						String contentId = (String) jo.get("contentId");
 						String mapx = (String) jo.get("mapx");
 						String mapy = (String) jo.get("mapy");
 						String imagePath = (String) jo.get("imagePath");
-
+						
 						if (!dayValue.equals(min)) {
 							min = dayValue;
 				%>
@@ -234,7 +257,7 @@ div {
 
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
-							areaCode="<%=areaCode%>" sigunguCode="<%=sigunguCode%>"
+							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
 							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
 							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
 					</div>
@@ -252,7 +275,7 @@ div {
 
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
-							areaCode="<%=areaCode%>" sigunguCode="<%=sigunguCode%>"
+							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
 							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
 							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
 					</div>

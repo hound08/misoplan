@@ -51,6 +51,17 @@
 	width: 120px;
 }
 
+
+.postnums {
+	width: 500px;
+	height: 30px;
+}
+#mytable td {
+	overflow: hidden;
+}
+
+
+
 .pagination {
 	display: flex;
 	justify-content: center;
@@ -90,12 +101,11 @@ var onoff = 0;
 	   console.log("trpost : " + trpost);
 	   
 		$.getJSON('companionajax.jsp', send_data, function(data,status) {
-			
 			if(onoff == 0){
 				$.each(data,function(){
 					var date = new Date();
 					 var str = 
-						('<tr class= "send_data"><td class="title">'+this.message+'<div .class="result"><a href="">수락</a> | <a href="">거절</a><div></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
+						('<tr class= "send_data"><td>'+this.message+'</td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
 					 $(trpost).after(str);
 				});
 				onoff = onoff + 1;
@@ -124,7 +134,7 @@ var onoff = 0;
 						</tr>
 						<c:forEach var="list" items="${list }" >
 							<tr id="z${list.post_num }"> 
-								<td class="postnums" id='${list.post_num }' width="500px">${list.title}</td>
+								<td class="postnums" id='${list.post_num }'>${list.title}</td>
 								<td>${list.nickname } </td>
 								<td>${list.current_num } / ${list.minimum_num } </td>
 								<td>${list.post_date }</td>
@@ -143,7 +153,7 @@ var onoff = 0;
 						</tr>
 						<c:forEach var="myapplist" items="${myapplist }" >
 							<tr> 
-								<td class="title">${myapplist.message}</td>
+								<td>${myapplist.message}</td>
 								<td>${myapplist.nickname } </td>
 								<td>${myapplist.status }</td>
 								<td>${myapplist.applicants_date }</td>

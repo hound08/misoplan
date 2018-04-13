@@ -343,21 +343,27 @@ public class MemberDao {
 		return result;
 	}
 	
-	public List<MemberDto> selectMemberList(int startRow, int endRow) throws SQLException {
+	public List<MemberDto> selectMemberList(int startRow, int endRow, MemberDto dtoSearch) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<MemberDto> list = new ArrayList<MemberDto>();
 		MemberDto dto = new MemberDto();
-		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, JOIN_DATE " +
+		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, TO_CHAR(JOIN_DATE,'YYYY-MM-DD HH24:MI:SS') " +
 					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER ORDER BY NICKNAME) A) " +
-					 "WHERE RN BETWEEN ? AND ?";
+					 "WHERE RN BETWEEN ? AND ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ?";
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
+		String phone = "%" + dtoSearch.getPhone() + "%";
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, endRow);
+			ps.setString(3, email);
+			ps.setString(4, nickname);
+			ps.setString(5, phone);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -371,7 +377,7 @@ public class MemberDao {
 					dto.setBan(rs.getInt(6));
 					dto.setBan_date(rs.getDate(7));
 					dto.setLeave(rs.getInt(8));
-					dto.setJoin_date(rs.getDate(9));
+					dto.setJoin_date_time(rs.getString(9));
 					list.add(dto);
 				} while (rs.next());
 			}
