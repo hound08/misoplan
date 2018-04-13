@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-
 div {
 	margin: 0px auto;
 }
@@ -52,92 +50,6 @@ td:FIRST-CHILD{
 	vertical-align: middle;
 	text-align: right;
 	width: 80px;
-}
-
-.input {
-	width: 100%;
-	height : 30px;
-	font-size: 15px;
-}
-
-.form-table{
-	font-size: 15px;
-}
-
-hr {
-	margin: 30px 0;
-}
-
-ul {
-    margin: 1em 0 1em 0;
-    padding-left: 40px;
-}
-
-ul li {
-    list-style-type: circle;
-    line-height: 30px;
-}
-
-#hashtag{
-	color: #2478FF;
-}
-
-#output {
-	width: 150px;
-	height: 150px;
-	background-size: 100% 100%;
-	display: inline-block;
-}
-
-tr.highlight td {
-	padding-top: 2px; 
-	padding-bottom: 2px;
-}
-
-.cancel-button{
-	width: 70px;
-	height: 30px;
-	font-size: 15px;
-	justify-content: center;
-	margin-top: 20px;
-}
-
-.input{
-	height: 35px;
-}
-
-input[type="submit"] {
-	width: 70px;
-	height: 30px;
-}
-
-input[type="button"] {
-	width: 70px;
-	height: 30px;
-}
-
-input[type="file"] {
-    display: none;
-}
-
-.wrapper-file-upload {
-	margin-top: 5px;
-	border: 1px solid #ccc;
-	border-radius: 4px;
-	background-color: #489CFF;
-	color: white;
-    display: inline-block;
-    padding: 8px 12px;
-    cursor: pointer;
-}
-
-#footer_wrap{
-	margin-top: 130px;
-}
-
-.submit-div{
-	float: right;
-	margin-right: 60px;
 }
 
 </style>

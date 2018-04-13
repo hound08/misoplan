@@ -45,7 +45,7 @@ public class BoardScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from BOARDSCHEDULE b, SCHEDULEMEDIUM s where b.bs_num = ?";
+		String sql = "select * from BOARDSCHEDULE where bs_num = ?";
 		BoardScheduleDto dto = new BoardScheduleDto();
 		try {
 			conn = getConnection();
@@ -60,12 +60,10 @@ public class BoardScheduleDao {
 				dto.setContent(rs.getString("content"));
 				dto.setImage_url(rs.getString("image_url"));
 				dto.setVote_count(rs.getInt("vote_count"));
-				dto.setView_count(rs.getInt("view_conut"));
+				dto.setView_count(rs.getInt("view_count"));
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setSchedule_date(rs.getString("schedule_date"));
-				dto.setArea_name(rs.getString("area_name"));
 				dto.setArea_names(rs.getString("area_names"));
-				dto.setEmail(rs.getString("email"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -157,45 +155,21 @@ public class BoardScheduleDao {
 			throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql1 = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		String sql2 = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		int bs_num = 0;
+		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES(BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		try {
 			conn = getConnection();
-			ps = conn.prepareStatement(sql1);
-			rs = ps.executeQuery();
-			if (rs.next()) {
-				bs_num = rs.getInt(1) + 1;
-			}
-
-			rs.close();
-			ps.close();
-			
-			System.out.println("2 -> " + dto.getTitle());
-			System.out.println("3 -> " + dto.getTag());
-			System.out.println("4 -> " + dto.getNickname());
-			System.out.println("5 -> " + dto.getImage_url());
-			System.out.println("6 -> " + dto.getContent());
-			System.out.println("7 -> " + dto.getArea_names());
-			System.out.println("8 -> " + dto.getEmail());
-			System.out.println("9 -> " + dto.getSl_code());
-			System.out.println("10 -> " + dto.getSchedule_date());
-			
-			ps = conn.prepareStatement(sql2);
-			System.out.println("bs_num" + bs_num);
+			ps = conn.prepareStatement(sql);
 /*			System.out.println("sl_code" + sl_code);*/
-			ps.setInt(1, bs_num);
-			ps.setString(2, dto.getTitle());
-			ps.setString(3, dto.getTag());
-			ps.setString(4, dto.getNickname());
-			ps.setString(5, dto.getImage_url());
-			ps.setString(6, dto.getContent());
-			ps.setString(7, dto.getArea_names());
-			ps.setString(8, dto.getEmail());
-			ps.setString(9, dto.getSl_code());
-			ps.setString(10, dto.getSchedule_date());
+			ps.setString(1, dto.getTitle());
+			ps.setString(2, dto.getTag());
+			ps.setString(3, dto.getNickname());
+			ps.setString(4, dto.getImage_url());
+			ps.setString(5, dto.getContent());
+			ps.setString(6, dto.getArea_names());
+			ps.setString(7, dto.getEmail());
+			ps.setString(8, dto.getSl_code());
+			ps.setString(9, dto.getSchedule_date());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -205,6 +179,8 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
+		System.out.println("result : " +  result);
+		
 		return result;
 	}
 }

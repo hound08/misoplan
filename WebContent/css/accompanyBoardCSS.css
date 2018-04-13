@@ -84,7 +84,7 @@ p {
 
 .card:hover .card-body-description {
     opacity: 1;
-    height: 200px;
+    height: 180px;
     -webkit-transition: .2s ease-in-out;
     -moz-transition: .2s ease-in-out;
     -ms-transition: .2s ease-in-out;
@@ -93,14 +93,17 @@ p {
     border: solid;
     overflow: hidden;
 }
-
+.card-body-title {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+}
 .card-body-hashtag {
-	height: 15px;
+	height: 20px;
 	width: 100%;
 	color: #2478FF;
 	font-style: italic;
 	overflow: hidden;
-	border: solid;
 }
 
 .card-body-footer {
@@ -123,14 +126,14 @@ p {
 .icon-view_count {
     width: 25px;
     height: 17px;
-	background: url("images/eye.jpg") no-repeat;
+	background: url("../images/eye.jpg") no-repeat;
 }
 
 .icon-comments_count {
 	margin-left: 5px;
 	width: 25px;
     height: 17px;
-	background: url("images/comment.jpg") no-repeat;	
+	background: url("../images/comment.jpg") no-repeat;	
 }
 
 .reg_date {
@@ -244,8 +247,8 @@ p {
 }
 
 .write-button {
-	width: 70px;
-	height: 30px;
+	width: 80px;
+	height: 35px;
 	display: flex;
 	float: right;
 	font-size: 15px;

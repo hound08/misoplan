@@ -74,7 +74,7 @@ public class writeActionAB implements CommandProcess{
         request.setAttribute("result", result);
         request.setAttribute("tag", accompanyDto.getTag());
 		
-		return "writeFormAB2.jsp";
+		return "listAction.do";
 	}//writeFormAction.requestPro
 
 }

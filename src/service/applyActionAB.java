@@ -14,7 +14,6 @@ public class applyActionAB implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		request.setCharacterEncoding("utf-8"); //encode to UTF-8
 		HttpSession session = request.getSession();
 		AccompanyApplicantsDao dao = AccompanyApplicantsDao.getInstance();
@@ -22,9 +21,13 @@ public class applyActionAB implements CommandProcess{
 		dto.setPost_num(Integer.parseInt(request.getParameter("post_num")));
 		dto.setEmail((String)session.getAttribute("email"));
 		dto.setNickname((String)session.getAttribute("nickname"));
+		dto.setKakao_id(request.getParameter("kakao_id"));
+		dto.setMessage(request.getParameter("message"));
+		dto.setNum_people(Integer.parseInt(request.getParameter("num_people")));
+		String result = String.valueOf(dao.insert(dto));
+		request.setAttribute(result, "result");
 		
-		
-		return null;
+		return "viewActionAB.do?post_num="+Integer.parseInt(request.getParameter("post_num"));
 	}
 
 }

@@ -43,14 +43,17 @@
 	padding: 10px;
 }
 
-#aa {
+.title {
 	width: 500px;
 }
 
 .bb {
 	width: 120px;
 }
-
+.postnums {
+	width: 500px;
+	height: 30px;
+}
 .pagination {
 	display: flex;
 	justify-content: center;
@@ -81,7 +84,7 @@
 </style>
 <script type="text/javascript">
 var onoff = 0;
-var aa= $(document).on('click', '.postnums', function(){
+ $(document).on('click', '.postnums', function(){
 	var post_num = $(this).attr("id");
 	var send_data = "post_num="+post_num;  
 	console.log("send_data : " + send_data);
@@ -117,14 +120,14 @@ var aa= $(document).on('click', '.postnums', function(){
 					<b id="all" onclick="all_click()">전체보기</b> |
 					<table border="1" id="mytable">
 						<tr>
-							<th id="aa">제목</th>
+							<th class="title">제목</th>
 							<th class="bb">닉네임</th>
 							<th class="bb">동행</th>
 							<th class="bb">등록일자</th>
 						</tr>
 						<c:forEach var="list" items="${list }" >
 							<tr id="z${list.post_num }"> 
-								<td class="postnums" id='${list.post_num }'>${list.title}</td>
+								<td class="postnums" id='${list.post_num }' width="500px">${list.title}</td>
 								<td>${list.nickname } </td>
 								<td>${list.current_num } / ${list.minimum_num } </td>
 								<td>${list.post_date }</td>
@@ -136,7 +139,7 @@ var aa= $(document).on('click', '.postnums', function(){
 					<h1>내가 시청한 동행</h1>
 					<table border="1" id="mytable2">
 						<tr>
-							<th id="aa">제목</th>
+							<th class="title">제목</th>
 							<th class="bb">닉네임</th>
 							<th class="bb">동행상태</th>
 							<th class="bb">등록일자</th>
@@ -150,6 +153,8 @@ var aa= $(document).on('click', '.postnums', function(){
 							</tr>
 						</c:forEach>
 					</table>
+					
+					
 				</div>
 		</div>
 	</div>

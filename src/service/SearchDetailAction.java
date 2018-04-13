@@ -7,6 +7,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.Session;
+
 import dao.TourRankDao;
 import dao.WishlistDao;
 import dao.WishlistDto;
@@ -60,6 +62,7 @@ public class SearchDetailAction implements CommandProcess{
 		request.setAttribute("contentTypeId", contentTypeId_);
 		request.setAttribute("contendtid", contendtid_);
 		request.setAttribute("result", result);
+		
 		request.setAttribute("mapx", mapx);
 		request.setAttribute("mapy", mapy);
 		request.setAttribute("firstImage", firstImage);

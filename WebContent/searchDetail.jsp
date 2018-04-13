@@ -18,11 +18,13 @@
 </script>
 <script type="text/javascript">
 	window.onload = function(){
+		alert("window onload");
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
 		/* alert("contentTypeId = " + contentTypeId);
 		alert("contendtid = " + contendtid); */
 		
+		/*공통 정보 조회  */
 		$.ajax({
 			url : 'Detail1',
 			type : 'get',
@@ -46,7 +48,7 @@
 				$("#touristImg").append(
 						'<img src = ' + img + '  alt="" >'
 						);
-				$("#summary").append(
+				$("#tab1").append(
 						'<ul class="txtCon" >'
 						+ '<li> <strong> 우편 번호 </strong>'
 						+ '  :  '
@@ -74,9 +76,282 @@
 						+'" id = "title">' 
 						
 				);
-				
-				
-				
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("request : " + XMLHttpRequest);
+				alert("Status: " + textStatus);
+				alert("Error: " + errorThrown);
+			}
+		});
+		
+		/* 소개정보 조회  */
+		$.ajax({
+			url : 'DetailIntro',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				typeId 	: contentTypeId,
+				id		: contendtid
+			},
+			success : function(data) {
+				var myItem 		= data.response.body.items.item;
+				if(contentTypeId == 12){
+					console.log("12(관광지)");
+					/* 관광지 소개 필요 변수  */
+					var infocenter		= myItem.infocenter;	//문의 및 안내
+					var restdate		= myItem.restdate;		//쉬는날
+					var parking			= myItem.parking;		//주차시설
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocenter
+							+ '</li>'
+							+ '<li> <strong> 쉬는날 </strong>'
+							+ '  :  '
+							+ restdate
+							+ '</li>'
+							+ '<li> <strong> 주차 시설 </strong>'
+							+ '  :  '
+							+ parking
+							+ '</li>'
+							+ '</ul>'
+					);
+				}else if(contentTypeId == 14){
+					console.log("14(문화시설)")
+					var infocenterculture 		= myItem.infocenterculture;		//문의 및 안내
+					var scale					= myItem.scale;					//규모
+					var usetimeculture			= myItem.usetimeculture;		//이용 시간
+					var restdateculture			= myItem.restdateculture;		//쉬는날
+					var usefee					= myItem.usefee;				//이용요금
+					var parkingculture			= myItem.parkingculture;		//주차 시설
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocenterculture
+							+ '</li>'
+							+ '<li> <strong> 규모 </strong>'
+							+ '  :  '
+							+ scale
+							+ '</li>'
+							+ '<li> <strong> 이용 시간 </strong>'
+							+ '  :  '
+							+ usetimeculture
+							+ '</li>'
+							+ '<li> <strong> 쉬는날 </strong>'
+							+ '  :  '
+							+ restdateculture
+							+ '</li>'
+							+ '<li> <strong> 이용 요금 </strong>'
+							+ '  :  '
+							+ usefee
+							+ '</li>'
+							+ '<li> <strong> 주차 시설 </strong>'
+							+ '  :  '
+							+ parkingculture
+							+ '</li>'
+							+ '</ul>'
+					);
+					
+				}else if(contentTypeId == 15){
+					console.log("15(행사/공연/축제)")
+					var sponsor1 			= myItem.sponsor1;			//주최자 정보
+					var sponsor1tel			= myItem.sponsor1tel;		//주최자 연락처
+					var playtime			= myItem.playtime;			//공연 시간
+					var eventplace			= myItem.eventplace;		//행사 장소
+					var usetimefestival		= myItem.usetimefestival; 	//이용 요금
+					var bookingplace		= myItem.bookingplace;		//예매처
+					var subevent			= myItem.subevent;			//부대 행사
+					var program				= myItem.program;			//프로그램
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 주최자 정보 </strong>'
+							+ '  :  '
+							+ sponsor1
+							+ '</li>'
+							+ '<li> <strong> 주최자 연락처 </strong>'
+							+ '  :  '
+							+ sponsor1tel
+							+ '</li>'
+							+ '<li> <strong> 공연 시간 </strong>'
+							+ '  :  '
+							+ playtime
+							+ '</li>'
+							+ '<li> <strong> 행사 장소 </strong>'
+							+ '  :  '
+							+ eventplace
+							+ '</li>'
+							+ '<li> <strong> 이용 요금 </strong>'
+							+ '  :  '
+							+ usetimefestival
+							+ '</li>'
+							+ '<li> <strong> 예매처 </strong>'
+							+ '  :  '
+							+ bookingplace
+							+ '</li>'
+							+ '<li> <strong> 부대 행사 </strong>'
+							+ '  :  '
+							+ subevent
+							+ '</li>'
+							+ '<li> <strong> 프로그램 </strong>'
+							+ '  :  '
+							+ program
+							+ '</li>'
+							+ '</ul>'
+					);
+				}else if(contentTypeId == 25){
+					console.log("25(여행코스)")
+					var distance		= myItem.distance;	// 총 거리
+					var taketime		= myItem.taketime;	// 소요 시간
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 총 거리 </strong>'
+							+ '  :  '
+							+ distance
+							+ '</li>'
+							+ '<li> <strong> 소요 시간 </strong>'
+							+ '  :  '
+							+ taketime
+							+ '</li>'
+							+ '</ul>'
+					);
+				}else if(contentTypeId == 28){
+					console.log("28(레포츠)")
+					var infocenterleports 		= myItem.infocenterleports;	//문의 및 안내
+					var restdateleports			= myItem.restdateleports;	//쉬는 날
+					var reservation				= myItem.reservation;		//예약 안내
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocenterleports
+							+ '</li>'
+							+ '<li> <strong> 쉬는 날 </strong>'
+							+ '  :  '
+							+ restdateleports
+							+ '</li>'
+							+ '<li> <strong> 예약 안내 </strong>'
+							+ '  :  '
+							+ reservation
+							+ '</li>'
+							+ '</ul>'
+					);
+				}else if(contentTypeId == 32){
+					console.log("32(숙박)")
+					var infocenterlodging		= myItem.infocenterlodging;	//문의 및 안내
+					var roomtype				= myItem.roomtype;			//객실 유형
+					var parkinglodging			= myItem.parkinglodging;	//주차 가능
+					var chkcooking				= myItem.chkcooking;		//조리 가능
+					var checkintime				= myItem.checkintime;		//체크인
+					var checkouttime			= myItem.checkouttime;		//체크아웃
+					var reservationlodging		= myItem.reservationlodging;//예약 안내
+					var reservationurl			= myItem.reservationurl;	//예약안내 홈페이지
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocenterlodging
+							+ '</li>'
+							+ '<li> <strong> 객실 유형 </strong>'
+							+ '  :  '
+							+ roomtype
+							+ '</li>'
+							+ '<li> <strong> 주차 가능 </strong>'
+							+ '  :  '
+							+ parkinglodging
+							+ '</li>'
+							+ '<li> <strong> 조리 가능 </strong>'
+							+ '  :  '
+							+ chkcooking
+							+ '</li>'
+							+ '<li> <strong> 체크인 </strong>'
+							+ '  :  '
+							+ checkintime
+							+ '</li>'
+							+ '<li> <strong> 체크 아웃 </strong>'
+							+ '  :  '
+							+ checkouttime
+							+ '</li>'
+							+ '<li> <strong> 예약 안내 </strong>'
+							+ '  :  '
+							+ reservationlodging
+							+ '</li>'
+							+ '<li> <strong> 예약 안내 홈페이지 </strong>'
+							+ '  :  '
+							+ reservationurl
+							+ '</li>'
+							+ '</ul>'
+					);
+					
+				}else if(contentTypeId == 38){
+					console.log("38(쇼핑)")
+					var infocentershopping		= myItem.infocentershopping;	//문의 및 안내
+					var saleitem				= myItem.saleitem;				//판매 품목
+					var opentime				= myItem.opentime;				//영업 시간
+					var shopguide				= myItem.shopguide;				//매장 안내
+					var restdateshopping		= myItem.restdateshopping;		//쉬는날
+					var parkingshopping			= myItem.parkingshopping;		//주차 시설
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocentershopping
+							+ '</li>'
+							+ '<li> <strong> 판매 품목 </strong>'
+							+ '  :  '
+							+ saleitem
+							+ '</li>'
+							+ '<li> <strong> 영업 시간 </strong>'
+							+ '  :  '
+							+ opentime
+							+ '</li>'
+							+ '<li> <strong> 매장 안내 </strong>'
+							+ '  :  '
+							+ shopguide
+							+ '</li>'
+							+ '<li> <strong> 쉬는날 </strong>'
+							+ '  :  '
+							+ restdateshopping
+							+ '</li>'
+							+ '<li> <strong> 주차 시설 </strong>'
+							+ '  :  '
+							+ parkingshopping
+							+ '</li>'
+							+ '</ul>'
+					);
+				}else if(contentTypeId == 39){
+					console.log("39(음식점)")
+					var infocenterfood	= myItem.infocenterfood;//문의 및 안내
+					var treatmenu		= myItem.treatmenu;		//대표 메뉴
+					var opentimefood	= myItem.opentimefood;	//영업 시간
+					var parkingfood		= myItem.parkingfood;	//주차 가능
+					var restdatefood	= myItem.restdatefood;	//쉬는 날
+					$("#tab2").append(
+							'<ul class="txtCon" >'
+							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '  :  '
+							+ infocenterfood
+							+ '</li>'
+							+ '<li> <strong> 대표 메뉴 </strong>'
+							+ '  :  '
+							+ treatmenu
+							+ '</li>'
+							+ '<li> <strong> 영업 시간 </strong>'
+							+ '  :  '
+							+ opentimefood
+							+ '</li>'
+							+ '<li> <strong> 주차 가능 </strong>'
+							+ '  :  '
+							+ parkingfood
+							+ '</li>'
+							+ '<li> <strong> 쉬는날 </strong>'
+							+ '  :  '
+							+ restdatefood
+							+ '</li>'
+							+ '</ul>'
+					);
+				}
 			},
 			error : function(XMLHttpRequest, textStatus, errorThrown) {
 				alert("request : " + XMLHttpRequest);
@@ -86,6 +361,8 @@
 		});
 	
 	};
+	/* window onload 끝 */
+	
 		function initMap(){
 			var mapx = $("#mapx").val();
 			var mapy = $("#mapy").val();
@@ -139,7 +416,15 @@
 		}
 	}
 	
-
+	$(function() {
+		$('ul.tab li').click(function() {
+			var activeTab = $(this).attr('data-tab');
+			$('ul.tab li').removeClass('current');
+			$('.tabcontent').removeClass('current');
+			$(this).addClass('current');
+			$('#' + activeTab).addClass('current');
+		})
+	});
 	 
 	
 </script>
@@ -210,15 +495,7 @@ div {
 	
 } 
 
-.summary{
-	width: 500px;
-	height: 400px;
-	border: 1px solid blue;
-	margin: 1px auto;
-	/* padding : 25px 10px 0 10px; */
-	border-top: 1px solid;
-	float : left;
-}
+
 
 /* .summary strong .tit{
 	margin-bottom: 15px;
@@ -238,7 +515,8 @@ div {
 	border: 1px solid pink;
 	margin-top : 10px;
 	margin-bottom: 10px;
-	
+	overflow:auto;
+	overflow-x:hidden;
 }
 
 .map {
@@ -261,6 +539,71 @@ div {
 
 .con { padding:10px; border:1px solid #ddd; }
 
+/* 멀티탭 css */
+
+#container {
+	width: 500px;
+	height: 400px;
+	/* text-align: center; */
+}
+
+.summary{
+	width: 500px;
+	height: 400px;
+	border: 1px solid blue;
+	margin: 1px auto;
+	/* padding : 25px 10px 0 10px; */
+	border-top: 1px solid;
+	float : left;
+}
+
+.tab {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	border: 1px solid black;
+	
+}
+/* Float the list items side by side */
+.tab li {
+	float: left;
+	margin-left: 50px;
+	
+}
+/* Style the links inside the list items */
+.tab li a {
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+	font-size: 17px;
+	transition: 0.3s;
+}
+/* Style the tab content */
+.tabcontent {
+	height : 350px;
+	display: none;
+	/* background-color: rgb(0, 154, 200); */
+	padding: 6px 12px;
+	/* color: #fff; */
+	overflow:auto;
+	overflow-x:hidden;
+	border: 1px solid black;
+}
+
+ul.tab li.current {
+	/* background-color: rgb(0, 154, 200); */
+	/* color: #222; */
+}
+
+.tabcontent.current {
+	display: block;
+}
+
+/* 멀티탭 css */
+
 </style>
 </head>
 <body>
@@ -272,9 +615,11 @@ div {
 	String mapx				= (String)request.getAttribute("mapx");
 	String mapy				= (String)request.getAttribute("mapy");
 	String firstImage		= (String)request.getAttribute("firstImg");
+	
+	/* session.setAttribute("result", request.getAttribute("result")); */
 %>
 
-	<div id="test">test
+<%-- 	<div id="test">test
 		<input type = "button" id = "wish" value = "즐겨찾기" onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')">
 		<c:choose>
 			<c:when test="${result=='0' }">
@@ -292,7 +637,7 @@ div {
 				</button>
 			</c:when>
 		</c:choose>
-	</div>
+	</div> --%>
 	<!--test div  -->
 	
 	<div class="section1">
@@ -302,14 +647,12 @@ div {
 			<div class = "wishImg">
 				<c:choose>
 			<c:when test="${result=='0' }">
-				
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
 					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
 					<img src = "images/notwish.png" style = "width:50px; height : 50px;">
 				</button>
 			</c:when>
 			<c:when test="${result=='1' }">
-				
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
 					style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">
 					<img src = "images/wish.png" style = "width:50px; height : 50px;">
@@ -328,6 +671,21 @@ div {
 			</div>
 			
 			<div class = "summary" id = "summary">
+				
+				<ul class="tab">
+					<li class="current" data-tab="tab1"><a href="#">공통 정보</a></li>
+					<li data-tab="tab2"><a href="#">소개 정보</a></li>
+					<li data-tab="tab3"><a href="#">세번째 탭</a></li>
+				</ul>
+		
+				<div id="tab1" class="tabcontent current">
+				</div>
+		
+				<div id="tab2" class="tabcontent">
+				</div>
+		
+				<div id="tab3" class="tabcontent">
+				</div>
 			
 			</div>
 
@@ -338,7 +696,7 @@ div {
 
 <!-- 여기부턴 List																															 -->
 	<div class="section2">
-		<div class="overview" id = "overview" style = "overflow:scroll;" >
+		<div class="overview" id = "overview">
 			
 		</div>
 		<div class="map" id = "map">
@@ -348,7 +706,7 @@ div {
 	<!--section 끝  -->
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
-		<input type = "text" value ="${contentTypeId}" id = "contentTypeId">
+		contenttypeid : <input type = "text" value ="${contentTypeId}" id = "contentTypeId">
 		<input type = "text" value ="${contendtid}" id = "contendtid">  
 <!-- 	 	<input type = "text" value ="12" id = "contentTypeId">
 		<input type = "text" value ="127213" id = "contendtid">  -->

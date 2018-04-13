@@ -11,7 +11,14 @@ public class AccompanyApplicantsDto {
 	private String message;
 	private String kakao_id;
 	private Date applicants_date;
+	private int num_people;
 	
+	public int getNum_people() {
+		return num_people;
+	}
+	public void setNum_people(int num_people) {
+		this.num_people = num_people;
+	}
 	public int getPost_num() {
 		return post_num;
 	}

@@ -40,16 +40,16 @@
 <body>
 	<%
 		MemberDao dao = MemberDao.getInstance();
-		session.setAttribute("admin", dao.selectAdminChk(request.getParameter("email")));
+		session.setAttribute("admin", dao.selectAdminChk((String)session.getAttribute("email")));
 	%>
 	<div id="sidemenu">
 		<ul>
-			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email}" class="a">내 정보</a></li>
+			<li class="sidemenus"><a href="myInfoConfirmForm.do?email=${email }" class="a">내 정보</a></li>
 			<li class="sidemenus"><a href="scheduleForm.do?email=${email }" class="a">내 계획</a></li>
 			<li class="sidemenus"><a href="myWishListForm.do?email=${email }" class="a">찜 리스트</a></li>
 			<li class="sidemenus"><a href="companionForm.do?email=${email }" class="a">동행</a></li>
 			<c:if test="${admin == 1}">
-				<li class="sidemenus"><a href="adminConfirmForm.do?email=${email }" id="b" >관리자 메뉴</a></li>
+				<li class="sidemenus"><a href="adminConfirmForm.do" id="b" >관리자 메뉴</a></li>
 			</c:if>
 		</ul>
 	</div>

@@ -17,27 +17,24 @@
 			width: 100%;
 		}
 		#main {
-			width: 1200px;
+			width: 1300px;
+			height: 100%;
 			margin: 0 auto;
+			border: 1px solid;
 		}
 		#main div{
 			float: left;
 		}
 		#myinfo{
-			width: 690px;
+			width: 670px;
 			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#myinfoa {
 			margin: 80px 0px 0px 50px;
 		}
-		/* ##myinfoa.a:hover{
-			color : #1e68cb;
-			letter-spacing: 0.1em;
-			text-decoration:none;
-		} */
 		#schedule{
-			width: 490px;
+			width: 520px;
 			height: 400px;
 			background-image: url("images/3.jpg");
 		}
@@ -45,7 +42,7 @@
 			margin: 80px 0px 0px 50px;
 		}
 		#myWishlist{
-			width: 490px;
+			width: 520px;
 			height: 400px;
 			background-image: url("images/3.jpg");
 		}
@@ -53,12 +50,22 @@
 			margin: 80px 0px 0px 50px;
 		}
 		#companion{
-			width: 690px;
+			width: 670px;
 			height: 400px;
 			background-image: url("images/3.jpg");
 		}
 		#companiona{
 			margin: 80px 0px 0px 50px;
+		}
+		#admin{
+			width: 100px;
+			height: 100px;
+			border-radius: 55px;
+		}
+		#admin img {
+			width: 100px;
+			height: 100px;
+			padding: 1px;
 		}
 		.menu {
 			font-size: 19px;
@@ -75,9 +82,9 @@
 </head>
 <body>
 	<div id="main">
-			<div id="myinfo" background="images/03.jpg">
+			<div id="myinfo">
 				<div id="myinfoa">
-					<a href="myInfoConfirmForm.do?email=${email}" class="menu"> 개인 정보 수정 </a>
+					<a href="myInfoConfirmForm.do?email=${email }" class="menu"> 개인 정보 수정 </a>
 				</div>
 			</div>
 			<div id="schedule">
@@ -93,10 +100,12 @@
 			</div>
 			<div id="companion">
 				<div id="companiona">
-					<a href="companionForm.do?email=${email }" class="menu"> 동행 </a>
+					 <a href="companionForm.do?email=${email }" class="menu"> 동행 </a> 
 				</div>
 			</div>
-		
+			<div id="admin">
+				<a  href="adminConfirmForm.do" ><img alt="aa" src="images/admin.png"> </a>
+			</div>
 			<!-- <img alt="myinfo" src="images/03.jpg" id="myinfo">
 			<img alt="schedule" src="images/03.jpg" id="schedule">
 			<img alt="myWishlist" src="images/03.jpg" id="myWishlist">
