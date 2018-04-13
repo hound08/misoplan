@@ -171,7 +171,8 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	var cardBoxBottom = centerCardBox.children().children().eq(2).text();	 // 위와 동일한 방법 // div 파일 세번째가 date 값이다. 순서를 보면 이해 가능
 	console.log("cardBoxTitle1 : " + cardBoxTitle1);
 	
-	$("#areahidden").val(cardBoxTitle);								// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
+ 	$("#datehidden").val(cardBoxBottom.trim());
+	$("#areahidden").val(cardBoxTitle.trim());								// 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
 	$("#area").text(cardBoxTitle.trim());							// 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
 	$("#date").text(cardBoxBottom);									// 위와 동일!!
 	$("#sl_codehidden").val(cardBoxTitle1.trim());					//	trim()<<< 공백 제거
@@ -195,6 +196,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 				 <input type="hidden" name="nickname" id="nickname" value="${nickname }"> <!-- nickname 넘어가는지 확인 -->
 				 <input type="hidden" name="sl_code" id="sl_codehidden"> <!-- sl_code 값을 넘겨 oracle로 받기위해 -->
 		<p>기   간 : <span id="date"></span></p>
+				 <input type="hidden" name="schedule_date" id="datehidden">
 				<!--  <span id="sl_codehidden"></span> -->
 		</div>
 		<div class="main-imagebt">

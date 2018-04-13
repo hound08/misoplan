@@ -54,7 +54,7 @@ public class writeActionAB implements CommandProcess{
 		
 		String String_date = multi.getParameter("closing_date");
 		java.sql.Date closing_date = java.sql.Date.valueOf(String_date);
-				
+		System.out.println(closing_date);
 		AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
 		accompanyDto.setEmail(String.valueOf(session.getAttribute("email")));
 		accompanyDto.setNickname(String.valueOf(session.getAttribute("nickname")));

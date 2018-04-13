@@ -20,27 +20,40 @@
 }
 div { /* 모두모두 가운데 정렬 !!!!! */
 	margin: 0px auto; 
- 	/* border: 1px solid black; */
+ 	border: 1px solid black;
 }
 * {
 	font-family: 'NanumSquareRound', sans-serif;
 }
 .main-top {
 	width: 1200px;
-	height: 400px;
+	height: 450px;
 	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
 	border: 1px solid gray;
+}
+.main-title {
+	width: 1000px;
+	heidht: 100px;
+/* 	vertical-align: top; */
+}
+.main-top2 {
+	width: 1100px;
+	width: 500px;
 }
 
 .main-top-second1 {
 	width: 610px;
 	height: 320px;
- 	margin: 25px 0 0 35px; 
+ 	margin: 25px 0 0 30px; 
 	border: 1px solid gray;
-	display: inline-block;
-	vertical-align: top;
-	
+	/* display: inline-block; */
+/* 	vertical-align: middle; */
+	float: left;
+}
+.image-size {
+	width: 610px;
+	height: 320px;
 }
 .card_image {
 	width: 350px;
@@ -48,29 +61,14 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-top-second2 {
 	padding: 40px 0 0 70px;
-	vertical-align: top;
+/* 	vertical-align: middle; */
+	float: right;
 	width: 400px;
 	height: 280px;
  	margin: 25px 0 0 40px; 
 	border: 1px solid gray;
 	display: inline-block;
 	
-}
-#title {
-	width: 300px;
-	height: 30px;
-}
-#tag {
-	width: 300px;
-	height: 30px;
-}
-#tour_date {
-	width: 136px;
-	height: 30px;
-}
-#nickname {
-	width: 290px;
-	height: 30px;
 }
 .main-center {
 	width: 1200px;
@@ -134,9 +132,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
-#radio {
-	: center;
-}
+
 
 </style>
 
@@ -144,11 +140,15 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 <body>
 
 	<div class="main-top">
+		<div class ="main-title">
+			
+		</div>
+		
 		<div class="main-top-second1">
-			<img alt="image" src="${bs.image_url }">		
+			<img alt="image" class="image-size" src="${dto.image_url }">		
 		</div>
 		<div class="main-top-second2">
-			${ bsdto.title}
+			${dto.nickname} ${dto.bs_num } ${dto.title }
 		</div>
 	</div>
 	<div class="main-center">
@@ -156,10 +156,10 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			My Plan List
 		</div>
 			<div class="center-main-card">
-			<c:forEach var="dto" items="${list }">
+			<c:forEach var="dto" items="">
 				<div class="center-card-box" align="center">
 					<div class="card-box-title">
-						${bs.title }
+						
 						<div> 
 						
 						
