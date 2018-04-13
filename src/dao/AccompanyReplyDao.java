@@ -123,7 +123,7 @@ public class AccompanyReplyDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				AccompanyReplyDto dto = new AccompanyReplyDto();
-				
+				dto.setRn(rs.getInt(1));
 				dto.setRp_num(rs.getInt(2));
 				dto.setPost_num(rs.getInt(3));
 				dto.setEmail(rs.getString(4));
@@ -141,31 +141,4 @@ public class AccompanyReplyDao {
 		return list;
 	}
 	
-	public List<Integer> reply_num(int post_num) {
-		
-		List<Integer> list = new ArrayList<>();
-		
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num) a)";
-		
-		try {
-			conn = getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, post_num);
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int a = (rs.getInt(1));
-				list.add(a);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		return list;
-		
-	}
 }

@@ -78,7 +78,6 @@ table {
 .reply-wrapper{
 	margin: 20px 0 0 0;
 	width: 100%;
-	height: 100px;
 	border: 1px solid;
 	border-color: #D5D5D5;	
 	display: flex;
@@ -130,11 +129,22 @@ tr.highlight td {
 	padding-bottom: 1px
 }
 
-span {
+.span.icon {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 5px;	
 	padding: 2px 3px;
+}
+
+.span-reply {
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 5px;	
+	background-color: #BC2424;
+	text-align: center;
+	color: white;
+	padding: 2px 3px;
+	height: 25px;
 }
 
 .icon-view {
@@ -201,8 +211,8 @@ span {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;">
 					<td> 
-						<span><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
-						<span><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
+						<span class="span-icon"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
+						<span class="span-icon"><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
 					</td>
 				</tr>
 			</table>
@@ -217,10 +227,16 @@ span {
 		<hr>
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
-			 <div class ="reply-image" style="background-image: url('${reply.profile_url}');"></div>
-				<span>댓글 ${reply.rp_num }</span><h2>작성자: ${reply.nickname }</h2>
-				등록일: ${reply.reply_date }<br>
-				<pre>내용: ${reply.content }</pre>
+			<div class ="reply-image" style="background-image: url('${reply.profile_url}')"></div>
+			<table>
+				<tr><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><h3>&nbsp&nbsp${reply.nickname }</h3></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td>등록일: ${reply.reply_date }</td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr style="font-size: 18px;"><td><pre>내용: ${reply.content }</pre></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+			</table>
 		</div>
 		</c:forEach>
 		<div class="post-footer">
