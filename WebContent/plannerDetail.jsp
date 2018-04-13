@@ -160,7 +160,7 @@ div {
 		
 		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		cal.setTime(firstDay);
-		cal.add(Calendar.DAY_OF_YEAR, max);
+		cal.add(Calendar.DAY_OF_YEAR, max-1);
 		Date lastDay = cal.getTime();
 		String strLastDay = new SimpleDateFormat("yyyy/MM/dd").format(lastDay);
 		System.out.println(strLastDay);
@@ -183,7 +183,7 @@ div {
 		</div>
 
 		<div class="planDiv">
-			<form action="plannerDetailtest.jsp" id="form">
+			<form action="insertPlan.do" id="form">
 				<div class="planTop">
 				<input type="hidden" name="title" value="<%=title %>">
 				<input type="hidden" name="firstDate" value="<%=strFirstDay %>">
