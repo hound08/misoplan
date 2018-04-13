@@ -14,6 +14,7 @@ public class MemberDto {
 	private Date ban_date;
 	private int leave;
 	private Date join_date;
+	private String join_date_time;
 	
 	public String getEmail() {
 		return email;
@@ -81,4 +82,11 @@ public class MemberDto {
 	public void setJoin_date(Date join_date) {
 		this.join_date = join_date;
 	}
+	public String getJoin_date_time() {
+		return join_date_time;
+	}
+	public void setJoin_date_time(String join_date_time) {
+		this.join_date_time = join_date_time;
+	}
+	
 }
