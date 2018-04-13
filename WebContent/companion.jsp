@@ -32,62 +32,20 @@
 #mainsecond1{
 	margin-bottom: 100px;
 }
-
-
-.companions table {
-	margin: 0 auto;
+ .title {
+	width: 520px;
+	height: 25px;
 }
-
-.companions table td {
-	text-align: left;
-	padding: 10px;
+.serve {
+	width: 110px;
+	height: 25px;
 }
-
-.title {
-	width: 500px;
-}
-
-.bb {
-	width: 120px;
-}
-
-
-.postnums {
-	width: 500px;
-	height: 30px;
-}
-#mytable td {
-	overflow: hidden;
-}
-
-
-
-.pagination {
-	display: flex;
-	justify-content: center;
-	margin: 50px 0 35px 0;
-}
-
-.pagination a {
-	color: black;
-	padding: 8px 16px;
-	font-size: 20px;
-	text-decoration: none;
-}
-
-.pagination a.active {
-	background-color: #4CAF50;
-	color: white;
-}
-
-.pagination a:hover:not (.active ) {
-	background-color: #ddd;
-	border-radius: 5px;
-}
-
-.companions h1 {
-	margin-bottom: 40px;
-}
+.message {
+	 overflow: hidden;
+	width: 520px;
+	height: 25px; 
+	font-size: 15px;
+} 
 
 </style>
 <script type="text/javascript">
@@ -105,7 +63,7 @@ var onoff = 0;
 				$.each(data,function(){
 					var date = new Date();
 					 var str = 
-						('<tr class= "send_data"><td>'+this.message+'</td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
+						('<tr class= "send_data"><td><pre class="message">'+this.message+'</pre></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
 					 $(trpost).after(str);
 				});
 				onoff = onoff + 1;
@@ -124,13 +82,12 @@ var onoff = 0;
 		<div id="main">
 			<h1>내가 쓴 동행 게시물</h1>
 			<div id="mainsecond1">
-					<b id="all" onclick="all_click()">전체보기</b> |
-					<table border="1" id="mytable">
+					<table border="1" class="mytable">
 						<tr>
 							<th class="title">제목</th>
-							<th class="bb">닉네임</th>
-							<th class="bb">동행</th>
-							<th class="bb">등록일자</th>
+							<th class="serve">닉네임</th>
+							<th class="serve">동행</th>
+							<th class="serve">등록일자</th>
 						</tr>
 						<c:forEach var="list" items="${list }" >
 							<tr id="z${list.post_num }"> 
@@ -144,16 +101,16 @@ var onoff = 0;
 			</div>
 				<div id="mainsecond2">
 					<h1>내가 시청한 동행</h1>
-					<table border="1" id="mytable2">
+					<table border="1" class="mytable">
 						<tr>
 							<th class="title">제목</th>
-							<th class="bb">닉네임</th>
-							<th class="bb">동행상태</th>
-							<th class="bb">등록일자</th>
+							<th class="serve">닉네임</th>
+							<th class="serve">동행상태</th>
+							<th class="serve">등록일자</th>
 						</tr>
 						<c:forEach var="myapplist" items="${myapplist }" >
 							<tr> 
-								<td>${myapplist.message}</td>
+								<td><pre class="message">${myapplist.message}</pre></td>
 								<td>${myapplist.nickname } </td>
 								<td>${myapplist.status }</td>
 								<td>${myapplist.applicants_date }</td>
