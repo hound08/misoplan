@@ -304,7 +304,9 @@ $(document).on('click', '#completebtn', function(){
 		if($(value).attr('dayvalue')){
 			jsonArr.push({"dayvalue" : $(value).attr('dayvalue'), 
 						  "areaCode" : $(value).attr('areaCode'),
+						  "areaName" : $(value).attr('areaName'),
 						  "sigunguCode" : $(value).attr('sigunguCode'),
+						  "sigunguName" : $(value).attr('sigunguName'),
 						  "contentId" : $(value).attr('contentId'),
 						  "elemTitle" : $(value).children(".elemtitle").text().replace(/ /gi,""),
 						  "mapx" : $(value).attr('mapx'),
@@ -434,7 +436,12 @@ $(document).on('click', '.plusbutton', function(){
 	var contentId = $(this).attr("id");
 	var plandiv = $('.plandiv'); 
 	var areaCode = $('.area_selected').attr('data');
+	var areaName = $('.area_selected').text().trim();
 	var sigunguCode = $('.city_selected').attr('data');
+	var sigunguName = $('.city_selected').text().trim();
+	console.log("area name : " + areaName);
+	console.log("sigungu name : " + sigunguName);
+	
 	var parsedinfo = areaCode + "-" + sigunguCode + "-" + contentId;
 	if(plandiv.children("#planelem"+contentId).attr('id')){
 		alert("이미 추가된 여행지입니다.");		
@@ -445,7 +452,7 @@ $(document).on('click', '.plusbutton', function(){
 			plandiv.css('height', plandivheight);
 			daycount = daycount + 1;
 		}
-		plandiv.append("<div class='planelem' id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaCode="+areaCode+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
+		plandiv.append("<div class='planelem' id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaName = "+areaName+" areaCode="+areaCode+" sigunguName ="+sigunguName+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
 		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 	}
@@ -627,6 +634,17 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 </script>
 </head>
 <body>
+
+<%
+	if(session.getAttribute("email") == null){
+		%>
+			<script type="text/javascript">
+				alert("로그인이 필요한 서비스 입니다.");
+				history.go(-1);
+			</script>
+		<%
+	}
+%>
 
 <div class="section">
 			${areasMap }
