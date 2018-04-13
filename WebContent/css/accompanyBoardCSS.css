@@ -161,13 +161,14 @@ p {
 }
 
 .section-card {
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 30px;
 	width: 100%;
 	margin-top: 35px;
 	margin-left: auto;
 	margin-right: auto;
 	display: inline-block;
-	border: solid;
-	border-color: #F6F6F6;
 }
 
 .pagenumber {
@@ -205,23 +206,28 @@ p {
 }
 
 .search {
+	display: flex;
+	justify-content: center;
+	margin: 50px 0 35px 0;
 	clear: both;
 }
 
 .search-bar {
 	font-size: 15px;
 	width: 400px;
-	height: 30px;
+	height: 40px;
 }
 
 .search-submit {
 	font-size: 15px;
 	width: 70px;
+	height: 42px;
 	background-color: #AA1212;
 	color: white;
 }
 
 .search-select {
+	height: 40px;
 	font-size: 15px;
 	margin-right: 5px;
 }

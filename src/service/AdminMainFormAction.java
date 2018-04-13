@@ -37,8 +37,23 @@ public class AdminMainFormAction implements CommandProcess {
 				endPage = pageCnt;
 			}
 			
+			MemberDto dtoSearch = new MemberDto();
+			dtoSearch.setEmail("");
+			dtoSearch.setNickname("");
+			dtoSearch.setPhone("");
+			
+			if (request.getParameter("textSearch") != null && !request.getParameter("textSearch").equals("")) {
+				if (request.getParameter("selSearch").equals("이메일")) {
+					dtoSearch.setEmail(request.getParameter("textSearch"));
+				} else if (request.getParameter("selSearch").equals("별명")) {
+					dtoSearch.setNickname(request.getParameter("textSearch"));
+				} else if (request.getParameter("selSearch").equals("연락처")) {
+					dtoSearch.setPhone(request.getParameter("textSearch"));
+				}
+			}
+
 			List<MemberDto> list = null;
-			list = dao.selectMemberList(startRow, endRow);
+			list = dao.selectMemberList(startRow, endRow, dtoSearch);
 			
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);

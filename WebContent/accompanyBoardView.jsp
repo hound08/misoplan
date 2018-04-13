@@ -25,6 +25,11 @@ div {
 	padding: 0px;
 	margin: 0px;
 	font-family: 'NanumSquareRound', sans-serif;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
 }
 	
 .section {
@@ -52,7 +57,10 @@ div {
 	height: 120px;
 	display: flex;
 	left: 1em;
- 	background-color: #EAEAEA;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px;
+	margin-bottom: 10px;	
 }
 
 .post-header-img {
@@ -60,10 +68,8 @@ div {
 	height: 100px;
 	width: 100px;
 	background-image: url("${profile_url}");
-	background-color: white;
 	border-radius: 50%;
 	background-size: 100% 100%;
-	border: solid;
 }
 
 table {
@@ -72,10 +78,12 @@ table {
 .reply-wrapper{
 	margin: 20px 0 0 0;
 	width: 100%;
-	border: solid;
+	height: 100px;
+	border: 1px solid;
+	border-color: #D5D5D5;	
 	display: flex;
 	left: 1em;
- 	background-color: #EAEAEA;
+ 	border-radius: 5px;
 }
 .reply-image { 
 	margin: auto 20px;
@@ -87,7 +95,9 @@ table {
 
 .post-body {
 	width: 100%;
-	border: solid;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px;
 	padding : 1em 0 1em 1em;
 }
 
@@ -121,14 +131,31 @@ tr.highlight td {
 }
 
 span {
-	border: solid;
-	border-color: gray;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 5px;	
+	padding: 2px 3px;
 }
 
 .icon-view {
-	background: url("images/eye.jpg");
+	width: 25px;
+    height: 17px;
+	background: url("images/eye.jpg") no-repeat;
 }
 
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+
+.image {
+	width: 350px;
+	height: 400px;
+	background: url("${board.image_url }");
+	background-size : 100% 100%;
+}
 </style>
 </head>
 <body>
@@ -174,15 +201,15 @@ span {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;">
 					<td> 
-						<span><i class="icon-view"></i>${board.view_count }명이 보았습니다.</span>
-						<span><i class="icon-vote"></i>${board.view_count }명이 좋아합니다.</span>
+						<span><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
+						<span><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
 					</td>
 				</tr>
 			</table>
 		</div>
 		<div class="post-body">
 			<pre>${board.content }</pre>
-			<img src="${board.image_url }">
+			<div class="image"></div>
 		</div>
 		<c:if test="${email != null }">
 			<button onclick="apply()">동행 신청하기</button>
@@ -191,7 +218,7 @@ span {
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
 			 <div class ="reply-image" style="background-image: url('${reply.profile_url}');"></div>
-				<h2>작성자: ${reply.nickname }</h2>
+				<span>댓글 ${reply.rp_num }</span><h2>작성자: ${reply.nickname }</h2>
 				등록일: ${reply.reply_date }<br>
 				<pre>내용: ${reply.content }</pre>
 		</div>

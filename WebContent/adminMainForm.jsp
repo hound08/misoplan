@@ -28,10 +28,10 @@
 		margin: 50px;
 	}
 	table.tableList {
-	margin: auto;
+	  margin: auto;
 	  border: 1px solid #1C6EA4;
 	  background-color: #FFFFFF;
-	  width: 850px;
+	  width: 90%;
 	  text-align: left;
 	  border-collapse: collapse;
 	}
@@ -116,7 +116,8 @@
 			<h1>관리자 메뉴</h1>
 			<table class="tableList">
 				<tr><th width="25px"><input type="checkbox" class="chkboxTop" name="chkboxTop"></th>
-					<th>번호</th><th>이메일</th><th>별명</th><th>연락처</th><th>회원점수</th><th>관리자 여부</th><th>정지 여부</th><th>정지 기간</th><th>탈퇴 여부</th><th>가입일</th></tr>
+					<th width="35px">번호</th><th width="170px">이메일</th><th width="70px">별명</th><th width="100px">연락처</th><th>점수</th><th>관리자</th>
+					<th>정지</th><th>정지 기간</th><th>탈퇴</th><th>가입일</th></tr>
 				<c:set var="num" value="1" />
 				<c:forEach var="list" items="${memberList }">
 					<tr><td><input type="checkbox" class="chkbox" name="chkbox"></td>
@@ -125,7 +126,7 @@
 						<td><c:if test="${list.member_admin == 0 }">일반</c:if><c:if test="${list.member_admin == 1 }">관리자</c:if></td>
 						<td><c:if test="${list.ban == 0 }">-</c:if><c:if test="${list.ban == 1 }">정지</c:if></td>
 						<td><c:if test="${list.ban_date == null }">-</c:if><c:if test="${list.ban_date != null }">${list.ban_date }</c:if></td>
-						<td><c:if test="${list.leave == 0 }">-</c:if><c:if test="${list.leave == 1 }">탈퇴</c:if></td><td>${list.join_date }</td></tr>
+						<td><c:if test="${list.leave == 0 }">-</c:if><c:if test="${list.leave == 1 }">탈퇴</c:if></td><td>${list.join_date_time }</td></tr>
 					<c:set var="num" value="${num + 1 }" />
 				</c:forEach>
 			</table>
@@ -141,13 +142,13 @@
 				</c:if>
 			</div>
 			<div class="divSearch">
-				<form action="adminMainFormPro.do" name="frm">
+				<form action="adminMainForm.do" name="frm">
 					<p><select name="selSearch" class="selSearch">
 						<option>이메일</option>
 						<option>별명</option>
 						<option>연락처</option>
 					</select>
-					<input type="text" name="textSearch" class="textSearch">
+					<input type="text" name="textSearch" class="textSearch" required="required">
 					<input type="submit" name="submitSearch" class="submitSearch" value="검색"></p>
 				</form>
 			</div>
