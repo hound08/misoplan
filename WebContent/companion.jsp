@@ -50,7 +50,10 @@
 .bb {
 	width: 120px;
 }
-
+.postnums {
+	width: 500px;
+	height: 30px;
+}
 .pagination {
 	display: flex;
 	justify-content: center;
@@ -95,7 +98,7 @@ var onoff = 0;
 				$.each(data,function(){
 					var date = new Date();
 					 var str = 
-						('<tr class= "send_data"><td class="title">'+this.message+'<div .class="result"><a href="">수락</a> | <a href="">거절</a><div></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
+						('<tr class= "send_data"><td>'+this.message+'<div .class="result"><a href="">수락</a> | <a href="">거절</a><div></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); 
 					 $(trpost).after(str);
 				});
 				onoff = onoff + 1;
@@ -143,7 +146,7 @@ var onoff = 0;
 						</tr>
 						<c:forEach var="myapplist" items="${myapplist }" >
 							<tr> 
-								<td class="title">${myapplist.message}</td>
+								<td>${myapplist.message}</td>
 								<td>${myapplist.nickname } </td>
 								<td>${myapplist.status }</td>
 								<td>${myapplist.applicants_date }</td>
