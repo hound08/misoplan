@@ -7,14 +7,6 @@ public class WishlistDto {
 	private String tour_name;
 	private String img_src;
 	
-<<<<<<< HEAD
-	
-	
-	
-	
-=======
-
->>>>>>> 78d37151a3b80201b479c275ef088f67577d89c2
 	public int getContenttypeid() {
 		return contenttypeid;
 	}
