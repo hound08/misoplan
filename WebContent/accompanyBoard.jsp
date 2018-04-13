@@ -13,177 +13,6 @@
 <link href="css/accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-
-div {
-	margin: 0px auto;
-}
-
-* {
-	padding: 0px;
-	margin: 0px;
-	font-family: 'NanumSquareRound', sans-serif;
-}
-
-.section {
-	width: 1200px;
-}
-
-.main-image {
-	border-radius: 5px;
-	margin-left: auto;
-	margin-right: auto;
-	width: 100%;
-	height: 400px;
-	overflow: hidden;
-	position: relative;
-}
-
-.centerimage {
-	min-height: 100%;
-	min-width: 100%;
-	width: 100%;
-	height: auto;
-}
-
-.section-card {
-	width: 100%;
-	margin-top: 35px;
-	margin-left: auto;
-	margin-right: auto;
-	display: inline-block;
-	border: solid;
-	border-color: #F6F6F6;
-}
-
-.pagenumber {
-	width: 1080px;
-	height: 100px;
-}
-
-.pagenumber {
-	margin-top: 30px;
-	text-align: center;
-}
-
-.footer_wrap {
-	padding-top: 20px;
-	margin-left: auto;
-	margin-right: auto;
-	margin-left: auto;
-}
-
-.container {
-	padding: 15px;
-	height: 150px;
-	clear: both;
-}
-
-.card {
-	height: 400px;
-	width: 350px;
-	border: solid;
-	border-radius: 10px;
-	border-color: #F6F6F6;
-	display: inline-block;
-	margin-left: 30px;
-	margin-bottom: 30px;
-	position: relative;
-}
-
-.card:hover {
-	border-color: #A6A6A6
-}
-
-.pagination {
-	display: flex;
-	justify-content: center;
-	margin: 50px 0 35px 0;
-	clear: both;
-}
-
-.pagination a {
-	color: black;
-	padding: 8px 16px;
-	font-size: 20px;
-	text-decoration: none;
-}
-
-.pagination a.active {
-	background-color: #4CAF50;
-	color: white;
-}
-
-.pagination a:hover:not {
-	background-color: #ddd;
-	border-radius: 5px;
-}
-
-.card-image {
-	width: 300px;
-	height: 60%;
-}
-
-.container {
-	padding: 15px;
-	height: 40%;
-	border: solid;
-}
-
-.search {
-	display: inline-flex;
-	clear: both;
-}
-
-.search-bar {
-	font-size: 15px;
-	width: 400px;
-	height: 30px;
-}
-
-.search-submit {
-	font-size: 15px;
-	width: 70px;
-	background-color: #AA1212;
-	color: white;
-}
-
-.search-select {
-	font-size: 15px;
-	margin-right: 5px;
-}
-
-.align {
-	margin-top: 30px;
-	width: 100%;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.align button {
-	width: 100px;
-	height: 30px;
-}
-
-.center-label {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-size: 30px
-}
-
-.write-button {
-	width: 70px;
-	height: 30px;
-	display: flex;
-	float: right;
-	font-size: 15px;
-	justify-content: center;
-	margin-top: 20px;
-}
-</style>
-
 </head>
 <body>
 
@@ -204,7 +33,6 @@ div {
 		<c:forEach var="board" items="${list }">
 			<a href="viewActionAB.do?post_num=${board.post_num }">
 			<div class="card">
-				<!-- 카드 헤더 -->
 				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
 					
 					<div class="card-header-is_closed">
@@ -251,6 +79,7 @@ div {
 						<a href="writeFormAB.jsp"><button class="write-button">글쓰기</button></a>
 					</c:if>
 				</div>
+				<div class="pagination-wrapper">
 				<div class="pagination">
 					
 					<c:if test="${startPage!=1 }">
@@ -282,6 +111,7 @@ div {
 					<c:if test="${endPage<totalPage }">
 						<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
 					</c:if>
+				</div>
 				</div>
 				<div class="search">
 					<select class="search-select">

@@ -17,8 +17,25 @@
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
 </script>
 <script type="text/javascript">
+	window.onpageshow = function(event){
+		console.log("onpageshow");
+		if(event.persisted){
+			console.log("onpageshow if");
+		}
+	}
+	
+	window.onbeforeunload = function(){
+	    //check if it was a back-button press using history
+	    //notify back-end
+	    console.log("beforeunload");
+	    window.history.back(-2);
+	}
+	
+	window.onhashchange = function() {
+		console.log("onhashchange");
+		}
+	
 	window.onload = function(){
-		alert("window onload");
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
 		/* alert("contentTypeId = " + contentTypeId);
@@ -71,7 +88,7 @@
 						+ '</p>' 
 				);
 				$("#hidden").append(
-						'<input type = "text" value = "'
+						'<input type = "hidden" value = "'
 						+title
 						+'" id = "title">' 
 						
@@ -399,7 +416,7 @@
 		}else if(result == 1){
 			alert("이미 찜 하셨어요!");
 		}else{
-			location.href = "addWish.do?contentTypeId="
+			/* location.href = "addWish.do?contentTypeId="
 							+ type + '&'
 							+ 'contendtid='
 							+ id + '&'
@@ -412,7 +429,37 @@
 							+ 'mapy='
 							+ mapy + '&'
 							+ 'firstImage='
-							+ firstImage;
+							+ firstImage; */
+			$.ajax({
+				url : 'addWish.do',
+				type : 'get',
+				data : {
+					contentTypeId	: type,
+					contendtid		: id,
+					email			: email,
+					title			: title,
+					mapx			: mapx,
+					mapy			: mapy,
+					firstImage		: firstImage					
+				},
+				success : function(data) {
+					$("#wishImg").html("");
+					$("#wishImg").append(
+						'<button onclick = "isAddWish(' + '\''+ type + '\'' + ',' + '\'' + id + '\'' + ',' + '\'' + email +'\''+ ')" '
+						+ 'style = "width:50px; height:50px;background-color: transparent; border:none;cursor:pointer;">'
+						+ '<img src = "images/wish.png" style = "width:50px; height : 50px;">'
+						+'</button>'
+					);
+					$("#result").val('1');
+					
+				},
+				error : function(XMLHttpRequest, textStatus, errorThrown) {
+					alert("request : " + XMLHttpRequest);
+					alert("Status: " + textStatus);
+					alert("Error: " + errorThrown);
+				}
+			});
+							
 		}
 	}
 	
@@ -616,10 +663,10 @@ ul.tab li.current {
 	String mapy				= (String)request.getAttribute("mapy");
 	String firstImage		= (String)request.getAttribute("firstImg");
 	
-	/* session.setAttribute("result", request.getAttribute("result")); */
+	session.setAttribute("test", request.getAttribute("result"));
 %>
 
-<%-- 	<div id="test">test
+	<%-- <div id="test">test
 		<input type = "button" id = "wish" value = "즐겨찾기" onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')">
 		<c:choose>
 			<c:when test="${result=='0' }">
@@ -636,15 +683,15 @@ ul.tab li.current {
 					<img src = "images/wish.png" style = "width:50px; height : 50px; ">
 				</button>
 			</c:when>
-		</c:choose>
-	</div> --%>
+		</c:choose> 
+	</div> --%> 
 	<!--test div  -->
 	
 	<div class="section1">
 		<!--이미지 & 간략 설명  -->
 		<div class="search1Area">
 		
-			<div class = "wishImg">
+			<div class = "wishImg" id = "wishImg">
 				<c:choose>
 			<c:when test="${result=='0' }">
 				<button onclick = "isAddWish('${contentTypeId}','${contendtid }','${email }')" 
@@ -706,15 +753,15 @@ ul.tab li.current {
 	<!--section 끝  -->
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
-		contenttypeid : <input type = "text" value ="${contentTypeId}" id = "contentTypeId">
-		<input type = "text" value ="${contendtid}" id = "contendtid">  
+		<input type = "hidden" value ="${contentTypeId}" id = "contentTypeId">
+		<input type = "hidden" value ="${contendtid}" id = "contendtid">  
 <!-- 	 	<input type = "text" value ="12" id = "contentTypeId">
 		<input type = "text" value ="127213" id = "contendtid">  -->
-		<input type = "text" value ="${email }" id = "email">
-		<input type = "text" value = "${result }" id = "result">
-		<input type = "text" value = "${mapx }" id = "mapx">
-		<input type = "text" value = "${mapy }" id = "mapy">
-		<input type = "text" value = "${firstImage }" id = firstImage>
+		<input type = "hidden" value ="${email }" id = "email">
+		<input type = "hidden" value = "${result }" id = "result">
+		<input type = "hidden" value = "${mapx }" id = "mapx">
+		<input type = "hidden" value = "${mapy }" id = "mapy">
+		<input type = "hidden" value = "${firstImage }" id = firstImage>
 		<!-- <input type = "text" value = "127.0336840818" id = "mapx">
 		<input type = "text" value = "37.5163582893" id = "mapy"> -->
 	</div>
