@@ -84,7 +84,7 @@ p {
 
 .card:hover .card-body-description {
     opacity: 1;
-    height: 200px;
+    height: 180px;
     -webkit-transition: .2s ease-in-out;
     -moz-transition: .2s ease-in-out;
     -ms-transition: .2s ease-in-out;
@@ -93,14 +93,17 @@ p {
     border: solid;
     overflow: hidden;
 }
-
+.card-body-title {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+}
 .card-body-hashtag {
-	height: 15px;
+	height: 20px;
 	width: 100%;
 	color: #2478FF;
 	font-style: italic;
 	overflow: hidden;
-	border: solid;
 }
 
 .card-body-footer {

@@ -14,16 +14,44 @@ public class AdminMainFormAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<MemberDto> list = null;
-		
 		try {
+			String pageNum = request.getParameter("pageNum");
+
+			if (pageNum == null || pageNum.equals("")) {
+				pageNum = "1";
+			}
+			
 			MemberDao dao = MemberDao.getInstance();
-			list = dao.selectMemberList();
+			int totCnt = dao.selectTotalCnt();
+			int currentPage = Integer.parseInt(pageNum);
+			int pageSize = 20; // 한 페이지에 보여줄 회원 수
+			int blockSize = 10; // 게시판 하단의 페이지 번호 블록
+			int startRow = (currentPage - 1) * pageSize + 1;
+			int endRow = startRow + pageSize - 1;
+			int startNum = totCnt - startRow + 1;
+			int pageCnt = (int) Math.ceil((double) totCnt / pageSize); // 해당 수 보다 높은 수 중에 가장 작은 정수
+			int startPage = (int) (currentPage - 1) / blockSize * blockSize + 1;
+			int endPage = startPage + blockSize - 1;
+
+			if (endPage > pageCnt) {
+				endPage = pageCnt;
+			}
+			
+			List<MemberDto> list = null;
+			list = dao.selectMemberList(startRow, endRow);
+			
+			request.setAttribute("totCnt", totCnt);
+			request.setAttribute("pageNum", pageNum);
+			request.setAttribute("currentPage", currentPage);
+			request.setAttribute("startNum", startNum);
+			request.setAttribute("blockSize", blockSize);
+			request.setAttribute("pageCnt", pageCnt);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("memberList", list);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		request.setAttribute("memberList", list);
 		
 		return "adminMainForm.jsp";
 	}
