@@ -23,9 +23,9 @@
 			</div>
 		</div>
 		<div class="align">
-			<button>조회순</button>
+			<a href="listActionVIEW.do"><button>조회순</button></a>
 			<button>인기순</button>
-			<button>최신순</button>
+			<a href="listAction.do"><button>최신순</button></a>
 		</div>
 		<div class="section-card">
 			

@@ -296,8 +296,9 @@ tr.highlight td {
 			<pre>${board.content }</pre>
 			<div class="image"></div>
 			<c:if test="${email != null }">
-			<button onclick="apply()">동행 신청하기</button>
-		</c:if>
+				<button onclick="apply()">동행 신청하기</button>
+				<button>좋아요</button>
+			</c:if>
 		</div>
 		<hr>
 		<c:forEach var="reply" items="${list }">
