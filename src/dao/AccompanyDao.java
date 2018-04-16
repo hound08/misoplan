@@ -346,4 +346,91 @@ public class AccompanyDao {
 		}
 		return profile_url;
 	}
+
+	public void vote_up(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update accompanyboard set vote_count = vote_count+1 where post_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+	}
+	
+public void vote_down(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "update accompanyboard set vote_count = vote_count-1 where post_num = ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		
+	}
+
+	public List<AccompanyBoardDto> list_vote(int startRow, int endRow){
+		
+		List<AccompanyBoardDto> list = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from (select rownum rn, a.* from (select *from accompanyboard order by vote_count desc) a) where rn between ? and ?";
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				AccompanyBoardDto accompanyDto = new AccompanyBoardDto();
+				accompanyDto.setPost_num(rs.getInt(2));
+				accompanyDto.setNickname(rs.getString(4));
+				accompanyDto.setTitle(rs.getString(6));
+				accompanyDto.setImage_url(rs.getString(7));
+				accompanyDto.setContent(rs.getString(8));
+				accompanyDto.setTag(rs.getString(9));
+				accompanyDto.setView_count(rs.getInt(10));
+				accompanyDto.setVote_count(rs.getInt(11));
+				accompanyDto.setPost_date(rs.getDate(12));
+				accompanyDto.setMinimum_num(rs.getInt(14));
+				accompanyDto.setCurrent_num(rs.getInt(15));
+				accompanyDto.setIs_closed(rs.getInt(16));
+				accompanyDto.setComment_count(rs.getInt(17));
+				
+				list.add(accompanyDto);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return list;
+	}
 }

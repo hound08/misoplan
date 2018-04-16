@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import dao.AccompanyBoardDto;
 import dao.AccompanyDao;
 
-public class listActionAB_VIEW implements CommandProcess{
+public class listActionAB_VOTE implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -35,7 +35,7 @@ public class listActionAB_VIEW implements CommandProcess{
 			endPage = totalPage;
 		else
 			endPage = startPage + blockSize -1; //페이지 목록 끝
-		List<AccompanyBoardDto> list = accompanyDao.list_view(startRow, endRow);
+		List<AccompanyBoardDto> list = accompanyDao.list_vote(startRow, endRow);
 		request.setAttribute("totalPost", totalPost);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);
@@ -47,7 +47,7 @@ public class listActionAB_VIEW implements CommandProcess{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
 		request.setAttribute("email", session.getAttribute("email"));
-		int a = 1;
+		int a = 2;
 		request.setAttribute("a", a);
 		return "accompanyBoard.jsp";
 	}
