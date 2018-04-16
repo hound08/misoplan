@@ -25,14 +25,6 @@ public class BoardScheduleAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			BoardScheduleDao bsd = BoardScheduleDao.getInstance();
-			List<BoardScheduleDto> list = bsd.list();
-			request.setAttribute("list", list);
-			
-		} catch (Exception e ) {
-			System.out.println(e.getMessage());
-		}
-		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			String pageNum = request.getParameter("pageNum");
 			HttpSession session = request.getSession();
@@ -44,6 +36,8 @@ public class BoardScheduleAction implements CommandProcess {
 			int blockSize = 5; //한번에 보일 페이지 수
 			int startRow = (currentPage - 1) * pageSize + 1; //현재 페이지에서 첫번째 보일 게시물 번호
 			int endRow = startRow + pageSize - 1; //현재 페이지에서 보일 마지막 게시물 번호
+			System.out.println("endRow : " + endRow);
+			System.out.println("startRow : " + startRow);
 			int startNum = totalpost - startRow +1 ;
 			int totalPage = (int)Math.ceil((double)totalpost/(double)pageSize);//총 페이지 개수
 			int startPage = (int)((currentPage-1)/blockSize)*blockSize+1; // 페이지 목록 시작
@@ -53,8 +47,6 @@ public class BoardScheduleAction implements CommandProcess {
 			else
 				endPage = startPage + blockSize -1; //페이지 목록 끝
 			
-			System.out.println("@@@@@@@ startNum -> " + startNum);
-			System.out.println("@@@@@@@ startpage -> " + startPage);
 			List<BoardScheduleDto> pagelist = dao.pagelist(startRow, endRow);
 			request.setAttribute("totalpost", totalpost);
 			request.setAttribute("pageNum", pageNum);
@@ -67,7 +59,6 @@ public class BoardScheduleAction implements CommandProcess {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("pagelist", pagelist);
 			request.setAttribute("email", session.getAttribute("email"));
-			System.out.println("email : " + session.getAttribute("email"));
 			} catch (Exception e ) {
 				System.out.println(e.getMessage());
 			}

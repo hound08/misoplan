@@ -186,7 +186,7 @@ div {
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
 				onClick="location.href='###'">
 		</div>
-		<c:forEach var="bs" items="${list }">
+		<c:forEach var="bs" items="${pagelist }">
 			<a href="planview.do?bs_num=${bs.bs_num }">
 				<div class="center-second">
 					<div class="second-box">
@@ -206,33 +206,33 @@ div {
 	</div>
 	<div class="page-num" align="center"></div>
 	<c:if test="${startPage!=1 }">
-		<a href='pagelistAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+		<a href='boardschedule.do?pageNum=${startPage-blockSize }'>&laquo;</a>
 	</c:if>
 	<c:if test="${startPage==1 }">
-		<a href='pagelistAction.do?pageNum=1'>&laquo;</a>
+		<a href='boardschedule.do?pageNum=1'>&laquo;</a>
 	</c:if>
 	<c:if test="${currentPage!=1 }">
-		<a href='pagelistAction.do?pageNum=${currentPage-1}'>&#9665</a>
+		<a href='boardschedule.do?pageNum=${currentPage-1}'>&#9665</a>
 	</c:if>
 	<c:if test="${currentPage==1 }">
-		<a href='pagelistAction.do?pageNum=1'>&#9665</a>
+		<a href='boardschedule.do?pageNum=1'>&#9665</a>
 	</c:if>
 
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-		<a href='pagelistAction.do?pageNum=${i }'>${i }</a>
+		<a href='boardschedule.do?pageNum=${i }'>${i }</a>
 	</c:forEach>
 
 	<c:if test="${currentPage==totalPage }">
-		<a href='pagelistAction.do?pageNum=${totalPage }'>&#9655</a>
+		<a href='boardschedule.do?pageNum=${totalPage }'>&#9655</a>
 	</c:if>
 	<c:if test="${currentPage!=totalPage }">
-		<a href='pagelistAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+		<a href='boardschedule.do?pageNum=${currentPage+1 }'>&#9655</a>
 	</c:if>
 	<c:if test="${endPage>=totalPage }">
-		<a href='pagelistAction.do?pageNum=${totalPage}'>&raquo;</a>
+		<a href='boardschedule.do?pageNum=${totalPage}'>&raquo;</a>
 	</c:if>
 	<c:if test="${endPage<totalPage }">
-		<a href='pagelistAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+		<a href='boardschedule.do?pageNum=${endPage+blockSize }'>&raquo;</a>
 	</c:if>
 	<div class="search" align="center">
 		<select name="menu">
