@@ -132,7 +132,11 @@ div {
 	height: 35px;
 	margin: 35px 0 0 0;
 }
-
+.page-num {
+	widht: 1200px;
+	height: 50px;
+	margin: 20px 0;
+}
 .search {
 	width: 1200px;
 	height: 35px;
@@ -197,18 +201,36 @@ div {
 			</a>
 		</c:forEach>
 	</div>
-		<div class="bottom-page" align="center">
-			<div style="text-align: center;">
-				<%-- <c:if test="${startPage > blockSize }">
-					<a href='list.do?pageNum=${startPage-blockSize }'>[이전]</a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<a href='list.do?pageNum=${i}'>[${i}]</a>
-				</c:forEach>
-				<c:if test="${endPage < pageCnt}">
-					<a href='list.do?pageNum=${startPage+blockSize}'>[다음]</a>
-				</c:if> --%>
-			</div>
+			<div class="page-num" align="center"></div>
+				<c:if test="${startPage!=1 }">
+						<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+					</c:if>
+					<c:if test="${startPage==1 }">
+						<a href='listAction.do?pageNum=1'>&laquo;</a>
+					</c:if>
+					<c:if test="${currentPage!=1 }">
+						<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+					</c:if>
+					<c:if test="${currentPage==1 }">
+						<a href='listAction.do?pageNum=1'>&#9665</a>
+					</c:if>
+
+					<c:forEach var="i" begin="${startPage }" end="${endPage }">
+						<a href='listAction.do?pageNum=${i }'>${i }</a>
+					</c:forEach>
+
+					<c:if test="${currentPage==totalPage }">
+						<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+					</c:if>
+					<c:if test="${currentPage!=totalPage }">
+						<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+					</c:if>
+					<c:if test="${endPage>=totalPage }">
+						<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+					</c:if>
+					<c:if test="${endPage<totalPage }">
+						<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+					</c:if>
 			<div class="search" align="center">
 				<select name="menu">
 					<option value="##">###</option>
@@ -217,8 +239,6 @@ div {
 					<option value="##">###</option>
 				</select> <input type="text" name="search"> 돋보기 이미지
 			</div>
-		</div>
-		<input type = "text" value = "${test }">
 		<%@ include file="footer.jsp"%>
 </body>
 </html>
