@@ -40,12 +40,18 @@
 	width: 110px;
 	height: 25px;
 }
-.message {
+.message{
 	 overflow: hidden;
 	width: 520px;
-	height: 25px; 
-	font-size: 15px;
+	height: 20px;
+	font-size: 16px;
 } 
+.message:HOVER {
+	overflow: scroll;
+	width: 520px;
+	height: 100px;
+	
+}
 
 </style>
 <script type="text/javascript">
