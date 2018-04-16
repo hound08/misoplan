@@ -135,6 +135,10 @@ public class AccompanyReplyDao {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
 		}
 		
 		

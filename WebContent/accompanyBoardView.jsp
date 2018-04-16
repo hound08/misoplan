@@ -7,12 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css"href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+</head>
 <style type="text/css">
-
 body, html {
     height: 100%;
 }
@@ -76,7 +75,8 @@ table {
 	margin: auto 20px;
 }
 .reply-wrapper{
-	margin: 20px 0 0 0;
+	min-height: 100px;
+	margin: 10px 0 10px 0;
 	width: 100%;
 	border: 1px solid;
 	border-color: #D5D5D5;	
@@ -85,7 +85,7 @@ table {
  	border-radius: 5px;
 }
 .reply-image { 
-	margin: auto 20px;
+	margin: 9px 0px auto 20px;
 	background-size: 100% 100%; 
 	width: 80px; 
 	height: 80px; 
@@ -97,7 +97,8 @@ table {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
-	padding : 1em 0 1em 1em;
+	padding: 1em 0 1em 1em;
+	margin-bottom: 10px; 
 }
 
 tr.highlight td {
@@ -166,8 +167,16 @@ tr.highlight td {
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
 }
+
+.table-reply{
+	margin-top: 15px;
+}
+
+.post-footer {
+	margin-top: 15px;
+}
 </style>
-</head>
+
 <body>
 	<div id="apply-div" style="display: none;">
 	<fieldset>
@@ -221,28 +230,27 @@ tr.highlight td {
 		<div class="post-body">
 			<pre>${board.content }</pre>
 			<div class="image"></div>
-		</div>
-		<c:if test="${email != null }">
+			<c:if test="${email != null }">
 			<button onclick="apply()">동행 신청하기</button>
 		</c:if>
+		</div>
 		<hr>
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
 			<div class ="reply-image" style="background-image: url('${reply.profile_url}')"></div>
-			<table>
-				<tr><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><h3>&nbsp&nbsp${reply.nickname }</h3></td></tr>
+			<table class="table-reply">
+				<tr"><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>등록일: ${reply.reply_date }</td></tr>
-				<tr class="highlight"><td></td><td></td></tr>
-				<tr style="font-size: 18px;"><td><pre>내용: ${reply.content }</pre></td></tr>
+				<tr style="font-size: 18px;"><td><pre>${reply.content }</pre></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 			</table>
 		</div>
 		</c:forEach>
+		<hr>
 		<div class="post-footer">
 			<c:if test="${email != null }">
-				<form action="writeReplyAB.do">
+				<form action="writeReplyAB.do" method="post">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<textarea rows="12" style="width: 70%;" name="content"></textarea>
 					<input type="submit" value="확인">
