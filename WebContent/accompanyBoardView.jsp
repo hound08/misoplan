@@ -215,7 +215,30 @@ tr.highlight td {
  height: 30px;
  font-size: 20px;
 }
+
+.reply-table{
+	width:100%;
+	margin: 0 0;
+}
+
+.reply-table td:FIRST-CHILD {
+	width: 150px;
+}
+
+.write-reply-image{
+	border-radius: 50%;
+	background-size: 100% 100%; 
+	width: 100px; 
+	height: 100px; 
+}
+
+.reply-submit{
+	width: 90px;
+	height: 40px;
+	float:right;
+}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <body>
 	<div id="apply-div" style="display: none;">
@@ -291,17 +314,22 @@ tr.highlight td {
 		</c:forEach>
 		<hr>
 		<div class="post-footer">
-			<c:if test="${email != null }">
+			<%-- <c:if test="${email == null }">
 				<form action="writeReplyAB.do" method="post">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<textarea rows="12" style="width: 70%;" name="content"></textarea>
 					<input type="submit" value="확인">
 				</form>
-			</c:if>
-			<c:if test="${email == null }">
-				<form action="writeReplyAB.do">
+			</c:if> --%>
+			<c:if test="${email != null }">
+				<form action="writeReplyAB.do" method="post" id="replyForm">
 					<input type="hidden" value="${post_num }"name="post_num">
-					<textarea rows="12" style="width: 70%;" name="content" placeholder="로그인하고 댓글을 작성해 주세요!" disabled></textarea>
+					<table class="reply-table">
+						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!</td></tr>
+						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
+						<tr><td colspan="2">
+						<input type="submit" class="reply-submit" value="확인" id="writeReply"></td></tr>
+					</table>
 				</form>
 			</c:if>
 		</div>		

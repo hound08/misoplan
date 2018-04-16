@@ -114,7 +114,7 @@ public class AccompanyReplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num) a)";
+		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num desc) a)";
 		
 		try {
 			conn = getConnection();

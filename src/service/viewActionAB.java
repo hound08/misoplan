@@ -31,6 +31,7 @@ public class viewActionAB implements CommandProcess{
 		AccompanyBoardDto board = accompanyDao.select(post_num);
 		String profile_url = accompanyDao.get_profile_url(post_num);
 		request.setAttribute("email", session.getAttribute("email"));
+		request.setAttribute("nickname", session.getAttribute("nickname"));
 		request.setAttribute("post_num", post_num);
 		request.setAttribute("board", board);
 		request.setAttribute("tag", board.getTag());
