@@ -122,22 +122,21 @@ public class BoardScheduleDao {
 
 	}
 
-	public int getTotalpage() throws SQLException {
+	public int getTotalpost() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		int result = 0;
-
+		int total = 0;
+		
+		String sql = "select count(*) from BOARDSCHEDULE";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			if (rs.next()) {
-				result = rs.getInt(1);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			if (rs != null)
 				rs.close();
@@ -146,7 +145,8 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
-		return result;
+		
+		return total;
 	}
 
 	public int insertPlan(BoardScheduleDto dto, String nickname)
