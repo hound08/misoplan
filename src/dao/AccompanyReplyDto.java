@@ -11,7 +11,14 @@ public class AccompanyReplyDto {
 	private String profile_url;
 	private String content;
 	private Date reply_date;
+	private int rn;
 	
+	public int getRn() {
+		return rn;
+	}
+	public void setRn(int rn) {
+		this.rn = rn;
+	}
 	public String getProfile_url() {
 		return profile_url;
 	}
