@@ -183,7 +183,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<div class="button-bottom" align="right">
 			<input type="button" value="수정" style="width: 40pt; height: 20pt"
-			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}'">
+			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}&email=${email }'">
+			<input type="button" value="삭제" style="width: 40pt; height: 20pt"
+			onclick="location.href='plandelete.do?bs_num=${dto.bs_num}'">
 			<input type="button" value="목록" style="width: 40pt; height: 20pt" 
 			onclick="location.href='boardschedule.do'">
 		</div>

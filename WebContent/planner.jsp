@@ -132,27 +132,33 @@
     .tourImageDiv{
     	width: 100%;
     	height: 300px;
+    	border: 1px solid gray;
     	/* margin: 5% 0 0 0; */
     }
     .tourdescdiv{
     	float: left;
     	width: 80%;
-    	height: 70px;
+    	height: 100px;
     	overflow: hidden;
     	border-bottom: 1px solid gray;
     }
     .descwrapper{
     	width: 100%;
-    	height: 70px;
+    	height: 100px;
     }
     
     .plusbutton{
     	text-align: center;
     	float:right;
     	width: 20%;
-    	height: 30px;
-    	margin: 4% 0 0 0;
+    	height: 100px;
+    	background-color: #ff9933;
+    	color: white;
+    	font-size: 30px;
 
+    }
+    .plusP{
+    	margin: 60% 0 0 0;
     }
     .plusbutton:hover {
 		cursor: pointer;
@@ -297,6 +303,8 @@ var mapx = [];
 var mapy = [];
 var daycount = 1;
 var plandivheight = 65;
+markers = [];
+
 
 $(document).on('click', '#completebtn', function(){
 	var plandiv = $(".plandiv");
@@ -366,6 +374,11 @@ $(document).on('click','#sidebar-menu', function(){
 
 
 $(document).on('click','#cityinfo', function(){
+	if(markers != null){
+		for(var i = 0; i < markers.length; i++){
+			markers[i].setMap(null);
+		}
+	}
 	var $this = $(this);
 	var areaCode = $('.area_selected').attr('data');
 	var sigunguCode = $(this).attr('data');
@@ -388,6 +401,17 @@ $(document).on('click','#cityinfo', function(){
 				var addr2 = myItem[i].addr2;
 				var coordx = myItem[i].mapx;
 				var coordy = myItem[i].mapy;
+				mapx.push(coordx);
+				mapy.push(coordy);
+				//console.log("coordx : " + coordx);
+				//console.log("coordy : " + coordy);
+				var latlng = new google.maps.LatLng(coordy, coordx);
+				markers[i] = new google.maps.Marker({
+				    position: latlng,
+				    map: map
+				  });
+				markers[i].setMap(map);
+
 				
 				var contentid = myItem[i].contentid;
 				var parsedinfo = contentid+"-"+title;
@@ -399,8 +423,11 @@ $(document).on('click','#cityinfo', function(){
 					addr1 = addr2;
 				}
 				$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
-				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><img class='plusbutton' id="+contentid+" src='images/plusbutton.png'></img></div></li>");
+				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><p class='plusP'>+</p></div></div></li>");
 			}
+
+				
+					
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			console.log("request : " + XMLHttpRequest);
@@ -409,12 +436,6 @@ $(document).on('click','#cityinfo', function(){
 		}
 	});
 	
-	for(var i = 0; i < mapx.length; i++){
-		marker = new google.maps.Marker({
-	  	    position: new google.maps.LatLng(mapx[i], mapy[i]),
-		  	map: map
-		});
-	}
 	
 	document.getElementById("tourlist").style.width = "20%";
 	var tourinfo = document.getElementsByClassName("tourinfo");
@@ -426,6 +447,8 @@ $(document).on('click','#cityinfo', function(){
 	$this.addClass('city_selected');
 	
 });
+
+
 
 
 $(document).on('click', '.plusbutton', function(){
@@ -612,22 +635,30 @@ $(document).on('click', '.deleteday', function(){
 		    map.setZoom(11, true);
 	    }	    
 });
- 
- 
+
  function initMap() {
        var area = document.getElementsByClassName('sidebar-menu');
-	   var center = {lat:36.543583, lng:127.859900};
+ 	   var center = {lat:36.543583, lng:127.859900};
        map = new google.maps.Map(document.getElementById('map'), {
          zoom: 7,
          center: center,
          gestureHandling: 'greedy'
        });  
-	  }
-/* function addMarker(mapx, mapy){
-	marker = new google.maps.Marker({
-  	    position: new google.maps.LatLng(mapx, mapy),
-	  	map: map
-	});
+ 	  };
+
+ /* function createMarkers(){
+ 	var markerArr = [];
+ 	console.log("mapx : " + mapx);
+ 	console.log("mapy : " + mapy);
+ 	for(var i = 0; i < mapx.length; i++){
+ 		var latlng = new google.maps.LatLng( mapx[i], mapy[i]);
+ 		
+ 		markerArr[i] = new google.maps.Marker({
+ 			position: latlng,
+ 			map: map
+ 		});
+ 		markerArr[i].setMap(map);
+ 	}
  } */
 </script>
 
@@ -642,7 +673,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 		%>
 			<script type="text/javascript">
 				alert("로그인이 필요한 서비스 입니다.");
-				history.go(-1);
+				location.href="loginForm.do";
 			</script>
 		<%
 	}
@@ -692,7 +723,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt
 				<input type="text" name="title" id="title" class="inputs" required>
 				<br>
 				<label>출발일 : </label>
-			  	<input type="date" name="date" class="inputs">
+			  	<input type="date" name="date" class="inputs" required>
 				<br>
 			<!-- <button onclick="javascript:document.getElementById('form').submit();">완료</button> -->
 			<input type="submit" value="전송">

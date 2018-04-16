@@ -65,6 +65,8 @@ public class BoardScheduleDao {
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setSchedule_date(rs.getString("schedule_date"));
 				dto.setArea_names(rs.getString("area_names"));
+				
+				System.out.println("@@@@@@@image_url : " + rs.getString("image_url"));
 			}
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -270,7 +272,9 @@ public class BoardScheduleDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from (selet rownum rs, a.* from (selet * from BOARDSCHEDULE order by bs_num desc) a)where rn between ? and ?";
+		String sql = "select * from "
+					 + "(select rownum rn, a.* from (select * from BOARDSCHEDULE order by bs_num desc) a)"
+					 + "where rn between ? and ?";
 		
 		try {
 			conn = getConnection();
@@ -289,7 +293,6 @@ public class BoardScheduleDao {
 				dto.setView_count(rs.getInt("view_count"));
 				dto.setVote_count(rs.getInt("vote_count"));
 				dto.setBoard_date(rs.getDate("board_date"));
-				dto.setArea_name(rs.getString("area_name"));
 				dto.setArea_names(rs.getString("area_names"));
 				dto.setSl_code(rs.getString("sl_code"));
 				
@@ -305,7 +308,45 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
+		System.out.println("listsize : " + pagelist.size());
 		return pagelist;
+	}
+	public int delete(int bs_num, String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql1 = "select email from BOARDSCHEDULE where bs_num = ?";
+		String sql2 = "delete from BOARDSCHEDULE where bs_num = ?";
+		int result = 0;
+		String dbemail = "";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql1);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				dbemail = rs.getString("email");
+				
+				if (dbemail.equals(email)) {
+					rs.close();
+					ps.close();
+					ps = conn.prepareStatement(sql2);
+					ps.setInt(1, bs_num);
+					result = ps.executeUpdate();
+				} else {
+					result = 0;
+				}
+			} else {
+				result = -1;
+			}
+		}	finally {
+			 if (rs != null) rs.close();
+	         if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		return result;
 	}
 
 }
