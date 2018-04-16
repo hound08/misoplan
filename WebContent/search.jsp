@@ -17,6 +17,13 @@
 <script type="text/javascript" src="js/jquery.js"></script>
 
 <script type="text/javascript">
+$(document).ready(function(){
+	$("#searchBar").keypress(function(e){
+		if(e.which == 13){
+			searchMain();	
+		}
+	});
+});
 	var areaCode;
 	var sigunCode;
 	function seoulButton_click(code) {
@@ -932,7 +939,7 @@ div {
 
 .searchBar {
 	font-size: 16px;
-	width: 325px;
+	width: 500px;
 	padding: 10px;
 	border: 0px;
 	outline: none;
@@ -965,13 +972,7 @@ div {
 	outline: none;
 	margin: 10px auto;
 }
-/* .areaTable{
-	width: 65px;
-	height : 50px;
-	outline : none;
-	margin : 10px auto;
-}
- */
+
 .contentsTop {
 	width: 1000px;
 	height: 50px;
@@ -1120,7 +1121,7 @@ div {
 		<div class="searchSection">
 			<!--검색창  -->
 			<div class="searchArea">
-				<input type="text" placeholder="검색어 입력" class="searchBar" id = "searchBar">
+				<input type="text" placeholder="관광지, 문화시설, 행사, 여행코스, 숙박 정보를 검색하세요!" class="searchBar" id = "searchBar">
 				<button class="searchButton" onclick="searchMain()">검색</button>
 			</div>
 			<!--검색창  끝-->
@@ -1457,5 +1458,6 @@ div {
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
+	
 </body>
 </html>
