@@ -11,7 +11,6 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
-
 public class BoardScheduleDao {
 	private static BoardScheduleDao instance;
 
@@ -40,7 +39,7 @@ public class BoardScheduleDao {
 
 		return conn;
 	}
-	
+
 	public BoardScheduleDto planselect(int bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -157,7 +156,7 @@ public class BoardScheduleDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-/*			System.out.println("sl_code" + sl_code);*/
+			/* System.out.println("sl_code" + sl_code); */
 			ps.setString(1, dto.getTitle());
 			ps.setString(2, dto.getTag());
 			ps.setString(3, dto.getNickname());
@@ -176,23 +175,24 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
-		System.out.println("result : " +  result);
-		
+		System.out.println("result : " + result);
+
 		return result;
 	}
+
 	public BoardScheduleDto select(int bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		String sql = "SELECT * FROM BOARDSCHEDULE WHERE BS_NUM = ?";
 		BoardScheduleDto dto = new BoardScheduleDto();
-		
+
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, bs_num);
 			rs = ps.executeQuery();
-			
+
 			if (rs.next()) {
 				dto.setBs_num(rs.getInt("bs_num"));
 				dto.setSl_code(rs.getString("sl_code"));
@@ -207,13 +207,58 @@ public class BoardScheduleDao {
 				dto.setSchedule_date(rs.getString("schedule_date"));
 				dto.setArea_names(rs.getString("area_names"));
 			}
-		} catch (Exception e ) {
+		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			 if (rs != null) rs.close(); 
-	         if (ps != null) ps.close(); 
-	         if (conn != null) conn.close(); 
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
 		}
 		return dto;
+	}
+
+	public int update(BoardScheduleDto dto) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql = "UPDATE BOARDSCHEDULE SET TITLE=?, TAG=?, IMAGE_URL=?, CONTENT=? where BS_NUM=?";
+		// UPDATE BOARDSCHEDULE SET TITLE='하하하', TAG='하하하하하', IMAGE_URL='하하하하',
+		// CONTENT='히히히히히' where bs_num = 2;
+		System.out.println("update 진입 성공");
+		try {
+			System.out.println("update try ");
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, dto.getTitle());
+			System.out.println("여기냐1" + dto.getTitle());
+			ps.setString(2, dto.getTag());
+			System.out.println("여기냐2" + dto.getTag());
+			ps.setString(3, dto.getImage_url());
+			System.out.println("여기냐3" + dto.getImage_url());
+			ps.setString(4, dto.getContent());
+			System.out.println("여기냐4" + dto.getContent());
+			ps.setInt(5, dto.getBs_num());
+			System.out.println("여기냐5" + dto.getBs_num());
+
+			result = ps.executeUpdate();
+			System.out.println("try result " + result);
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			try {
+				if (ps != null)
+					ps.close();
+				if (conn != null)
+					conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		System.out.println("result : " + result);
+		return result;
 	}
 }

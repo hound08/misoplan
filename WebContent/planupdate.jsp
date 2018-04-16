@@ -183,7 +183,10 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 </script>
 </head>
 <body>
-<form action="planupdate.do" name="planSelect" method="post" enctype="multipart/form-data">
+<%
+	String bs_num = request.getParameter("bs_num");
+%>
+<form action="planupdatePro.do?bs_num=${bs_num}" name="planSelect" method="post">
 	<div class="main-top">
 		<!-- <div class="main-top-second1" align="left"> -->
 			<img class="main-top-second1" alt="IMG" src="${dto.image_url }">
