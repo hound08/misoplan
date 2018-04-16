@@ -128,7 +128,7 @@ public class AccompanyReplyDao {
 				dto.setPost_num(rs.getInt(3));
 				dto.setEmail(rs.getString(4));
 				dto.setNickname(rs.getString(5));
-				dto.setProfile_url(rs.getString(6));
+				dto.setProfile_url(AccompanyDao.getInstance().get_profile_url((rs.getString(4))));
 				dto.setContent(rs.getString(7));
 				dto.setReply_date(rs.getDate(8));
 				list.add(dto);
