@@ -15,7 +15,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">

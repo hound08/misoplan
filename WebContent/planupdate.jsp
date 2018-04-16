@@ -1,3 +1,4 @@
+<%@page import="dao.BoardScheduleDto"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.mySchduleDto"%>
 <%@page import="java.util.List"%>
@@ -182,7 +183,10 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 </script>
 </head>
 <body>
-<form action="planupdate.do" name="planSelect" method="post" enctype="multipart/form-data">
+<%
+	String bs_num = request.getParameter("bs_num");
+%>
+<form action="planupdatePro.do?bs_num=${bs_num}" name="planSelect" method="post">
 	<div class="main-top">
 		<!-- <div class="main-top-second1" align="left"> -->
 			<img class="main-top-second1" alt="IMG" src="${dto.image_url }">
@@ -194,7 +198,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 				<!--  <span id="sl_codehidden"></span> -->
 		</div>
 		<div class="main-imagebt">
-			<input class="" type="file" name="image_url" value="" onchange="image(this)">
+			<input class="" type="file" name="image_url" onchange="image(this)">
 		</div>
 	</div>
 	<div class="main-center">
@@ -202,7 +206,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 			일정 내용
 		</div>
 		<div class="center-bottom-image">
-			<textarea rows="13" cols="163" name="content" required="required"></textarea>
+			<textarea rows="13" cols="163" name="content" required="required">${dto.content }</textarea>
 		</div>
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" style="width: 40pt; height: 20pt">

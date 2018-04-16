@@ -7,12 +7,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css"href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+</head>
 <style type="text/css">
-
 body, html {
     height: 100%;
 }
@@ -76,9 +75,9 @@ table {
 	margin: auto 20px;
 }
 .reply-wrapper{
-	margin: 20px 0 0 0;
+	min-height: 100px;
+	margin: 10px 0 10px 0;
 	width: 100%;
-	height: 100px;
 	border: 1px solid;
 	border-color: #D5D5D5;	
 	display: flex;
@@ -86,7 +85,7 @@ table {
  	border-radius: 5px;
 }
 .reply-image { 
-	margin: auto 20px;
+	margin: 9px 0px auto 20px;
 	background-size: 100% 100%; 
 	width: 80px; 
 	height: 80px; 
@@ -98,7 +97,8 @@ table {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
-	padding : 1em 0 1em 1em;
+	padding: 1em 0 1em 1em;
+	margin-bottom: 10px; 
 }
 
 tr.highlight td {
@@ -130,11 +130,22 @@ tr.highlight td {
 	padding-bottom: 1px
 }
 
-span {
+.span.icon {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 5px;	
 	padding: 2px 3px;
+}
+
+.span-reply {
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 5px;	
+	background-color: #BC2424;
+	text-align: center;
+	color: white;
+	padding: 2px 3px;
+	height: 25px;
 }
 
 .icon-view {
@@ -156,15 +167,24 @@ span {
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
 }
+
+.table-reply{
+	margin-top: 15px;
+}
+
+.post-footer {
+	margin-top: 15px;
+}
 </style>
-</head>
+
 <body>
 	<div id="apply-div" style="display: none;">
 	<fieldset>
 		<form class ="form" action="applyActionAB.do">
+			<input type="hidden" value="${post_num }" name="post_num">
 			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
 			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
-			카카오톡 아이디: <input type="text" name="kakao_id""><p>
+			카카오톡 아이디: <input type="text" name="kakao_id"><p>
 			참가 인원 : 
 			<select name="num_people">
 				<option value="1">1명</option>
@@ -201,8 +221,8 @@ span {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;">
 					<td> 
-						<span><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
-						<span><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
+						<span class="span-icon"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
+						<span class="span-icon"><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
 					</td>
 				</tr>
 			</table>
@@ -210,22 +230,27 @@ span {
 		<div class="post-body">
 			<pre>${board.content }</pre>
 			<div class="image"></div>
-		</div>
-		<c:if test="${email != null }">
+			<c:if test="${email != null }">
 			<button onclick="apply()">동행 신청하기</button>
 		</c:if>
+		</div>
 		<hr>
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
-			 <div class ="reply-image" style="background-image: url('${reply.profile_url}');"></div>
-				<span>댓글 ${reply.rp_num }</span><h2>작성자: ${reply.nickname }</h2>
-				등록일: ${reply.reply_date }<br>
-				<pre>내용: ${reply.content }</pre>
+			<div class ="reply-image" style="background-image: url('${reply.profile_url}')"></div>
+			<table class="table-reply">
+				<tr"><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr style="font-size: 18px;"><td><pre>${reply.content }</pre></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+			</table>
 		</div>
 		</c:forEach>
+		<hr>
 		<div class="post-footer">
 			<c:if test="${email != null }">
-				<form action="writeReplyAB.do">
+				<form action="writeReplyAB.do" method="post">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<textarea rows="12" style="width: 70%;" name="content"></textarea>
 					<input type="submit" value="확인">

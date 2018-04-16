@@ -18,8 +18,9 @@ public class PlanUpdateAction implements CommandProcess {
 		try{
 			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			BoardScheduleDto dto = dao.update(bs_num);
+			BoardScheduleDto dto = dao.select(bs_num);
 			request.setAttribute("dto", dto);
+			request.setAttribute("bs_num", bs_num);
 		} catch (Exception e ) {
 			System.out.println(e.getMessage());
 		}
