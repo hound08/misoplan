@@ -11,6 +11,8 @@ import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
+import com.sun.xml.internal.ws.Closeable;
+
 public class BoardScheduleDao {
 	private static BoardScheduleDao instance;
 
@@ -120,22 +122,21 @@ public class BoardScheduleDao {
 
 	}
 
-	public int getTotalCnt() throws SQLException {
+	public int getTotalpost() throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM BOARDSCHEDULE";
-		int result = 0;
-
+		int total = 0;
+		
+		String sql = "select count(*) from BOARDSCHEDULE";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			if (rs.next()) {
-				result = rs.getInt(1);
-			}
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			if (rs != null)
 				rs.close();
@@ -144,7 +145,8 @@ public class BoardScheduleDao {
 			if (conn != null)
 				conn.close();
 		}
-		return result;
+		
+		return total;
 	}
 
 	public int insertPlan(BoardScheduleDto dto, String nickname)
@@ -261,4 +263,49 @@ public class BoardScheduleDao {
 		System.out.println("result : " + result);
 		return result;
 	}
+	public List<BoardScheduleDto> pagelist(int startRow, int endRow) throws SQLException {
+		List<BoardScheduleDto> pagelist = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from (selet rownum rs, a.* from (selet * from BOARDSCHEDULE order by bs_num desc) a)where rn between ? and ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardScheduleDto dto = new BoardScheduleDto();
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setContent(rs.getString("content"));
+				dto.setTag(rs.getString("tag"));
+				dto.setView_count(rs.getInt("view_count"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setArea_name(rs.getString("area_name"));
+				dto.setArea_names(rs.getString("area_names"));
+				dto.setSl_code(rs.getString("sl_code"));
+				
+				pagelist.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		}
+		return pagelist;
+	}
+
 }

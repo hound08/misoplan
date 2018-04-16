@@ -21,22 +21,6 @@ public class AdminMainFormAction implements CommandProcess {
 				pageNum = "1";
 			}
 			
-			MemberDao dao = MemberDao.getInstance();
-			int totCnt = dao.selectTotalCnt();
-			int currentPage = Integer.parseInt(pageNum);
-			int pageSize = 20; // 한 페이지에 보여줄 회원 수
-			int blockSize = 10; // 게시판 하단의 페이지 번호 블록
-			int startRow = (currentPage - 1) * pageSize + 1;
-			int endRow = startRow + pageSize - 1;
-			int startNum = totCnt - startRow + 1;
-			int pageCnt = (int) Math.ceil((double) totCnt / pageSize); // 해당 수 보다 높은 수 중에 가장 작은 정수
-			int startPage = (int) (currentPage - 1) / blockSize * blockSize + 1;
-			int endPage = startPage + blockSize - 1;
-
-			if (endPage > pageCnt) {
-				endPage = pageCnt;
-			}
-			
 			MemberDto dtoSearch = new MemberDto();
 			dtoSearch.setEmail("");
 			dtoSearch.setNickname("");
@@ -51,9 +35,25 @@ public class AdminMainFormAction implements CommandProcess {
 					dtoSearch.setPhone(request.getParameter("textSearch"));
 				}
 			}
+			
+			MemberDao dao = MemberDao.getInstance();
+			int totCnt = dao.selectTotalCnt(0, dtoSearch);
+			int currentPage = Integer.parseInt(pageNum);
+			int pageSize = 20; // 한 페이지에 보여줄 회원 수
+			int blockSize = 10; // 게시판 하단의 페이지 번호 블록
+			int startRow = (currentPage - 1) * pageSize + 1;
+			int endRow = startRow + pageSize - 1;
+			int startNum = totCnt - startRow + 1;
+			int pageCnt = (int) Math.ceil((double) totCnt / pageSize); // 해당 수 보다 높은 수 중에 가장 작은 정수
+			int startPage = (int) (currentPage - 1) / blockSize * blockSize + 1;
+			int endPage = startPage + blockSize - 1;
+
+			if (endPage > pageCnt) {
+				endPage = pageCnt;
+			}
 
 			List<MemberDto> list = null;
-			list = dao.selectMemberList(startRow, endRow, dtoSearch);
+			list = dao.selectMemberList(startRow, endRow, 0, dtoSearch);
 			
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);

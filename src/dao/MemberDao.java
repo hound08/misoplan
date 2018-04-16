@@ -99,7 +99,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT NICKNAME, PASSWORD, PROFILE_URL, MEMBER_ADMIN FROM MEMBER WHERE EMAIL = ?";
+		String sql = "SELECT NICKNAME, PASSWORD, PROFILE_URL, MEMBER_ADMIN, BAN, BAN_DATE FROM MEMBER WHERE EMAIL = ?";
 		MemberDto dto = new MemberDto();
 		
 		try {
@@ -114,6 +114,8 @@ public class MemberDao {
 					dto.setNickname(rs.getString(1));
 					dto.setProfile_url(rs.getString(3));
 					dto.setMember_admin(rs.getInt(4));
+					dto.setBan(rs.getInt(5));
+					dto.setBan_date(rs.getDate(6));
 				}
 			}
 		} catch (Exception e) {
@@ -318,16 +320,30 @@ public class MemberDao {
 		return result;
 	}
 	
-	public int selectTotalCnt() throws SQLException {
+	public int selectTotalCnt(int ban, MemberDto dtoSearch) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT COUNT(*) FROM MEMBER";
+		String sql = "SELECT COUNT(*) FROM MEMBER WHERE BAN LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ?";
+		
+		String banResult = "%";
+		
+		if (ban == 1) {
+			banResult = "1";
+		}
+		
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
+		String phone = "%" + dtoSearch.getPhone() + "%";
 		int result = 0;
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, banResult);
+			ps.setString(2, email);
+			ps.setString(3, nickname);
+			ps.setString(4, phone);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -344,7 +360,7 @@ public class MemberDao {
 		return result;
 	}
 	
-	public List<MemberDto> selectMemberList(int startRow, int endRow, MemberDto dtoSearch) throws SQLException {
+	public List<MemberDto> selectMemberList(int startRow, int endRow, int ban, MemberDto dtoSearch) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -352,7 +368,13 @@ public class MemberDao {
 		MemberDto dto = new MemberDto();
 		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, TO_CHAR(JOIN_DATE,'YYYY-MM-DD HH24:MI:SS') " +
 					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER ORDER BY NICKNAME) A) " +
-					 "WHERE RN BETWEEN ? AND ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ?";
+					 "WHERE RN BETWEEN ? AND ? AND BAN LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ?";
+		String banResult = "%";
+		
+		if (ban == 1) {
+			banResult = "1";
+		}
+		
 		String email = "%" + dtoSearch.getEmail() + "%";
 		String nickname = "%" + dtoSearch.getNickname() + "%";
 		String phone = "%" + dtoSearch.getPhone() + "%";
@@ -362,9 +384,10 @@ public class MemberDao {
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, startRow);
 			ps.setInt(2, endRow);
-			ps.setString(3, email);
-			ps.setString(4, nickname);
-			ps.setString(5, phone);
+			ps.setString(3, banResult);
+			ps.setString(4, email);
+			ps.setString(5, nickname);
+			ps.setString(6, phone);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {

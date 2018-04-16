@@ -1,6 +1,7 @@
 package service;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,8 @@ public class LoginProAction implements CommandProcess {
 			request.setAttribute("nickname", dto.getNickname());
 			request.setAttribute("profile_url", dto.getProfile_url());
 			request.setAttribute("admin", dto.getMember_admin());
+			request.setAttribute("ban", dto.getBan());
+			request.setAttribute("ban_date", dto.getBan_date());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
