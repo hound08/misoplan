@@ -908,15 +908,15 @@ div {
 /*전체 div  */
 .section {
 	width: 1080px;
-	height: 351px;
-	border: 1px solid red;
+	height: 281px;
+	/* border: 1px solid red; */
 }
 /* 검색 Area */
 .searchSection {
 	width: 1080px;
-	height: 300px;
+	height: 230px;
 	margin-top: 50px;
-	border: 1px solid green;
+	border: 1px solid red; 
 }
 
 .searchArea {
@@ -925,6 +925,7 @@ div {
 	border: 1px solid #1b5ac2;
 	background: #ffffff;
 	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .searchButton {
@@ -948,22 +949,22 @@ div {
 
 .areaButton {
 	width: 1000px;
-	height: 100px;
-	border: 1px solid blue;
+	height: 80px;
+	/* border: 1px solid blue; */
 	margin: 1px auto;
 }
 
 .select {
 	width: 100px;
 	height: 20px;
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	margin: 0px auto;
 }
 
 .contents {
 	width: 1080px;
-	height: 767px;
-	border: 1px solid black;
+	height: 800px;
+	/* border: 1px solid black; */
 }
 
 .sidoButton {
@@ -972,18 +973,30 @@ div {
 	outline: none;
 	margin: 10px auto;
 }
+.sidoBtn{
+	width:100px; 
+	height:50px;
+	background-color: transparent; 
+	border:none;
+	cursor:pointer;
+}
+
+.sidoImg{
+	width:100px; 
+	height : 50px;
+}
 
 .contentsTop {
 	width: 1000px;
-	height: 50px;
-	border: 1px solid pink;
+	height: 30px;
+	/* border: 1px solid pink; */
 	margin: 10px auto;
 }
 
 .listArea {
-	width: 1000px;
+	width: 1050px;
 	height: 680px;
-	border: 1px solid blue;
+	/* border: 1px solid blue; */
 	margin: 10px auto;
 }
 
@@ -1132,10 +1145,11 @@ div {
 				<!--서울 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${seoul }" class="sidoButton"
-							id="seoulButton" name="seoulButton"
-							onclick="seoulButton_click(1)"></th>
-
+						<th>
+							<button onclick = "seoulButton_click(1)" class = "sidoBtn">
+								<img class = sidoImg src = "images/seoul.png" >
+							</button>
+						</th>		
 					</tr>
 					<tr>
 						<td>
@@ -1162,8 +1176,11 @@ div {
 				<!--인천 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${incheon}"
-							class="sidoButton" onclick="incheonButton_click(2)"></th>
+						<th>
+							<button onclick = "incheonButton_click(2)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/incheon.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1179,8 +1196,11 @@ div {
 				<!--대전 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${daejeon}"
-							class="sidoButton" onclick="daejeonButton_click(3)"></th>
+						<th>
+							<button onclick = "daejeonButton_click(3)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/daejeon.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1196,8 +1216,11 @@ div {
 				<!--대구 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${daegu}" class="sidoButton"
-							onclick="daeguButton_click(4)"></th>
+						<th>
+							<button onclick = "daeguButton_click(4)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/daegu.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1213,8 +1236,11 @@ div {
 				<!--광주 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${gwangju}"
-							class="sidoButton" onclick="gwangjuButton_click(5)"></th>
+						<th>
+							<button onclick = "gwangjuButton_click(5)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/gwangju.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1230,8 +1256,11 @@ div {
 				<!--부산 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${busan}" class="sidoButton"
-							onclick="busanButton_click(6)"></th>
+						<th>
+							<button onclick = "busanButton_click(6)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/busan.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1247,8 +1276,11 @@ div {
 				<!--울산 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${ulsan}" class="sidoButton"
-							onclick="ulsanButton_click(7)"></th>
+						<th>
+							<button onclick = "ulsanButton_click(7)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/ulsan.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1264,8 +1296,11 @@ div {
 				<!--세종특별자치시 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${sejong}" class="sidoButton"
-							onclick="sejongButton_click(8)"></th>
+						<th>
+							<button onclick = "sejongButton_click(8)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/sejong.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1280,8 +1315,11 @@ div {
 				<!--경기도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${gyeonggi}"
-							class="sidoButton" onclick="gyeonggiButton_click(31)"></th>
+						<th>
+							<button onclick = "gyeonggiButton_click(31)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/gyeonggi.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1298,8 +1336,11 @@ div {
 				<!--강원도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${gangwon}"
-							class="sidoButton" onclick="gangwonButton_click(32)"></th>
+						<th>
+							<button onclick = "gangwonButton_click(32)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/gangwon.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1315,8 +1356,11 @@ div {
 				<!--충청북도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${chungbuk}"
-							class="sidoButton" onclick="chungbukButton_click(33)"></th>
+						<th>
+							<button onclick = "chungbukButton_click(33)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/chungbuk.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1331,8 +1375,11 @@ div {
 				<!--충청남도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${chungnam}"
-							class="sidoButton" onclick="chungnamButton_click(34)"></th>
+						<th>
+							<button onclick = "chungnamButton_click(34)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/chungnam.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1347,8 +1394,11 @@ div {
 				<!--경상북도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${gyeongbuk}"
-							class="sidoButton" onclick="gyeongbukButton_click(35)"></th>
+						<th>
+							<button onclick = "gyeongbukButton_click(35)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/gyeongbuk.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1363,8 +1413,11 @@ div {
 				<!--경상남도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${gyeongnam}"
-							class="sidoButton" onclick="gyeongnamButton_click(36)"></th>
+						<th>
+							<button onclick = "gyeongnamButton_click(36)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/gyeongnam.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1379,8 +1432,11 @@ div {
 				<!--전라북도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${jeonbuk}"
-							class="sidoButton" onclick="jeonbukButton_click(37)"></th>
+						<th>
+							<button onclick = "jeonbukButton_click(37)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/jeonbuk.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1395,8 +1451,11 @@ div {
 				<!--전라남도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${jeonnam}"
-							class="sidoButton" onclick="jeonnamButton_click(38)"></th>
+						<th>
+							<button onclick = "jeonnamButton_click(38)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/jeonnam.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1411,8 +1470,11 @@ div {
 				<!--제주도 버튼  -->
 				<table class="areaTable" border="0" width="106" style="float: left;">
 					<tr>
-						<th><input type="button" value="${jeju}" class="sidoButton"
-							onclick="jejuButton_click(39)"></th>
+						<th>
+							<button onclick = "jejuButton_click(39)" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/jeju.png">
+							</button>
+						</th>
 					</tr>
 					<tr>
 						<td>
@@ -1428,7 +1490,9 @@ div {
 				<table class="areaTable" border="0" width="106" style="float: left;" >
 					<tr>
 						<th>
-							<input type = "button" value = "검색" onclick="searchSub()">
+							<button onclick = "searchSub()" class = "sidoBtn">
+								<img class = "sidoImg" src = "images/searchsub.png">
+							</button>
 						</th>
 					</tr>
 				</table>
@@ -1454,7 +1518,7 @@ div {
 		</div>
 	</div><!--content 끝  -->
 	<!--section 끝  -->
-	<input type = "text" value = "${email }" id = "email">
+	<input type = "hidden" value = "${email }" id = "email">
 	<div class="footer_wrap">
 		<%@ include file="footer.jsp"%>
 	</div>
