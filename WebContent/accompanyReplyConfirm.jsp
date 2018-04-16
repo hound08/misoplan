@@ -7,12 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-	<c:if test="${result > 0 }">
-		<script type="text/javascript">
-			alert("수정완료");
-			location.href="planview.do?bs_num=${bs_num}";
-		</script>
-	</c:if>
+<body>	
+	<script>
+		location.href="viewActionAB.do?post_num=${post_num}";
+	</script>
 </body>
 </html>

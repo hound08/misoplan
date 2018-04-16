@@ -20,6 +20,7 @@
 	margin: 0px;
 	padding: 0px;
 }
+
 div {
 	margin: 0px auto;
 	/* border: 1px solid black;  */
@@ -75,6 +76,7 @@ div {
 	clear: both;
 	overflow: hidden;
 }
+
 .card_image {
 	width: 350px;
 	height: 250px;
@@ -133,6 +135,12 @@ div {
 	margin: 35px 0 0 0;
 }
 
+.page-num {
+	widht: 1200px;
+	height: 50px;
+	margin: 20px 0;
+}
+
 .search {
 	width: 1200px;
 	height: 35px;
@@ -166,12 +174,13 @@ div {
 		setInterval(replacePhoto, 3000);
 	</script>
 	<%
-		String email = (String)session.getAttribute("email");
-		String nickname = (String)session.getAttribute("nickname");
+		String email = (String) session.getAttribute("email");
+		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div class="center">
 		<div id="button1" align="right">
-			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt" onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
+			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt"
+				onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
 			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
 			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
 			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
@@ -179,46 +188,60 @@ div {
 		</div>
 		<c:forEach var="bs" items="${list }">
 			<a href="planview.do?bs_num=${bs.bs_num }">
-			<div class="center-second">
-				<div class="second-box">
-					<img alt="image" class="card_image" src="${bs.image_url }">
+				<div class="center-second">
+					<div class="second-box">
+						<img alt="image" class="card_image" src="${bs.image_url }">
+					</div>
+					<div class="local">${bs.area_names } ${bs.sl_code }</div>
+					<div class="second-text">
+						<h2>제목 : ${bs.title }</h2>
+						${schedule_date }
+					</div>
+					<div class="tag">${bs.tag }</div>
+					<div class="idlocal">아이디 : ${bs.nickname }</div>
+					<div class="datelocal" align="right">${bs.board_date }</div>
 				</div>
-				<div class="local">
-					${bs.area_names } ${bs.sl_code }
-				</div>
-				<div class="second-text">
-					<h2>제목 : ${bs.title }</h2>
-					 ${schedule_date }
-				</div>
-				<div class="tag">${bs.tag }</div>
-				<div class="idlocal">아이디 : ${bs.nickname }</div>
-				<div class="datelocal" align="right">${bs.board_date }</div>
-			</div>
 			</a>
 		</c:forEach>
 	</div>
-		<div class="bottom-page" align="center">
-			<div style="text-align: center;">
-				<%-- <c:if test="${startPage > blockSize }">
-					<a href='list.do?pageNum=${startPage-blockSize }'>[이전]</a>
-				</c:if>
-				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<a href='list.do?pageNum=${i}'>[${i}]</a>
-				</c:forEach>
-				<c:if test="${endPage < pageCnt}">
-					<a href='list.do?pageNum=${startPage+blockSize}'>[다음]</a>
-				</c:if> --%>
-			</div>
-			<div class="search" align="center">
-				<select name="menu">
-					<option value="##">###</option>
-					<option value="##">###</option>
-					<option value="##">###</option>
-					<option value="##">###</option>
-				</select> <input type="text" name="search"> 돋보기 이미지
-			</div>
-		</div>
-		<input type = "text" value = "${test }">
-		<%@ include file="footer.jsp"%>
+	<div class="page-num" align="center"></div>
+	<c:if test="${startPage!=1 }">
+		<a href='pagelistAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+	</c:if>
+	<c:if test="${startPage==1 }">
+		<a href='pagelistAction.do?pageNum=1'>&laquo;</a>
+	</c:if>
+	<c:if test="${currentPage!=1 }">
+		<a href='pagelistAction.do?pageNum=${currentPage-1}'>&#9665</a>
+	</c:if>
+	<c:if test="${currentPage==1 }">
+		<a href='pagelistAction.do?pageNum=1'>&#9665</a>
+	</c:if>
+
+	<c:forEach var="i" begin="${startPage }" end="${endPage }">
+		<a href='pagelistAction.do?pageNum=${i }'>${i }</a>
+	</c:forEach>
+
+	<c:if test="${currentPage==totalPage }">
+		<a href='pagelistAction.do?pageNum=${totalPage }'>&#9655</a>
+	</c:if>
+	<c:if test="${currentPage!=totalPage }">
+		<a href='pagelistAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+	</c:if>
+	<c:if test="${endPage>=totalPage }">
+		<a href='pagelistAction.do?pageNum=${totalPage}'>&raquo;</a>
+	</c:if>
+	<c:if test="${endPage<totalPage }">
+		<a href='pagelistAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+	</c:if>
+	<div class="search" align="center">
+		<select name="menu">
+			<option value="##">###</option>
+			<option value="##">###</option>
+			<option value="##">###</option>
+			<option value="##">###</option>
+		</select> <input type="text" name="search"> 돋보기 이미지
+	</div>
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

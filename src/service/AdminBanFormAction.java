@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import dao.MemberDao;
 import dao.MemberDto;
 
-public class AdminMainFormAction implements CommandProcess {
+public class AdminBanFormAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -20,7 +20,7 @@ public class AdminMainFormAction implements CommandProcess {
 			if (pageNum == null || pageNum.equals("")) {
 				pageNum = "1";
 			}
-			
+
 			MemberDto dtoSearch = new MemberDto();
 			dtoSearch.setEmail("");
 			dtoSearch.setNickname("");
@@ -37,7 +37,7 @@ public class AdminMainFormAction implements CommandProcess {
 			}
 			
 			MemberDao dao = MemberDao.getInstance();
-			int totCnt = dao.selectTotalCnt(0, dtoSearch);
+			int totCnt = dao.selectTotalCnt(1, dtoSearch);
 			int currentPage = Integer.parseInt(pageNum);
 			int pageSize = 20; // 한 페이지에 보여줄 회원 수
 			int blockSize = 10; // 게시판 하단의 페이지 번호 블록
@@ -51,9 +51,14 @@ public class AdminMainFormAction implements CommandProcess {
 			if (endPage > pageCnt) {
 				endPage = pageCnt;
 			}
+			
+			System.out.println("totCnt : " + totCnt);
+			System.out.println("pageCnt : " + pageCnt);
+			System.out.println("startPage : " + startPage);
+			System.out.println("endPage : " + endPage);
 
 			List<MemberDto> list = null;
-			list = dao.selectMemberList(startRow, endRow, 0, dtoSearch);
+			list = dao.selectMemberList(startRow, endRow, 1, dtoSearch);
 			
 			request.setAttribute("totCnt", totCnt);
 			request.setAttribute("pageNum", pageNum);
@@ -67,8 +72,8 @@ public class AdminMainFormAction implements CommandProcess {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		
-		return "adminMainForm.jsp";
+
+		return "adminBanForm.jsp";
 	}
 
 }

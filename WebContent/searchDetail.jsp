@@ -488,20 +488,21 @@ div {
 /*전체 div  */
 .section1 {
 	width: 1080px;
-	height: 500px;
-	border: 1px solid red;
+	height: 486px;
+	/* border: 1px solid red; */
+	margin-top: 20px;
 }
 .search1Area {
 	width: 1080px;
 	height: 480px;
 	margin-top: 10px;
-	border: 1px solid green;
+	/* border: 1px solid green; */
 }
 
 .touristName {
 	width: 500px;
 	height: 40px;
-	border: 1px solid #1b5ac2;
+	/* border: 1px solid #1b5ac2; */
 	background: #ffffff;
 	margin-bottom: 20px;
 }
@@ -509,7 +510,7 @@ div {
 .wishImg{
 	width : 50px;
 	height : 50px;
-	border : 1px solid red;
+	/* border : 1px solid red; */
 	margin-left : 20px;
 	float : left;
 }
@@ -517,7 +518,7 @@ div {
 .touristImg{
 	width: 500px;
 	height: 400px;
-	border: 1px solid blue;
+	/* border: 1px solid black; */
 	margin: 1px auto;
 	float : left;
 	margin-left: 20px;
@@ -552,14 +553,14 @@ div {
 .section2 {
 	width: 1080px;
 	height: 850px;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 
 .overview {
 	width: 1000px;
 	height: 300px;
-	border: 1px solid pink;
+	/* border: 1px solid pink; */
 	margin-top : 10px;
 	margin-bottom: 10px;
 	overflow:auto;
@@ -569,7 +570,7 @@ div {
 .map {
 	width: 1000px;
 	height: 500px;
-	border: 1px solid blue;
+	/* border: 1px solid black; */
 	
 }
 
@@ -597,7 +598,7 @@ div {
 .summary{
 	width: 500px;
 	height: 400px;
-	border: 1px solid blue;
+	border: 1px solid black;
 	margin: 1px auto;
 	/* padding : 25px 10px 0 10px; */
 	border-top: 1px solid;
@@ -609,7 +610,7 @@ div {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	
 }
 /* Float the list items side by side */
@@ -637,7 +638,7 @@ div {
 	/* color: #fff; */
 	overflow:auto;
 	overflow-x:hidden;
-	border: 1px solid black;
+	/* border: 1px solid black; */
 }
 
 ul.tab li.current {
@@ -755,8 +756,8 @@ ul.tab li.current {
 	<div class = "hidden" id = "hidden">
 		<input type = "hidden" value ="${contentTypeId}" id = "contentTypeId">
 		<input type = "hidden" value ="${contendtid}" id = "contendtid">  
-<!-- 	 	<input type = "text" value ="12" id = "contentTypeId">
-		<input type = "text" value ="127213" id = "contendtid">  -->
+<!-- <input type = "text" value ="12" id = "contentTypeId">
+		<input type = "text" value ="127213" id = "contendtid"> -->
 		<input type = "hidden" value ="${email }" id = "email">
 		<input type = "hidden" value = "${result }" id = "result">
 		<input type = "hidden" value = "${mapx }" id = "mapx">

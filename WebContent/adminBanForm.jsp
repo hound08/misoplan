@@ -34,18 +34,18 @@
 	}
 	.tdAll {
 		width: 50%;
-		border-bottom: 4px solid #1A7AD9;
-		font-weight: bold;
+		
+	}
+	.tdAll a {
+		color: gray;
+	}
+	.tdAll a:HOVER {
+		color: black;
 	}
 	.tdBan {
-		color: gray;
 		width: 50%;
-	}
-	.tdBan a {
-		color: gray;
-	}
-	.tdBan a:HOVER {
-		color: black;
+		border-bottom: 4px solid #1A7AD9;
+		font-weight: bold;
 	}
 	table.tableList {
 	  margin: auto;
@@ -82,20 +82,6 @@
 	}
 	table.tableList thead th:first-child {
 	  border-left: none;
-	}
-	.divButton {
-		margin: auto;
-		width: 90%;
-		text-align: right;
-	}
-	.adminButton {
-		margin-top: 5px;
-		margin-left: 5px;
-		width: 100px;
-		height: 30px;
-		color: white;
-		background-color: #49B2E9;
-		border-color: transparent;
 	}
 	.divPage {
 		margin-top: 15px;
@@ -141,35 +127,6 @@
 			}
 		});
 	});
-	
-	function memberBan() {
-		if ($(".chkbox:checked").length == 0) {
-			alert("선택된 회원이 없습니다.");
-			
-			return;
-		} else {
-			if (confirm($(".chkbox:checked").length + "명의 회원을 정지 처리합니다.\n계속 진행하시겠습니까?")) {
-				var rowData = new Array();
-				var tdArr = new Array();
-				var checkbox = $(".chkbox:checked");
-				
-				checkbox.each(function(i) {
-					var tr = checkbox.parent().parent().eq(i);
-					var td = tr.children();
-		
-					rowData.push(tr.text());
-					var email = td.eq(2).text();
-					tdArr.push(email);
-				});
-				
-				location.href="adminBanPro.do";
-			} else {
-				alert("취소하셨습니다.");
-				
-				return;
-			}
-		}
-	}
 </script>
 </head>
 <body>
@@ -178,7 +135,7 @@
 		<div id="main">
 			<h1>관리자 메뉴</h1>
 			<div class="divTab">
-				<table class="tableTab"><tr><td class="tdAll"><a href="adminMainForm.do">전체 회원(${totCnt})</a></td><td class="tdBan"><a href="adminBanForm.do">정지된 회원</a></td></tr></table>
+				<table class="tableTab"><tr><td class="tdAll"><a href="adminMainForm.do">전체 회원</a></td><td class="tdBan"><a href="adminBanForm.do">정지된 회원(${totCnt})</a></td></tr></table>
 			</div>
 			<table class="tableList">
 				<tr><th width="25px"><input type="checkbox" class="chkboxTop" name="chkboxTop"></th>
@@ -196,10 +153,6 @@
 					<c:set var="num" value="${num + 1 }" />
 				</c:forEach>
 			</table>
-			<div class="divButton">
-				<p><input type="button" class="adminButton" value="회원 정지" onclick="memberBan()"><input type="button" class="adminButton" value="회원 정지 해제">
-				<input type="button" class="adminButton" value="관리자 지정"><input type="button" class="adminButton" value="관리자 해제"></p>
-			</div>
 			<div class="divPage">
 				<c:if test="${startPage > blockSize }">
 					<a href='adminMainForm.do?pageNum=${startPage-blockSize }'>≪이전</a>
@@ -212,7 +165,7 @@
 				</c:if>
 			</div>
 			<div class="divSearch">
-				<form action="adminMainForm.do" name="frm">
+				<form action="adminBanForm.do" name="frm">
 					<p><select name="selSearch" class="selSearch">
 						<option>이메일</option>
 						<option>별명</option>
