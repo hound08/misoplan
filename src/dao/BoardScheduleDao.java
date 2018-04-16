@@ -311,5 +311,42 @@ public class BoardScheduleDao {
 		System.out.println("listsize : " + pagelist.size());
 		return pagelist;
 	}
+	public int delete(int bs_num, String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql1 = "select email from BOARDSCHEDULE where bs_num = ?";
+		String sql2 = "delete from BOARDSCHEDULE where bs_num = ?";
+		int result = 0;
+		String dbemail = "";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql1);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				dbemail = rs.getString("email");
+				
+				if (dbemail.equals(email)) {
+					rs.close();
+					ps.close();
+					ps = conn.prepareStatement(sql2);
+					ps.setInt(1, bs_num);
+					result = ps.executeUpdate();
+				} else {
+					result = 0;
+				}
+			} else {
+				result = -1;
+			}
+		}	finally {
+			 if (rs != null) rs.close();
+	         if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		return result;
+	}
 
 }
