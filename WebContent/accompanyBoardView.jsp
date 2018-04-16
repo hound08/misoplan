@@ -117,14 +117,6 @@ tr.highlight td {
     z-index: 999;  /*stack order*/
 }
 
-fieldset {
-	color: white;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	border: none;
-}
-
 tr.highlight td {
 	padding-top: 1px; 
 	padding-bottom: 1px
@@ -160,7 +152,6 @@ tr.highlight td {
     margin-right: 2px;
 }
 
-
 .image {
 	width: 350px;
 	height: 400px;
@@ -175,33 +166,84 @@ tr.highlight td {
 .post-footer {
 	margin-top: 15px;
 }
+
+.form-label{
+	font-size: 20px;
+	color: white;
+	float: right;
+}
+
+.form-input {
+	height: 30px;
+	width: 100%;
+	font-size: 20px;
+}
+
+.apply-table {
+	width: 60%;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto auto;
+}
+
+.apply-table td:FIRST-CHILD {
+	width: 150px;
+}
+
+.apply-submit-button{
+	float:right;
+	width: 100%;
+	height: 35px;
+	background-color: #59DA50;
+	color: white;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.cancel-button {
+	float:right;
+	width: 40px;
+	height: 40px;
+	color: white;
+	background-color: #DB0000;
+}
+
+.form-select{
+ height: 30px;
+ font-size: 20px;
+}
 </style>
 
 <body>
 	<div id="apply-div" style="display: none;">
-	<fieldset>
 		<form class ="form" action="applyActionAB.do">
-			<input type="hidden" value="${post_num }" name="post_num">
-			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
-			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
-			카카오톡 아이디: <input type="text" name="kakao_id"><p>
-			참가 인원 : 
-			<select name="num_people">
-				<option value="1">1명</option>
-				<option value="2">2명</option>
-				<option value="3">3명</option>
-				<option value="4">4명</option>
-				<option value="5">5명</option>
-				<option value="6">6명</option>
-				<option value="7">7명</option>
-				<option value="8">8명</option>
-				<option value="9">9명</option>
-				<option value="10">10명</option>
-			</select>
-			<input type="submit">
+			<table class="apply-table">
+				<input type="hidden" value="${post_num }" name="post_num">
+				<tr><td colspan="2"><button class="cancel-button" onclick="apply()">&#10006</button></td><tr>
+				<tr><td><label class="form-label">이메일:</label></td><td><input type="text" class="form-input" placeholder="${email } " name="email" disabled></td></tr>
+				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message"></textarea></td></tr>
+				<tr><td><label class="form-label">카카오톡 아이디:</label></td><td><input type="text" class="form-input" name="kakao_id"></td><tr>
+				<tr><td><label class="form-label">참가 인원 :</label></td>
+				<td><select name="num_people" class="form-select">
+					<option value="1">1명</option>
+					<option value="2">2명</option>
+					<option value="3">3명</option>
+					<option value="4">4명</option>
+					<option value="5">5명</option>
+					<option value="6">6명</option>
+					<option value="7">7명</option>
+					<option value="8">8명</option>
+					<option value="9">9명</option>
+					<option value="10">10명</option>
+				</select></td>
+				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td colspan="2"><input type="submit" class="apply-submit-button" value="동행신청 쪽지보내기"></td></tr>
+			</table>
 		</form>
-		<button onclick="apply()">취소</button>
-	</fieldset>
 	</div>
 	<div class="section">
 		<div class="main-image">
