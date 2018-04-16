@@ -47,6 +47,8 @@ public class listActionAB implements CommandProcess{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
 		request.setAttribute("email", session.getAttribute("email"));
+		int a = 0;
+		request.setAttribute("a", a);
 		return "accompanyBoard.jsp";
 	}
 

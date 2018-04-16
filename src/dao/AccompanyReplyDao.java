@@ -140,8 +140,6 @@ public class AccompanyReplyDao {
 			close(pstmt);
 			close(conn);
 		}
-		
-		
 		return list;
 	}
 	

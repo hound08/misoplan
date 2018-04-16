@@ -29,9 +29,11 @@ public class writeReplyActionAB implements CommandProcess{
 		dto.setNickname((String)session.getAttribute("nickname"));
 		dto.setContent(request.getParameter("content"));
 		accompanyDao.comment_count(post_num);
-		dao.insert(dto);
-		
-		return "viewActionAB.do?post_num="+request.getParameter("post_num");
+		int result = dao.insert(dto);
+		request.setAttribute("result", result);
+		request.setAttribute("post_num", post_num);
+		return "accompanyViewConfirm.jsp";
+		//return "viewActionAB.do?post_num="+request.getParameter("post_num");
 	}
 
 }

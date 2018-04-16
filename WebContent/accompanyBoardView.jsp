@@ -1,3 +1,4 @@
+<%@page import="java.net.InetAddress"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -117,14 +118,6 @@ tr.highlight td {
     z-index: 999;  /*stack order*/
 }
 
-fieldset {
-	color: white;
-	position: fixed;
-	top: 50%;
-	left: 50%;
-	border: none;
-}
-
 tr.highlight td {
 	padding-top: 1px; 
 	padding-bottom: 1px
@@ -149,9 +142,15 @@ tr.highlight td {
 }
 
 .icon-view {
-	width: 25px;
+	width: 17px;
     height: 17px;
-	background: url("images/eye.jpg") no-repeat;
+	background: url("images/eye.png") no-repeat;
+}
+
+.icon-vote{
+	width: 17px;
+    height: 17px;
+	background: url("images/thumbup.png") no-repeat;
 }
 
 .icon {
@@ -159,7 +158,6 @@ tr.highlight td {
     vertical-align: middle;
     margin-right: 2px;
 }
-
 
 .image {
 	width: 350px;
@@ -175,33 +173,111 @@ tr.highlight td {
 .post-footer {
 	margin-top: 15px;
 }
+
+.form-label{
+	font-size: 20px;
+	color: white;
+	float: right;
+}
+
+.form-input {
+	height: 30px;
+	width: 100%;
+	font-size: 20px;
+}
+
+.apply-table {
+	width: 60%;
+	position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto auto;
+}
+
+.apply-table td:FIRST-CHILD {
+	width: 150px;
+}
+
+.apply-submit-button{
+	float:right;
+	width: 100%;
+	height: 35px;
+	background-color: #59DA50;
+	color: white;
+	border-radius: 5px;
+	font-size: 20px;
+}
+
+.cancel-button {
+	float:right;
+	width: 40px;
+	height: 40px;
+	color: white;
+	background-color: #DB0000;
+}
+
+.form-select{
+ height: 30px;
+ font-size: 20px;
+}
+
+.reply-table{
+	width:100%;
+	margin: 0 0;
+}
+
+.reply-table td:FIRST-CHILD {
+	width: 150px;
+}
+
+.write-reply-image{
+	border-radius: 50%;
+	background-size: 100% 100%; 
+	width: 100px; 
+	height: 100px; 
+}
+
+.reply-submit{
+	width: 90px;
+	height: 40px;
+	float:right;
+	background-color: #AA1212;
+	color: white;
+	border-radius: 5px;
+	font-size: 18px;
+}
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 
 <body>
 	<div id="apply-div" style="display: none;">
-	<fieldset>
 		<form class ="form" action="applyActionAB.do">
-			<input type="hidden" value="${post_num }" name="post_num">
-			이메일: <input type="text" placeholder="${email } " name="email" disabled><p>
-			메시지: <textarea rows="5" style="width: 30%" name="message"></textarea><p>
-			카카오톡 아이디: <input type="text" name="kakao_id"><p>
-			참가 인원 : 
-			<select name="num_people">
-				<option value="1">1명</option>
-				<option value="2">2명</option>
-				<option value="3">3명</option>
-				<option value="4">4명</option>
-				<option value="5">5명</option>
-				<option value="6">6명</option>
-				<option value="7">7명</option>
-				<option value="8">8명</option>
-				<option value="9">9명</option>
-				<option value="10">10명</option>
-			</select>
-			<input type="submit">
+			<table class="apply-table">
+				<input type="hidden" value="${post_num }" name="post_num">
+				<tr><td colspan="2"><button class="cancel-button" onclick="apply()">&#10006</button></td><tr>
+				<tr><td><label class="form-label">이메일:</label></td><td><input type="text" class="form-input" placeholder="${email } " name="email" disabled></td></tr>
+				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message"></textarea></td></tr>
+				<tr><td><label class="form-label">카카오톡 아이디:</label></td><td><input type="text" class="form-input" name="kakao_id"></td><tr>
+				<tr><td><label class="form-label">참가 인원 :</label></td>
+				<td><select name="num_people" class="form-select">
+					<option value="1">1명</option>
+					<option value="2">2명</option>
+					<option value="3">3명</option>
+					<option value="4">4명</option>
+					<option value="5">5명</option>
+					<option value="6">6명</option>
+					<option value="7">7명</option>
+					<option value="8">8명</option>
+					<option value="9">9명</option>
+					<option value="10">10명</option>
+				</select></td>
+				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td colspan="2"><input type="submit" class="apply-submit-button" value="동행신청 쪽지보내기"></td></tr>
+			</table>
 		</form>
-		<button onclick="apply()">취소</button>
-	</fieldset>
 	</div>
 	<div class="section">
 		<div class="main-image">
@@ -221,8 +297,8 @@ tr.highlight td {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;">
 					<td> 
-						<span class="span-icon"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
-						<span class="span-icon"><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
+						<span class="span-icon"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요</span>
+						<a href="likeActionAB.do?post_num=${post_num }"><span class="span-icon"><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요</span></a>
 					</td>
 				</tr>
 			</table>
@@ -231,8 +307,9 @@ tr.highlight td {
 			<pre>${board.content }</pre>
 			<div class="image"></div>
 			<c:if test="${email != null }">
-			<button onclick="apply()">동행 신청하기</button>
-		</c:if>
+				<button onclick="apply()">동행 신청하기</button>
+			</c:if>
+			<a href="likeActionAB.do?post_num=${post_num }"><button>좋아요</button></a>
 		</div>
 		<hr>
 		<c:forEach var="reply" items="${list }">
@@ -249,17 +326,22 @@ tr.highlight td {
 		</c:forEach>
 		<hr>
 		<div class="post-footer">
-			<c:if test="${email != null }">
+			<%-- <c:if test="${email == null }">
 				<form action="writeReplyAB.do" method="post">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<textarea rows="12" style="width: 70%;" name="content"></textarea>
 					<input type="submit" value="확인">
 				</form>
-			</c:if>
-			<c:if test="${email == null }">
-				<form action="writeReplyAB.do">
+			</c:if> --%>
+			<c:if test="${email != null }">
+				<form action="writeReplyAB.do" method="post" id="replyForm">
 					<input type="hidden" value="${post_num }"name="post_num">
-					<textarea rows="12" style="width: 70%;" name="content" placeholder="로그인하고 댓글을 작성해 주세요!" disabled></textarea>
+					<table class="reply-table">
+						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!</td></tr>
+						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
+						<tr><td colspan="2">
+						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
+					</table>
 				</form>
 			</c:if>
 		</div>		
