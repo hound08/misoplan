@@ -27,6 +27,20 @@
 	h1 {
 		margin: 50px;
 	}
+	.tableTab {
+		margin: auto;
+		width: 90%;
+		text-align: center;
+	}
+	.tdAll {
+		width: 50%;
+		border-bottom: 4px solid #1A7AD9;
+		font-weight: bold;
+	}
+	.tdBan {
+		color: gray;
+		width: 50%;
+	}
 	table.tableList {
 	  margin: auto;
 	  border: 1px solid #1C6EA4;
@@ -114,6 +128,9 @@
 		<%@ include file="sidemenu.jsp"%>
 		<div id="main">
 			<h1>관리자 메뉴</h1>
+			<div class="divTab">
+				<table class="tableTab"><tr><td class="tdAll"><a href="adminMainForm.do">전체 회원</a></td><td class="tdBan"><a href="adminBanForm.do">차단된 회원</a></td></tr></table>
+			</div>
 			<table class="tableList">
 				<tr><th width="25px"><input type="checkbox" class="chkboxTop" name="chkboxTop"></th>
 					<th width="35px">번호</th><th width="170px">이메일</th><th width="70px">별명</th><th width="100px">연락처</th><th>점수</th><th>관리자</th>

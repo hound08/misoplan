@@ -250,6 +250,7 @@ h1 {
 </script>
 </head>
 <body>
+	<% String userIp = request.getRemoteAddr(); %>
 	<div class="header_wrap">
 		<%@ include file="header.jsp"%>
 	</div>
@@ -275,6 +276,7 @@ h1 {
 				<input type="file" name="profile_url" class="inputFile">
 			</div>
 			<p><input type="submit" id="submit" value="회원가입"></p>
+			<input type="hidden" name="ip_address" value="<%=userIp%>">
 		</form>
 	</div>
 	<div class="footer_wrap">

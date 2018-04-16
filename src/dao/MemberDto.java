@@ -15,6 +15,7 @@ public class MemberDto {
 	private int leave;
 	private Date join_date;
 	private String join_date_time;
+	private String ip_address;
 	
 	public String getEmail() {
 		return email;
@@ -87,6 +88,12 @@ public class MemberDto {
 	}
 	public void setJoin_date_time(String join_date_time) {
 		this.join_date_time = join_date_time;
+	}
+	public String getIp_address() {
+		return ip_address;
+	}
+	public void setIp_address(String ip_address) {
+		this.ip_address = ip_address;
 	}
 	
 }

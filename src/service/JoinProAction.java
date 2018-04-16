@@ -50,6 +50,7 @@ public class JoinProAction implements CommandProcess {
 		dto.setNickname(multi.getParameter("nickname"));
 		dto.setPassword(password);
 		dto.setPhone(multi.getParameter("phone"));
+		dto.setIp_address(multi.getParameter("ip_address"));
 		
 		if (multi.getFile("profile_url") != null) {
 			dto.setProfile_url("/J20180403/upload/" + filename);
