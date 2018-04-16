@@ -824,6 +824,7 @@ $(document).ready(function(){
 				
 			/* 페이징 */
 				/* 처음으로 가기  */
+				$("#pageNavi").html("");
 				if(myStartPage > 1){
 					$("#pageNavi").append(
 						'<a href = "javascript:void(0);" onclick = "searchPagingBtnClick('+ myFirstPage +')">' + "[처음]" + ' </a>'
@@ -908,13 +909,13 @@ div {
 /*전체 div  */
 .section {
 	width: 1080px;
-	height: 281px;
+	height: 250px;
 	/* border: 1px solid red; */
 }
 /* 검색 Area */
 .searchSection {
 	width: 1080px;
-	height: 230px;
+	height: 237px;
 	margin-top: 50px;
 	border: 1px solid red; 
 }
@@ -990,12 +991,12 @@ div {
 	width: 1000px;
 	height: 30px;
 	/* border: 1px solid pink; */
-	margin: 10px auto;
+	/* margin: 10px auto; */
 }
 
 .listArea {
 	width: 1050px;
-	height: 680px;
+	height: 640px;
 	/* border: 1px solid blue; */
 	margin: 10px auto;
 }
@@ -1051,7 +1052,11 @@ div {
 }
 
 .pageNavi{
-	text-align: center;
+	text-align: left;
+	/* border: 1px solid pink;  */
+	width: 430px;
+	height: 20px;
+	margin: 1px auto;
 }
 
 </style>
@@ -1060,44 +1065,8 @@ div {
 	<!-- 울산=7, 서울=1, 전라남도=38, 부산=6, 제주도=39, 경기도=31, 경상남도=36, 전라북도=37, 
 대전=3, 충청북도=33, 충청남도=34, 강원도=32, 
 경상북도=35, 대구=4, 세종특별자치시=8, 인천=2, 광주=5} -->
-	<c:set var="seoul" value="서울" />
-	<c:set var="incheon" value="인천" />
-	<c:set var="daejeon" value="대전" />
-	<c:set var="daegu" value="대구" />
-	<c:set var="gwangju" value="광주" />
-	<c:set var="busan" value="부산" />
-	<c:set var="ulsan" value="울산" />
-	<c:set var="sejong" value="세종특별자치시" />
-	<c:set var="gyeonggi" value="경기도" />
-	<c:set var="gangwon" value="강원도" />
-	<c:set var="chungbuk" value="충청북도" />
-	<c:set var="chungnam" value="충청남도" />
-	<c:set var="gyeongbuk" value="경상북도" />
-	<c:set var="gyeongnam" value="경상남도" />
-	<c:set var="jeonbuk" value="전라북도" />
-	<c:set var="jeonnam" value="전라남도" />
-	<c:set var="jeju" value="제주도" />
 	<%
 		String email		= (String)session.getAttribute("email");
-		
-		String seoulB 		= (String) pageContext.getAttribute("seoul");
-		String incheonB 	= (String) pageContext.getAttribute("incheon");
-		String daejeonB 	= (String) pageContext.getAttribute("daejeon");
-		String daeguB 		= (String) pageContext.getAttribute("daegu");
-		String gwangjuB 	= (String) pageContext.getAttribute("gwangju");
-		String busanB 		= (String) pageContext.getAttribute("busan");
-		String ulsanB 		= (String) pageContext.getAttribute("ulsan");
-		String sejongB 		= (String) pageContext.getAttribute("sejong");
-		String gyeonggiB 	= (String) pageContext.getAttribute("gyeonggi");
-		String gangwonB 	= (String) pageContext.getAttribute("gangwon");
-		String chungbukB 	= (String) pageContext.getAttribute("chungbuk");
-		String chungnamB 	= (String) pageContext.getAttribute("chungnam");
-		String gyeongbukB 	= (String) pageContext.getAttribute("gyeongbuk");
-		String gyeongnamB 	= (String) pageContext.getAttribute("gyeongnam");
-		String jeonbukB 	= (String) pageContext.getAttribute("jeonbuk");
-		String jeonnamB 	= (String) pageContext.getAttribute("jeonnam");
-		String jejuB 		= (String) pageContext.getAttribute("jeju");
-
 /* 		AreaParserSearch aps = new AreaParserSearch();
 		ArrayList<HashMap<String, Object>> areaList = aps.areaParser();
 		HashMap<String, Object> tempMap = new HashMap<String, Object>();
