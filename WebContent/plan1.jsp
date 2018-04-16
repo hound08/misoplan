@@ -93,7 +93,7 @@ div {
 	/* float: right; */
 	/* border: 1px solid red; */
 	width: 1190px;
-	margin: 15px 10px 0 0;
+	margin: 15px 13px 10px 10px;
 }
 
 .local { /* 말머리개념 지역명을 나타내기 위한 영역 확보 */
@@ -178,12 +178,12 @@ div {
 		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div class="center">
-		<div id="button1" align="right">
+		<div id="button1" align="left">
 			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt"
 				onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
-			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
-			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
-			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
+			<input type="button" value="최신순" style="width: 50pt; height: 30pt">
+			<input type="button" value="오래된순" style="width: 50pt; height: 30pt">
+			<input type="button" value="조회순" style="width: 50pt; height: 30pt"
 				onClick="location.href='###'">
 		</div>
 		<c:forEach var="bs" items="${pagelist }">
@@ -192,7 +192,8 @@ div {
 					<div class="second-box">
 						<img alt="image" class="card_image" src="${bs.image_url }">
 					</div>
-					<div class="local">${bs.area_names } ${bs.sl_code }</div>
+					<div class="local">${bs.area_names } 
+					<input type="hidden" value="${bs.sl_code }"></div>
 					<div class="second-text">
 						<h2>제목 : ${bs.title }</h2>
 						${schedule_date }
