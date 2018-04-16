@@ -244,7 +244,7 @@ public class MemberDao {
 	public int insertMember(MemberDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO MEMBER(EMAIL, NICKNAME, PASSWORD, PHONE, PROFILE_URL) VALUES(?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO MEMBER(EMAIL, NICKNAME, PASSWORD, PHONE, PROFILE_URL, IP_ADDRESS) VALUES(?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		
 		try {
@@ -255,6 +255,7 @@ public class MemberDao {
 			ps.setString(3, dto.getPassword());
 			ps.setString(4, dto.getPhone());
 			ps.setString(5, dto.getProfile_url());
+			ps.setString(6, dto.getIp_address());
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
