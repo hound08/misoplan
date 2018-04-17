@@ -265,6 +265,8 @@ public class BoardScheduleDao {
 		System.out.println("result : " + result);
 		return result;
 	}
+	
+	
 	public List<BoardScheduleDto> pagelist(int startRow, int endRow) throws SQLException {
 		List<BoardScheduleDto> pagelist = new ArrayList<>();
 		
@@ -309,6 +311,51 @@ public class BoardScheduleDao {
 				conn.close();
 		}
 		System.out.println("listsize : " + pagelist.size());
+		return pagelist;
+	}
+	public List<BoardScheduleDto> view_conut(int startRow, int endRow) throws SQLException {
+		List<BoardScheduleDto> pagelist = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from "
+					 + "(select rownum rn, a.* from (select * from BOARDSCHEDULE order by view_count desc) a)"
+					 + "where rn between ? and ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardScheduleDto dto = new BoardScheduleDto();
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setContent(rs.getString("content"));
+				dto.setTag(rs.getString("tag"));
+				dto.setView_count(rs.getInt("view_count"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setArea_names(rs.getString("area_names"));
+				dto.setSl_code(rs.getString("sl_code"));
+				
+				pagelist.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		}
 		return pagelist;
 	}
 	public int delete(int bs_num, String email) throws SQLException {
