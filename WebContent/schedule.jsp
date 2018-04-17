@@ -8,9 +8,14 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>내 일정 리스트</title>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<link rel="stylesheet" type="text/css" hrefs="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 		<style type="text/css">
+			*{
+				font-family: 'NanumSquareRound', sans-serif;
+			}
+			
 			#center {
-				border: 1px solid red;
 				margin: 0px auto;
 				width: 1200px;
 				height: 100%;
@@ -53,10 +58,32 @@
 				text-align: left;
 			
 			}
+			.center-second:hover{
+				cursor: pointer;
+			}
 		</style>
+		
+		<script type="text/javascript">
+			$(document).on('click', '.second-text', function(){
+				console.log("clicked");
+				var $this = $(this);
+				var sl_code = $this.attr('id');
+				console.log('sl_code : ' + sl_code);
+				
+				var form = $("#form");
+				form.append("<input type='hidden' name='sl_code' value="+sl_code+">");
+				form.submit();
+			});
+		</script>
 	</head>
 	<body>
-		
+		<%
+			String email = (String)session.getAttribute("email");
+		%>
+		<form id="form" action="loadPlan.do">
+			<input type="hidden" name="email" value="<%=email%>">
+			
+		</form>
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
@@ -64,11 +91,11 @@
 				<div id="myinfo">
 					<div id="info">
 						<c:forEach var="list" items="${showList }">
-							<div class="center-second">
+							<div class="center-second" >
 								<div class="second-box">
 									<img alt="image" src="images/1.jpg">
 								</div>
-								<div class="second-text">
+								<div class="second-text" id=${list.sl_code }>
 									<h1>제목 : ${list.s_name }</h1>
 								</div>
 								<div class="text">여행지 : ${list.area_name }</div>
@@ -79,14 +106,14 @@
 						
 						</c:forEach>
 						<div class="pagination">
-										<a href="#">&laquo;</a> 
-										<a href="#" class="active">1</a> 
-										<a href="#">2</a> 
-										<a href="#">3</a> 
-										<a href="#" >4</a> 
-										<a href="#">5</a> 
-										<a href="#">&raquo;</a>
-							</div>
+							<a href="#">&laquo;</a> 
+							<a href="#" class="active">1</a> 
+							<a href="#">2</a> 
+							<a href="#">3</a> 
+							<a href="#">4</a> 
+							<a href="#">5</a> 
+							<a href="#">&raquo;</a>
+						</div>
 					</div>
 				</div>
 			</div>
