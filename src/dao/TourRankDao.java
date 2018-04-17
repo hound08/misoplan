@@ -43,7 +43,11 @@ public class TourRankDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<TourRankDto> list = new ArrayList<TourRankDto>();
-		String sql = "SELECT * FROM TOURRANK";
+		String sql = "SELECT TOUR_NAME, IMAGE_URL " +
+					 "FROM (SELECT ROWNUM RN, A.* " +
+				 	   	   "FROM (SELECT TOUR_NAME, IMAGE_URL, COUNT(TOUR_NAME) CNT " +
+				 	   		 	 "FROM TOURRANK GROUP BY TOUR_NAME, IMAGE_URL ORDER BY CNT DESC) A) " +
+				 	 "WHERE RN BETWEEN 1 AND 6";
 		
 		try {
 			conn = getConnection();
@@ -52,10 +56,8 @@ public class TourRankDao {
 			
 			while (rs.next()) {
 				TourRankDto dto = new TourRankDto();
-				dto.setTour_num(rs.getInt(1));
-				dto.setTour_name(rs.getString(2));
-				dto.setTour_code(rs.getString(3));
-				dto.setImage_url(rs.getString(4));
+				dto.setTour_name(rs.getString(1));
+				dto.setImage_url(rs.getString(2));
 				list.add(dto);
 			}
 		} catch (Exception e) {
