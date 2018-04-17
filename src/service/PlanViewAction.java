@@ -26,7 +26,6 @@ public class PlanViewAction implements CommandProcess {
 			
 			request.setAttribute("bs_num", bs_num);
 			request.setAttribute("dto", dto);
-			System.out.println("bs_num : @@@@@@@@@@@@@@@@@@@@@@@@@@" + bs_num);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
