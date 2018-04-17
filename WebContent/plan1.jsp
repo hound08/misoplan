@@ -19,6 +19,7 @@
 * {
 	margin: 0px;
 	padding: 0px;
+	font-family: 'NanumSquareRound', sans-serif;
 }
 
 div {
@@ -93,7 +94,7 @@ div {
 	/* float: right; */
 	/* border: 1px solid red; */
 	width: 1190px;
-	margin: 15px 10px 0 0;
+	margin: 15px 13px 10px 10px;
 }
 
 .local { /* 말머리개념 지역명을 나타내기 위한 영역 확보 */
@@ -134,17 +135,30 @@ div {
 	height: 35px;
 	margin: 35px 0 0 0;
 }
-
+.page-number{
+	padding: 0 0 0 30px;
+}
 .page-num {
 	widht: 1200px;
 	height: 50px;
-	margin: 20px 0;
 }
 
 .search {
 	width: 1200px;
 	height: 35px;
-	margin: 25px 0 50px 0;
+	padding: 25px 0 0 0;
+}
+.menu{
+	font-size: 15px;
+	height: 35px;
+}
+.search-bar{
+	font-size: 15px;
+	width: 300px;
+	height: 35px;
+}
+.search-button{
+	
 }
 </style>
 </head>
@@ -178,13 +192,13 @@ div {
 		String nickname = (String) session.getAttribute("nickname");
 	%>
 	<div class="center">
-		<div id="button1" align="right">
-			<input type="button" value="글쓰기" style="width: 40pt; height: 20pt"
+		<div id="button1" align="left">
+			<input type="button" value="최신순" style="width: 65pt; height: 25pt;"
+				onclick="location.href='boardschedule.do'">
+			<input type="button" value="조회순" style="width: 65pt; height: 25pt;"
+				onClick="location.href='view_count.do'">
+			<input type="button" value="글쓰기" style="width: 65pt; height: 25pt"
 				onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
-			<input type="button" value="최신순" style="width: 40pt; height: 20pt">
-			<input type="button" value="오래된순" style="width: 40pt; height: 20pt">
-			<input type="button" value="조회순" style="width: 40pt; height: 20pt"
-				onClick="location.href='###'">
 		</div>
 		<c:forEach var="bs" items="${pagelist }">
 			<a href="planview.do?bs_num=${bs.bs_num }">
@@ -192,7 +206,8 @@ div {
 					<div class="second-box">
 						<img alt="image" class="card_image" src="${bs.image_url }">
 					</div>
-					<div class="local">${bs.area_names } ${bs.sl_code }</div>
+					<div class="local">${bs.area_names } 
+					<input type="hidden" value="${bs.sl_code }"></div>
 					<div class="second-text">
 						<h2>제목 : ${bs.title }</h2>
 						${schedule_date }
@@ -204,7 +219,8 @@ div {
 			</a>
 		</c:forEach>
 	</div>
-	<div class="page-num" align="center"></div>
+	<div align="center">
+	<div class="page-num"></div>
 	<c:if test="${startPage!=1 }">
 		<a href='boardschedule.do?pageNum=${startPage-blockSize }'>&laquo;</a>
 	</c:if>
@@ -234,13 +250,16 @@ div {
 	<c:if test="${endPage<totalPage }">
 		<a href='boardschedule.do?pageNum=${endPage+blockSize }'>&raquo;</a>
 	</c:if>
+	</div>
 	<div class="search" align="center">
-		<select name="menu">
-			<option value="##">###</option>
-			<option value="##">###</option>
-			<option value="##">###</option>
-			<option value="##">###</option>
-		</select> <input type="text" name="search"> 돋보기 이미지
+		<select class="menu">
+			<option value="##">제목</option>
+			<option value="##">지역명</option>
+			<option value="##">닉네임</option>
+			<option value="##">내용</option>
+		</select> <input type="text" class="search-bar" placeholder="일정 보기 검색">
+		<button type="submit" class="search-button" style="width: 50pt; height: 27pt;">검색</button>
+		
 	</div>
 	<%@ include file="footer.jsp"%>
 </body>

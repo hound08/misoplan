@@ -8,10 +8,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%
+	System.out.println("###########################");
+%>
 <c:if test="${result > 0 }">
    <script type="text/javascript">
       alert("삭제 완료");
-      location.href="BoardSchedule.do?bs_num=${bs_num}";
+      location.href="boardschedule.do";
    </script>
 </c:if>
 

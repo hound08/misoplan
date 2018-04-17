@@ -69,4 +69,33 @@ public class TourRankDao {
 		return list;
 	}
 	
+	public List<WishlistDto> selectWishList() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<WishlistDto> list = new ArrayList<WishlistDto>();
+		String sql = "SELECT TOUR_NAME, IMG_SRC, COUNT(TOUR_NAME) CNT FROM WISHLIST GROUP BY TOUR_NAME, IMG_SRC ORDER BY CNT DESC";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				WishlistDto dto = new WishlistDto();
+				dto.setTour_name(rs.getString(1));
+				dto.setImg_src(rs.getString(2));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return list;
+	}
+	
 }
