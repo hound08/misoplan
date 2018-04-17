@@ -146,7 +146,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<img alt="image" class="image-size" src="${dto.image_url }">		
 		</div>
 		<div class="main-top-second2">
-		<input type="button" value="조아욤" class="like-button" style="width: 35pt; height: 15pt;" onclick="location.href='planlike.do'">
+		<input type="button" value="조아욤" class="like-button" style="width: 35pt; height: 15pt;" 
+			onclick="location.href='planlike.do?vote_count=${dto.vote_count }'">
 			<p>${dto.nickname }</p>
 			<p>${dto.tag}</p>
  			<p>${dto.area_names }</p>
