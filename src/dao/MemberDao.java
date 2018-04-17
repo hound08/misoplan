@@ -1,10 +1,12 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.naming.Context;
@@ -416,16 +418,49 @@ public class MemberDao {
 		return list;
 	}
 	
-	public int updateMemberBan(String email) throws SQLException {
+	public int updateMemberBan(int ban, String email) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE - 100, BAN = 1, BAN_DATE = SYSDATE WHERE EMAIL = ?";
+		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE - 100, BAN = ?, BAN_DATE = ? WHERE EMAIL = ?";
 		int result = 0;
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setString(1, email);
+			ps.setInt(1, ban);
+			ps.setString(3, email);
+			
+			if (ban == 0) {
+				ps.setString(2, "");
+			} else if (ban == 1) {
+				Calendar cal = Calendar.getInstance();
+				Date date = new Date(cal.getTimeInMillis());
+				ps.setDate(2, date);
+			}
+			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public int updateMemberAdmin(int admin, String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE MEMBER SET MEMBER_ADMIN = ? WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, admin);
+			ps.setString(2, email);
+			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

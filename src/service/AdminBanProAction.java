@@ -14,16 +14,35 @@ public class AdminBanProAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			String emailBan = request.getParameter("hiddenBan");
-			String[] arrayEmail = emailBan.split(",");
+			String emailBanCancle = request.getParameter("hiddenBanCancle");
+			String emailAdmin = request.getParameter("hiddenAdmin");
+			String emailAdminCancle = request.getParameter("hiddenAdminCancle");
+			MemberDao dao = MemberDao.getInstance();
 			int result = 0;
 			
-			MemberDao dao = MemberDao.getInstance();
-			
-			for (String strEmail : arrayEmail) {
-				result = dao.updateMemberBan(strEmail);
+			if (emailBan != null && !emailBan.equals("")) {
+				String[] arrayEmail = emailBan.split(",");
 				
-				if (result <= 0) {
-					System.out.println(strEmail + " 회원 정지 처리에 실패하였습니다.");
+				for (String strEmail : arrayEmail) {
+					result = dao.updateMemberBan(1, strEmail);
+				}
+			} else if (emailBanCancle != null && !emailBanCancle.equals("")) {
+				String[] arrayEmail = emailBanCancle.split(",");
+				
+				for (String strEmail : arrayEmail) {
+					result = dao.updateMemberBan(0, strEmail);
+				}
+			} else if (emailAdmin != null && !emailAdmin.equals("")) {
+				String[] arrayEmail = emailAdmin.split(",");
+				
+				for (String strEmail : arrayEmail) {
+					result = dao.updateMemberAdmin(1, strEmail);
+				}
+			} else if (emailAdminCancle != null && !emailAdminCancle.equals("")) {
+				String[] arrayEmail = emailAdminCancle.split(",");
+				
+				for (String strEmail : arrayEmail) {
+					result = dao.updateMemberAdmin(0, strEmail);
 				}
 			}
 			

@@ -8,13 +8,13 @@
 <body>
 	<c:if test="${result > 0}">
 		<script type="text/javascript">
-			alert("해당 회원이 정지처리 되었습니다.");
-			location.href="adminBanForm.do";
+			alert("정보 수정이 완료되었습니다.");
+			location.href="adminMainForm.do";
 		</script>
 	</c:if>
 	<c:if test="${result <= 0}">
 		<script type="text/javascript">
-			alert("회원 정지 처리에 실패하였습니다.");
+			alert("정보 수정에 실패하였습니다.");
 			location.href="adminMainForm.do";
 		</script>
 	</c:if>
