@@ -415,5 +415,26 @@ public class MemberDao {
 		
 		return list;
 	}
+	
+	public int updateMemberBan(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE - 100, BAN = 1, BAN_DATE = SYSDATE WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
 
 }
