@@ -305,10 +305,8 @@ var mapy = [];
 var daycount = 1;
 var plandivheight = 65;
 markers = [];
-locations = [];
 infowindow = [];
 var seq = 0;
-
 
 $(document).on('click', '#completebtn', function(){
 	var plandiv = $(".plandiv");
@@ -491,7 +489,7 @@ $(document).on('click', '.plusbutton', function(){
 			plandiv.css('height', plandivheight);
 			daycount = daycount + 1;
 		}
-		plandiv.append("<div class='planelem' seq="+seq+" id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaName = "+areaName+" areaCode="+areaCode+" sigunguName ="+sigunguName+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
+		plandiv.append("<div class='planelem' seq=seq-"+seq+" id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaName = "+areaName+" areaCode="+areaCode+" sigunguName ="+sigunguName+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
 		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 	}
@@ -503,12 +501,13 @@ $(document).on('click', '.plusbutton', function(){
 	    icon: 'images/marker.png'
 	  });
 	
-	locations.push(latlng);
-	markers.push(marker);
-	marker.setMap(map);
+	
+	markers[seq] = marker;
 	seq = seq + 1;
+	marker.setMap(map);
 	map.panTo(latlng);
 	map.setZoom(15, true);
+	removeLines();
 	drawLines();
 });
 
@@ -521,24 +520,24 @@ $(document).on('click', '.deleteelem', function(){
 	var parseddiv = "#planelem"+parsedid;
 	var parsedtitle = "#elemtitle"+parsedid;
 	var parseddelete = "#delete"+parsedid; 
-	var planelem = $this.parent().attr('seq');
-	console.log("seq : " + seq);
+	var seqInDiv = $this.parent().attr('seq');
+	var parsedSeq = seqInDiv.substr(4, seqInDiv.length);
+	console.log("parsedSeq : " + parsedSeq);
 	plandivheight = plandivheight - 22;
 	plandiv.css('height', plandivheight);
 	$(parseddiv).remove();
 	$(parsedtitle).remove();
 	$(parseddelete).remove();
+	
+	
+	console.log("markers before remove : " + markers);
+	markers[parsedSeq].setMap(null);
+	delete markers[parsedSeq];
+	console.log("markers after remove: " + markers);
+	removeLines();
+	drawLines();
 
 	
-	markers[seq-1].setMap(null);
-	console.log("markers[seq-1] : " + markers[seq-1]);
-	console.log("locations[seq-1] : " + locations[seq-1]);
-	delete markers[seq-1];
-	delete locations[seq-1];
-	console.log("markers : " + markers);
-	console.log("locations : " + locations);
-	map.setZoom(12,true);
-	drawLines();
 });	
 
 
@@ -570,20 +569,35 @@ $(document).on('click', '.deleteday', function(){
 	$(deleteid).remove();
 });
 
+var path = null;
  function drawLines(){
-	alert('drawLines()');
-	/*
-		path 초기화 필요, drawLines()가 실행될때마다 reload되도록.
-	*/
 	
-	var path = new google.maps.Polyline({
-		path: locations,
+	path = new google.maps.Polyline({
+		path: getLocations(),
 		geodesic: true,
 		strokeColor: 'black',
 		strokeOpacity: 1.0,
 		strokeWeight: 2
 	});
 	path.setMap(map);
+}
+ function removeLines(){
+	 if(path != null){
+		 path.setMap(null);
+		 path = null;
+	 }
+ }
+function getLocations(){
+	var planelem = $('.planelem');
+	var locations = [];
+	console.log("planelem : " + planelem);
+	jQuery.each(planelem, function(index, value) {
+		var mapx = $(value).attr('mapx');
+		var mapy = $(value).attr('mapy');
+		var location = new google.maps.LatLng(mapy, mapx);
+		locations.push(location);
+	});
+	return locations;
 }
 
 
