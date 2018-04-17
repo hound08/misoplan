@@ -151,6 +151,32 @@ public class AccompanyDao {
 		return total;
 	}
 	
+	public int getTotalVote(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select vote_count from accompanyboard where post_num = ?";
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return total;
+	}
+	
 	public List<AccompanyBoardDto> list_view(int startRow, int endRow){
 		
 		List<AccompanyBoardDto> list = new ArrayList<>();
@@ -334,6 +360,32 @@ public class AccompanyDao {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, post_num);
+			rs = pstmt.executeQuery();
+			rs.next();
+			profile_url = rs.getString(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally { 
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		return profile_url;
+	}
+	
+	public String get_profile_url(String email) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		String sql = "select profile_url from member where email = ?";
+		String profile_url = null;
+		
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			rs.next();
 			profile_url = rs.getString(1);

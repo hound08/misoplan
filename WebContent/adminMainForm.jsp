@@ -142,11 +142,11 @@
 		});
 	});
 	
-	function memberBan() {
+	function memberBanChk() {
 		if ($(".chkbox:checked").length == 0) {
 			alert("선택된 회원이 없습니다.");
 			
-			return;
+			return false;
 		} else {
 			if (confirm($(".chkbox:checked").length + "명의 회원을 정지 처리합니다.\n계속 진행하시겠습니까?")) {
 				var rowData = new Array();
@@ -162,14 +162,16 @@
 					tdArr.push(email);
 				});
 				
-				location.href="adminBanPro.do";
+				$('#hiddenBan').val(tdArr);
+				
+				return true;
 			} else {
 				alert("취소하셨습니다.");
-				
-				return;
 			}
+			
+			return false;
 		}
-	}
+	};
 </script>
 </head>
 <body>
@@ -197,8 +199,11 @@
 				</c:forEach>
 			</table>
 			<div class="divButton">
-				<p><input type="button" class="adminButton" value="회원 정지" onclick="memberBan()"><input type="button" class="adminButton" value="회원 정지 해제">
-				<input type="button" class="adminButton" value="관리자 지정"><input type="button" class="adminButton" value="관리자 해제"></p>
+				<form name="frm" action="adminBanPro.do" onsubmit="return memberBanChk()">
+					<input type="hidden" id="hiddenBan" name="hiddenBan">
+					<p><input type="submit" id="btnMemberBan" class="adminButton" value="회원 정지"><input type="button" class="adminButton" value="회원 정지 해제">
+					<input type="button" class="adminButton" value="관리자 지정"><input type="button" class="adminButton" value="관리자 해제"></p>
+				</form>
 			</div>
 			<div class="divPage">
 				<c:if test="${startPage > blockSize }">
