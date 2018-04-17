@@ -215,7 +215,8 @@ td {
 	};
 	
 	function memberLeave() {
-		if (confirm("회원 탈퇴를 진행하시겠습니까?")) {
+		if (confirm("회원 탈퇴를 진행하시겠습니까?\n해당 이메일로 다시 가입할 수 없습니다.")) {
+			alert("회원 탈퇴가 정상적으로 처리되었습니다.\n이용해 주셔서 감사합니다.");
 			location.href="memberLeave.do";
 		} else {
 			alert("취소하셨습니다.");

@@ -101,7 +101,7 @@ public class MemberDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT NICKNAME, PASSWORD, PROFILE_URL, MEMBER_ADMIN, BAN, BAN_DATE FROM MEMBER WHERE EMAIL = ?";
+		String sql = "SELECT NICKNAME, PASSWORD, PROFILE_URL, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE FROM MEMBER WHERE EMAIL = ?";
 		MemberDto dto = new MemberDto();
 		
 		try {
@@ -118,6 +118,7 @@ public class MemberDao {
 					dto.setMember_admin(rs.getInt(4));
 					dto.setBan(rs.getInt(5));
 					dto.setBan_date(rs.getDate(6));
+					dto.setLeave(rs.getInt(7));
 				}
 			}
 		} catch (Exception e) {
@@ -461,6 +462,27 @@ public class MemberDao {
 			ps.setInt(1, admin);
 			ps.setString(2, email);
 			
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public int updateMemberLeave(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "UPDATE MEMBER SET LEAVE = 1 WHERE EMAIL = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
