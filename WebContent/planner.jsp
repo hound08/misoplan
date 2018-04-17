@@ -572,11 +572,11 @@ $(document).on('click', '.deleteday', function(){
 
  function drawLines(){
 	alert('drawLines()');
-	var path = null;
-	if(path != null){
-		path.setMap(null);	
-	}
-	path = new google.maps.Polyline({
+	/*
+		path 초기화 필요, drawLines()가 실행될때마다 reload되도록.
+	*/
+	
+	var path = new google.maps.Polyline({
 		path: locations,
 		geodesic: true,
 		strokeColor: 'black',
@@ -588,6 +588,7 @@ $(document).on('click', '.deleteday', function(){
 
 
  $(document).on('click','#sidebar-menu', function(e){
+	 	/* 좌표 미세조정 */
 	    var $this = $(this).attr('data');
 	    if($this == '1'){
 			e.preventDefault();

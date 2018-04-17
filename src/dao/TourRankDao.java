@@ -98,4 +98,70 @@ public class TourRankDao {
 		return list;
 	}
 	
+	public int getNextVal() {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT TOUR_RANK_SEQ.NEXTVAL FROM DUAL";
+		int nextVal = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			rs.next();
+			nextVal = rs.getInt(1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return nextVal;
+	}  // getNextVal() End
+	
+	public void insertTour(ArrayList<ScheduleSmallDto> sArr) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql = "INSERT INTO TOURRANK VALUES (TOUR_RANK_SEQ.NEXTVAL,?,?,?)";
+		getNextVal();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			for(int i = 0; i < sArr.size(); i++) {
+				ScheduleSmallDto sdto = sArr.get(i);
+				ps.setString(1, sdto.getTour_name());
+				ps.setString(2, sdto.getTour_code());
+				ps.setString(3, sdto.getImage_url());
+				ps.executeQuery();
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	} // insertTour() End
+	
 }
