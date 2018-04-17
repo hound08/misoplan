@@ -395,5 +395,26 @@ public class BoardScheduleDao {
 		}
 		return result;
 	}
+	public void view_count(int bs_num)throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update boardschedule set view_count = view_count+1 where bs_num = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			ps.executeUpdate();
+			System.out.println("*********************************");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		
+	}
 
 }
