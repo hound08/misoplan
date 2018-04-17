@@ -193,11 +193,11 @@ div {
 	%>
 	<div class="center">
 		<div id="button1" align="left">
-			<input type="button" value="최신순" style="width: 65pt; height: 25pt;"
+			<input type="button" value="최신순" style="width: 65pt; height: 20pt;"
 				onclick="location.href='boardschedule.do'">
-			<input type="button" value="조회순" style="width: 65pt; height: 25pt;"
+			<input type="button" value="조회순" style="width: 65pt; height: 20pt;"
 				onClick="location.href='view_count.do'">
-			<input type="button" value="글쓰기" style="width: 65pt; height: 25pt"
+			<input type="button" value="글쓰기" style="width: 65pt; height: 20pt"
 				onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
 		</div>
 		<c:forEach var="bs" items="${pagelist }">

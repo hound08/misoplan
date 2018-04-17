@@ -31,6 +31,7 @@ public class LoginProAction implements CommandProcess {
 			request.setAttribute("admin", dto.getMember_admin());
 			request.setAttribute("ban", dto.getBan());
 			request.setAttribute("ban_date", dto.getBan_date());
+			request.setAttribute("leave", dto.getLeave());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
 <title>미소플랜</title>
+
 <style type="text/css">
 /* ---------------------------- 화면 전체 적용 ---------------------------- */
 * {
@@ -23,11 +24,26 @@ div {
 
 /* ---------------------------- 메인 메뉴 기능 소개 ---------------------------- */
 .image {
-	background-image: url("images/spring_cherry_tree.jpg");
-	position: absolute;
-	left: 0px;
+/* 	background-image: url("images/main2.png") no-repeat; */
+ 	
+	/* left: 0px;
 	width: 100%;
-	height: 450px;
+	height: 450px; */
+	
+ 	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	position: absolute;
+	
+	left : 0px;
+	width : 100%;
+	 
+}
+
+.image img{
+	width : 100%;
+	height : 400px;
 }
 
 .imageText {
@@ -192,9 +208,7 @@ div {
 <body>
 	<div class="section">
 		<div class="image">
-			<div class="imageText">
-				<p class="imageDesc">미소플랜에 오신 것을 환영합니다<br>자신만의 일정을 자유롭게 꾸며보세요</p>
-			</div>
+			<img id="center-image" alt="centerimage" src="images/main1.png">
 		</div>
 		<div class="contents">
 			<div class="mainmenu">
@@ -259,5 +273,22 @@ div {
 			<%@ include file="footer.jsp"%>
 		</div>
 	</div>
+	<script type="text/javascript">
+ 			 var image = document.getElementById("center-image");
+			var current = 0;
+			var images = [ "images/main2.png", 
+			               "images/main3.png",
+						   "images/main4.png", 
+						   "images/main5.png",
+						   "images/main1.png" ];
+			function replacePhoto() {
+				console.log(image);
+				++current;
+				if (current >= images.length)
+					current = 0;
+				image.src = images[current];
+			}
+			setInterval(replacePhoto, 2000); 
+</script>
 </body>
 </html>
