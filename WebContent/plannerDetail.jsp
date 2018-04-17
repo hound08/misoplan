@@ -114,7 +114,7 @@ div {
 	height: 100px;
 }
 
-.buttons{
+.bottomButtons{
 	width : 200px;
 	height: 50px;
 	background-color: #ff9933;
@@ -300,7 +300,7 @@ div {
 				}%>
 				<br>
 				<center>
-					<input type="submit" value="저장" class="buttons">
+					<input type="submit" value="저장" class="bottomButtons">
 				</center>
 			</form>
 		</div>
@@ -311,3 +311,4 @@ div {
 	</div>
 </body>
 </html>
+<%@ include file="footer.jsp"%>

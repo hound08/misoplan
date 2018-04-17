@@ -222,33 +222,78 @@ div {
 	<div align="center">
 	<div class="page-num"></div>
 	<c:if test="${startPage!=1 }">
-		<a href='boardschedule.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+		</c:if>
 	</c:if>
 	<c:if test="${startPage==1 }">
-		<a href='boardschedule.do?pageNum=1'>&laquo;</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=1'>&laquo;</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=1'>&laquo;</a>
+		</c:if>
 	</c:if>
 	<c:if test="${currentPage!=1 }">
-		<a href='boardschedule.do?pageNum=${currentPage-1}'>&#9665</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${currentPage-1}'>&#9665</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${currentPage-1}'>&#9665</a>
+		</c:if>
 	</c:if>
 	<c:if test="${currentPage==1 }">
-		<a href='boardschedule.do?pageNum=1'>&#9665</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=1'>&#9665</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=1'>&#9665</a>
+		</c:if>
 	</c:if>
 
 	<c:forEach var="i" begin="${startPage }" end="${endPage }">
-		<a href='boardschedule.do?pageNum=${i }'>${i }</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${i }'>${i }</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${i }'>${i }</a>
+		</c:if>
 	</c:forEach>
 
 	<c:if test="${currentPage==totalPage }">
-		<a href='boardschedule.do?pageNum=${totalPage }'>&#9655</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${totalPage }'>&#9655</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${totalPage }'>&#9655</a>
+		</c:if>
 	</c:if>
 	<c:if test="${currentPage!=totalPage }">
-		<a href='boardschedule.do?pageNum=${currentPage+1 }'>&#9655</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${currentPage+1 }'>&#9655</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${currentPage+1 }'>&#9655</a>
+		</c:if>
 	</c:if>
 	<c:if test="${endPage>=totalPage }">
-		<a href='boardschedule.do?pageNum=${totalPage}'>&raquo;</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${totalPage}'>&raquo;</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${totalPage}'>&raquo;</a>
+		</c:if>
 	</c:if>
 	<c:if test="${endPage<totalPage }">
-		<a href='boardschedule.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+		<c:if test="${click == 0 }">
+			<a href='boardschedule.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+		</c:if>
+		<c:if test="${click == 1 }">
+			<a href='view_count.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+		</c:if>
 	</c:if>
 	</div>
 	<div class="search" align="center">

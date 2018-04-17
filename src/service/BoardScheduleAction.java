@@ -59,6 +59,8 @@ public class BoardScheduleAction implements CommandProcess {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("pagelist", pagelist);
 			request.setAttribute("email", session.getAttribute("email"));
+			int click = 0;
+			request.setAttribute("click", click);
 			} catch (Exception e ) {
 				System.out.println(e.getMessage());
 			}

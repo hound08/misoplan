@@ -17,24 +17,6 @@
 	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
 </script>
 <script type="text/javascript">
-	window.onpageshow = function(event){
-		console.log("onpageshow");
-		if(event.persisted){
-			console.log("onpageshow if");
-		}
-	}
-	
-	window.onbeforeunload = function(){
-	    //check if it was a back-button press using history
-	    //notify back-end
-	    console.log("beforeunload");
-	    window.history.back(-2);
-	}
-	
-	window.onhashchange = function() {
-		console.log("onhashchange");
-		}
-	
 	window.onload = function(){
 		var contentTypeId = $("#contentTypeId").val();
 		var contendtid = $("#contendtid").val();
@@ -60,29 +42,32 @@
 				var overview	= myItem.overview;
 				mapx		= myItem.mapx;
 				mapy		= myItem.mapy;
-				
+				console.log("img ==> " + img);
+				if(img == undefined){
+					img = "images/no_image.jpg";
+				}
 				$("#touristName").append('<h2>' + title +'<h2>');
 				$("#touristImg").append(
 						'<img src = ' + img + '  alt="" >'
 						);
 				$("#tab1").append(
 						'<ul class="txtCon" >'
-						+ '<li> <strong> 우편 번호 </strong>'
+						+ '<li> <strong> ● 우편 번호 </strong>'
 						+ '  :  '
 						+ zipcode
 						+ '</li>'
-						+ '<li> <strong> 전화 번호 </strong>'
+						+ '<li> <strong> ● 전화 번호 </strong>'
 						+ '  :  '
 						+ tel
 						+ '</li>'
-						+ '<li> <strong> 주 소 </strong>'
+						+ '<li> <strong> ● 주 소 </strong>'
 						+ '  :  '
 						+ addr
 						+ '</li>'
 						+ '</ul>'
 				);
 				$("#overview").append(
-						'<strong class = "tit">개요</strong>'
+						'<strong class = "tit"><h2>개요</h2></strong>'
 						+ '<p id = "con" class = "con" >'
 						+ overview
 						+ '</p>' 
@@ -120,15 +105,15 @@
 					var parking			= myItem.parking;		//주차시설
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocenter
 							+ '</li>'
-							+ '<li> <strong> 쉬는날 </strong>'
+							+ '<li> <strong> ● 쉬는날 </strong>'
 							+ '  :  '
 							+ restdate
 							+ '</li>'
-							+ '<li> <strong> 주차 시설 </strong>'
+							+ '<li> <strong> ● 주차 시설 </strong>'
 							+ '  :  '
 							+ parking
 							+ '</li>'
@@ -144,27 +129,27 @@
 					var parkingculture			= myItem.parkingculture;		//주차 시설
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocenterculture
 							+ '</li>'
-							+ '<li> <strong> 규모 </strong>'
+							+ '<li> <strong> ● 규모 </strong>'
 							+ '  :  '
 							+ scale
 							+ '</li>'
-							+ '<li> <strong> 이용 시간 </strong>'
+							+ '<li> <strong> ● 이용 시간 </strong>'
 							+ '  :  '
 							+ usetimeculture
 							+ '</li>'
-							+ '<li> <strong> 쉬는날 </strong>'
+							+ '<li> <strong> ● 쉬는날 </strong>'
 							+ '  :  '
 							+ restdateculture
 							+ '</li>'
-							+ '<li> <strong> 이용 요금 </strong>'
+							+ '<li> <strong> ● 이용 요금 </strong>'
 							+ '  :  '
 							+ usefee
 							+ '</li>'
-							+ '<li> <strong> 주차 시설 </strong>'
+							+ '<li> <strong> ● 주차 시설 </strong>'
 							+ '  :  '
 							+ parkingculture
 							+ '</li>'
@@ -183,35 +168,35 @@
 					var program				= myItem.program;			//프로그램
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 주최자 정보 </strong>'
+							+ '<li> <strong> ● 주최자 정보 </strong>'
 							+ '  :  '
 							+ sponsor1
 							+ '</li>'
-							+ '<li> <strong> 주최자 연락처 </strong>'
+							+ '<li> <strong> ● 주최자 연락처 </strong>'
 							+ '  :  '
 							+ sponsor1tel
 							+ '</li>'
-							+ '<li> <strong> 공연 시간 </strong>'
+							+ '<li> <strong> ● 공연 시간 </strong>'
 							+ '  :  '
 							+ playtime
 							+ '</li>'
-							+ '<li> <strong> 행사 장소 </strong>'
+							+ '<li> <strong> ● 행사 장소 </strong>'
 							+ '  :  '
 							+ eventplace
 							+ '</li>'
-							+ '<li> <strong> 이용 요금 </strong>'
+							+ '<li> <strong> ● 이용 요금 </strong>'
 							+ '  :  '
 							+ usetimefestival
 							+ '</li>'
-							+ '<li> <strong> 예매처 </strong>'
+							+ '<li> <strong> ● 예매처 </strong>'
 							+ '  :  '
 							+ bookingplace
 							+ '</li>'
-							+ '<li> <strong> 부대 행사 </strong>'
+							+ '<li> <strong> ● 부대 행사 </strong>'
 							+ '  :  '
 							+ subevent
 							+ '</li>'
-							+ '<li> <strong> 프로그램 </strong>'
+							+ '<li> <strong> ● 프로그램 </strong>'
 							+ '  :  '
 							+ program
 							+ '</li>'
@@ -223,11 +208,11 @@
 					var taketime		= myItem.taketime;	// 소요 시간
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 총 거리 </strong>'
+							+ '<li> <strong> ● 총 거리 </strong>'
 							+ '  :  '
 							+ distance
 							+ '</li>'
-							+ '<li> <strong> 소요 시간 </strong>'
+							+ '<li> <strong> ● 소요 시간 </strong>'
 							+ '  :  '
 							+ taketime
 							+ '</li>'
@@ -240,15 +225,15 @@
 					var reservation				= myItem.reservation;		//예약 안내
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocenterleports
 							+ '</li>'
-							+ '<li> <strong> 쉬는 날 </strong>'
+							+ '<li> <strong> ● 쉬는 날 </strong>'
 							+ '  :  '
 							+ restdateleports
 							+ '</li>'
-							+ '<li> <strong> 예약 안내 </strong>'
+							+ '<li> <strong> ● 예약 안내 </strong>'
 							+ '  :  '
 							+ reservation
 							+ '</li>'
@@ -266,35 +251,35 @@
 					var reservationurl			= myItem.reservationurl;	//예약안내 홈페이지
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocenterlodging
 							+ '</li>'
-							+ '<li> <strong> 객실 유형 </strong>'
+							+ '<li> <strong> ● 객실 유형 </strong>'
 							+ '  :  '
 							+ roomtype
 							+ '</li>'
-							+ '<li> <strong> 주차 가능 </strong>'
+							+ '<li> <strong> ● 주차 가능 </strong>'
 							+ '  :  '
 							+ parkinglodging
 							+ '</li>'
-							+ '<li> <strong> 조리 가능 </strong>'
+							+ '<li> <strong> ● 조리 가능 </strong>'
 							+ '  :  '
 							+ chkcooking
 							+ '</li>'
-							+ '<li> <strong> 체크인 </strong>'
+							+ '<li> <strong> ● 체크인 </strong>'
 							+ '  :  '
 							+ checkintime
 							+ '</li>'
-							+ '<li> <strong> 체크 아웃 </strong>'
+							+ '<li> <strong> ● 체크 아웃 </strong>'
 							+ '  :  '
 							+ checkouttime
 							+ '</li>'
-							+ '<li> <strong> 예약 안내 </strong>'
+							+ '<li> <strong> ● 예약 안내 </strong>'
 							+ '  :  '
 							+ reservationlodging
 							+ '</li>'
-							+ '<li> <strong> 예약 안내 홈페이지 </strong>'
+							+ '<li> <strong> ● 예약 안내 홈페이지 </strong>'
 							+ '  :  '
 							+ reservationurl
 							+ '</li>'
@@ -311,27 +296,27 @@
 					var parkingshopping			= myItem.parkingshopping;		//주차 시설
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocentershopping
 							+ '</li>'
-							+ '<li> <strong> 판매 품목 </strong>'
+							+ '<li> <strong> ● 판매 품목 </strong>'
 							+ '  :  '
 							+ saleitem
 							+ '</li>'
-							+ '<li> <strong> 영업 시간 </strong>'
+							+ '<li> <strong> ● 영업 시간 </strong>'
 							+ '  :  '
 							+ opentime
 							+ '</li>'
-							+ '<li> <strong> 매장 안내 </strong>'
+							+ '<li> <strong> ● 매장 안내 </strong>'
 							+ '  :  '
 							+ shopguide
 							+ '</li>'
-							+ '<li> <strong> 쉬는날 </strong>'
+							+ '<li> <strong> ● 쉬는날 </strong>'
 							+ '  :  '
 							+ restdateshopping
 							+ '</li>'
-							+ '<li> <strong> 주차 시설 </strong>'
+							+ '<li> <strong> ● 주차 시설 </strong>'
 							+ '  :  '
 							+ parkingshopping
 							+ '</li>'
@@ -346,23 +331,23 @@
 					var restdatefood	= myItem.restdatefood;	//쉬는 날
 					$("#tab2").append(
 							'<ul class="txtCon" >'
-							+ '<li> <strong> 문의 및 안내 </strong>'
+							+ '<li> <strong> ● 문의 및 안내 </strong>'
 							+ '  :  '
 							+ infocenterfood
 							+ '</li>'
-							+ '<li> <strong> 대표 메뉴 </strong>'
+							+ '<li> <strong> ● 대표 메뉴 </strong>'
 							+ '  :  '
 							+ treatmenu
 							+ '</li>'
-							+ '<li> <strong> 영업 시간 </strong>'
+							+ '<li> <strong> ● 영업 시간 </strong>'
 							+ '  :  '
 							+ opentimefood
 							+ '</li>'
-							+ '<li> <strong> 주차 가능 </strong>'
+							+ '<li> <strong> ● 주차 가능 </strong>'
 							+ '  :  '
 							+ parkingfood
 							+ '</li>'
-							+ '<li> <strong> 쉬는날 </strong>'
+							+ '<li> <strong> ● 쉬는날 </strong>'
 							+ '  :  '
 							+ restdatefood
 							+ '</li>'
@@ -376,9 +361,67 @@
 				alert("Error: " + errorThrown);
 			}
 		});
-	
+		
+		/* 추가 이미지 조회 */
+		$.ajax({
+			url : 'DetailImage',
+			type : 'get',
+			dataType : 'json',
+			data : {
+				typeId 	: contentTypeId,
+				id		: contendtid
+			},
+			success : function(data) {
+				var myItem 				= data.response.body.items;
+				var num					= data.response.body.numOfRows;
+				var index				= num-1;
+				console.log("myItem => " + myItem);
+				$("#thumbs").html("");
+				$("#mainImg").html("");
+				if(myItem == ""){
+					$("#mainImg").append(
+						'<h2>제공 이미지 없음</h2>'		
+					);
+				}
+				for(var i = 0 ; i < index; i++){
+					console.log(myItem.item[i].originimgurl);
+					if(i==0){
+						$("#mainImg").append(
+								'<img src = "'
+								+ myItem.item[i].originimgurl
+								+ '" />'
+								);
+					}
+					$("#thumbs").append(
+						'<a href = "'
+						+ myItem.item[i].originimgurl
+						+ '" ><img src = "'
+						+ myItem.item[i].smallimageurl
+						+'"/></a>'
+					);
+					
+				}
+				$(".thumbs a").click(function(){            //클릭 시
+					  var imgPath = $(this).attr("href");     //클릭한 a태그의 하이퍼링크를 변수저장
+					  
+					  $("#mainImg>img").attr({src:imgPath})   //메인 이미지의 주소 속성에 할당
+					    .hide()                                 //fadein()효과를 보여주기 위해 숨김처리
+					    .fadeIn();                              //fadeIn()
+					 return false;                           //<a> 의 본래기능 (하이퍼링크) 작동방지
+					});
+			},
+			error : function(XMLHttpRequest, textStatus, errorThrown) {
+				alert("request : " + XMLHttpRequest);
+				alert("Status: " + textStatus);
+				alert("Error: " + errorThrown);
+			}
+		});
+		
+		
+		
 	};
 	/* window onload 끝 */
+		
 	
 		function initMap(){
 			var mapx = $("#mapx").val();
@@ -487,13 +530,13 @@ div {
 
 /*전체 div  */
 .section1 {
-	width: 1080px;
+	width: 1200px;
 	height: 486px;
 	/* border: 1px solid red; */
 	margin-top: 20px;
 }
 .search1Area {
-	width: 1080px;
+	width: 1200px;
 	height: 480px;
 	margin-top: 10px;
 	/* border: 1px solid green; */
@@ -596,7 +639,7 @@ div {
 }
 
 .summary{
-	width: 500px;
+	width: 650px;
 	height: 400px;
 	border: 1px solid black;
 	margin: 1px auto;
@@ -616,7 +659,7 @@ div {
 /* Float the list items side by side */
 .tab li {
 	float: left;
-	margin-left: 50px;
+	margin-left: 80px;
 	
 }
 /* Style the links inside the list items */
@@ -650,8 +693,36 @@ ul.tab li.current {
 	display: block;
 }
 
-/* 멀티탭 css */
+/* 멀티탭 css 끝*/
 
+/* 썸네일 이미지 css 시작  */
+.thumbs {
+   width:50px; 
+   float:left;
+}
+.thumbs img {
+	width : 50px;
+	height: 50px;
+    border:1px solid #ccc;
+    padding:5px;
+    margin-bottom:3px;
+}
+.thumbs img:hover {
+    border-color:tomato;
+}
+#mainImg {
+    border:solid 1px #ccc;
+    width:530px;
+    height:300px;
+    padding:5px;
+    margin-left:60px;
+}
+
+#mainImg img {
+	width : 530px;
+	height: 300px;
+}
+/* 썸네일 이미지 css 끝  */
 </style>
 </head>
 <body>
@@ -723,7 +794,7 @@ ul.tab li.current {
 				<ul class="tab">
 					<li class="current" data-tab="tab1"><a href="#">공통 정보</a></li>
 					<li data-tab="tab2"><a href="#">소개 정보</a></li>
-					<li data-tab="tab3"><a href="#">세번째 탭</a></li>
+					<li data-tab="tab3"><a href="#">추가 이미지</a></li>
 				</ul>
 		
 				<div id="tab1" class="tabcontent current">
@@ -733,7 +804,15 @@ ul.tab li.current {
 				</div>
 		
 				<div id="tab3" class="tabcontent">
-				</div>
+					<div class = "thumbs" id = "thumbs">
+						<a href="http://sevensprings.dothome.co.kr/img/a_500x280.jpg" title="image1"><img src="http://sevensprings.dothome.co.kr/img/a_90x80.jpg" /></a>
+				        <a href="http://sevensprings.dothome.co.kr/img/b_500x280.jpg" title="image1"><img src="http://sevensprings.dothome.co.kr/img/b_90x80.jpg" /></a>
+				        <a href="http://sevensprings.dothome.co.kr/img/c_500x280.jpg" title="image1"><img src="http://sevensprings.dothome.co.kr/img/c_90x80.jpg" /></a>
+					</div>
+					<div id = "mainImg">
+						<img src="http://sevensprings.dothome.co.kr/img/a_500x280.jpg" alt="image" />
+					</div>
+					
 			
 			</div>
 
@@ -755,9 +834,9 @@ ul.tab li.current {
 	<!--hidden text  -->
 	<div class = "hidden" id = "hidden">
 		<input type = "hidden" value ="${contentTypeId}" id = "contentTypeId">
-		<input type = "hidden" value ="${contendtid}" id = "contendtid">  
-<!-- <input type = "text" value ="12" id = "contentTypeId">
-		<input type = "text" value ="127213" id = "contendtid"> -->
+		<input type = "hidden" value ="${contendtid}" id = "contendtid">
+		<!-- <input type = "text" value ="12" id = "contentTypeId">
+		<input type = "text" value ="127213" id = "contendtid"> --> 
 		<input type = "hidden" value ="${email }" id = "email">
 		<input type = "hidden" value = "${result }" id = "result">
 		<input type = "hidden" value = "${mapx }" id = "mapx">
