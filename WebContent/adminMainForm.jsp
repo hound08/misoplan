@@ -93,7 +93,6 @@
 	}
 	.adminButton {
 		margin-top: 5px;
-		margin-left: 5px;
 		width: 100px;
 		height: 30px;
 		color: white;
