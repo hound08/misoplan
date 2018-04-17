@@ -19,8 +19,9 @@ public class PlanDeletAction implements CommandProcess {
 			String email = request.getParameter("email");
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			int result = dao.delete(bs_num, email);
+			request.setAttribute("result", result);
 			request.setAttribute("bs_num", bs_num);
-			request.setAttribute("email", email);
+			System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

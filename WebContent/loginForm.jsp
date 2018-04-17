@@ -44,7 +44,6 @@
 		left: 0px;
 		width: 100%;
 		margin-top: 130px;
-		background-color: #0099ff;
 	}
 	
 	.find_password {
