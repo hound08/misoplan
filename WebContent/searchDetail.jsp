@@ -42,7 +42,10 @@
 				var overview	= myItem.overview;
 				mapx		= myItem.mapx;
 				mapy		= myItem.mapy;
-				
+				console.log("img ==> " + img);
+				if(img == undefined){
+					img = "images/no_image.jpg";
+				}
 				$("#touristName").append('<h2>' + title +'<h2>');
 				$("#touristImg").append(
 						'<img src = ' + img + '  alt="" >'
@@ -371,9 +374,17 @@
 			success : function(data) {
 				var myItem 				= data.response.body.items;
 				var num					= data.response.body.numOfRows;
+				var index				= num-1;
+				console.log("myItem => " + myItem);
 				$("#thumbs").html("");
 				$("#mainImg").html("");
-				for(var i = 0 ; i < num; i++){
+				if(myItem == ""){
+					$("#mainImg").append(
+						'<h2>제공 이미지 없음</h2>'		
+					);
+				}
+				for(var i = 0 ; i < index; i++){
+					console.log(myItem.item[i].originimgurl);
 					if(i==0){
 						$("#mainImg").append(
 								'<img src = "'

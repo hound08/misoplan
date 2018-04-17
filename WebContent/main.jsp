@@ -227,7 +227,7 @@ div {
 			<div class="rankList">
 				<div class="rankTitleWrap">
 					<div class="rankText">
-						<p class="rankTextTitle">일정 등록 순위</p>
+						<p class="rankTextTitle">인기 여행일정</p>
 						<p class="rankTextContent">인기있는 관광지를 알아보세요</p>
 					</div>
 				</div>
@@ -242,7 +242,7 @@ div {
 			</div>
 			<div class="wishList">
 				<div class="wishText">
-					<p class="wishTextTitle">찜 리스트 순위</p>
+					<p class="wishTextTitle">찜 리스트 Top 9</p>
 					<p class="wishTextContent">가장 가 보고 싶은 관광지</p>
 				</div>
 				<div class="wishListWrap">

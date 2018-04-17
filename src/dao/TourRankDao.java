@@ -74,7 +74,11 @@ public class TourRankDao {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		List<WishlistDto> list = new ArrayList<WishlistDto>();
-		String sql = "SELECT TOUR_NAME, IMG_SRC, COUNT(TOUR_NAME) CNT FROM WISHLIST GROUP BY TOUR_NAME, IMG_SRC ORDER BY CNT DESC";
+		String sql = "SELECT TOUR_NAME, IMG_SRC " +
+					 "FROM (SELECT ROWNUM RN, A.* " +
+					 	   "FROM (SELECT TOUR_NAME, IMG_SRC, COUNT(TOUR_NAME) CNT " +
+					 	   		 "FROM WISHLIST GROUP BY TOUR_NAME, IMG_SRC ORDER BY CNT DESC) A) " +
+					 "WHERE RN BETWEEN 1 AND 9";
 		
 		try {
 			conn = getConnection();
