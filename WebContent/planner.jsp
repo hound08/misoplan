@@ -11,8 +11,9 @@
 <link rel="stylesheet" type="text/css" hrefs="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script> 
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <style type="text/css">
 	/* 전체 적용   */
 	
@@ -304,6 +305,9 @@ var mapy = [];
 var daycount = 1;
 var plandivheight = 65;
 markers = [];
+locations = [];
+infowindow = [];
+var seq = 0;
 
 
 $(document).on('click', '#completebtn', function(){
@@ -374,11 +378,11 @@ $(document).on('click','#sidebar-menu', function(){
 
 
 $(document).on('click','#cityinfo', function(){
-	if(markers != null){
+	/* if(markers != null){
 		for(var i = 0; i < markers.length; i++){
 			markers[i].setMap(null);
 		}
-	}
+	} */
 	var $this = $(this);
 	var areaCode = $('.area_selected').attr('data');
 	var sigunguCode = $(this).attr('data');
@@ -405,13 +409,22 @@ $(document).on('click','#cityinfo', function(){
 				mapy.push(coordy);
 				//console.log("coordx : " + coordx);
 				//console.log("coordy : " + coordy);
-				var latlng = new google.maps.LatLng(coordy, coordx);
+				/* var latlng = new google.maps.LatLng(coordy, coordx);
 				markers[i] = new google.maps.Marker({
 				    position: latlng,
-				    map: map
+				    map: map,
+				    icon: 'images/marker.png'
 				  });
 				markers[i].setMap(map);
-
+				
+				infowindow[i] = new google.maps.InfoWindow({
+					content: title 
+				});
+				
+				markers[i].addListener('click', function(){
+					infowindow[i].open(map, markers[i]);
+					alert('clicked');
+				}); */
 				
 				var contentid = myItem[i].contentid;
 				var parsedinfo = contentid+"-"+title;
@@ -426,7 +439,8 @@ $(document).on('click','#cityinfo', function(){
 				+"<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+"><p class='tourtitle'>"+title+"</p><p class='touraddr'>"+addr1+"</p></div><div class='plusbutton' id="+contentid+"><p class='plusP'>+</p></div></div></li>");
 			}
 
-				
+			//var markerCluster = new MarkerClusterer(map, markers,
+		    //           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 					
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
@@ -477,10 +491,25 @@ $(document).on('click', '.plusbutton', function(){
 			plandiv.css('height', plandivheight);
 			daycount = daycount + 1;
 		}
-		plandiv.append("<div class='planelem' id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaName = "+areaName+" areaCode="+areaCode+" sigunguName ="+sigunguName+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
+		plandiv.append("<div class='planelem' seq="+seq+" id='planelem"+contentId+"' dayvalue="+(daycount-1)+" areaName = "+areaName+" areaCode="+areaCode+" sigunguName ="+sigunguName+" sigunguCode="+sigunguCode+" contentId="+contentId+" mapx="+coordx+" mapy="+coordy+" imagePath="+imagePath+"><p class='elemtitle' id='elemtitle"+contentId+"'>"+tourtitle+"</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
 		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 	}
+	
+	var latlng = new google.maps.LatLng(coordy, coordx);
+	var marker = new google.maps.Marker({
+	    position: latlng,
+	    map: map,
+	    icon: 'images/marker.png'
+	  });
+	
+	locations.push(latlng);
+	markers.push(marker);
+	marker.setMap(map);
+	seq = seq + 1;
+	map.panTo(latlng);
+	map.setZoom(15, true);
+	drawLines();
 });
 
 
@@ -492,12 +521,24 @@ $(document).on('click', '.deleteelem', function(){
 	var parseddiv = "#planelem"+parsedid;
 	var parsedtitle = "#elemtitle"+parsedid;
 	var parseddelete = "#delete"+parsedid; 
-	
+	var planelem = $this.parent().attr('seq');
+	console.log("seq : " + seq);
 	plandivheight = plandivheight - 22;
 	plandiv.css('height', plandivheight);
 	$(parseddiv).remove();
 	$(parsedtitle).remove();
 	$(parseddelete).remove();
+
+	
+	markers[seq-1].setMap(null);
+	console.log("markers[seq-1] : " + markers[seq-1]);
+	console.log("locations[seq-1] : " + locations[seq-1]);
+	delete markers[seq-1];
+	delete locations[seq-1];
+	console.log("markers : " + markers);
+	console.log("locations : " + locations);
+	map.setZoom(12,true);
+	drawLines();
 });	
 
 
@@ -528,6 +569,22 @@ $(document).on('click', '.deleteday', function(){
 	$(pid).remove();
 	$(deleteid).remove();
 });
+
+ function drawLines(){
+	alert('drawLines()');
+	var path = null;
+	if(path != null){
+		path.setMap(null);	
+	}
+	path = new google.maps.Polyline({
+		path: locations,
+		geodesic: true,
+		strokeColor: 'black',
+		strokeOpacity: 1.0,
+		strokeWeight: 2
+	});
+	path.setMap(map);
+}
 
 
  $(document).on('click','#sidebar-menu', function(e){
