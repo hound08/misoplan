@@ -160,7 +160,7 @@ div {
 </head>
 <body>
 	<%
-		
+		// date calculating start
 		request.setCharacterEncoding("UTF-8");
 		String title = request.getParameter("title");
 		String jsonString = request.getParameter("jsonArr");
@@ -168,7 +168,7 @@ div {
 		date = date.replace("-", "/");
 		String paraDay = "";
 		System.out.println("date parameter : " + date);
-		//System.out.println("jsonString : " + jsonString);
+			//System.out.println("jsonString : " + jsonString);
 		
 		JSONArray ja1 = new JSONArray(jsonString);
 		JSONObject lastObj = ja1.getJSONObject(ja1.length()-1);
@@ -177,14 +177,14 @@ div {
 		System.out.println("date : " +date);
 		Date firstDay = new SimpleDateFormat("yyyy/MM/dd").parse(date);
 		String strFirstDay = new SimpleDateFormat("yyyy/MM/dd").format(firstDay);
-		//System.out.println(strFirstDay);
+			//System.out.println(strFirstDay);
 		
 		Calendar cal = new GregorianCalendar(Locale.KOREA);
 		cal.setTime(firstDay);
 		cal.add(Calendar.DAY_OF_YEAR, max-1);
 		Date lastDay = cal.getTime();
 		String strLastDay = new SimpleDateFormat("yyyy/MM/dd").format(lastDay);
-		//System.out.println(strLastDay);
+			//System.out.println(strLastDay);
 		
 		for(int i = 0; i < ja1.length(); i++){
 			JSONObject jo1 = ja1.getJSONObject(i);
@@ -198,7 +198,10 @@ div {
 			paraDay += "," + strDay;			
 		}
 		paraDay = paraDay.substring(1, paraDay.length());
-		System.out.println("paraDay : " + paraDay);
+			//System.out.println("paraDay : " + paraDay);
+		// date calculating end
+		
+		
 		
 	%>
 
