@@ -276,7 +276,8 @@ div {
 	<script type="text/javascript">
  			 var image = document.getElementById("center-image");
 			var current = 0;
-			var images = [ "images/main2.png", 
+			var images = [ "images/main2.png",
+			               "images/mainmodel.png",
 			               "images/main3.png",
 						   "images/main4.png", 
 						   "images/main5.png",
