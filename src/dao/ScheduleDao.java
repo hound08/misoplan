@@ -13,6 +13,7 @@ import javax.sql.DataSource;
 public class ScheduleDao {
 
 	private static ScheduleDao instance;
+
 	private ScheduleDao() {
 	}
 
@@ -24,7 +25,6 @@ public class ScheduleDao {
 		return instance;
 	}// getInstance() end
 
-	
 	private Connection getConnection() {
 		Connection conn = null;
 		try {
@@ -38,23 +38,22 @@ public class ScheduleDao {
 		return conn;
 	}// getConnection() End
 
-	
 	public void release(Connection conn, PreparedStatement ps, ResultSet rs) {
-		if(rs != null) {
+		if (rs != null) {
 			try {
 				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		if(ps != null) {
+		if (ps != null) {
 			try {
 				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		if(conn != null) {
+		if (conn != null) {
 			try {
 				conn.close();
 			} catch (SQLException e) {
@@ -62,18 +61,17 @@ public class ScheduleDao {
 			}
 		}
 	}
-	
-	
+
 	public void release(Connection conn, PreparedStatement ps) {
-		
-		if(ps != null) {
+
+		if (ps != null) {
 			try {
 				ps.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
-		if(conn != null) {
+		if (conn != null) {
 			try {
 				conn.close();
 			} catch (SQLException e) {
@@ -81,8 +79,7 @@ public class ScheduleDao {
 			}
 		}
 	}
-	
-	
+
 	public String getNextVal() {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -93,20 +90,19 @@ public class ScheduleDao {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			rs = ps.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				nextVal = rs.getString(1);
 			}
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			release(conn, ps, rs);
 			System.out.println("nextVal : " + nextVal);
 		}
 		System.out.println("nextVal : " + nextVal);
 		return nextVal;
 	}
-	
-	
+
 	public int insertPlan(ScheduleLargeDto ldto, ArrayList<ScheduleMediumDto> mArr, ArrayList<ScheduleSmallDto> sArr) {
 		Connection conn = null;
 		PreparedStatement ps1 = null;
@@ -115,19 +111,19 @@ public class ScheduleDao {
 		String nextVal = getNextVal();
 		String sql1 = "INSERT INTO SCHEDULELARGE VALUES(?,?,?,sysdate)";
 		int result = 0;
-		
-		try{
+
+		try {
 			conn = getConnection();
 			ps1 = conn.prepareStatement(sql1);
 			ps1.setString(1, nextVal);
 			ps1.setString(2, ldto.getEmail());
 			ps1.setString(3, ldto.getS_name());
 			ps1.executeUpdate();
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(ps1 != null) {
+		} finally {
+			if (ps1 != null) {
 				try {
 					ps1.close();
 				} catch (SQLException e) {
@@ -135,11 +131,11 @@ public class ScheduleDao {
 				}
 			}
 		}
-		
+
 		String sql2 = "INSERT INTO SCHEDULEMEDIUM VALUES(?,SM_CODE_SEQ.NEXTVAL,?,?,?,?,?)";
-		try{
+		try {
 			ps2 = conn.prepareStatement(sql2);
-			for(int i = 0; i < mArr.size(); i++) {
+			for (int i = 0; i < mArr.size(); i++) {
 				ScheduleMediumDto mdto = mArr.get(i);
 				ps2.setString(1, nextVal);
 				ps2.setString(2, mdto.getArea_name());
@@ -149,11 +145,11 @@ public class ScheduleDao {
 				ps2.setString(6, mdto.getTour_date());
 				ps2.executeUpdate();
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(ps2 != null) {
+		} finally {
+			if (ps2 != null) {
 				try {
 					ps2.close();
 				} catch (SQLException e) {
@@ -162,9 +158,9 @@ public class ScheduleDao {
 			}
 		}
 		String sql3 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ.NEXTVAL,?,?,?,?,?,?)";
-		try{
+		try {
 			ps3 = conn.prepareStatement(sql3);
-			for(int i = 0; i < sArr.size(); i++) {
+			for (int i = 0; i < sArr.size(); i++) {
 				ScheduleSmallDto sdto = sArr.get(i);
 				ps3.setString(1, nextVal);
 				ps3.setString(2, sdto.getTour_name());
@@ -175,18 +171,18 @@ public class ScheduleDao {
 				ps3.setString(7, sdto.getTour_text());
 				result = ps3.executeUpdate();
 			}
-			
-		}catch (Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
-			if(ps3 != null) {
+		} finally {
+			if (ps3 != null) {
 				try {
 					ps3.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
 			}
-			if(conn != null) {
+			if (conn != null) {
 				try {
 					conn.close();
 				} catch (SQLException e) {
@@ -196,8 +192,107 @@ public class ScheduleDao {
 		}
 		return result;
 	}// insertPlan() End
-	
-	
-	
-	
+
+	public ScheduleLargeDto selectLarge(String sl_code) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM SCHEDULELARGE WHERE sl_code = ?";
+		ScheduleLargeDto ldto = null;
+
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sl_code);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				ldto = new ScheduleLargeDto();
+				ldto.setSl_code(rs.getString(1));
+				ldto.setEmail(rs.getString(2));
+				ldto.setS_name(rs.getString(3));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			release(conn, ps, rs);
+		}
+		return ldto;
+	}// selectLarge() End
+
+	/*
+	 * public ArrayList<ScheduleMediumDto> selectMedium(String sl_code) { Connection
+	 * conn = null; PreparedStatement ps = null; ResultSet rs = null; String sql =
+	 * "SELECT * FROM SCHEDULEMEDIUM WHERE sl_code = ?";
+	 * ArrayList<ScheduleMediumDto> mArr = new ArrayList<>();
+	 * 
+	 * try { conn = getConnection(); ps = conn.prepareStatement(sql);
+	 * ps.setString(1, sl_code); rs = ps.executeQuery();
+	 * 
+	 * while(rs.next()) { ScheduleMediumDto mdto = new ScheduleMediumDto();
+	 * mdto.setSl_code(rs.getString(1)); mdto.setSm_code(rs.getString(2));
+	 * mdto.setArea_name(rs.getString(3)); mdto.setArea_code(rs.getString(4));
+	 * mdto.setSigungu_name(rs.getString(5)); mdto.setSigungu_code(rs.getString(6));
+	 * mdto.setTour_date(rs.getString(7)); mArr.add(mdto); } }catch (Exception e) {
+	 * e.printStackTrace(); }finally { release(conn, ps, rs); } return mArr; } //
+	 * selectMedium() End
+	 * 
+	 * 
+	 * public ArrayList<ScheduleSmallDto> selectSmall(String sl_code) { Connection
+	 * conn = null; PreparedStatement ps = null; ResultSet rs = null; String sql =
+	 * "SELECT * FROM SCHEDULESMALL WHERE sl_code = ?"; ArrayList<ScheduleSmallDto>
+	 * sArr = new ArrayList<>();
+	 * 
+	 * try { conn = getConnection(); ps = conn.prepareStatement(sql);
+	 * ps.setString(1, sl_code); rs = ps.executeQuery();
+	 * 
+	 * while(rs.next()) { ScheduleSmallDto sdto = new ScheduleSmallDto();
+	 * sdto.setSl_code(rs.getString(1)); sdto.setSm_code(rs.getString(2));
+	 * sdto.setSs_code(rs.getString(3)); sdto.setTour_name(rs.getString(4));
+	 * sdto.setTour_code(rs.getString(5)); sdto.setCoord_x(rs.getDouble(6));
+	 * sdto.setCoord_y(rs.getDouble(7)); sdto.setImage_url(rs.getString(8));
+	 * sdto.setTour_text(rs.getString(9)); sArr.add(sdto); } }catch (Exception e) {
+	 * e.printStackTrace(); }finally { release(conn, ps, rs); } return sArr; } //
+	 * selectSmall() End
+	 */
+
+	public ArrayList<ScheduleLoadDto> selectPlan(String sl_code) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "select m.area_name, m.area_code, m.sigungu_name, m.sigungu_code, m.tour_date, s.sl_code, s.sm_code, s.ss_code, s.tour_name, s.coord_x, s.coord_y, s.image_url "
+				+ "from schedulemedium m, schedulesmall s " 
+				+ "where s.sm_code = m.sm_code "
+				+ "and s.sl_code = ?";
+		ArrayList<ScheduleLoadDto> loadArr = new ArrayList<>();
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, sl_code);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				ScheduleLoadDto loadDto = new ScheduleLoadDto();
+				loadDto.setArea_name(rs.getString(1));
+				loadDto.setArea_code(rs.getString(2));
+				loadDto.setSigungu_name(rs.getString(3));
+				loadDto.setSigungu_code(rs.getString(4));
+				loadDto.setTour_date(rs.getString(5));
+				loadDto.setSl_code(rs.getString(6));
+				loadDto.setSm_code(rs.getString(7));
+				loadDto.setSs_code(rs.getString(8));
+				loadDto.setTour_name(rs.getString(9));
+				loadDto.setCoord_x(rs.getDouble(10));
+				loadDto.setCoord_y(rs.getDouble(11));
+				loadDto.setImage_url(rs.getString(12));
+				loadArr.add(loadDto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			release(conn, ps, rs);
+		}
+		return loadArr;
+	}
+
 }
