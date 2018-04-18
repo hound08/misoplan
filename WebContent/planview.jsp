@@ -304,6 +304,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<p>병자</p>
 				</div>
 				<div class="reply_content_write">
+					<input type="hidden" name="bs_num" value="${dto.bs_num }">
 					<textarea rows="7" cols="105" class="reply_textarea" name="reply_content"></textarea>
 				</div>
 				<div class="reply_button">
@@ -313,15 +314,17 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<hr class="reply_hr">
 		<div class="reply_view">
-			<p class="reply_title">댓글(1)</p>
-			<div class="reply_profile_view">
-				<img class="img_profile_view" alt="회원 프로필 사진" src="images/no_profile_image.png">
-				<p>개씨발</p>
-			</div>
-			<div class="reply_content_view">
-				<p class="reply_text">시발아</p>
-				<p class="reply_date">2018-04-03 18:21</p>
-			</div>
+			<p class="reply_title">댓글</p>
+			<c:forEach var="list_reply" items="${list_reply}">
+				<div class="reply_profile_view">
+					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
+					<p>${list_reply.nickname}</p>
+				</div>
+				<div class="reply_content_view">
+					<p class="reply_text">${list_reply.reply_content}</p>
+					<p class="reply_date">${list_reply.reply_date}</p>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	

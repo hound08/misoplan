@@ -724,7 +724,13 @@ body {
 </script>
 </head>
 <body>
-
+	<%
+		if(request.getAttribute("loadJsonArr") != null){
+			System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
+		}else if(request.getAttribute("loadJsonArr") == null){
+			System.out.println("empty!!!!!!");
+		}
+	%>
 	<%
 		if (session.getAttribute("email") == null) {
 	%>
