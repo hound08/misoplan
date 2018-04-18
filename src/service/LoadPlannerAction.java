@@ -2,24 +2,40 @@ package service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class LoadPlannerAction implements CommandProcess {
+import com.sun.org.apache.bcel.internal.generic.LALOAD;
+
+import dao.ScheduleDao;
+import dao.ScheduleLargeDto;
+import dao.ScheduleLoadDto;
+import dao.ScheduleMediumDto;
+import dao.ScheduleSmallDto;
+
+public class LoadPlannerAction implements CommandProcess{
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		AreaParser areaParser = new AreaParser();
-		try {
-			ArrayList<HashMap<String, String>> areas = areaParser.getAreas();
-			request.setAttribute("areasList", areas);
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return "planner.jsp";
+		
+		String email = request.getParameter("email");
+		String sl_code = request.getParameter("sl_code");
+		//System.out.println("sl_code in LoadPlannerAction : " + sl_code);
+		
+		ScheduleDao sdao = ScheduleDao.getInstance();
+		ScheduleLargeDto largeDto = sdao.selectLarge(sl_code);
+		ArrayList<ScheduleLoadDto> loadArr = sdao.selectPlan(sl_code);
+		
+		//System.out.println("loadArr[0] after sdao : " + loadArr.get(0).getArea_code());
+		
+		int status = 1;
+		request.setAttribute("status", status);
+		request.setAttribute("ldto", largeDto);
+		request.setAttribute("loadArr", loadArr);
+		return "makePlan.do";
 	}
+
 }

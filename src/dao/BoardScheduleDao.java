@@ -155,7 +155,7 @@ public class BoardScheduleDao {
 			throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES(BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES (BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		try {
 			conn = getConnection();
@@ -265,6 +265,8 @@ public class BoardScheduleDao {
 		System.out.println("result : " + result);
 		return result;
 	}
+	
+	
 	public List<BoardScheduleDto> pagelist(int startRow, int endRow) throws SQLException {
 		List<BoardScheduleDto> pagelist = new ArrayList<>();
 		
@@ -311,6 +313,51 @@ public class BoardScheduleDao {
 		System.out.println("listsize : " + pagelist.size());
 		return pagelist;
 	}
+	public List<BoardScheduleDto> view_conut(int startRow, int endRow) throws SQLException {
+		List<BoardScheduleDto> pagelist = new ArrayList<>();
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		String sql = "select * from "
+					 + "(select rownum rn, a.* from (select * from BOARDSCHEDULE order by view_count desc) a)"
+					 + "where rn between ? and ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardScheduleDto dto = new BoardScheduleDto();
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setContent(rs.getString("content"));
+				dto.setTag(rs.getString("tag"));
+				dto.setView_count(rs.getInt("view_count"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setArea_names(rs.getString("area_names"));
+				dto.setSl_code(rs.getString("sl_code"));
+				
+				pagelist.add(dto);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+			if (conn != null)
+				conn.close();
+		}
+		return pagelist;
+	}
 	public int delete(int bs_num, String email) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
@@ -347,6 +394,128 @@ public class BoardScheduleDao {
 	         if (conn != null) conn.close(); 
 		}
 		return result;
+	}
+	public void view_count(int bs_num)throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update boardschedule set view_count = view_count+1 where bs_num = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		
+	}
+	public int getTotalVote(int bs_num) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select vote_count from boardschedule where bs_num = ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) rs.close();
+	        if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return total;
+	}
+	public void vote_count(int bs_num) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update boardschedule set vote_count = vote_count+1 where bs_num = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close(); 
+	         if (conn != null) conn.close(); 
+		}
+		
+	}
+	public void vote_down(int bs_num) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update boardschedule set vote_count = vote_count-1 where bs_num = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (ps != null) ps.close();
+		}
+		
+	}
+	
+	public List<ReplyBoardScheduleDto> selectReply(int bs_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
+		List<ReplyBoardScheduleDto> list = new ArrayList<ReplyBoardScheduleDto>();
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					ReplyBoardScheduleDto dto = new ReplyBoardScheduleDto();
+					dto.setRbs_num(rs.getInt(1));
+					dto.setBs_num(rs.getInt(2));
+					dto.setEmail(rs.getString(3));
+					dto.setNickname(rs.getString(4));
+					dto.setReply_content(rs.getString(5));
+					dto.setReply_date(rs.getDate(6));
+					dto.setProfile_url(rs.getString(7));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+	        if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return list;
 	}
 
 }

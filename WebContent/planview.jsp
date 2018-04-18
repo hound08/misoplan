@@ -127,10 +127,115 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
-
-
+.icon-vote{
+	width: 17px;
+    height: 17px;
+	background: url("images/thumbup.png") no-repeat;
+}
+.icon-view {
+	width: 17px;
+    height: 17px;
+	background: url("images/eye.png") no-repeat;
+}
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+.span-icon-vote{
+	cursor: pointer;
+}
+.main-reply {
+	width: 1100px;
+	margin: auto;
+}
+.reply_write {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+.reply_profile_write {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+.img_profile_write {
+	width: 100px;
+	height: 100px;
+}
+.reply_content_write {
+	display: inline-block;
+	width: 865px;
+	height: 135px;
+}
+.reply_textarea {
+	font-size: 16px;
+}
+.reply_button {
+	position: absolute;
+	display: inline-block;
+}
+.btn_reply {
+	width: 120px;
+	height: 120px;
+	color: white;
+	background-color: #1A7AD9;
+	border-color: transparent;
+	font-size: 20px;
+}
+.reply_hr {
+	color: black;
+}
+.reply_title {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-weight: bold;
+}
+.img_profile_view {
+	width: 100px;
+	height: 100px;
+}
+.reply_profile_view {
+	display: inline-block;
+	text-align: center;
+	vertical-align: top;
+}
+.reply_content_view{
+	display: inline-block;
+	width: 980px;
+}
+.reply_date {
+	margin-top: 5px;
+	color: gray;
+	font-size: 13px;
+}
 </style>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+	$(document).on('click', '.span-icon-vote', function() {
+		
+		var bs_num = '${bs_num}';
+		var sendDate = "bs_num="+bs_num;
+		$.post('vote.jsp', sendDate, function(msg) {
+			
+			var parseMsg = msg.trim();
+			$('.span-icon-vote').html('<i class="icon-vote"></i>'+parseMsg);
+			
+		});
+	});
+
+	function replyChk() {
+		if (!$('.reply_textarea').val()) {
+			alert("글을 입력해 주시기 바랍니다.");
+			
+			return false;
+		}
+		
+		return true;
+	}
+</script>
 </head>
 <body>
 
@@ -144,11 +249,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<div class="main-top-second2">
 			<p>${dto.nickname }</p>
+		<span class="span-icon-view"><i class="icon icon-view"></i>${dto.view_count }명이 읽었어요</span>
+		<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 읽었어요</span>
 			<p>${dto.tag}</p>
  			<p>${dto.area_names }</p>
 			<p>${dto.schedule_date }</p>
-			<p>${dto.vote_count }</p>
-			<p>${dto.view_count }</p> 
 			<p>${dto.board_date }</p>
 			<p>${dto.content }</p>
 			
@@ -183,11 +288,42 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<div class="button-bottom" align="right">
 			<input type="button" value="수정" style="width: 40pt; height: 20pt"
-			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}&email=${email }'">
+			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}'">
 			<input type="button" value="삭제" style="width: 40pt; height: 20pt"
-			onclick="location.href='plandelete.do?bs_num=${dto.bs_num}'">
+			onclick="location.href='plandelete.do?bs_num=${dto.bs_num}&email=${email }'">
 			<input type="button" value="목록" style="width: 40pt; height: 20pt" 
 			onclick="location.href='boardschedule.do'">
+		</div>
+	</div>
+	<div class="main-reply">
+		<div class="reply_write">
+			<form name="frm_reply" action="bsReplyPro.do" onsubmit="return replyChk()">
+				<div class="reply_profile_write">
+					<img class="img_profile_write" alt="프로필 사진" src="${profile_url}">
+					<p>${nickname}</p>
+				</div>
+				<div class="reply_content_write">
+					<input type="hidden" name="bs_num" value="${dto.bs_num }">
+					<textarea rows="7" cols="105" class="reply_textarea" name="reply_content"></textarea>
+				</div>
+				<div class="reply_button">
+					<input type="submit" class="btn_reply" value="댓글 작성">
+				</div>
+			</form>
+		</div>
+		<hr class="reply_hr">
+		<div class="reply_view">
+			<p class="reply_title">댓글(${list_size})</p>
+			<c:forEach var="list_reply" items="${list_reply}">
+				<div class="reply_profile_view">
+					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
+					<p>${list_reply.nickname}</p>
+				</div>
+				<div class="reply_content_view">
+					<p class="reply_text">${list_reply.reply_content}</p>
+					<p class="reply_date">${list_reply.reply_date}</p>
+				</div>
+			</c:forEach>
 		</div>
 	</div>
 	

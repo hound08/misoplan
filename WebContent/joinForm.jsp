@@ -25,7 +25,6 @@ div {
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	background-color: #0099ff;
 }
 
 .divEmail {

@@ -1,11 +1,6 @@
 package service;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -15,15 +10,12 @@ import javax.servlet.http.HttpSession;
 
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
-import dao.ScheduleDao;
-import dao.ScheduleLargeDto;
 
-public class BoardScheduleAction implements CommandProcess {
+public class View_CountAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
 		try {
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			String pageNum = request.getParameter("pageNum");
@@ -47,7 +39,7 @@ public class BoardScheduleAction implements CommandProcess {
 			else
 				endPage = startPage + blockSize -1; //페이지 목록 끝
 			
-			List<BoardScheduleDto> pagelist = dao.pagelist(startRow, endRow);
+			List<BoardScheduleDto> pagelist = dao.view_conut(startRow, endRow);
 			request.setAttribute("totalpost", totalpost);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);
@@ -59,7 +51,7 @@ public class BoardScheduleAction implements CommandProcess {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("pagelist", pagelist);
 			request.setAttribute("email", session.getAttribute("email"));
-			int click = 0;
+			int click = 1;
 			request.setAttribute("click", click);
 			} catch (Exception e ) {
 				System.out.println(e.getMessage());
@@ -68,4 +60,3 @@ public class BoardScheduleAction implements CommandProcess {
 	}
 
 }
-
