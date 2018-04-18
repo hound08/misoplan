@@ -155,7 +155,7 @@ public class BoardScheduleDao {
 			throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES(BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES (BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		try {
 			conn = getConnection();
@@ -433,8 +433,8 @@ public class BoardScheduleDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
-			if (conn != null) conn.close();
-			if (conn != null) conn.close();
+			if (rs != null) rs.close();
+	        if (ps != null) ps.close();
 			if (conn != null) conn.close();
 		}
 		
@@ -479,6 +479,43 @@ public class BoardScheduleDao {
 			if (ps != null) ps.close();
 		}
 		
+	}
+	
+	public List<ReplyBoardScheduleDto> selectReply(int bs_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
+		List<ReplyBoardScheduleDto> list = new ArrayList<ReplyBoardScheduleDto>();
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					ReplyBoardScheduleDto dto = new ReplyBoardScheduleDto();
+					dto.setRbs_num(rs.getInt(1));
+					dto.setBs_num(rs.getInt(2));
+					dto.setEmail(rs.getString(3));
+					dto.setNickname(rs.getString(4));
+					dto.setReply_content(rs.getString(5));
+					dto.setReply_date(rs.getDate(6));
+					dto.setProfile_url(rs.getString(7));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+	        if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return list;
 	}
 
 }

@@ -20,7 +20,7 @@
 	
 	int result = vdao.check(vdto);
 	if(result ==0) {
-		vdao.inset(vdto);
+		vdao.insert(vdto);
 		dao.vote_count(bs_num);
 		
 	} else {
@@ -28,5 +28,5 @@
 		dao.vote_down(bs_num);
 	}
 	int vote_count = dao.getTotalVote(bs_num);
-	out.print(vote_count+"명이 좋아요를 눌렀습니다.");
+	out.print(vote_count+"명이 좋아해요!!");
 %>

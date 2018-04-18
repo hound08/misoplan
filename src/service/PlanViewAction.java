@@ -9,23 +9,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
+import dao.ReplyBoardScheduleDto;
 
 public class PlanViewAction implements CommandProcess {
 
 	@Override
-	public String requestPro(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			System.out.println("planviewaction 진입");
 			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			BoardScheduleDto dto = dao.planselect(bs_num);
+			List<ReplyBoardScheduleDto> list = dao.selectReply(bs_num);
 			
 			dao.view_count(bs_num);
 			
 			request.setAttribute("bs_num", bs_num);
 			request.setAttribute("dto", dto);
+			request.setAttribute("list_reply", list);
+			request.setAttribute("list_size", list.size());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
