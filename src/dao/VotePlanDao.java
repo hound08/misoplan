@@ -88,7 +88,7 @@ private static VotePlanDao instance; //instance
 		PreparedStatement ps = null;
 		int result = -1;
 		
-		String sql = "delet from vateplan where email=? or ip_addr=?";
+		String sql = "delete from voteplan where email=? or ip_addr=?";
 		
 		try {
 			conn = getConnection();
@@ -96,7 +96,7 @@ private static VotePlanDao instance; //instance
 			ps.setString(1, dto.getEmail() );
 			ps.setString(2, dto.getIp_addr());
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if ( conn != null ) conn.close();
@@ -125,7 +125,7 @@ private static VotePlanDao instance; //instance
 			if(!rs.next())
 				result = 0; //좋아요 누르지 않은 상태
 			else 
-				result =1; // 좋아요 이미 누른 상태
+				result = 1; // 좋아요 이미 누른 상태
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
