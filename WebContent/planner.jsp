@@ -353,6 +353,138 @@ body {
 	var seq = 0;
 	var path = null;
 
+	
+	// 
+	$(document).ready(function(){
+		var status = '${status}';
+		//console.log("status in script : " + status);
+		var loadJsonArr = '${loadJsonArr}';
+		loadJsonArr = JSON.parse(loadJsonArr).reverse();
+		console.log(loadJsonArr);
+		var plandiv = $('.plandiv');
+		var dayFlag = loadJsonArr[0].tour_date;
+		//console.log("dayFlag : " + dayFlag)
+		makeDay();
+		jQuery.each(loadJsonArr, function(index, value){
+			if(dayFlag != value.tour_date){
+				console.log(dayFlag +"////" + value.tour_date);
+				makeDay();
+				dayFlag = value.tour_date;
+			}
+			plandiv.append("<div class='planelem' seq=seq-"+ seq+ " id='planelem"+ value.tour_code + "' dayvalue="+ (daycount - 1) 
+					  + " areaName = "+ value.area_name + " areaCode="+ value.area_code + " sigunguName ="+ value.sigungu_name
+					  + " sigunguCode="+ value.sigungu_code + " contentId="+ value.tour_code + " mapx="+ value.coord_x + " mapy="+ value.coord_y
+					  + " imagePath="+ value.image_url+ "><p class='elemtitle' id='elemtitle"+value.tour_code+"'>"+ value.tour_name
+					  + "</p><div class='deleteelem' id='delete"+value.tour_code+"'>X&nbsp;</div></div>");
+			plandivheight = plandivheight + 22;
+			plandiv.css('height', plandivheight);
+			
+			createMarker(value.coord_y, value.coord_x);
+			
+		});
+		drawLines();
+		
+	});
+	function makeDay(){
+		var plandiv = $('.plandiv');
+		plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
+				+ daycount
+				+ "</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+		plandivheight = plandivheight + 20;
+		plandiv.css('height', plandivheight);
+		daycount = daycount + 1;
+	}
+	
+	function createMarker(y, x){
+		var latlng = new google.maps.LatLng(y, x);	// 마커 생성을 위한 위도, 경도 객체를 생성
+		var marker = new google.maps.Marker({					// 마커생성
+			position : latlng,									// 마커의 위치
+			map : map,											// 마커를 붙일 map 객체
+			icon : 'images/marker.png'							// 마커의 이미지
+		});
+		markers[seq] = marker;		// 마커를 집단적으로 관리하기 위해 생성된 마커를 배열에 할당
+		seq = seq + 1;				// 마커를 추가, 삭제할 때 index로 관리하기 위해 사용하는 변수
+		marker.setMap(map);			// 마커를 map에 set
+		map.panTo(latlng);			// 지도 시점 이동
+		map.setZoom(15, true);
+	}
+	
+	// append day
+	/* plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
+			+ daycount
+			+ "</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
+	plandivheight = plandivheight + 20;					 // 추가되는 div만큼 plandiv의 height 컨트롤 
+	plandiv.css('height', plandivheight);				 // plandiv의 CSS 수정
+	daycount = daycount + 1; */
+	
+	// append planelem
+	/* plandiv.append("<div class='planelem' seq=seq-"+ seq+ " id='planelem"+ contentId+ "' dayvalue="+ (daycount - 1)					// (데이터베이스 전송을 위해 
+															  + " areaName = "+ areaName+ " areaCode="+ areaCode+ " sigunguName ="+ sigunguName				// 	담고가야할 데이터를 속성으로
+															  + " sigunguCode="+ sigunguCode+ " contentId="+ contentId+ " mapx="+ coordx+ " mapy="+ coordy  //	설정하여 append
+															  + " imagePath="+ imagePath+ "><p class='elemtitle' id='elemtitle"+contentId+"'>"+ tourtitle
+															  + "</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
+							plandivheight = plandivheight + 22;
+							plandiv.css('height', plandivheight); */
+	
+	// create marker
+	/* var latlng = new google.maps.LatLng(coordy, coordx);	// 마커 생성을 위한 위도, 경도 객체를 생성
+						var marker = new google.maps.Marker({					// 마커생성
+							position : latlng,									// 마커의 위치
+							map : map,											// 마커를 붙일 map 객체
+							icon : 'images/marker.png'							// 마커의 이미지
+						});
+
+						markers[seq] = marker;		// 마커를 집단적으로 관리하기 위해 생성된 마커를 배열에 할당
+						seq = seq + 1;				// 마커를 추가, 삭제할 때 index로 관리하기 위해 사용하는 변수
+						marker.setMap(map);			// 마커를 map에 set
+						map.panTo(latlng);			// 지도 시점 이동
+						map.setZoom(15, true);		// 지도 Zoom 정도 조정
+						removeLines();				// 현재 렌더된 선들을 제거하는 메서드
+						drawLines();		 */
+	
+	// draw lines
+		// 마커 사이를 잇는 선을 그리는 메서드
+	/* function drawLines() {
+		path = new google.maps.Polyline({
+			path : getLocations(),	// 위경도 정보가 들어있는 배열
+			geodesic : true,		// ??
+			strokeColor : 'black',  // 선 색상
+			strokeOpacity : 1.0,	// 선 투명도
+			strokeWeight : 2		// 선 두께
+		});
+		path.setMap(map);			// 생성된 선을 map에 붙임
+	}
+
+	// 현재 지도위에 렌더된 선을 지우는 메서드
+	function removeLines() {
+		if (path != null) {
+			path.setMap(null);
+			path = null;
+		}
+	}
+
+	// 현재 생성된 마커의 경,위도를 추출하여 배열로 리턴하는 메서드
+	function getLocations() {
+		var planelem = $('.planelem');
+		var locations = [];
+		console.log("planelem : " + planelem);
+		jQuery.each(planelem, function(index, value) {
+			var mapx = $(value).attr('mapx');
+			var mapy = $(value).attr('mapy');
+			var location = new google.maps.LatLng(mapy, mapx);
+			locations.push(location);
+		});
+		return locations;
+	}					
+	 */
+	
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 	// 저장 버튼 클릭 이벤트
 	$(document).on('click','#completebtn',function() {
 						var plandiv = $(".plandiv");
@@ -726,10 +858,11 @@ body {
 <body>
 	<%
 		if(request.getAttribute("loadJsonArr") != null){
-			System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
+			//System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
 		}else if(request.getAttribute("loadJsonArr") == null){
-			System.out.println("empty!!!!!!");
+			//System.out.println("empty!!!!!!");
 		}
+		System.out.println("status in planner.jsp : " + request.getAttribute("status"));
 	%>
 	<%
 		if (session.getAttribute("email") == null) {

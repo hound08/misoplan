@@ -23,13 +23,13 @@ public class LoadPlannerAction implements CommandProcess{
 		
 		String email = request.getParameter("email");
 		String sl_code = request.getParameter("sl_code");
-		System.out.println("sl_code in LoadPlannerAction : " + sl_code);
+		//System.out.println("sl_code in LoadPlannerAction : " + sl_code);
 		
 		ScheduleDao sdao = ScheduleDao.getInstance();
 		ScheduleLargeDto largeDto = sdao.selectLarge(sl_code);
 		ArrayList<ScheduleLoadDto> loadArr = sdao.selectPlan(sl_code);
 		
-		System.out.println("loadArr[0] after sdao : " + loadArr.get(0).getArea_code());
+		//System.out.println("loadArr[0] after sdao : " + loadArr.get(0).getArea_code());
 		
 		int status = 1;
 		request.setAttribute("status", status);

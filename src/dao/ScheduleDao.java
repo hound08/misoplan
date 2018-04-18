@@ -260,7 +260,7 @@ public class ScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select m.area_name, m.area_code, m.sigungu_name, m.sigungu_code, m.tour_date, s.sl_code, s.sm_code, s.ss_code, s.tour_name, s.coord_x, s.coord_y, s.image_url "
+		String sql = "select m.area_name, m.area_code, m.sigungu_name, m.sigungu_code, m.tour_date, s.sl_code, s.sm_code, s.ss_code, s.tour_name, s.tour_code, s.coord_x, s.coord_y, s.image_url "
 				+ "from schedulemedium m, schedulesmall s " 
 				+ "where s.sm_code = m.sm_code "
 				+ "and s.sl_code = ?";
@@ -282,9 +282,10 @@ public class ScheduleDao {
 				loadDto.setSm_code(rs.getString(7));
 				loadDto.setSs_code(rs.getString(8));
 				loadDto.setTour_name(rs.getString(9));
-				loadDto.setCoord_x(rs.getDouble(10));
-				loadDto.setCoord_y(rs.getDouble(11));
-				loadDto.setImage_url(rs.getString(12));
+				loadDto.setTour_code(rs.getString(10));
+				loadDto.setCoord_x(rs.getDouble(11));
+				loadDto.setCoord_y(rs.getDouble(12));
+				loadDto.setImage_url(rs.getString(13));
 				loadArr.add(loadDto);
 			}
 		} catch (Exception e) {

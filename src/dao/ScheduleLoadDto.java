@@ -10,9 +10,17 @@ public class ScheduleLoadDto {
 	private String sm_code;
 	private String ss_code;
 	private String tour_name;
+	private String tour_code;
+	public String getTour_code() {
+		return tour_code;
+	}
+	public void setTour_code(String tour_code) {
+		this.tour_code = tour_code;
+	}
 	private double coord_x;
 	private double coord_y;
 	private String image_url;
+	
 	public String getArea_name() {
 		return area_name;
 	}
