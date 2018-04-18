@@ -210,7 +210,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	font-size: 13px;
 }
 </style>
-<<<<<<< HEAD
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -227,7 +226,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		})
 		
 	})
-=======
 <script type="text/javascript">
 	function replyChk() {
 		if (!$('.reply_textarea').val()) {
@@ -238,7 +236,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		
 		return true;
 	}
->>>>>>> cf73627372c556bc97bda5352746f6ac0428d360
 </script>
 </head>
 <body>
