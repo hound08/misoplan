@@ -96,7 +96,7 @@ private static VotePlanDao instance; //instance
 			ps.setString(1, dto.getEmail() );
 			ps.setString(2, dto.getIp_addr());
 			result = ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if ( conn != null ) conn.close();
