@@ -65,7 +65,7 @@ private static VotePlanDao instance; //instance
 		
 		int result = -1;
 		
-		String sql = "INSERT INTO VOTEPLAN VELUE(?, ?, ?)";
+		String sql = "INSERT INTO VOTEPLAN VELUES(?, ?, ?)";
 		
 		try {
 			conn = getConnection();
