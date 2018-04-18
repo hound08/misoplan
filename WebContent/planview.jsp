@@ -290,6 +290,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<p>병자</p>
 				</div>
 				<div class="reply_content_write">
+					<input type="hidden" name="bs_num" value="${dto.bs_num }">
 					<textarea rows="7" cols="105" class="reply_textarea" name="reply_content"></textarea>
 				</div>
 				<div class="reply_button">

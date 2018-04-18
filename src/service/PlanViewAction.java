@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.BoardScheduleDao;
 import dao.BoardScheduleDto;
+import dao.ReplyBoardScheduleDto;
 
 public class PlanViewAction implements CommandProcess {
 
@@ -21,6 +22,7 @@ public class PlanViewAction implements CommandProcess {
 			
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			BoardScheduleDto dto = dao.planselect(bs_num);
+			ReplyBoardScheduleDto dtoReply = dao.
 			
 			dao.view_count(bs_num);
 			
