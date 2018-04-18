@@ -65,10 +65,10 @@
 		
 		<script type="text/javascript">
 			$(document).on('click', '.second-text', function(){
-				console.log("clicked");
+				//console.log("clicked");
 				var $this = $(this);
 				var sl_code = $this.attr('id');
-				console.log('sl_code : ' + sl_code);
+				//console.log('sl_code : ' + sl_code);
 				
 				var form = $("#form");
 				form.append("<input type='hidden' name='sl_code' value="+sl_code+">");
