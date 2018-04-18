@@ -141,6 +141,12 @@ td {
 	background-color: #1A7AD9;
 	border-color: transparent;
 }
+
+.divMemberLeave {
+	margin: 25px auto auto auto;
+	width: 60px;
+	font-size: 14px;
+}
 </style>
 <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script type="text/javascript">
@@ -206,7 +212,18 @@ td {
 		}
 		
 		return true;
-	}
+	};
+	
+	function memberLeave() {
+		if (confirm("회원 탈퇴를 진행하시겠습니까?\n해당 이메일로 다시 가입할 수 없습니다.")) {
+			alert("회원 탈퇴가 정상적으로 처리되었습니다.\n이용해 주셔서 감사합니다.");
+			location.href="memberLeave.do";
+		} else {
+			alert("취소하셨습니다.");
+		}
+		
+		return;
+	};
 </script>
 </head>
 <%
@@ -238,6 +255,9 @@ td {
 							<tr><td class="td">연락처</td><td><input type="tel" class="input" required="required" name="phone" value="${memberdto.phone }"></td></tr>
 							<tr><td colspan="2" class="tdSubmit"><input type="submit" class="btn" value="정보 수정"></td></tr>
 						</table>
+						<div class="divMemberLeave">
+							<p style="cursor: pointer;" onclick="memberLeave()">회원 탈퇴</p>
+						</div>
 					</form>
 				</div>
 			</div>

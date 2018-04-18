@@ -32,7 +32,7 @@ public class writeReplyActionAB implements CommandProcess{
 		int result = dao.insert(dto);
 		request.setAttribute("result", result);
 		request.setAttribute("post_num", post_num);
-		return "accompanyReplyConfirm.jsp";
+		return "accompanyViewConfirm.jsp";
 		//return "viewActionAB.do?post_num="+request.getParameter("post_num");
 	}
 

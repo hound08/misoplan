@@ -114,7 +114,7 @@ public class AccompanyReplyDao {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		
-		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num desc) a)";
+		String sql = "select * from (select rownum rn, a.* from (select * from replyaccompany where post_num = ? order by rp_num) a)";
 		
 		try {
 			conn = getConnection();
@@ -128,7 +128,7 @@ public class AccompanyReplyDao {
 				dto.setPost_num(rs.getInt(3));
 				dto.setEmail(rs.getString(4));
 				dto.setNickname(rs.getString(5));
-				dto.setProfile_url(rs.getString(6));
+				dto.setProfile_url(AccompanyDao.getInstance().get_profile_url((rs.getString(4))));
 				dto.setContent(rs.getString(7));
 				dto.setReply_date(rs.getDate(8));
 				list.add(dto);
@@ -140,8 +140,6 @@ public class AccompanyReplyDao {
 			close(pstmt);
 			close(conn);
 		}
-		
-		
 		return list;
 	}
 	

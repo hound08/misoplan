@@ -8,6 +8,13 @@
 </head>
 <body>
 	<c:if test="${nickname != null }">
+		<c:if test="${leave == 1}">
+			<c:set var="ban_date" value="${ban_date_result}" />
+			<script type="text/javascript">
+				alert("해당 계정은 탈퇴 처리된 계정입니다.");
+				location.href="loginForm.do";
+			</script>
+		</c:if>
 		<c:if test="${ban == 1}">
 			<c:set var="ban_date" value="${ban_date_result}" />
 			<script type="text/javascript">

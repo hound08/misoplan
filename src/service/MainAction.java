@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import dao.TourRankDao;
 import dao.TourRankDto;
+import dao.WishlistDto;
 
 public class MainAction implements CommandProcess {
 
@@ -16,8 +17,11 @@ public class MainAction implements CommandProcess {
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
 			TourRankDao dao = TourRankDao.getInstance();
-			List<TourRankDto> list = dao.selectRankList();
-			request.setAttribute("list", list);
+			List<TourRankDto> listPlan = dao.selectRankList();
+			List<WishlistDto> listWish = dao.selectWishList();
+			
+			request.setAttribute("listPlan", listPlan);
+			request.setAttribute("listWish", listWish);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

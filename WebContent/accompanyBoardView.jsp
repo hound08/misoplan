@@ -1,3 +1,4 @@
+<%@page import="java.net.InetAddress"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -66,7 +67,7 @@ div {
 	margin: auto 0px auto 20px;
 	height: 100px;
 	width: 100px;
-	background-image: url("${profile_url}");
+	background-image: url("${profile_url_writer}");
 	border-radius: 50%;
 	background-size: 100% 100%;
 }
@@ -129,6 +130,10 @@ tr.highlight td {
 	padding: 2px 3px;
 }
 
+.span-icon-vote{
+	cursor: pointer;
+}
+
 .span-reply {
 	border: 1px solid;
 	border-color: #D5D5D5;
@@ -141,9 +146,15 @@ tr.highlight td {
 }
 
 .icon-view {
-	width: 25px;
+	width: 17px;
     height: 17px;
-	background: url("images/eye.jpg") no-repeat;
+	background: url("images/eye.png") no-repeat;
+}
+
+.icon-vote{
+	width: 17px;
+    height: 17px;
+	background: url("images/thumbup.png") no-repeat;
 }
 
 .icon {
@@ -236,9 +247,35 @@ tr.highlight td {
 	width: 90px;
 	height: 40px;
 	float:right;
+	background-color: #AA1212;
+	color: white;
+	border-radius: 5px;
+	font-size: 18px;
 }
+
+.like-button{
+	vertical-align: baseline;
+	margin: auto;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+	$(document).on('click', '.span-icon-vote', function(){
+		
+		var post_num = '${post_num}';
+		var sendData = "post_num="+post_num;
+		$.post('likey.jsp', sendData, function(msg){
+			
+		var parsedMsg = msg.trim();
+		$('.span-icon-vote').html('<i class="icon icon-vote"></i>'+parsedMsg);
+			
+		});
+	
+	});
+
+</script>
 
 <body>
 	<div id="apply-div" style="display: none;">
@@ -286,8 +323,9 @@ tr.highlight td {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;">
 					<td> 
-						<span class="span-icon"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요.</span>
-						<span class="span-icon"><i class="icon icon-vote"></i>${board.vote_count }명이 좋아해요.</span>
+						<span class="span-icon-view"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요</span>
+						<span class="span-icon-vote"><i class="icon icon-vote"></i><label>${board.vote_count }명이 좋아해요</label></span>
+						
 					</td>
 				</tr>
 			</table>
@@ -297,8 +335,8 @@ tr.highlight td {
 			<div class="image"></div>
 			<c:if test="${email != null }">
 				<button onclick="apply()">동행 신청하기</button>
-				<button>좋아요</button>
 			</c:if>
+			<div class="like-button"><button>좋아요</button></div>
 		</div>
 		<hr>
 		<c:forEach var="reply" items="${list }">
@@ -327,9 +365,9 @@ tr.highlight td {
 					<input type="hidden" value="${post_num }"name="post_num">
 					<table class="reply-table">
 						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!</td></tr>
-						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
+						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
 						<tr><td colspan="2">
-						<input type="submit" class="reply-submit" value="확인" id="writeReply"></td></tr>
+						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
 					</table>
 				</form>
 			</c:if>

@@ -113,32 +113,48 @@ div {
 	width: 1200px;
 	height: 100px;
 }
+
+.bottomButtons{
+	width : 200px;
+	height: 50px;
+	background-color: #ff9933;
+	color: white;
+	font-size: 25px;
+	border: 1px solid #ff9933;
+}
 </style>
 
 <script type="text/javascript">
 	$(document).on('click','#tempSaveBtn',function() {
-		var jsonArr = [];
-		var wrapper = $(".wrapper");
-		jQuery.each(wrapper, function(index, value) {
-			jsonArr.push({
-				"dayvalue" : $(value).children(".contentTextDiv").children().attr('dayValue'),
-				"areaCode" : $(value).children(".contentTextDiv").children().attr('areaCode'),
-				"areaName" : $(value).children(".contentTextDiv").children().attr('areaName'),
-				"sigunguCode" : $(value).children(".contentTextDiv").children().attr('sigunguCode'),
-				"sigunguName" : $(value).children(".contentTextDiv").children().attr('sigunguName'),
-				"contentId" : $(value).children(".contentTextDiv").children().attr('contentId'),
-				"elemTitle" : $(value).children(".contentDiv").children(".contentP").text().trim(),
-				"mapx" : $(value).children(".contentTextDiv").children().attr('mapx'),
-				"mapy" : $(value).children(".contentTextDiv").children().attr('mapy'),
-				"imagePath" : $(value).children(".contentTextDiv").children().attr('imagePath'),
-				"detail" : $(value).children(".contentTextDiv").children().val()
-			});
-		});
-		var jsonString = JSON.stringify(jsonArr);
-		$("#jsonString").val(jsonString);
-		console.log(jsonArr);
+		
+//		console.log(jsonArr);
 	});
-
+	
+	$(function(){
+		$('#form').on('submit', function(e){
+			var jsonArr = [];
+			var wrapper = $(".wrapper");
+			jQuery.each(wrapper, function(index, value) {
+				jsonArr.push({
+					"dayvalue" : $(value).children(".contentTextDiv").children().attr('dayValue'),
+					"areaCode" : $(value).children(".contentTextDiv").children().attr('areaCode'),
+					"areaName" : $(value).children(".contentTextDiv").children().attr('areaName'),
+					"sigunguCode" : $(value).children(".contentTextDiv").children().attr('sigunguCode'),
+					"sigunguName" : $(value).children(".contentTextDiv").children().attr('sigunguName'),
+					"contentId" : $(value).children(".contentTextDiv").children().attr('contentId'),
+					"elemTitle" : $(value).children(".contentDiv").children(".contentP").text().trim(),
+					"mapx" : $(value).children(".contentTextDiv").children().attr('mapx'),
+					"mapy" : $(value).children(".contentTextDiv").children().attr('mapy'),
+					"imagePath" : $(value).children(".contentTextDiv").children().attr('imagePath'),
+					"detail" : $(value).children(".contentTextDiv").children().val()
+				});
+			});
+			var jsonString = JSON.stringify(jsonArr);
+			$("#jsonString").val(jsonString);
+			alert("저장이 완료되었습니다.");
+			return true;
+		});
+	});
 </script>
 
 </head>
@@ -282,14 +298,17 @@ div {
 				</div>
 				<%}
 				}%>
-				<input type="submit" value="저장">
+				<br>
+				<center>
+					<input type="submit" value="저장" class="bottomButtons">
+				</center>
 			</form>
 		</div>
 		<div class="bottom">
-			<button id="tempSaveBtn">임시저장</button>
 		</div>
 		
 		
 	</div>
 </body>
 </html>
+<%@ include file="footer.jsp"%>

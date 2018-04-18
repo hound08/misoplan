@@ -17,6 +17,7 @@ import dao.ScheduleDao;
 import dao.ScheduleLargeDto;
 import dao.ScheduleMediumDto;
 import dao.ScheduleSmallDto;
+import dao.TourRankDao;
 
 public class InsertPlanAction implements CommandProcess{
 
@@ -81,6 +82,10 @@ public class InsertPlanAction implements CommandProcess{
 		
 		ScheduleDao sd = ScheduleDao.getInstance();
 		int result = sd.insertPlan(ldto, mArr, sArr);
+		
+		TourRankDao tdao = TourRankDao.getInstance();
+		tdao.insertTour(sArr);
+		
 		if(result != 0 ) {
 			return "main.jsp";
 		}

@@ -10,10 +10,279 @@
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
-<link href="css/accompanyBoardCSS.css" rel="stylesheet" type="text/css" media="all">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style type="text/css">
+div {
+	margin: 0px auto;
+}
+* {
+	padding: 0px;
+	margin: 0px;
+	font-family: 'NanumSquareRound', sans-serif;
+}
+
+.card {
+	height: 400px;
+	width: 350px;
+	border-radius: 15px;
+	display: inline-block;
+	margin-top: 30px;
+	margin-left: 30px;
+	margin-bottom: 30px;
+	position: relative;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	overflow: hidden;
+}
+
+.card-header {
+	-webkit-transition: 0.5s; /*사파리 & 크롬*/
+    -moz-transition: 0.5s;  /*파이어폭스*/
+    -ms-transition: 0.5s;	/*인터넷 익스플로러*/
+    -o-transition: 0.5s;  /*오페라*/
+    transition: 0.5s;
+	width: 100%;
+	height: 270px;
+	border-radius: 15px 15px 0 0;
+}
+
+.card:hover .card-header  {
+	opacity: 0.8;
+	height: 100px;
+}
+
+.card-header-is_closed{
+    background-color: #EF5A31 ;
+    color: #FFF ;
+    font-weight: bold ;
+    text-align: center ;
+    float: right;
+    margin: 15px 15px 0 0;
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 10px 10px;
+    line-height: 20px;
+}
+
+h1 {
+	color: black;
+    font-size: 22px;
+    font-weight: bold;
+    border: solid;
+}
+p {
+	display: inline-block;
+}
+.card-body {
+	width: 100%;
+	height: 100%;
+}
+
+.card-body-header{
+	line-height: 25px;
+	margin: 10px 20px 0px 20px;
+}
+
+.card-body-description  {
+    opacity: 0;
+    color: #757B82;
+    line-height: 25px;
+    -webkit-transition: .2s ease-in-out; /*사파리&크롬*/
+    -moz-transition: .2s ease-in-out; /*파이어폭스*/
+    -ms-transition: .2s ease-in-out; /*익스플로러*/
+    -o-transition: .2s ease-in-out; /*오페라*/
+    transition : .2s ease-in-out;
+	margin: 5px 20px;
+	overflow: hidden;
+}
+
+.card:hover .card-body-description {
+    opacity: 1;
+    height: 180px;
+    -webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -ms-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition : .2s ease-in-out;
+    border: solid;
+    overflow: hidden;
+}
+.card-body-title {
+	height: 25px;
+	width: 100%;
+	overflow: hidden;
+}
+.card-body-hashtag {
+	height: 20px;
+	width: 100%;
+	color: #2478FF;
+	font-style: italic;
+	overflow: hidden;
+}
+
+.card-body-footer {
+  	position: absolute; 
+  	margin-top: 15px;
+  	margin-bottom: 6px;
+    bottom: 0; 
+    width: 314px;
+    font-size: 14px;
+    color: #9FA5A8;
+    padding: 0 15px;
+}
+
+.icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.icon-view_count {
+    width: 17px;
+    height: 17px;
+	background: url("images/eye.png") no-repeat;
+}
+
+.icon-comments_count {
+	margin-left: 5px;
+	width: 17px;
+    height: 17px;
+	background: url("images/comment.png") no-repeat;
+}
+
+.icon-vote_count{
+	margin-left: 5px;
+	width: 17px;
+    height: 17px;
+	background: url("images/thumbup.png") no-repeat;
+}
+
+.section {
+	width: 1200px;
+}
+
+.main-image {
+	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 100%;
+	height: 400px;
+	overflow: hidden;
+	position: relative;
+}
+.centerimage {
+	min-height: 100%;
+	min-width: 100%;
+	width: 100%;
+	height: auto;
+}
+
+.section-card {
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 30px;
+	width: 100%;
+	margin-top: 35px;
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+}
+
+.pagenumber {
+	width: 1080px;
+	height: 100px;
+}
+
+.pagenumber {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin: 50px 0 35px 0;
+	clear: both;
+}
+
+.pagination a {
+	color: black;
+	padding: 8px 16px;
+	font-size: 20px;
+	text-decoration: none;
+}
+
+.pagination a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+.pagination a:hover:not {
+	background-color: #ddd;
+	border-radius: 5px;
+}
+
+.search {
+	display: flex;
+	justify-content: center;
+	margin: 50px 0 35px 0;
+	clear: both;
+}
+
+.search-bar {
+	font-size: 15px;
+	width: 400px;
+	height: 40px;
+}
+
+.search-submit {
+	font-size: 15px;
+	width: 70px;
+	height: 42px;
+	background-color: #AA1212;
+	color: white;
+}
+
+.search-select {
+	height: 40px;
+	font-size: 15px;
+	margin-right: 5px;
+}
+
+.align {
+	margin-top: 30px;
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.align button {
+	width: 100px;
+	height: 30px;
+}
+
+.center-label {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 30px
+}
+
+.write-button {
+	width: 80px;
+	height: 35px;
+	display: flex;
+	float: right;
+	font-size: 18px;
+	justify-content: center;
+	margin-top: 20px;
+	background-color: #AA1212;
+	border-radius: 5px;
+	color: white;
+}
+</style>
 <body>
 	<div class="section">
 		<div class="main-image">
@@ -24,7 +293,7 @@
 		</div>
 		<div class="align">
 			<a href="listActionVIEW.do"><button>조회순</button></a>
-			<button>인기순</button>
+			<a href="listActionVOTE.do"><button>인기순</button></a>
 			<a href="listAction.do"><button>최신순</button></a>
 		</div>
 		<div class="section-card">
@@ -65,7 +334,7 @@
 						<hr style="margin-bottom: 8px; opacity: 0.5; border-color: #EF5A31">
 						<i class="icon icon-view_count"></i>조회 ${board.view_count }회 
 						<i class="icon icon-comments_count"></i>댓글 ${board.comment_count }개
-						<i class="reg_date"></i>${board.post_date }
+						<i class="icon icon-vote_count"></i>좋아요 ${board.vote_count }개
 					</div>
 				</div>
 			</div>
@@ -82,33 +351,105 @@
 				<div class="pagination">
 					
 					<c:if test="${startPage!=1 }">
-						<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+						<c:if test="${a == 0 }">					
+							<a href='listAction.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+						</c:if>
+						<c:if test="${a == 1 }">					
+							<a href='listActionVIEW.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+						</c:if>
+						<c:if test="${a == 2 }">					
+							<a href='listActionVOTE.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+						</c:if>
 					</c:if>
 					<c:if test="${startPage==1 }">
-						<a href='listAction.do?pageNum=1'>&laquo;</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=1'>&laquo;</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=1'>&laquo;</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=1'>&laquo;</a>
+						</c:if>
 					</c:if>
 					<c:if test="${currentPage!=1 }">
-						<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${currentPage-1}'>&#9665</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${currentPage-1}'>&#9665</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${currentPage-1}'>&#9665</a>
+						</c:if>
 					</c:if>
 					<c:if test="${currentPage==1 }">
-						<a href='listAction.do?pageNum=1'>&#9665</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=1'>&#9665</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=1'>&#9665</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=1'>&#9665</a>
+						</c:if>
 					</c:if>
 
 					<c:forEach var="i" begin="${startPage }" end="${endPage }">
-						<a href='listAction.do?pageNum=${i }'>${i }</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${i }'>${i }</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${i }'>${i }</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${i }'>${i }</a>
+						</c:if>
 					</c:forEach>
 
 					<c:if test="${currentPage==totalPage }">
-						<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${totalPage }'>&#9655</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${totalPage }'>&#9655</a>
+						</c:if>
 					</c:if>
 					<c:if test="${currentPage!=totalPage }">
-						<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
 					</c:if>
 					<c:if test="${endPage>=totalPage }">
-						<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${totalPage}'>&raquo;</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${totalPage}'>&raquo;</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${totalPage}'>&raquo;</a>
+						</c:if>
 					</c:if>
 					<c:if test="${endPage<totalPage }">
-						<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+						<c:if test="${a == 0 }">
+							<a href='listAction.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>
+						<c:if test="${a == 1 }">
+							<a href='listActionVIEW.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>
+						<c:if test="${a == 2 }">
+							<a href='listActionVOTE.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>
 					</c:if>
 				</div>
 				</div>

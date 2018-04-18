@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
 <title>미소플랜</title>
+
 <style type="text/css">
 /* ---------------------------- 화면 전체 적용 ---------------------------- */
 * {
@@ -23,11 +24,26 @@ div {
 
 /* ---------------------------- 메인 메뉴 기능 소개 ---------------------------- */
 .image {
-	background-image: url("images/spring_cherry_tree.jpg");
-	position: absolute;
-	left: 0px;
+/* 	background-image: url("images/main2.png") no-repeat; */
+ 	
+	/* left: 0px;
 	width: 100%;
-	height: 450px;
+	height: 450px; */
+	
+ 	border-radius: 5px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	position: absolute;
+	
+	left : 0px;
+	width : 100%;
+	 
+}
+
+.image img{
+	width : 100%;
+	height : 400px;
 }
 
 .imageText {
@@ -58,6 +74,10 @@ div {
 	vertical-align: middle;
 }
 
+.mainmenuimage:HOVER {
+	cursor: pointer;
+}
+
 .mainimage {
 	width: 240px;
 	height: 140px;
@@ -79,37 +99,42 @@ div {
 /* ---------------------------- 관광지 순위 ---------------------------- */
 .rankList {
 	width: 100%;
-	height: 450px;
+	height: 700px;
 	left: 0px;
 }
 
 .rankTitleWrap {
-	background-image: url("images/best_tour.jpg");
+	background-color: #F6F6F6;
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	height: 225px;
+	height: 700px;
+	z-index: 1;
 }
 
-.rankTitleText {
+.rankText {
 	width: 1080px;
-	padding-top: 50px;
-	color: white;
+	padding-top: 70px;
 	text-align: center;
 }
 
-.rankTitleTextHead {
-	font-size: 70px;
+.rankTextTitle {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 10px;
 }
 
-.rankTitleTextContent {
-	font-size: 35px;
+.rankTextContent {
+	font-size: 17px;
+	color: gray;
 }
 
 .rankListWrap {
-	padding-top: 270px;
+	position: relative;
+	padding-top: 150px;
 	text-align: center;
 	font-size: 20px;
+	z-index: 2;
 }
 
 .rankListContent {
@@ -126,6 +151,50 @@ div {
 	height: 180px;
 }
 
+/* ---------------------------- 찜 리스트 순위 ---------------------------- */
+.wishList {
+	width: 100%;
+	height: 600px;
+	left: 0px;
+}
+
+.wishText {
+	width: 1080px;
+	padding-top: 70px;
+	text-align: center;
+}
+
+.wishTextTitle {
+	font-size: 25px;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
+
+.wishTextContent {
+	font-size: 17px;
+	color: gray;
+}
+
+.wishListWrap {
+	padding-top: 30px;
+	text-align: center;
+	font-size: 20px;
+}
+
+.wishListContent {
+	display: inline-block;
+	margin: 15px 15px 15px 15px;
+}
+
+.wishName {
+	padding-top: 10px;
+}
+
+.wishImage {
+	width: 320px;
+	height: 180px;
+}
+
 /* ---------------------------- footer 영역 ---------------------------- */
 .footer_wrap {
 	float: right;
@@ -133,57 +202,68 @@ div {
 	left: 0px;
 	width: 100%;
 	margin-top: 360px;
-	background-color: #0099ff;
 }
 </style>
 </head>
 <body>
 	<div class="section">
 		<div class="image">
-			<div class="imageText">
-				<p class="imageDesc">미소플랜에 오신 것을 환영합니다<br>자신만의 일정을 자유롭게 꾸며보세요</p>
-			</div>
+			<img id="center-image" alt="centerimage" src="images/main1.png">
 		</div>
 		<div class="contents">
 			<div class="mainmenu">
-				<div class="mainmenuimage">
+				<div class="mainmenuimage" onclick="location.href='search.do'">
 					<img class="mainimage" alt="searchimage" src="images/search.jpg">
-					<p class="menutitle">관광지 검색</p>
+					<p class="menutitle">일정 검색</p>
 					<p class="menudesc">국내에서 이용가능한 관광지를 실시간으로 검색하여 각종 정보들을 알아볼 수
 						있고, 나만의 리스트에 추가할 수 있습니다.</p>
 				</div>
-				<div class="mainmenuimage">
+				<div class="mainmenuimage" onclick="location.href='makePlan.do'">
 					<img class="mainimage" alt="planimage" src="images/plan.jpg">
 					<p class="menutitle">일정 만들기</p>
 					<p class="menudesc">관광 계획, 이동순서, 세부일정 등의 놓치지 말아야 할 사항들을 편리하게
 						작성하고 관리할 수 있습니다.</p>
 				</div>
-				<div class="mainmenuimage">
-					<img class="mainimage" alt="accompanyimage"
-						src="images/accompany.jpg">
-					<p class="menutitle">동행 찾기</p>
-					<p class="menudesc">원하는 관광지를 함께 여행할 동행을 검색할 수 있도록 도와드립니다.
-						미소투어에서 동행을 찾아보세요.</p>
-				</div>
-				<div class="mainmenuimage">
+				<div class="mainmenuimage" onclick="location.href='boardschedule.do'">
 					<img class="mainimage" alt="accompanyimage"
 						src="images/otherplan.jpg">
-					<p class="menutitle">다른 일정 보기</p>
+					<p class="menutitle">일정 게시판</p>
 					<p class="menudesc">다른 회원의 일정을 구경하거나 자신이 만든 일정을 공유할 수 있습니다.</p>
+				</div>
+				<div class="mainmenuimage" onclick="location.href='listAction.do'">
+					<img class="mainimage" alt="accompanyimage"
+						src="images/accompany.jpg">
+					<p class="menutitle">동행 구하기</p>
+					<p class="menudesc">원하는 관광지를 함께 여행할 동행을 검색할 수 있도록 도와드립니다.
+						미소투어에서 동행을 찾아보세요.</p>
 				</div>
 			</div>
 			<div class="rankList">
 				<div class="rankTitleWrap">
-					<div class="rankTitleText">
-						<p class="rankTitleTextHead">관광지 순위</p>
-						<p class="rankTitleTextContent">가장 인기있는 관광지를 알아보세요</p>
+					<div class="rankText">
+						<p class="rankTextTitle">인기 여행일정</p>
+						<p class="rankTextContent">인기있는 관광지를 알아보세요</p>
 					</div>
 				</div>
 				<div class="rankListWrap">
-					<c:forEach var="list" items="${list }">
+					<c:forEach var="listPlan" items="${listPlan }">
 						<div class="rankListContent">
-							<img class="rankImage" alt="${list.tour_name }" src="${list.image_url }">
-							<p class="rankName"><strong>${list.tour_name }</strong></p>
+							<img class="rankImage" alt="${listPlan.tour_name }" src="${listPlan.image_url }">
+							<p class="rankName"><strong>${listPlan.tour_name }</strong></p>
+						</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="wishList">
+				<div class="wishText">
+					<p class="wishTextTitle">찜 리스트 Top 9</p>
+					<p class="wishTextContent">가장 가 보고 싶은 관광지</p>
+				</div>
+				<div class="wishListWrap">
+					<c:forEach var="listWish" items="${listWish }">
+						<div class="wishListContent">
+							<img class="wishImage" alt="${listWish.tour_name }" src="${listWish.img_src }">
+							<p class="wishName"><strong>${listWish.tour_name }</strong></p>
 						</div>
 					</c:forEach>
 				</div>
@@ -193,5 +273,22 @@ div {
 			<%@ include file="footer.jsp"%>
 		</div>
 	</div>
+	<script type="text/javascript">
+ 			 var image = document.getElementById("center-image");
+			var current = 0;
+			var images = [ "images/main2.png", 
+			               "images/main3.png",
+						   "images/main4.png", 
+						   "images/main5.png",
+						   "images/main1.png" ];
+			function replacePhoto() {
+				console.log(image);
+				++current;
+				if (current >= images.length)
+					current = 0;
+				image.src = images[current];
+			}
+			setInterval(replacePhoto, 2000); 
+</script>
 </body>
 </html>
