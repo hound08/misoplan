@@ -179,6 +179,10 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	$("#sl_codehidden").val(cardBoxTitle1.trim());					//	trim()<<< 공백 제거
 });
 
+var loadFile = function(event) {
+	var output = document.getElementById('output');
+	output.src = URL.createObjectURL(event.target.files[0]);
+};
 
 </script>
 </head>
@@ -217,11 +221,6 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	</form>
 	
 	<%@ include file="footer.jsp"%>
-	<script type="text/javascript">
-	var loadFile = function(event) {
-		var output = document.getElementById('output');
-		output.src = URL.createObjectURL(event.target.files[0]);
-	};
-	</script>
+	
 </body>
 </html>
