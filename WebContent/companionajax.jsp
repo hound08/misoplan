@@ -1,7 +1,7 @@
-<%@page import="dao.ApplicantsDto"%>
 <%@page import="org.json.simple.JSONArray"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="java.util.List"%>
+<%@page import="dao.ApplicantsDto"%>
 <%@page import="dao.ApplicantsDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -24,6 +24,9 @@
 		 obj.put("status", applist.get(i).getStatus());
 		 String dateString = "" + applist.get(i).getApplicants_date();
 		 obj.put("applicants_date", dateString);
+		 obj.put("kakao_id", applist.get(i).getKakao_id());
+		 obj.put("num_people", applist.get(i).getNum_people());
+		 obj.put("post_num", applist.get(i).getPost_num());
 		 jsonArray.add(obj);
 	 }
 	 out.print(jsonArray);
