@@ -415,6 +415,31 @@ public class BoardScheduleDao {
 		}
 		
 	}
+	public int getTotalVote(int bs_num) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select vote_count from boardschedule where bs_num = ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (conn != null) conn.close();
+			if (conn != null) conn.close();
+		}
+		
+		return total;
+	}
 	public void vote_count(int bs_num) throws SQLException {
 		
 		Connection conn = null;
@@ -432,6 +457,26 @@ public class BoardScheduleDao {
 		} finally {
 			 if (ps != null) ps.close(); 
 	         if (conn != null) conn.close(); 
+		}
+		
+	}
+	public void vote_down(int bs_num) throws SQLException {
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		
+		String sql = "update boardschedule set vote_count = vote_count-1 where bs_num = ?";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			ps.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			if (conn != null) conn.close();
+			if (ps != null) ps.close();
 		}
 		
 	}

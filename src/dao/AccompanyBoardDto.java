@@ -19,7 +19,16 @@ public class AccompanyBoardDto {
 	private Date closing_date; //마감일
 	private int is_closed; //마감 여부
 	private int comment_count; //댓글수
+	private int status;
 	
+	
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
 	public int getMinimum_num() {
 		return minimum_num;
 	}

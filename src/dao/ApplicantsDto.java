@@ -6,12 +6,35 @@ public class ApplicantsDto {
 	private int post_num;
 	private String email;
 	private String nickname;
-	private String status;
+	private int status;
 	private String message;
-	private String kkkao_id;
+	private String kakao_id;
 	private Date   applicants_date;
+	private int    num_people;
+	private String profile_url;
 	
 	
+	
+	
+	
+	public String getKakao_id() {
+		return kakao_id;
+	}
+	public void setKakao_id(String kakao_id) {
+		this.kakao_id = kakao_id;
+	}
+	public String getProfile_url() {
+		return profile_url;
+	}
+	public void setProfile_url(String profile_url) {
+		this.profile_url = profile_url;
+	}
+	public int getNum_people() {
+		return num_people;
+	}
+	public void setNum_people(int num_people) {
+		this.num_people = num_people;
+	}
 	public Date getApplicants_date() {
 		return applicants_date;
 	}
@@ -36,10 +59,10 @@ public class ApplicantsDto {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public String getStatus() {
+	public int getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 	public String getMessage() {
@@ -48,10 +71,5 @@ public class ApplicantsDto {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getKkkao_id() {
-		return kkkao_id;
-	}
-	public void setKkkao_id(String kkkao_id) {
-		this.kkkao_id = kkkao_id;
-	}
+	
 }
