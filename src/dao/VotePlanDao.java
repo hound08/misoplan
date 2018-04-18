@@ -65,7 +65,7 @@ private static VotePlanDao instance; //instance
 		
 		int result = -1;
 		
-		String sql = "INSERT INTO VOTEPLAN VELUES(?, ?, ?)";
+		String sql = "INSERT INTO VOTEPLAN VALUES (?, ?, ?)";
 		
 		try {
 			conn = getConnection();
@@ -80,6 +80,7 @@ private static VotePlanDao instance; //instance
 			if ( conn != null ) conn.close();
 			if ( ps != null ) ps.close();
 		}
+		System.out.println("insert result : " + result);
 		return result;
 	}
 	public int delete(VotePlanDto dto) throws SQLException {
@@ -87,7 +88,7 @@ private static VotePlanDao instance; //instance
 		PreparedStatement ps = null;
 		int result = -1;
 		
-		String sql = "delete from voteplan where email = ? or ip_addr = ?";
+		String sql = "delet from vateplan where email=? or ip_addr=?";
 		
 		try {
 			conn = getConnection();
@@ -101,6 +102,7 @@ private static VotePlanDao instance; //instance
 			if ( conn != null ) conn.close();
 			if ( ps != null ) ps.close();
 		}
+		System.out.println("delete result : " + result);
 		return result;
 	}
 	
@@ -110,7 +112,6 @@ private static VotePlanDao instance; //instance
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		int result = -1;
-		
 		String sql = "select * from voteplan where (email=? and bs_num=?) or (ip_addr=? and bs_num=?)";
 		
 		try {
@@ -125,14 +126,14 @@ private static VotePlanDao instance; //instance
 				result = 0; //좋아요 누르지 않은 상태
 			else 
 				result =1; // 좋아요 이미 누른 상태
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			if ( conn != null ) conn.close();
 			if ( ps != null ) ps.close();
 			if ( rs != null ) rs.close();
 		}
-		
+		System.out.println("checkresult : " + result);
 		return result;
 	}
 	
