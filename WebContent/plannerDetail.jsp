@@ -168,7 +168,7 @@ div {
 		date = date.replace("-", "/");
 		String paraDay = "";
 		System.out.println("date parameter : " + date);
-			//System.out.println("jsonString : " + jsonString);
+			System.out.println("jsonString : " + jsonString);
 		
 		JSONArray ja1 = new JSONArray(jsonString);
 		JSONObject lastObj = ja1.getJSONObject(ja1.length()-1);
@@ -256,7 +256,9 @@ div {
 						String mapx = (String) jo.get("mapx");
 						String mapy = (String) jo.get("mapy");
 						String imagePath = (String) jo.get("imagePath");
-						
+						String slcode = (String) jo.get("slcode");
+						String smcode = (String) jo.get("smcode");
+						String sscode = (String) jo.get("sscode");
 						if (!dayValue.equals(min)) {
 							min = dayValue;
 				%>
@@ -277,8 +279,8 @@ div {
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
 							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
-							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
-							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							planTitle="<%=planTitle%>" contentId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"
+							slcode="<%=slcode%>" smcode="<%=smcode%>" sscode="<%=sscode%>"></textarea>
 					</div>
 				</div>
 				<%
@@ -295,8 +297,8 @@ div {
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
 							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
-							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
-							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							planTitle="<%=planTitle%>" contentId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"
+							sl_code="<%=slcode%>" sm_code="<%=smcode%>" ss_code="<%=sscode%>"></textarea>
 					</div>
 				</div>
 				<%}
