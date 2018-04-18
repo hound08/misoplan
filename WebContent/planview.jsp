@@ -147,6 +147,22 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 </style>
 
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+
+	$(document).on('click', '.span-icon-vote', function() {
+		
+		var bs_num = '${bs_num}';
+		var sendDate = "bs_num="+bs_num;
+		$.post('vote.jsp', sendDate, function(msg) {
+			
+			var parseMsg = msg.trim();
+			$('.span-icon-vote').html('<i class="icon-vote"></i>'+parseMsg);
+			
+		})
+		
+	})
+</script>
 </head>
 <body>
 
@@ -165,8 +181,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<p>${dto.tag}</p>
  			<p>${dto.area_names }</p>
 			<p>${dto.schedule_date }</p>
-<%-- 			<p>${dto.vote_count }</p>
-			<p>${dto.view_count }</p>  --%>
 			<p>${dto.board_date }</p>
 			<p>${dto.content }</p>
 			
