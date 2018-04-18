@@ -44,8 +44,8 @@ public class mySchduleDao {
 		  Connection conn = null;
 	      PreparedStatement ps = null;
 	      ResultSet rs = null;
-	      String sql2 = "select l.sl_code,l.s_name, m.AREA_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from   SCHEDULELARGE l, "
-	      		+ "schedulemedium m where  l.sl_code = m.sl_code and    email = ? ";
+	      String sql2 = "select l.sl_code,l.s_name, m.AREA_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from SCHEDULELARGE l, "
+	      		+ "schedulemedium m where  l.sl_code = m.sl_code and email = ?";
 	      List<mySchduleDto> planList = new ArrayList<mySchduleDto>();
 	      
 	      try {
@@ -72,6 +72,6 @@ public class mySchduleDao {
 		      }
 	      
 		      return planList;
-		   }
+	}
 	
 }

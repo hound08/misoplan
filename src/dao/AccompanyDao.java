@@ -485,4 +485,54 @@ public void vote_down(int post_num) {
 		
 		return list;
 	}
+	
+	public List<myPlanABDto> getMyPlan(String email){
+		  Connection conn = null;
+	      PreparedStatement pstmt = null;
+	      ResultSet rs = null;
+	      String sql = "select distinct l.sl_code,l.s_name, m.AREA_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from SCHEDULELARGE l, schedulemedium m where l.sl_code = m.sl_code and email = ? ORDER BY SL_CODE DESC, TOUR_DATE_START ASC";
+	      List<myPlanABDto> planList = new ArrayList<myPlanABDto>();
+	      
+	      try {
+		         conn = getConnection();
+		         pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		         pstmt.setString(1, email);
+		         rs = pstmt.executeQuery();
+		         
+		         while(rs.next()){
+		        	 myPlanABDto dto = new myPlanABDto();
+		        	 ArrayList<String> areaList = new ArrayList<String>();
+		        	 dto.setSl_code(rs.getString("sl_code"));
+		        	 dto.setS_name(rs.getString("s_name"));
+		        	 dto.setDate_start(String.valueOf(rs.getDate("tour_date_start")));
+		        	 areaList.add(rs.getString("area_name"));
+		        	 String s_name = rs.getString("s_name");
+		        	 while(true) {
+		        		 if(rs.next()) {
+				        	 if( s_name.equals((rs.getString("s_name"))) ) {
+				        		if(!areaList.contains(rs.getString("area_name")))
+				        			areaList.add(rs.getString("area_name"));
+				        	 } else {
+				        		 rs.previous();
+				        		 break;
+				        	 }
+		        		 } else {
+			        		 rs.previous();
+		        			 break;
+		        		 }
+		        	 }
+		        	 dto.setArea_names(areaList);
+		        	 dto.setDate_end(String.valueOf(rs.getDate("tour_date_start")));
+		        	 dto.setRegi_date(String.valueOf(rs.getDate("regi_date")));
+		        	 planList.add(dto);
+		         }
+		      } catch (Exception e) {
+		         e.printStackTrace();
+		      } finally {
+		         close(rs);
+		         close(pstmt);
+		         close(conn);
+		      }
+		      return planList;
+	}
 }
