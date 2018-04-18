@@ -127,7 +127,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
-.icon-vote{
+.icon-vote {
 	width: 17px;
     height: 17px;
 	background: url("images/thumbup.png") no-repeat;
@@ -144,6 +144,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .span-icon-vote{
 	cursor: pointer;
+}
+.span.icon {
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 5px;	
+	padding: 2px 3px;
 }
 .main-reply {
 	width: 1100px;
@@ -250,7 +256,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="main-top-second2">
 			<p>${dto.nickname }</p>
 		<span class="span-icon-view"><i class="icon icon-view"></i>${dto.view_count }명이 읽었어요</span>
-		<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 읽었어요</span>
+		<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 좋아해요</span>
 			<p>${dto.tag}</p>
  			<p>${dto.area_names }</p>
 			<p>${dto.schedule_date }</p>
