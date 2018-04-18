@@ -111,7 +111,7 @@ private static VotePlanDao instance; //instance
 		ResultSet rs = null;
 		int result = -1;
 		
-		String sql = "select * from voteplan where (email=? and bs_num=?) or (ip_addr=? and post_num=?)";
+		String sql = "select * from voteplan where (email=? and bs_num=?) or (ip_addr=? and bs_num=?)";
 		
 		try {
 			conn = getConnection();
