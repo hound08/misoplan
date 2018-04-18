@@ -210,7 +210,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	font-size: 13px;
 }
 </style>
-<<<<<<< HEAD
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -227,8 +226,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		})
 		
 	})
-=======
-<script type="text/javascript">
+
 	function replyChk() {
 		if (!$('.reply_textarea').val()) {
 			alert("글을 써!");
@@ -238,7 +236,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		
 		return true;
 	}
->>>>>>> cf73627372c556bc97bda5352746f6ac0428d360
 </script>
 </head>
 <body>
@@ -303,8 +300,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		<div class="reply_write">
 			<form name="frm_reply" action="bsReplyPro.do" onsubmit="return replyChk()">
 				<div class="reply_profile_write">
-					<img class="img_profile_write" alt="내 프로필 사진" src="images/no_profile_image.png">
-					<p>병자</p>
+					<img class="img_profile_write" alt="프로필 사진" src="${profile_url}">
+					<p>${nickname}</p>
 				</div>
 				<div class="reply_content_write">
 					<input type="hidden" name="bs_num" value="${dto.bs_num }">
@@ -317,7 +314,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<hr class="reply_hr">
 		<div class="reply_view">
-			<p class="reply_title">댓글</p>
+			<p class="reply_title">댓글(${list_size})</p>
 			<c:forEach var="list_reply" items="${list_reply}">
 				<div class="reply_profile_view">
 					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">

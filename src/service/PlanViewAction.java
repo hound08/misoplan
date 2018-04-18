@@ -28,6 +28,7 @@ public class PlanViewAction implements CommandProcess {
 			request.setAttribute("bs_num", bs_num);
 			request.setAttribute("dto", dto);
 			request.setAttribute("list_reply", list);
+			request.setAttribute("list_size", list.size());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
