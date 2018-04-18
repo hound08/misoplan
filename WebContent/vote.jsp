@@ -20,7 +20,7 @@
 	
 	int result = vdao.check(vdto);
 	if(result ==0) {
-		vdao.inset(vdto);
+		vdao.insert(vdto);
 		dao.vote_count(bs_num);
 		
 	} else {
