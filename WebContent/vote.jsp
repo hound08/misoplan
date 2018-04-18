@@ -9,7 +9,6 @@
 	BoardScheduleDao dao = BoardScheduleDao.getInstance();
 	VotePlanDao vdao = VotePlanDao.getInstance();
 	VotePlanDto vdto = new VotePlanDto();
-	System.out.println("@@@@@@@@@@@@@@@@@@@");
 	
 	int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 	String email = (String) session.getAttribute("email");
@@ -23,7 +22,6 @@
 	if(result ==0) {
 		vdao.insert(vdto);
 		dao.vote_count(bs_num);
-		System.out.println("bs_num : " + bs_num);
 		
 	} else {
 		vdao.delete(vdto);

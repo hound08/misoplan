@@ -223,9 +223,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			var parseMsg = msg.trim();
 			$('.span-icon-vote').html('<i class="icon-vote"></i>'+parseMsg);
 			
-		})
+		});
 		
-	})
+	});
 	function replyChk() {
 		if (!$('.reply_textarea').val()) {
 			alert("글을 써!");
