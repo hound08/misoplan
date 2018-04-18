@@ -27,7 +27,6 @@
 			 #myinfo {
 				border: 1px solid green;
 			}
-			
 			.card {
 				float: left;
 				width: 290px;
@@ -147,18 +146,19 @@
 					</div>
 					<div id="cardall">
 						<c:forEach var="list" items="${list }">
-							<div class="card" onclick="cardclick('${list.contendtid}', '${list.contenttypeid }', '${list.email }')">
+							<input type="checkbox" name="wishlist" class="cardcheckbox" value="${list.contendtid }">
+								<div class="card" onclick="cardclick('${list.contendtid}', '${list.contenttypeid }', '${list.email }')">
 								<div class="cardhead">
-									<input type="checkbox" name="wishlist" class="cardcheckbox" value="${list.contendtid }">
 									<img alt="tour_img" src="${list.img_src }">
 								</div>
 								<div class="cardbody">
 									<a href="#">${list.tour_name }</a>
 								</div>
-							</div>
+								</div>
 						</c:forEach>
 					</div>
 				</form>
+				
 							<div class="pagination">
 										<a href="#">&laquo;</a> 
 										<a href="#" class="active">1</a> 

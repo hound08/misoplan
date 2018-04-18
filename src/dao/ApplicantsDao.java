@@ -57,10 +57,12 @@ public class ApplicantsDao {
 	        	 ApplicantsDto dto = new ApplicantsDto();
 	        	 dto.setMessage(rs.getString("message"));
 	        	 dto.setNickname(rs.getString("nickname"));
-	        	 dto.setStatus(rs.getString("status"));
+	        	 dto.setStatus(rs.getInt("status"));
 	        	 dto.setApplicants_date(rs.getDate("applicants_date"));
-	        	 dto.setKkkao_id(rs.getString("kakao_id"));
+	        	 dto.setKakao_id(rs.getString("kakao_id"));
+	        	 dto.setNum_people(rs.getInt("num_people"));
 	        	 dto.setEmail(rs.getString("email"));
+	        	 dto.setPost_num(rs.getInt("post_num"));
 	        	 applist.add(dto);
 	         }
 		} catch (Exception e) {
@@ -72,6 +74,7 @@ public class ApplicantsDao {
 	      }
 		return applist;
 	}
+	
 	public List<ApplicantsDto> myappselect(String email) throws SQLException{
 		Connection conn = null;
 	    PreparedStatement ps = null;
@@ -88,9 +91,9 @@ public class ApplicantsDao {
 	        	 ApplicantsDto dto = new ApplicantsDto();
 	        	 dto.setMessage(rs.getString("message"));
 	        	 dto.setNickname(rs.getString("nickname"));
-	        	 dto.setStatus(rs.getString("status"));
+	        	 dto.setStatus(rs.getInt("status"));
 	        	 dto.setApplicants_date(rs.getDate("applicants_date"));
-	        	 dto.setKkkao_id(rs.getString("kakao_id"));
+	        	 dto.setKakao_id(rs.getString("kakao_id"));
 	        	 dto.setPost_num(rs.getInt("post_num"));
 	        	 System.out.println("post_num"+rs.getInt("post_num"));
 	        	 myapplist.add(dto);
@@ -104,4 +107,61 @@ public class ApplicantsDao {
 	      }
 		return myapplist;
 	}
+	
+	public int update(ApplicantsDto appdto) throws SQLException{
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		String sql ="update applicants set status = ? where nickname = ? and post_num = ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, appdto.getStatus());
+			ps.setString(2, appdto.getNickname());
+			ps.setInt(3, appdto.getPost_num());
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			 if (ps != null) ps.close();
+		     if (conn != null) conn.close();
+		}
+		return result;
+	}
+	
+	public List<ApplicantsDto> bonusselect(int post_num, String nickname, int status) throws SQLException {
+		Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String sql = "SELECT m.PROFILE_URL , a.NICKNAME, a.KAKAO_ID   from member m, applicants a  where m.NICKNAME = a.NICKNAME and a.POST_NUM = ? and a.STATUS = ? and a.NICKNAME = ?";
+	    System.out.println("dao"+ post_num);
+	    System.out.println("dao"+ nickname);
+	    System.out.println("dao"+ status);
+	    List<ApplicantsDto> list = new ArrayList<ApplicantsDto>();
+		try {
+			conn = getConnection();
+	         ps = conn.prepareStatement(sql);
+	         ps.setInt(1, post_num);
+	         ps.setInt(2, status);
+	         ps.setString(3, nickname);
+	         rs = ps.executeQuery();
+	         while(rs.next()){
+	        	 ApplicantsDto dto = new ApplicantsDto();
+	        	 dto.setProfile_url(rs.getString("profile_url"));
+	        	 dto.setNickname(rs.getString("nickname"));
+	        	 dto.setKakao_id(rs.getString("kakao_id"));
+	        	 list.add(dto);
+	         }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}	finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return list;
+		
+	}
+	
+	
 }
