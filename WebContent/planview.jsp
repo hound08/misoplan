@@ -226,7 +226,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		})
 		
 	})
-<script type="text/javascript">
 	function replyChk() {
 		if (!$('.reply_textarea').val()) {
 			alert("글을 써!");
