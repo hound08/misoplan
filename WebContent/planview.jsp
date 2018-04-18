@@ -224,16 +224,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			$('.span-icon-vote').html('<i class="icon-vote"></i>'+parseMsg);
 			
 		});
-		
-<<<<<<< HEAD
 	})
 
-=======
-	});
->>>>>>> 3ffd2071e0214530784b2c7a08669f77efa45966
 	function replyChk() {
 		if (!$('.reply_textarea').val()) {
-			alert("글을 써!");
+			alert("글을 입력해 주시기 바랍니다.");
 			
 			return false;
 		}
