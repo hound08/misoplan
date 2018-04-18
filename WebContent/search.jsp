@@ -790,29 +790,55 @@ $(document).ready(function(){
 										+	' 	29%10 :   '	+ (29%10)
 										+ '</p>'											
 											);
-				}
-				
-				
-				/* 검색 list 생성 */
-				for (var i = 0; i < myItem.length; i++) {
+					/* 검색 list 생성 */
+					for (var i = 0; i < myItem.length; i++) {
+						console.log(myItem.length);
+						var title = myItem[i].title;
+						var firstImage = myItem[i].firstimage;
+						if(firstImage == undefined){
+							firstImage = "images/no_image.jpg";
+						}					
+						
+						$("#galleryList").append(
+								'<a href = "searchDetail.do?contentTypeId='
+								+ myItem[i].contenttypeid +'&'
+								+ 'contendtid='
+								+ myItem[i].contentid +'&'
+								+ 'email='
+								+ email + '&'
+								+ 'mapx='
+								+ myItem[i].mapx + '&'
+								+ 'mapy='
+								+ myItem[i].mapy + '&'
+								+ 'firstImage='
+								+ firstImage
+								+ '">'
+								+'<li> <img src =' + firstImage + ' alt = ""> <p>' 
+								+ title + '</p> </li>'
+								+ '</a>'
+								);
+					}
+				}else if(myTotalCount==1){
 					console.log(myItem.length);
-					var title = myItem[i].title;
-					var firstImage = myItem[i].firstimage;
+					$("#contentsTop").html('<p> 총 검색개수 : ' + myTotalCount + '</p>'											
+					);
+					var title = myItem.title;
+					var firstImage = myItem.firstimage;
 					if(firstImage == undefined){
 						firstImage = "images/no_image.jpg";
 					}					
 					
 					$("#galleryList").append(
 							'<a href = "searchDetail.do?contentTypeId='
-							+ myItem[i].contenttypeid +'&'
+							+ myItem.contenttypeid +'&'
 							+ 'contendtid='
-							+ myItem[i].contentid +'&'
+							+ myItem.contentid +'&'
 							+ 'email='
 							+ email + '&'
 							+ 'mapx='
-							+ myItem[i].mapx + '&'
+							+ myItem.mapx + '&'
 							+ 'mapy='
-							+ myItem[i].mapy + '&'
+							+ myItem.mapy + '&'
 							+ 'firstImage='
 							+ firstImage
 							+ '">'
@@ -821,6 +847,9 @@ $(document).ready(function(){
 							+ '</a>'
 							);
 				}
+				
+				
+				
 				
 			/* 페이징 */
 				/* 처음으로 가기  */
