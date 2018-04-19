@@ -202,7 +202,7 @@
 							+ '<li> <strong> ● 공연 시간 </strong>'
 							+ '  :  '
 							+ playtime
-							+ '</li>'
+							+ '</li><br>'
 							+ '<li> <strong> ● 행사 장소 </strong>'
 							+ '  :  '
 							+ eventplace
