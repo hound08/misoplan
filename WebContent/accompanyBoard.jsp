@@ -360,6 +360,9 @@ p {
 						<c:if test="${a == 2 }">					
 							<a href='listActionVOTE.do?pageNum=${startPage-blockSize }'>&laquo;</a>
 						</c:if>
+						<c:if test="${a == 3 }">					
+							<a href='searchActionAB.do?pageNum=${startPage-blockSize }&keyword=${keyword}&selected=${selected}'>&laquo;</a>
+						</c:if>
 					</c:if>
 					<c:if test="${startPage==1 }">
 						<c:if test="${a == 0 }">
@@ -371,6 +374,10 @@ p {
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=1'>&laquo;</a>
 						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=1&keyword=${keyword}&selected=${selected}'>&laquo;</a>
+						</c:if>
+						
 					</c:if>
 					<c:if test="${currentPage!=1 }">
 						<c:if test="${a == 0 }">
@@ -382,6 +389,9 @@ p {
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${currentPage-1}'>&#9665</a>
 						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${currentPage-1}&keyword=${keyword}&selected=${selected}'>&#9665</a>
+						</c:if>
 					</c:if>
 					<c:if test="${currentPage==1 }">
 						<c:if test="${a == 0 }">
@@ -392,6 +402,9 @@ p {
 						</c:if>
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=1'>&#9665</a>
+						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=1&keyword=${keyword}&selected=${selected}'>&#9665</a>
 						</c:if>
 					</c:if>
 
@@ -405,6 +418,9 @@ p {
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${i }'>${i }</a>
 						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${i }&keyword=${keyword}&selected=${selected}'>${i }</a>
+						</c:if>
 					</c:forEach>
 
 					<c:if test="${currentPage==totalPage }">
@@ -417,6 +433,9 @@ p {
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${totalPage }'>&#9655</a>
 						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${totalPage }&keyword=${keyword}&selected=${selected}'>&#9655</a>
+						</c:if>
 					</c:if>
 					<c:if test="${currentPage!=totalPage }">
 						<c:if test="${a == 0 }">
@@ -427,6 +446,9 @@ p {
 						</c:if>
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${currentPage+1 }&keyword=${keyword}&selected=${selected}'>&#9655</a>
 						</c:if>
 					</c:if>
 					<c:if test="${endPage>=totalPage }">
@@ -439,6 +461,9 @@ p {
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${totalPage}'>&raquo;</a>
 						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${totalPage}&keyword=${keyword}&selected=${selected}'>&raquo;</a>
+						</c:if>
 					</c:if>
 					<c:if test="${endPage<totalPage }">
 						<c:if test="${a == 0 }">
@@ -449,6 +474,9 @@ p {
 						</c:if>
 						<c:if test="${a == 2 }">
 							<a href='listActionVOTE.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>
+						<c:if test="${a == 3 }">
+							<a href='searchActionAB.do?pageNum=${endPage+blockSize }&keyword=${keyword}&selected=${selected}'>&raquo;</a>
 						</c:if>
 					</c:if>
 				</div>

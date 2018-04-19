@@ -16,17 +16,27 @@ public class searchActionAB implements CommandProcess{
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("utf-8"); //encode to UTF-8
 		HttpSession session = request.getSession();
 		
 		String pageNum = request.getParameter("pageNum");
-		String keyword = request.getParameter("search-keyword");
-		int selected = Integer.parseInt(request.getParameter("search-selected"));
+		
+		String keyword = "";
+		if(request.getParameter("search-keyword") == null)
+			keyword = request.getParameter("keyword");
+		else
+			keyword = request.getParameter("search-keyword");
+		
+		int selected = 0;
+		if(request.getParameter("search-selected") == null)
+			selected = Integer.parseInt(request.getParameter("selected"));
+		else
+			selected = Integer.parseInt(request.getParameter("search-selected"));
 		
 		AccompanyDao dao = AccompanyDao.getInstance();
 		
-		if(pageNum ==null ||pageNum.equals(""))
+		if(pageNum == null || pageNum.equals("") )
 			pageNum = "1";
+		System.out.println("pageNum="+pageNum);
 		int currentPage = Integer.parseInt(pageNum);//현재 페이지 번호
 		int totalPost = dao.getTotalSearchedPost(keyword, selected); //게시물 개수
 		int pageSize = 9; //한페이지에 보일 게시물 수
@@ -41,9 +51,18 @@ public class searchActionAB implements CommandProcess{
 			endPage = totalPage;
 		else
 			endPage = startPage + blockSize -1; //페이지 목록 끝
-		
+		System.out.println("currentPage="+currentPage);
+		System.out.println("totalPost="+totalPost);
+		System.out.println("pageSize="+pageSize);
+		System.out.println("blockSize="+blockSize);
+		System.out.println("startRow="+startRow);
+		System.out.println("endRow="+endRow);
+		System.out.println("startNum="+startNum);
+		System.out.println("totalPage="+totalPage);
+		System.out.println("startPage="+startPage);
+		System.out.println("endPage="+endPage);
+
 		List<AccompanyBoardDto> list = dao.search(keyword, selected, startRow, endRow);
-		
 		request.setAttribute("totalPost", totalPost);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);
@@ -55,7 +74,9 @@ public class searchActionAB implements CommandProcess{
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("list", list);
 		request.setAttribute("email", session.getAttribute("email"));
-		int a = 4;
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("selected", selected);
+		int a = 3;
 		request.setAttribute("a", a);
 		return "accompanyBoard.jsp";
 	}

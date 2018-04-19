@@ -544,15 +544,15 @@ public void vote_down(int post_num) {
 	    List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
 	    String sql = null;
 	    if(selected == 1) {
-	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like ? order by post_num desc) a) where rn between ? and ?";
 	    }else if(selected == 2) {
-	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like ? order by post_num desc) a) where rn between ? and ?";
 	    }else if(selected == 3) {
-	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where nickname like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where nickname like ? order by post_num desc) a) where rn between ? and ?";
 	    }else {
-	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where tag like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where tag like ? order by post_num desc) a) where rn between ? and ?";
 	    }
-	    
+	    keyword = "%" + keyword + "%";
 	    try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -586,7 +586,6 @@ public void vote_down(int post_num) {
 			close(pstmt);
 			close(conn);
 		}
-		
 		return list;
 	}
 
@@ -597,14 +596,15 @@ public void vote_down(int post_num) {
 		int total = 0;
 		String sql = null;
 		   if(selected == 1) {
-		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   	sql = "select count(*) from accompanyboard where title like ?";
 		   }else if(selected == 2) {
-		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   	sql = "select count(*) from accompanyboard where title like ?";
 		   }else if(selected == 3) {
-		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where nickname like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   	sql = "select count(*) from accompanyboard where nickname like ?";
 		   }else {
-		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where tag like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   	sql = "select count(*) from accompanyboard where tag like ?";
 		   }
+		keyword = "%" + keyword + "%";
 		try {
 			conn = getConnection();
 			pstmt = conn.prepareStatement(sql);
@@ -619,7 +619,6 @@ public void vote_down(int post_num) {
 			close(pstmt);
 			close(conn);
 		}
-		
 		return total;
 	}
 }
