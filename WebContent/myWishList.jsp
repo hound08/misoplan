@@ -25,14 +25,24 @@
 					margin: 20px 0px;
 			}
 			 #myinfo {
-				border: 1px solid green;
+				/* border: 1px solid green; */
+			}
+			.cardOut{
+				float:left;
+				width : 270px;
+				height : 200px;
+				/* border: 1px solid; */
+				margin-bottom : 10px;
+				margin-right: 10px;
+				margin-left: 25px;
+				margin-top: 15px;
 			}
 			.card {
 				float: left;
-				width: 290px;
+				width: 250px;
 				height: 200px;
-				border: 1px solid;
-				margin: 8px;
+				/* border: 1px solid; */
+				/* margin: 8px; */
 			}
 			.cardhead  img{
 				border-radius: 15px;
@@ -43,11 +53,11 @@
 				float: right;        /* 체크 박스 정렬 */
 			}
 			.cardbody {
-				border: 1px solid yellow;
+				/* border: 1px solid yellow; */
 				height: 45px;
 			}
 			#cardmenu {
-				border: 1px solid;
+				/* border: 1px solid; */
 				float: right;
 			}
 			#cardall{
@@ -146,28 +156,59 @@
 					</div>
 					<div id="cardall">
 						<c:forEach var="list" items="${list }">
-							<input type="checkbox" name="wishlist" class="cardcheckbox" value="${list.contendtid }">
+							<div class = "cardOut">
+								<input type="checkbox" name="wishlist" class="cardcheckbox" value="${list.contendtid }">
 								<div class="card" onclick="cardclick('${list.contendtid}', '${list.contenttypeid }', '${list.email }')">
-								<div class="cardhead">
-									<img alt="tour_img" src="${list.img_src }">
+									<div class="cardhead">
+										<img alt="tour_img" src="${list.img_src }">
+									<div class="cardbody">
+										<a href="#">${list.tour_name }</a>
+									</div>
+									</div>
 								</div>
-								<div class="cardbody">
-									<a href="#">${list.tour_name }</a>
-								</div>
-								</div>
+							</div>
 						</c:forEach>
 					</div>
 				</form>
 				
-							<div class="pagination">
-										<a href="#">&laquo;</a> 
-										<a href="#" class="active">1</a> 
-										<a href="#">2</a> 
-										<a href="#">3</a> 
-										<a href="#" >4</a> 
-										<a href="#">5</a> 
-										<a href="#">&raquo;</a>
-							</div>
+					<div class="pagination">
+						<c:if test="${startPage!=1 }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${startPage-blockSize }'>&laquo;</a>
+						</c:if>
+						
+						<c:if test="${startPage==1 }">
+							<a href='myWishListForm.do?email=${email }&pageNum=1'>&laquo;</a>
+						</c:if>
+						
+						<c:if test="${currentPage!=1 }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${currentPage-1}'>&#9665</a>
+						</c:if>
+						
+						<c:if test="${currentPage==1 }">
+							<a href='myWishListForm.do?email=${email }&pageNum=1'>&#9665</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${i }'>${i }</a>
+						</c:forEach>
+						
+						<c:if test="${currentPage==totalPage }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${totalPage }'>&#9655</a>
+						</c:if>
+						
+						<c:if test="${currentPage!=totalPage }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
+						
+						<c:if test="${endPage>=totalPage }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${totalPage}'>&raquo;</a>
+						</c:if>
+						
+						<c:if test="${endPage<totalPage }">
+							<a href='myWishListForm.do?email=${email }&pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>	
+						
+					</div>
 				</div>
 			</div>
 		</div>
