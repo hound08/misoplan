@@ -517,5 +517,9 @@ public class BoardScheduleDao {
 		
 		return list;
 	}
+	public int getSearchPage(String bar, int selected) throws SQLException {
+		
+		
+	}
 
 }

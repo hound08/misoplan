@@ -187,7 +187,9 @@ div {
 		}
 		setInterval(replacePhoto, 3000);
 		
-		
+		function listChk(list) {
+			listCode = list;
+		}
 	</script>
 	<%
 		String email = (String) session.getAttribute("email");
@@ -298,17 +300,18 @@ div {
 		</c:if>
 	</c:if>
 	</div>
+	<form action="plansearch.do">
 	<div class="search" align="center">
-		<select class="menu" onchange="listChk(this.value)">
+		<select class="menu" name="search-option">
 			<option value="0">전체</option>
 			<option value="1">제목</option>
 			<option value="2">지역명</option>
 			<option value="3">닉네임</option>
 			<option value="4">내용</option>
-		</select> <input type="text" class="search-bar" placeholder="일정 보기 검색">
-		<button style="width: 50pt; height: 27pt;" onclick="location.href='plansearch.do'">검색</button>
-		
+		</select> <input type="text" class="search-bar" placeholder="일정 보기 검색" name="search-bar">
+		<input type="submit" value="검색" style="width: 50pt; height: 27pt;">
 	</div>
+	</form>
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
