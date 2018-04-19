@@ -9,6 +9,7 @@
  	int post_num = Integer.parseInt(request.getParameter("postnum"));
 	String nickname = request.getParameter("nickname");
 	int status = Integer.parseInt(request.getParameter("status"));
+	int num_people = Integer.parseInt(request.getParameter("num_people"));
 	/* int post_num = 5;
 	String nickname = "철우!";
 	int status = 1; */
@@ -17,13 +18,13 @@
 	appdto.setStatus(Integer.parseInt(request.getParameter("status")));
 	appdto.setPost_num(post_num);
 	appdto.setNickname(nickname);
-
+		
+		System.out.println("ajax :"+ num_people);
 		System.out.println("ajax :"+ post_num);
 		System.out.println("ajax :"+ nickname); 
 		System.out.println("ajax :"+ Integer.parseInt(request.getParameter("status"))); 
 		  
 	ApplicantsDao appdao = ApplicantsDao.getInstance();
-	
  	int result = appdao.update(appdto);  
 	// 동행 상태 업데이트
 	List<ApplicantsDto> list = appdao.bonusselect(post_num, nickname, status);
