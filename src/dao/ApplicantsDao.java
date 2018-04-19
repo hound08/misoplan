@@ -163,5 +163,36 @@ public class ApplicantsDao {
 		
 	}
 	
-	
+	public List<ApplicantsDto> statusselect(int post_num )throws SQLException{
+		Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String sql ="select a.status, a.nickname, a.kakao_id, m.profile_url from applicants a , member m where a.email = m.email and post_num = ?";
+	    List<ApplicantsDto> list = new ArrayList<ApplicantsDto>();
+	    try {
+	    	conn = getConnection();
+	        ps = conn.prepareStatement(sql);
+	        ps.setInt(1, post_num);
+	        rs = ps.executeQuery();
+	        while(rs.next()){
+	        	int status = rs.getInt("status");
+	        	System.out.println("status : "+ status);
+	        	if (status ==1){
+	        		System.out.println("dao 빙빙빙");
+	        		 ApplicantsDto dto = new ApplicantsDto();
+		        	 dto.setProfile_url(rs.getString("profile_url"));
+		        	 dto.setNickname(rs.getString("nickname"));
+		        	 dto.setKakao_id(rs.getString("kakao_id"));
+		        	 list.add(dto);
+	        	}
+	        }
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return list;
+	}
 }

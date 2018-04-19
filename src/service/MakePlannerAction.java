@@ -55,6 +55,7 @@ public class MakePlannerAction implements CommandProcess {
 		}
 		AreaParser areaParser = new AreaParser();
 		try {
+			
 			ArrayList<HashMap<String, String>> areas = areaParser.getAreas();
 			request.setAttribute("areasList", areas);
 		}catch (Exception e) {

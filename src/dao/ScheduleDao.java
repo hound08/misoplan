@@ -157,7 +157,7 @@ public class ScheduleDao {
 				}
 			}
 		}
-		String sql3 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ.NEXTVAL,?,?,?,?,?,?)";
+		String sql3 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ2.NEXTVAL,?,?,?,?,?,?)";
 		try {
 			ps3 = conn.prepareStatement(sql3);
 			for (int i = 0; i < sArr.size(); i++) {
@@ -294,6 +294,123 @@ public class ScheduleDao {
 			release(conn, ps, rs);
 		}
 		return loadArr;
+	}
+
+	public int updatePlan(ScheduleLargeDto ldto, ArrayList<ScheduleMediumDto> mArr, ArrayList<ScheduleSmallDto> sArr) {
+		Connection conn = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2= null;
+		PreparedStatement ps3 = null;
+		PreparedStatement ps4 = null;
+		PreparedStatement ps5 = null;
+		int result1 = 0;
+		int result2 = 0;
+		int result3 = 0;
+		int result4 = 0;
+		int result5 = 0;
+		
+		String sql1 = "UPDATE SCHEDULELARGE SET s_name = ?, regi_date = sysdate WHERE sl_code = ?";
+		try {
+			conn = getConnection();
+			ps1 = conn.prepareStatement(sql1);
+			ps1.setString(1, ldto.getS_name());
+			ps1.setString(2, ldto.getSl_code());
+			
+			result1 = ps1.executeUpdate();
+			System.out.println("result1 : " + result1);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		String sql2 = "DELETE FROM SCHEDULESMALL WHERE sl_code = ?";
+		try {
+			ps2 = conn.prepareStatement(sql2);
+			ps2.setString(1, ldto.getSl_code());
+			result2 = ps2.executeUpdate();
+			System.out.println("result2 : " + result2);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps2.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String sql3 = "DELETE FROM SCHEDULEMEDIUM WHERE sl_code = ?";
+		try {
+			ps3 = conn.prepareStatement(sql3);
+			ps3.setString(1, ldto.getSl_code());
+			result3 = ps3.executeUpdate();
+			System.out.println("result3 : " + result3);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps3.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String sql4 = "INSERT INTO SCHEDULEMEDIUM VALUES(?,SM_CODE_SEQ.NEXTVAL,?,?,?,?,?)";
+		try {
+			ps4 = conn.prepareStatement(sql4);
+			for (int i = 0; i < mArr.size(); i++) {
+				ScheduleMediumDto mdto = mArr.get(i);
+				ps4.setString(1, ldto.getSl_code());
+				ps4.setString(2, mdto.getArea_name());
+				ps4.setString(3, mdto.getArea_code());
+				ps4.setString(4, mdto.getSigungu_name());
+				ps4.setString(5, mdto.getSigungu_code());
+				ps4.setString(6, mdto.getTour_date());
+				result4 = ps4.executeUpdate();
+				System.out.println("result4 : " + result4);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps4.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		String sql5 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ.NEXTVAL,?,?,?,?,?,?)";
+		try {
+			ps5 = conn.prepareStatement(sql5);
+			for (int i = 0; i < sArr.size(); i++) {
+				ScheduleSmallDto sdto = sArr.get(i);
+				ps5.setString(1, ldto.getSl_code());
+				ps5.setString(2, sdto.getTour_name());
+				ps5.setString(3, sdto.getTour_code());
+				ps5.setDouble(4, sdto.getCoord_x());
+				ps5.setDouble(5, sdto.getCoord_y());
+				ps5.setString(6, sdto.getImage_url());
+				ps5.setString(7, sdto.getTour_text());
+				result5 = ps5.executeUpdate();
+				System.out.println("result5 : " + result5);
+			}
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps5.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0 && result5 != 0) {
+			return 1;
+		}
+		return 0;
 	}
 
 }

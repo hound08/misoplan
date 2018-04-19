@@ -145,21 +145,17 @@ var onoff = 0;
 	var tdpost = "#z"+post_num;
 	var divpost = "#t"+post_num;
 	   console.log("tdpost : " + tdpost);
-	var senddata = {
-			"status":status, 
-		 	"post_num":postnum
-		 };   
-	   
-	 	$.getJSON('companionajax2.jsp', data,function() {
-			
-		
+			if(onoff == 0){
+	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"></div><div id="menu2"></div></div>')
+	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
+	 		$.each(data,function(){
+	 			var date = new Date();
+				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td></tr></table></div>';
+				   $('#menu1').append(str);
+	 		});
 	 		
 	 	});
-	   
-	   
 		$.getJSON('companionajax.jsp', send_data, function(data,status) {
-	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"></div><div id="menu2"></div></div>')
-			if(onoff == 0){
 				$.each(data,function(){
 					var date = new Date();
 						var kakao = this.kakao_id;
@@ -168,18 +164,18 @@ var onoff = 0;
 							'<div class="cardbox"><table>'+
 							'<tr><td id="nickname" postnum='+postnum+'>'+this.nickname+'</td><td id="'+kakao+'"><button class="btnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button class="btnimg" aaa="2"><img class="yn" src="images/no.png"></button></td></tr>'+
 							'<tr><td colspan="2"><pre class="mess">'+  this.message +'</pre></td></tr>'+
-							'<tr><td>인원수 : </td><td>'+ this.num_people+'</td></tr>'+
+							'<tr><td>인원수 : </td><td  data='+this.num_people+'>'+ this.num_people+'</td></tr>'+
 							'<tr><td>신청날짜 : </td><td>'+this.applicants_date+'</td></tr>'
 							+'</table></div>';
 					/* $('#card2').after(str2);  */
 					$('#menu2').append(str); 
 				});
 				onoff = onoff+1;
-			}else{
-				 $('#mainsecond2').remove(); 
-				 onoff = onoff-1; 
-			}
 		});
+			}else{
+				  $('#mainsecond2').remove(); 
+				 onoff = onoff-1;  
+			}
 });
  
  $(document).on('click', '.btnimg', function(){
@@ -189,6 +185,9 @@ var onoff = 0;
 	 console.log("$this : " + classname);
 	 var nickname = $this.parent().prevAll('#nickname').text();
 	 var postnum = $this.parent().prevAll('#nickname').attr('postnum');
+	 var num_people = $this.parent().parent().next().next().children().next().attr('data');
+	 //prev().eq(2).children().eq(1).text();
+	 console.log("num_people = " + num_people);
 	 
 	 var status_data = "status="+status;
 	 var nickname_data = "nickname="+nickname;
@@ -197,7 +196,8 @@ var onoff = 0;
 	 var senddata = {
 		"status":status, 
 		"nickname":nickname,
-	 	"postnum":postnum
+	 	"postnum":postnum,
+	 	"num_people":num_people
 	 };
 	  
 	 console.log("status : " + status);

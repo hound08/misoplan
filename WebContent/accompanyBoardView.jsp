@@ -275,6 +275,7 @@ tr.highlight td {
 	
 	});
 
+
 </script>
 
 <body>
@@ -325,7 +326,6 @@ tr.highlight td {
 					<td> 
 						<span class="span-icon-view"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요</span>
 						<span class="span-icon-vote"><i class="icon icon-vote"></i><label>${board.vote_count }명이 좋아해요</label></span>
-						
 					</td>
 				</tr>
 			</table>
@@ -338,6 +338,8 @@ tr.highlight td {
 			</c:if>
 			<div class="like-button"><button>좋아요</button></div>
 		</div>
+		<a href="listAction.do"><button>목록보기</button></a>
+		<button onclick="refresh()">새로고침</button>
 		<hr>
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
@@ -405,6 +407,10 @@ tr.highlight td {
 		        document.body.scroll = "yes";
 		    }
 		    
+		}
+		
+		function refresh() {
+		    location.reload();
 		}
 	</script>
 </body>

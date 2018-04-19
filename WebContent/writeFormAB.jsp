@@ -1,3 +1,9 @@
+<%@page import="dao.myPlanABDto"%>
+<%@page import="dao.AccompanyDao"%>
+<%@page import="dao.mySchduleDto"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="dao.mySchduleDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
@@ -17,6 +23,11 @@ div {
 	padding: 0px;
 	margin: 0px;
 	font-family: 'NanumSquareRound', sans-serif;
+	box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -o-box-sizing: border-box;
 }
 	
 .section {
@@ -130,9 +141,42 @@ input[type="file"] {
 	margin-right: 60px;
 }
 
+.plan-div{
+	width: 100%; 
+	height: 250px; 
+	border-style: solid;
+	border-width: 1px;
+	border-color: silver;
+	display: inline-block;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-left: 10px;
+}
+
+.plan{
+	width: 250px;
+	height: 220px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: silver;
+	display: inline-block;
+	margin: 10px 10px;
+}
+
+.plan-table td{
+	text-align:center; 
+    vertical-align:middle;
+}
+
 </style>
 </head>
 <body>
+	<%
+		String email = (String)session.getAttribute("email");
+	    AccompanyDao dao = AccompanyDao.getInstance();
+	    List<myPlanABDto> list = dao.getMyPlan(email);
+	    request.setAttribute("list", list);
+	%>
 	<div class="section">
 		<div class="main-image">
 			<img id="center-image" alt="centerimage" src="images/korea1.jpg">
@@ -168,7 +212,33 @@ input[type="file"] {
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>태그&nbsp&nbsp</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="20" name="content"></textarea></div></td></tr>
+				<tr>
+					<td>나의 일정&nbsp&nbsp</td>
+					<td>
+						<div class="plan-div">
+							<c:forEach var="myplan" items="${list }">
+								<div class="plan">
+									<table class="plan-table">
+										<tr>
+											<td>일정이름: ${myplan.s_name }</td> 
+										</tr>
+										<tr>
+											<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
+										</tr>
+										<tr>
+											<td>${myplan.date_start }~${myplan.date_end }</td>
+										</tr>
+										<tr>
+											<td>${myplan.regi_date }</td>
+										</tr>
+									</table>
+								</div>
+							</c:forEach>
+						</div>
+					</td>
+				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="30" name="content"></textarea></div></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지&nbsp&nbsp</td><td><img id="output"/></td></tr>

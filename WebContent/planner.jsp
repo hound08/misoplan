@@ -357,40 +357,41 @@ body {
 	// 
 	$(document).ready(function(){
 		var status = '${status}';
-		//console.log("status in script : " + status);
-		var loadJsonArr = '${loadJsonArr}';
-		loadJsonArr = JSON.parse(loadJsonArr).reverse();
-		console.log(loadJsonArr);
-		var plandiv = $('.plandiv');
-		var dayFlag = loadJsonArr[0].tour_date;
-		//console.log("dayFlag : " + dayFlag)
-		var sm_codes = "";
-		var ss_codes = "";
-		makeDay();
-		jQuery.each(loadJsonArr, function(index, value){
-			if(dayFlag != value.tour_date){
-				//console.log(dayFlag +"////" + value.tour_date);
-				makeDay();
-				dayFlag = value.tour_date;
-			}
-			plandiv.append("<div class='planelem' seq=seq-"+ seq+ " id='planelem"+ value.tour_code + "' dayvalue="+ (daycount - 1) 
-					  + " areaName = "+ value.area_name + " areaCode="+ value.area_code + " sigunguName ="+ value.sigungu_name
-					  + " sigunguCode="+ value.sigungu_code + " contentId="+ value.tour_code + " mapx="+ value.coord_x + " mapy="+ value.coord_y
-					  + " imagePath="+ value.image_url+"><p class='elemtitle' id='elemtitle"+value.tour_code+"'>"+ value.tour_name
-					  + "</p><div class='deleteelem' id='delete"+value.tour_code+"'>X&nbsp;</div></div>");
-			plandivheight = plandivheight + 22;
-			plandiv.css('height', plandivheight);
+		if(status == null){
+			status = '0';
+		}
+		console.log("status in script : " + status);
+		if(status == 1){
+			var loadJsonArr = '${loadJsonArr}';
+			loadJsonArr = JSON.parse(loadJsonArr).reverse();
+			console.log(loadJsonArr);
+			var plandiv = $('.plandiv');
+			var dayFlag = loadJsonArr[0].tour_date;
+			//console.log("dayFlag : " + dayFlag)
+			makeDay();
+			jQuery.each(loadJsonArr, function(index, value){
+				if(dayFlag != value.tour_date){
+					//console.log(dayFlag +"////" + value.tour_date);
+					makeDay();
+					dayFlag = value.tour_date;
+				}
+				plandiv.append("<div class='planelem' seq=seq-"+ seq+ " id='planelem"+ value.tour_code + "' dayvalue="+ (daycount - 1) 
+						  + " areaName = "+ value.area_name + " areaCode="+ value.area_code + " sigunguName ="+ value.sigungu_name
+						  + " sigunguCode="+ value.sigungu_code + " contentId="+ value.tour_code + " mapx="+ value.coord_x + " mapy="+ value.coord_y
+						  + " imagePath="+ value.image_url+" sl_code="+value.sl_code+" sm_code="+value.sm_code+" ss_code="+value.ss_code+">"
+						  +	" <p class='elemtitle' id='elemtitle"+value.tour_code+"'>"+ value.tour_name
+						  + "</p><div class='deleteelem' id='delete"+value.tour_code+"'>X&nbsp;</div></div>");
+				plandivheight = plandivheight + 22;
+				plandiv.css('height', plandivheight);
+				
+				createMarker(value.coord_y, value.coord_x);
+			});
+			drawLines();
+			$('#form').append("<input type='hidden' name='sl_code' value="+loadJsonArr[0].sl_code+">");
 			
-			createMarker(value.coord_y, value.coord_x);
-			sm_codes = sm_codes + "," +value.sm_code;
-			ss_codes = ss_codes + "," +value.ss_code;
-		});
-		drawLines();
-		$('#form').append("<input type='hidden' name='sl_code' value="+loadJsonArr[0].sl_code+">");
-		$('#form').append("<input type='hidden' name='sm_codes' value="+sm_codes+">");
-		$('#form').append("<input type='hidden' name='ss_codes' value="+ss_codes+">");
-		$('#form').append("<input type='hidden' name='status' value="+status+">");
-		
+			
+		}
+			$('#form').append("<input type='hidden' name='status' value="+status+">");
 	});
 	function makeDay(){
 		var plandiv = $('.plandiv');
@@ -422,8 +423,10 @@ body {
 						var plandiv = $(".plandiv");
 						var contents = $(".planelem");
 						var jsonArr = [];
+						var sl_code = "";
 						jQuery.each(contents, function(index, value) { // jQuery each >> java의 향상된 for문과 비슷함, value는 contents의 각 요소
 							if ($(value).attr('dayvalue')) { // jsonArr에 데이터를 push
+								sl_code = 
 								jsonArr.push({
 												"dayvalue" : $(value).attr('dayvalue'),
 												"areaCode" : $(value).attr('areaCode'),
@@ -434,7 +437,10 @@ body {
 												"elemTitle" : $(value).children(".elemtitle").text().replace(/ /gi,""), // 공백을 제거하는 메서드
 												"mapx" : $(value).attr('mapx'),
 												"mapy" : $(value).attr('mapy'),
-												"imagePath" : $(value).attr('imagePath')
+												"imagePath" : $(value).attr('imagePath'),
+												"slcode" : $(value).attr('sl_code'),
+												"smcode" : $(value).attr('sm_code'),
+												"sscode" : $(value).attr('ss_code')
 								});
 							}
 						});
@@ -542,6 +548,7 @@ body {
 						var touraddr = $this.prevAll("#tourdescdiv").children().eq(1).text();
 						var coordx = $this.prevAll("#tourdescdiv").attr("mapx");
 						var coordy = $this.prevAll("#tourdescdiv").attr("mapy");
+						var sl_code = $this.prevAll("#tourdescdiv").attr("slcode");
 						var imagePath = $this.parent().prevAll(".tourImageDiv").children(".tourImage").attr("src");
 						var contentId = $(this).attr("id");
 						var plandiv = $('.plandiv');
@@ -563,7 +570,7 @@ body {
 							plandiv.append("<div class='planelem' seq=seq-"+ seq+ " id='planelem"+ contentId+ "' dayvalue="+ (daycount - 1)					// (데이터베이스 전송을 위해 
 															  + " areaName = "+ areaName+ " areaCode="+ areaCode+ " sigunguName ="+ sigunguName				// 	담고가야할 데이터를 속성으로
 															  + " sigunguCode="+ sigunguCode+ " contentId="+ contentId+ " mapx="+ coordx+ " mapy="+ coordy  //	설정하여 append
-															  + " imagePath="+ imagePath+ "><p class='elemtitle' id='elemtitle"+contentId+"'>"+ tourtitle
+															  + " imagePath="+ imagePath+" sl_code='' sm_code='' ss_code=''><p class='elemtitle' id='elemtitle"+contentId+"'>"+ tourtitle
 															  + "</p><div class='deleteelem' id='delete"+contentId+"'>X&nbsp;</div></div>");
 							plandivheight = plandivheight + 22;
 							plandiv.css('height', plandivheight);
@@ -790,11 +797,12 @@ body {
 </head>
 <body>
 	<%
-		if(request.getAttribute("loadJsonArr") != null){
-			//System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
+		/* if(request.getAttribute("loadJsonArr") != null){
+			System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
 		}else if(request.getAttribute("loadJsonArr") == null){
-			//System.out.println("empty!!!!!!");
-		}
+			System.out.println("empty!!!!!!");
+		} */
+		request.setAttribute("status", request.getAttribute("status"));
 		System.out.println("status in planner.jsp : " + request.getAttribute("status"));
 	%>
 	<%

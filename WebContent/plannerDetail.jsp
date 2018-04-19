@@ -9,6 +9,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -156,7 +157,6 @@ div {
 		});
 	});
 </script>
-
 </head>
 <body>
 	<%
@@ -168,7 +168,7 @@ div {
 		date = date.replace("-", "/");
 		String paraDay = "";
 		System.out.println("date parameter : " + date);
-			//System.out.println("jsonString : " + jsonString);
+			System.out.println("jsonString : " + jsonString);
 		
 		JSONArray ja1 = new JSONArray(jsonString);
 		JSONObject lastObj = ja1.getJSONObject(ja1.length()-1);
@@ -200,9 +200,12 @@ div {
 		paraDay = paraDay.substring(1, paraDay.length());
 			//System.out.println("paraDay : " + paraDay);
 		// date calculating end
-		
-		
-		
+		int status = Integer.parseInt(request.getParameter("status"));
+		String sl_code = "";
+		if(request.getParameter("sl_code") != null){
+			sl_code = request.getParameter("sl_code");
+		}
+				
 	%>
 
 	<div class="section">
@@ -219,7 +222,8 @@ div {
 			<br> 
 			<h3><%=strFirstDay %> ~ <%= strLastDay %></h3><br>
 		</div>
-
+		
+	
 		<div class="planDiv">
 			<form action="insertPlanAction.do" id="form">
 				<div class="planTop">
@@ -229,6 +233,8 @@ div {
 				<input type="hidden" name="lastDate" value="<%=strLastDay %>">
 				<input type="hidden" name="jsonString" id="jsonString">
 				<input type="hidden" name="strDays" id="strDays" value="<%=paraDay%>">
+				<input type="hidden" name="sl_code" id="strDays" value="<%=sl_code%>">
+				<input type="hidden" name="status" id="strDays" value="<%=status%>">
 					<div class="planTopInner">PLAN</div>
 				</div>
 				<%
@@ -243,6 +249,9 @@ div {
 					</p>
 				</div>
 				<%
+						String slcode = " ";
+						String smcode = " ";
+						String sscode = " ";
 					for (int i = 0; i < ja.length(); i++) {
 
 						JSONObject jo = ja.getJSONObject(i);
@@ -256,7 +265,15 @@ div {
 						String mapx = (String) jo.get("mapx");
 						String mapy = (String) jo.get("mapy");
 						String imagePath = (String) jo.get("imagePath");
-						
+						if(jo.get("slcode") != null){
+							slcode = (String) jo.get("slcode");
+						}
+						if(jo.get("smcode") != null){
+							smcode = (String) jo.get("smcode");
+						}
+						if(jo.get("sscode") != null){
+							sscode = (String) jo.get("sscode");
+						}
 						if (!dayValue.equals(min)) {
 							min = dayValue;
 				%>
@@ -277,8 +294,8 @@ div {
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
 							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
-							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
-							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							planTitle="<%=planTitle%>" contentId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"
+							slcode="<%=slcode%>" smcode="<%=smcode%>" sscode="<%=sscode%>"></textarea>
 					</div>
 				</div>
 				<%
@@ -295,8 +312,8 @@ div {
 					<div class="contentTextDiv">
 						<textarea class="textarea" dayValue="<%=dayValue%>"
 							areaCode="<%=areaCode%>" areaName = "<%=areaName %>" sigunguCode="<%=sigunguCode%>" sigunguName="<%=sigunguName %>"
-							planTitle="<%=planTitle%>" contentId="<%=contentId%>"
-							mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"></textarea>
+							planTitle="<%=planTitle%>" contentId="<%=contentId%>" mapx="<%=mapx%>" mapy="<%=mapy%>" imagePath="<%=imagePath%>"
+							sl_code="<%=slcode%>" sm_code="<%=smcode%>" ss_code="<%=sscode%>"></textarea>
 					</div>
 				</div>
 				<%}
