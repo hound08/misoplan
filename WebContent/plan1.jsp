@@ -232,6 +232,9 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${startPage-blockSize }'>&laquo;</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${startPage-blockSize }'>&laquo;</a>
+		</c:if>
 	</c:if>
 	<c:if test="${startPage==1 }">
 		<c:if test="${click == 0 }">
@@ -239,6 +242,9 @@ div {
 		</c:if>
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=1'>&laquo;</a>
+		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=1'>&laquo;</a>
 		</c:if>
 	</c:if>
 	<c:if test="${currentPage!=1 }">
@@ -248,6 +254,9 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${currentPage-1}'>&#9665</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${currentPage-1}'>&#9665</a>
+		</c:if>
 	</c:if>
 	<c:if test="${currentPage==1 }">
 		<c:if test="${click == 0 }">
@@ -255,6 +264,9 @@ div {
 		</c:if>
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=1'>&#9665</a>
+		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=1'>&#9665</a>
 		</c:if>
 	</c:if>
 
@@ -265,6 +277,9 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${i }'>${i }</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${i }'>${i }</a>
+		</c:if>
 	</c:forEach>
 
 	<c:if test="${currentPage==totalPage }">
@@ -274,6 +289,9 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${totalPage }'>&#9655</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${totalPage }'>&#9655</a>
+		</c:if>
 	</c:if>
 	<c:if test="${currentPage!=totalPage }">
 		<c:if test="${click == 0 }">
@@ -281,6 +299,9 @@ div {
 		</c:if>
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${currentPage+1 }'>&#9655</a>
+		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${currentPage+1 }'>&#9655</a>
 		</c:if>
 	</c:if>
 	<c:if test="${endPage>=totalPage }">
@@ -290,6 +311,9 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${totalPage}'>&raquo;</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${totalPage}'>&raquo;</a>
+		</c:if>
 	</c:if>
 	<c:if test="${endPage<totalPage }">
 		<c:if test="${click == 0 }">
@@ -298,12 +322,15 @@ div {
 		<c:if test="${click == 1 }">
 			<a href='view_count.do?pageNum=${endPage+blockSize }'>&raquo;</a>
 		</c:if>
+		<c:if test="${click == 2 }">
+			<a href='plansearch.do?pageNum=${endPage+blockSize }'>&raquo;</a>
+		</c:if>
 	</c:if>
 	</div>
 	<form action="plansearch.do">
 	<div class="search" align="center">
 		<select class="menu" name="search-option">
-			<option value="0">전체</option>
+			<!-- <option value="1">전체</option> -->
 			<option value="1">제목</option>
 			<option value="2">지역명</option>
 			<option value="3">닉네임</option>

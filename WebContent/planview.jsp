@@ -127,6 +127,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 	magin : 0 30px;
 }
+
 .icon-vote {
 	width: 17px;
     height: 17px;

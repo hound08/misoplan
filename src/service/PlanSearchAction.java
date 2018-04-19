@@ -18,28 +18,22 @@ public class PlanSearchAction implements CommandProcess {
 			HttpServletResponse response) throws ServletException, IOException {
 
 		try {
-			System.out.println("@@@@@@@@@@@@@@@@@@@@2");
 			request.setCharacterEncoding("utf-8");
 			HttpSession session = request.getSession();
 			String pageNum = request.getParameter("pageNum");
 			String bar = request.getParameter("search-bar");
 			int selected = Integer.parseInt(request.getParameter("search-option"));
-			System.out.println("pageNum :>>>>>>>>>>>>>>> " + pageNum);
-			System.out.println("search-bar : >>>>>>>>>>>>" + bar);
-			System.out.println("search-option : >>>>>>>>>>>>>>>" + selected);
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
 			
 			if (pageNum == null || pageNum.equals(""))
 				pageNum = "1";
 			int currentPage = Integer.parseInt(pageNum);// 현재 페이지 번호
-			int totalpost = dao.getSearchPage(bar, selected); // 게시물 개수
+			int totalpost = dao.getTotalselect(bar, selected); // 게시물 개수
 			int pageSize = 9; // 한페이지에 보일 게시물 수
 			int blockSize = 5; // 한번에 보일 페이지 수
 			int startRow = (currentPage - 1) * pageSize + 1; // 현재 페이지에서 첫번째 보일
 																// 게시물 번호
 			int endRow = startRow + pageSize - 1; // 현재 페이지에서 보일 마지막 게시물 번호
-			System.out.println("endRow : " + endRow);
-			System.out.println("startRow : " + startRow);
 			int startNum = totalpost - startRow + 1;
 			int totalPage = (int) Math.ceil((double) totalpost
 					/ (double) pageSize);// 총 페이지 개수
@@ -51,7 +45,7 @@ public class PlanSearchAction implements CommandProcess {
 			else
 				endPage = startPage + blockSize - 1; // 페이지 목록 끝
 
-			List<BoardScheduleDto> pagelist = dao.view_conut(startRow, endRow);
+			List<BoardScheduleDto> pagelist = dao.searchPage(bar, selected, startRow, endRow);
 			request.setAttribute("totalpost", totalpost);
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("currentPage", currentPage);
@@ -63,7 +57,7 @@ public class PlanSearchAction implements CommandProcess {
 			request.setAttribute("endPage", endPage);
 			request.setAttribute("pagelist", pagelist);
 			request.setAttribute("email", session.getAttribute("email"));
-			int click = 1;
+			int click = 2;
 			request.setAttribute("click", click);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
