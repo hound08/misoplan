@@ -108,26 +108,165 @@ public class ApplicantsDao {
 		return myapplist;
 	}
 	
-	public int update(ApplicantsDto appdto) throws SQLException{
+	public int update(ApplicantsDto appdto, AccompanyBoardDto abdto){
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result = 0;
-		String sql ="update applicants set status = ? where nickname = ? and post_num = ?";
+		int status = 0;
+		ResultSet rs = null;
+		String sql = "select Status from applicants where  nickname= ? and post_num = ? "; 
+		String sql1 = "SELECT CURRENT_NUM, MINIMUM_NUM FROM ACCOMPANYBOARD where POST_NUM = ?";
+		String sql2 ="update applicants set status = ? where nickname = ? and post_num = ?";
+		String sql3 ="update ACCOMPANYBOARD set CURRENT_NUM= ?  where post_num= ?";
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, appdto.getStatus());
-			ps.setString(2, appdto.getNickname());
-			ps.setInt(3, appdto.getPost_num());
-			result = ps.executeUpdate();
+			ps.setString(1, appdto.getNickname());
+			ps.setInt(2, appdto.getPost_num());
+			rs= ps.executeQuery();
+			int st =0;
+			if(rs.next()){
+				st = rs.getInt("status");
+			} 
+			ps.close();
+			rs.close();
+			//리턴을 0 (대기) 1 (수락) 2 (거절)
+			// status = 0 (대기) 에서 status = 1 로 업데이트
+			// 0 인 상황
+			if( st == 0){
+				ps = conn.prepareStatement(sql2);   // 상태 업데이트
+				ps.setInt(1, appdto.getStatus());
+				ps.setString(2, appdto.getNickname());
+				ps.setInt(3, appdto.getPost_num());
+				result = ps.executeUpdate();
+				ps.close();
+				// 현재 인원에 + 동행 신청한 사람 인원수를 더해 주는 업데이트
+				ps = conn.prepareStatement(sql1);
+				ps.setInt(1, appdto.getPost_num());
+				rs = ps.executeQuery();
+				if(rs.next()){
+					int current_num = rs.getInt("current_num");
+					int minimum_num = rs.getInt("minimum_num");
+					ps.close();
+					rs.close();
+					ps = conn.prepareStatement(sql3);
+					int Num_people = appdto.getNum_people();
+					ps.setInt(1, Num_people+current_num);
+					ps.setInt(2, appdto.getPost_num());
+					result = ps.executeUpdate();
+				}
+				
+				status =  1;
+				
+			}
+			// status = 1(수락 된 상황)에서 수락을 또 누른 상태
+			else if(st == 1){
+				
+				status = 3; //임시로 3 저장(왜냐, 정의를 못내리겠어)
+				
+			}
+			//status = 2(거절인 상황) 인 상황에서 수락을 누른상태 ==> status =1 로 바꿔줘야됨
+			else if( st == 2){
+				ps = conn.prepareStatement(sql2);   // 상태 업데이트
+				ps.setInt(1, appdto.getStatus());
+				ps.setString(2, appdto.getNickname());
+				ps.setInt(3, appdto.getPost_num());
+				result = ps.executeUpdate();
+				ps.close();
+				ps.close();
+				ps = conn.prepareStatement(sql1);
+				ps.setInt(1, appdto.getPost_num());
+				rs = ps.executeQuery();
+				if(rs.next()){
+					int current_num = rs.getInt("current_num");
+					int minimum_num = rs.getInt("minimum_num");
+					ps.close();
+					rs.close();
+					ps = conn.prepareStatement(sql3);
+					int Num_people = appdto.getNum_people();
+					ps.setInt(1, Num_people+current_num);
+					ps.setInt(2, appdto.getPost_num());
+					result = ps.executeUpdate();
+				}
+				
+				status =  1;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			 if (ps != null) ps.close();
-		     if (conn != null) conn.close();
+			 try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return status;
+		
+	}
+	
+	public int noupdate(ApplicantsDto appdto) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		int result = 0;
+		ResultSet rs = null;
+		String sql = "select Status from applicants where  nickname= ? and post_num = ? "; 
+		String sql1 = "SELECT CURRENT_NUM, MINIMUM_NUM FROM ACCOMPANYBOARD where POST_NUM = ?";
+		String sql2 ="update applicants set status = ? where nickname = ? and post_num = ?";
+		String sql3 ="update ACCOMPANYBOARD set CURRENT_NUM= ?  where post_num= ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, appdto.getNickname());
+			ps.setInt(2, appdto.getPost_num());
+			rs= ps.executeQuery();
+			int st =0;
+			if(rs.next()){
+				st = rs.getInt("status");
+			} 
+			ps.close();
+			rs.close();
+			if( st == 2){
+				return 2;
+			} else if (st == 1 ){
+				ps = conn.prepareStatement(sql2);   // 상태 업데이트
+				ps.setInt(1, appdto.getStatus());
+				ps.setString(2, appdto.getNickname());
+				ps.setInt(3, appdto.getPost_num());
+				result = ps.executeUpdate();
+					ps.close();
+					ps = conn.prepareStatement(sql1);
+					ps.setInt(1, appdto.getPost_num());
+					rs = ps.executeQuery();
+					if(rs.next()){
+						int current_num = rs.getInt("current_num");
+						ps.close();
+						rs.close();
+						ps = conn.prepareStatement(sql3);
+						int Num_people = appdto.getNum_people();
+						ps.setInt(1, current_num-Num_people);
+						ps.setInt(2, appdto.getPost_num());
+						result = ps.executeUpdate();
+						result = 1;
+					}
+			} else if (st == 0 ){
+				ps = conn.prepareStatement(sql2);   // 상태 업데이트
+				ps.setInt(1, appdto.getStatus());
+				ps.setString(2, appdto.getNickname());
+				ps.setInt(3, appdto.getPost_num());
+				result = ps.executeUpdate();
+				result = 1;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ps   != null)   ps.close();
+			if (conn != null) conn.close();
 		}
 		return result;
 	}
+	
 	
 	public List<ApplicantsDto> bonusselect(int post_num, String nickname, int status) throws SQLException {
 		Connection conn = null;
@@ -176,9 +315,7 @@ public class ApplicantsDao {
 	        rs = ps.executeQuery();
 	        while(rs.next()){
 	        	int status = rs.getInt("status");
-	        	System.out.println("status : "+ status);
 	        	if (status ==1){
-	        		System.out.println("dao 빙빙빙");
 	        		 ApplicantsDto dto = new ApplicantsDto();
 		        	 dto.setProfile_url(rs.getString("profile_url"));
 		        	 dto.setNickname(rs.getString("nickname"));
