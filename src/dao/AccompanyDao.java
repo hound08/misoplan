@@ -535,4 +535,91 @@ public void vote_down(int post_num) {
 		      }
 		      return planList;
 	}
+	
+	public List<AccompanyBoardDto> search(String keyword, int selected, int startRow, int endRow){
+		
+		Connection conn = null;
+	    PreparedStatement pstmt = null;
+	    ResultSet rs = null;
+	    List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
+	    String sql = null;
+	    if(selected == 1) {
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    }else if(selected == 2) {
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    }else if(selected == 3) {
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where nickname like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    }else {
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where tag like '%?%' order by post_num desc) a) where rn between ? and ?";
+	    }
+	    
+	    try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				AccompanyBoardDto board = new AccompanyBoardDto();
+				board.setPost_num(rs.getInt(2));
+				board.setEmail(rs.getString(3));
+				board.setNickname(rs.getString(4));
+				board.setTitle(rs.getString(6));
+				board.setImage_url(rs.getString(7));
+				board.setContent(rs.getString(8));
+				board.setTag(rs.getString(9));
+				board.setView_count(rs.getInt(10));
+				board.setVote_count(rs.getInt(11));
+				board.setPost_date(rs.getDate(12));
+				board.setClosing_date(rs.getDate(13));
+				board.setMinimum_num(rs.getInt(14));
+				board.setCurrent_num(rs.getInt(15));
+				board.setIs_closed(rs.getInt(16));
+				board.setComment_count(rs.getInt(17));
+				list.add(board);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return list;
+	}
+
+	public int getTotalSearchedPost(String keyword, int selected) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int total = 0;
+		String sql = null;
+		   if(selected == 1) {
+		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   }else if(selected == 2) {
+		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where title like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   }else if(selected == 3) {
+		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where nickname like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   }else {
+		   	sql = "select count(*) from (select rownum rn, a.* from (select * from accompanyboard where tag like '%?%' order by post_num desc) a) where rn between ? and ?";
+		   }
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			rs = pstmt.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(pstmt);
+			close(conn);
+		}
+		
+		return total;
+	}
 }

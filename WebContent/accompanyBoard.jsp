@@ -454,14 +454,16 @@ p {
 				</div>
 				</div>
 				<div class="search">
-					<select class="search-select">
-						<option>제목</option>
-						<option>지역명</option>
-						<option>닉네임</option>
-						<option>날짜</option>
-					</select> 
-					<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!">
-					<button type="submit" class="search-submit">검색</button>
+					<form action="searchActionAB.do">
+						<select class="search-select" name="search-selected">
+							<option value="1">제목</option>
+							<option value="2">지역명</option>
+							<option value="3">닉네임</option>
+							<option value="4">해시태그</option>
+						</select> 
+						<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!" name="search-keyword">
+						<input type="submit" class="search-submit">
+					</form>
 				</div>
 		</div>
 		<div class="footer_wrap">
