@@ -1,11 +1,14 @@
 package dao;
 
+import java.util.Date;
+
 public class WishlistDto {
 	private int contenttypeid;
 	private int contendtid;
 	private String email;
 	private String tour_name;
 	private String img_src;
+	private int post_num;
 	
 	public int getContenttypeid() {
 		return contenttypeid;
@@ -36,6 +39,12 @@ public class WishlistDto {
 	}
 	public void setImg_src(String img_src) {
 		this.img_src = img_src;
+	}
+	public int getPost_num() {
+		return post_num;
+	}
+	public void setPost_num(int post_num) {
+		this.post_num = post_num;
 	}
 	
 }

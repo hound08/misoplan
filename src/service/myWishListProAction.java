@@ -35,13 +35,17 @@ public class myWishListProAction implements CommandProcess {
 			int result = 0;
 			try {
 				result = dao.mydelete(email, list);
-			} catch (SQLException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 			
 			request.setAttribute("result", result);
 			request.setAttribute("email", email);
 			request.setAttribute("contendtid", contendtid);
+			
+			
+			
+			
 		return "myWishListForm.do";
 	}
 
