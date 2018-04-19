@@ -186,6 +186,8 @@ div {
 			image.src = images[current];
 		}
 		setInterval(replacePhoto, 3000);
+		
+		
 	</script>
 	<%
 		String email = (String) session.getAttribute("email");
@@ -297,13 +299,14 @@ div {
 	</c:if>
 	</div>
 	<div class="search" align="center">
-		<select class="menu">
-			<option value="##">제목</option>
-			<option value="##">지역명</option>
-			<option value="##">닉네임</option>
-			<option value="##">내용</option>
+		<select class="menu" onchange="listChk(this.value)">
+			<option value="0">전체</option>
+			<option value="1">제목</option>
+			<option value="2">지역명</option>
+			<option value="3">닉네임</option>
+			<option value="4">내용</option>
 		</select> <input type="text" class="search-bar" placeholder="일정 보기 검색">
-		<button type="submit" class="search-button" style="width: 50pt; height: 27pt;">검색</button>
+		<button style="width: 50pt; height: 27pt;" onclick="location.href='plansearch.do'">검색</button>
 		
 	</div>
 	<%@ include file="footer.jsp"%>

@@ -145,12 +145,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .span-icon-vote{
 	cursor: pointer;
 }
-.span.icon {
-	border: 1px solid;
-	border-color: #D5D5D5;
-	border-radius: 5px;	
-	padding: 2px 3px;
-}
+
 .main-reply {
 	width: 1100px;
 	margin: auto;
