@@ -28,6 +28,8 @@ public class InsertPlanAction implements CommandProcess{
 		ArrayList<ScheduleMediumDto> mArr = new ArrayList<>();
 		ArrayList<ScheduleSmallDto> sArr = new ArrayList<>();
 		
+		
+		int status = Integer.parseInt((String)request.getParameter("status"));
 		String email = request.getParameter("email");
 		String title = request.getParameter("title");
 		String firstdate = request.getParameter("firstdate");
@@ -35,15 +37,17 @@ public class InsertPlanAction implements CommandProcess{
 		String jsonString = request.getParameter("jsonString");
 		String strDays = request.getParameter("strDays");
 		String[] dayArr = strDays.split(",");
-		System.out.println("strDays : " + strDays);
+			//System.out.println("strDays : " + strDays);
 
 		
 		
 		ScheduleLargeDto ldto = new ScheduleLargeDto();
 		ldto.setEmail(email);
 		ldto.setS_name(title);
+		System.out.println("sl_code in insertplanAction : " + request.getParameter("sl_code"));
+		ldto.setSl_code((String)request.getParameter("sl_code"));
 		
-		
+		System.out.println("getSl_code() : " + ldto.getSl_code());
 		JSONArray ja = new JSONArray(jsonString);
 		for(int i = 0; i < ja.length(); i++) {
 
@@ -80,8 +84,14 @@ public class InsertPlanAction implements CommandProcess{
 		System.out.println("lastdate : " + lastdate);
 		System.out.println("jsonString : " + jsonString);
 		
+		
 		ScheduleDao sd = ScheduleDao.getInstance();
-		int result = sd.insertPlan(ldto, mArr, sArr);
+		int result = 0;
+		if(status == 0) {
+			result = sd.insertPlan(ldto, mArr, sArr);
+		}else if(status == 1) {
+			result = sd.updatePlan(ldto, mArr, sArr);
+		}
 		
 		TourRankDao tdao = TourRankDao.getInstance();
 		tdao.insertTour(sArr);

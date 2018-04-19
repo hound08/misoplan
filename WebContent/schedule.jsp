@@ -34,7 +34,7 @@
 			.center-second { /* center 의 세부 내용 쭉쭉~~*/
 				border: 0.5px solid gray;
 				width: 350px;
-				height: 400px;
+				height: 420px;
 				display: inline-block; /* 가로형 정렬 */
 				margin: 30px 22.5px;
 				border-radius: 10px;
@@ -56,7 +56,7 @@
 			}
 			.text {
 				text-align: left;
-			
+			`
 			}
 			.center-second:hover{
 				cursor: pointer;
@@ -73,6 +73,20 @@
 				var form = $("#form");
 				form.append("<input type='hidden' name='sl_code' value="+sl_code+">");
 				form.submit();
+			});
+			
+			
+			$(document).on('click', '.deletePlan', function(){
+				$this = $(this);
+				var deleteId = $this.attr('id');
+				//console.log(deleteId);
+				var deleteId = deleteId.substr(6, deleteId.length);
+				//console.log(deleteId);
+				var sendData = "deleteId="+deleteId; 
+				$.post('deletePlanAction.do', sendData, function(msg) {
+					
+				});
+				
 			});
 		</script>
 	</head>
@@ -101,6 +115,9 @@
 								<div class="text">여행지 : ${list.area_name }</div>
 								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
 								<div class="text">작성일 : ${list.regi_date }</div>
+								<div class="text">
+									<button class='deletePlan' id='delete${list.sl_code}'>삭제</button>
+								</div>
 							</div>
 							
 						
