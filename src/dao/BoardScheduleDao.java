@@ -745,12 +745,39 @@ public class BoardScheduleDao {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (conn != null) conn.close();
 			if (rs != null) rs.close();
 			if (ps != null) ps.close();
+			if (conn != null) conn.close();
 		}
 		
 		return list;
+	}
+	
+	public int deleteAdmin(int bs_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql1 = "DELETE FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
+		String sql2 = "DELETE FROM BOARDSCHEDULE WHERE BS_NUM = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql1);
+			ps.setInt(1, bs_num);
+			result = ps.executeUpdate();
+			
+			ps.close();
+			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, bs_num);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
 	}
 
 }

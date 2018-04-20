@@ -167,8 +167,8 @@
 					var td = tr.children();
 		
 					rowData.push(tr.text());
-					var email = td.eq(2).text();
-					tdArr.push(email);
+					var bs_num = td.eq(1).text();
+					tdArr.push(bs_num);
 				});
 				
 				$('#hiddenDelete').val(tdArr);
@@ -207,7 +207,7 @@
 			</table>
 			<div class="divButton">
 				<form name="frm" action="planDeletePro.do" onsubmit="return deleteChk()">
-					<input type="hidden" id="hiddenDelete" name="hiddenBan">
+					<input type="hidden" id="hiddenDelete" name="hiddenDelete">
 					<input type="submit" id="btnDelete" class="deleteButton" value="글 삭제">
 				</form>
 			</div>
