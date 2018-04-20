@@ -83,6 +83,22 @@
 	table.tableList thead th:first-child {
 	  border-left: none;
 	}
+	form {
+		display: inline-block;
+	}
+	.divButton {
+		margin: auto;
+		width: 90%;
+		text-align: right;
+	}
+	.adminButton {
+		margin-top: 5px;
+		width: 100px;
+		height: 30px;
+		color: white;
+		background-color: #49B2E9;
+		border-color: transparent;
+	}
 	.divPage {
 		margin-top: 15px;
 		text-align: center;
@@ -127,6 +143,134 @@
 			}
 		});
 	});
+	
+	function memberBanChk() {
+		if ($(".chkbox:checked").length == 0) {
+			alert("선택된 회원이 없습니다.");
+			
+			return false;
+		} else {
+			if (confirm($(".chkbox:checked").length + "개의 계정을 정지 처리합니다.\n계속 진행하시겠습니까?")) {
+				var rowData = new Array();
+				var tdArr = new Array();
+				var checkbox = $(".chkbox:checked");
+				
+				checkbox.each(function(i) {
+					var tr = checkbox.parent().parent().eq(i);
+					var td = tr.children();
+		
+					rowData.push(tr.text());
+					var email = td.eq(2).text();
+					tdArr.push(email);
+				});
+				
+				$('#hiddenBan').val(tdArr);
+				
+				return true;
+			} else {
+				$('#hiddenBan').val("");
+				alert("취소하셨습니다.");
+			}
+			
+			return false;
+		}
+	};
+	
+	function memberBanCancleChk() {
+		if ($(".chkbox:checked").length == 0) {
+			alert("선택된 회원이 없습니다.");
+			
+			return false;
+		} else {
+			if (confirm($(".chkbox:checked").length + "개의 계정을 정지 해제합니다.\n계속 진행하시겠습니까?")) {
+				var rowData = new Array();
+				var tdArr = new Array();
+				var checkbox = $(".chkbox:checked");
+				
+				checkbox.each(function(i) {
+					var tr = checkbox.parent().parent().eq(i);
+					var td = tr.children();
+		
+					rowData.push(tr.text());
+					var email = td.eq(2).text();
+					tdArr.push(email);
+				});
+				
+				$('#hiddenBanCancle').val(tdArr);
+				
+				return true;
+			} else {
+				$('#hiddenBanCancle').val("");
+				alert("취소하셨습니다.");
+			}
+			
+			return false;
+		}
+	};
+	
+	function memberAdminChk() {
+		if ($(".chkbox:checked").length == 0) {
+			alert("선택된 회원이 없습니다.");
+			
+			return false;
+		} else {
+			if (confirm($(".chkbox:checked").length + "개의 계정을 관리자로 지정합니다.\n계속 진행하시겠습니까?")) {
+				var rowData = new Array();
+				var tdArr = new Array();
+				var checkbox = $(".chkbox:checked");
+				
+				checkbox.each(function(i) {
+					var tr = checkbox.parent().parent().eq(i);
+					var td = tr.children();
+		
+					rowData.push(tr.text());
+					var email = td.eq(2).text();
+					tdArr.push(email);
+				});
+				
+				$('#hiddenAdmin').val(tdArr);
+				
+				return true;
+			} else {
+				$('#hiddenAdmin').val("");
+				alert("취소하셨습니다.");
+			}
+			
+			return false;
+		}
+	};
+	
+	function memberAdminCancleChk() {
+		if ($(".chkbox:checked").length == 0) {
+			alert("선택된 회원이 없습니다.");
+			
+			return false;
+		} else {
+			if (confirm($(".chkbox:checked").length + "개의 계정을 관리자 해제합니다.\n계속 진행하시겠습니까?")) {
+				var rowData = new Array();
+				var tdArr = new Array();
+				var checkbox = $(".chkbox:checked");
+				
+				checkbox.each(function(i) {
+					var tr = checkbox.parent().parent().eq(i);
+					var td = tr.children();
+		
+					rowData.push(tr.text());
+					var email = td.eq(2).text();
+					tdArr.push(email);
+				});
+				
+				$('#hiddenAdminCancle').val(tdArr);
+				
+				return true;
+			} else {
+				$('#hiddenAdminCancle').val("");
+				alert("취소하셨습니다.");
+			}
+			
+			return false;
+		}
+	};
 </script>
 </head>
 <body>
@@ -153,6 +297,21 @@
 					<c:set var="num" value="${num + 1 }" />
 				</c:forEach>
 			</table>
+			<div class="divButton">
+				<form name="frm" action="adminBanPro.do" onsubmit="return memberBanChk()">
+					<input type="hidden" id="hiddenBan" name="hiddenBan">
+					<input type="submit" id="btnMemberBan" class="adminButton" value="회원 정지"></form>
+					<form name="frmBanCancle" action="adminBanPro.do" onsubmit="return memberBanCancleChk()">
+					<input type="hidden" id="hiddenBanCancle" name="hiddenBanCancle">
+					<input type="submit" class="adminButton" value="회원 정지 해제"></form>
+					<form name="frmAdmin" action="adminBanPro.do" onsubmit="return memberAdminChk()">
+					<input type="hidden" id="hiddenAdmin" name="hiddenAdmin">
+					<input type="submit" class="adminButton" value="관리자 지정"></form>
+					<form name="frmAdminCancle" action="adminBanPro.do" onsubmit="return memberAdminCancleChk()">
+					<input type="hidden" id="hiddenAdminCancle" name="hiddenAdminCancle">
+					<input type="submit" class="adminButton" value="관리자 해제">
+				</form>
+			</div>
 			<div class="divPage">
 				<c:if test="${startPage > blockSize }">
 					<a href='adminMainForm.do?pageNum=${startPage-blockSize }'>≪이전</a>

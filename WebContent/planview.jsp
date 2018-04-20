@@ -183,6 +183,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .reply_hr {
 	color: black;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 .reply_title {
 	margin-top: 20px;
@@ -304,6 +306,20 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 	</div>
 	<div class="main-reply">
+		<div class="reply_view">
+			<p class="reply_title">댓글(${list_size})</p>
+			<c:forEach var="list_reply" items="${list_reply}">
+				<div class="reply_profile_view">
+					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
+					<p>${list_reply.nickname}</p>
+				</div>
+				<div class="reply_content_view">
+					<p class="reply_text">${list_reply.reply_content}</p>
+					<p class="reply_date">${list_reply.reply_date}</p>
+				</div>
+			</c:forEach>
+		</div>
+		<hr class="reply_hr">
 		<div class="reply_write">
 			<form name="frm_reply" action="bsReplyPro.do" onsubmit="return replyChk()">
 				<div class="reply_profile_write">
@@ -318,20 +334,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<input type="submit" class="btn_reply" value="댓글 작성">
 				</div>
 			</form>
-		</div>
-		<hr class="reply_hr">
-		<div class="reply_view">
-			<p class="reply_title">댓글(${list_size})</p>
-			<c:forEach var="list_reply" items="${list_reply}">
-				<div class="reply_profile_view">
-					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
-					<p>${list_reply.nickname}</p>
-				</div>
-				<div class="reply_content_view">
-					<p class="reply_text">${list_reply.reply_content}</p>
-					<p class="reply_date">${list_reply.reply_date}</p>
-				</div>
-			</c:forEach>
 		</div>
 	</div>
 	

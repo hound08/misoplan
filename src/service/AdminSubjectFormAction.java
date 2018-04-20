@@ -19,6 +19,7 @@ public class AdminSubjectFormAction implements CommandProcess {
 			List<BoardScheduleDto> list = dao.selectAdminList();
 			
 			request.setAttribute("list", list);
+			request.setAttribute("totCnt", list.size());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

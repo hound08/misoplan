@@ -422,21 +422,23 @@ public class MemberDao {
 	public int updateMemberBan(int ban, String email) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE - 100, BAN = ?, BAN_DATE = ? WHERE EMAIL = ?";
+		String sql = "UPDATE MEMBER SET MEMBER_SCORE = MEMBER_SCORE - ?, BAN = ?, BAN_DATE = ? WHERE EMAIL = ?";
 		int result = 0;
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, ban);
-			ps.setString(3, email);
+			ps.setInt(2, ban);
+			ps.setString(4, email);
 			
 			if (ban == 0) {
-				ps.setString(2, "");
+				ps.setInt(1, 0);
+				ps.setString(3, "");
 			} else if (ban == 1) {
 				Calendar cal = Calendar.getInstance();
 				Date date = new Date(cal.getTimeInMillis());
-				ps.setDate(2, date);
+				ps.setInt(1, 100);
+				ps.setDate(3, date);
 			}
 			
 			result = ps.executeUpdate();
