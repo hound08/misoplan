@@ -10,10 +10,11 @@
 	int post_num = Integer.parseInt(request.getParameter("post_num"));
 //	int post_num = 1;
 	ApplicantsDao appdao = ApplicantsDao.getInstance();
+	
+		
+	
+	
 	List<ApplicantsDto> applist = appdao.youappselect(post_num);
-	
-	
-	
 	JSONObject json= new JSONObject();
 	JSONArray jsonArray = new JSONArray();
 	
@@ -28,6 +29,7 @@
 		 obj.put("num_people", applist.get(i).getNum_people());
 		 obj.put("post_num", applist.get(i).getPost_num());
 		 jsonArray.add(obj);
+		 System.out.println("ajax jsonArray = "+ jsonArray);
 	 }
 	 out.print(jsonArray);
 	%>

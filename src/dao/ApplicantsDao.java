@@ -155,15 +155,11 @@ public class ApplicantsDao {
 					ps.setInt(2, appdto.getPost_num());
 					result = ps.executeUpdate();
 				}
-				
 				status =  1;
-				
 			}
 			// status = 1(수락 된 상황)에서 수락을 또 누른 상태
 			else if(st == 1){
-				
 				status = 3; //임시로 3 저장(왜냐, 정의를 못내리겠어)
-				
 			}
 			//status = 2(거절인 상황) 인 상황에서 수락을 누른상태 ==> status =1 로 바꿔줘야됨
 			else if( st == 2){
@@ -187,8 +183,8 @@ public class ApplicantsDao {
 					ps.setInt(1, Num_people+current_num);
 					ps.setInt(2, appdto.getPost_num());
 					result = ps.executeUpdate();
+				/*	abdto.setCurrent_num(Num_people+current_num);*/
 				}
-				
 				status =  1;
 			}
 		} catch (Exception e) {
@@ -203,13 +199,39 @@ public class ApplicantsDao {
 			}
 		}
 		return status;
-		
 	}
+	
+	public int getCurrent(int post_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;	
+		int result = 0;
+		ResultSet rs = null;
+		String sql = "SELECT CURRENT_NUM FROM ACCOMPANYBOARD where POST_NUM = ? ";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, post_num);
+			rs = ps.executeQuery();
+			if (rs.next()) {
+				result = rs.getInt("current_num");
+				System.out.println(" appdto result =   " + result );
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}	finally {
+			if (rs     != null) rs.close(); 
+			if (ps    != null)  ps.close();
+			if (conn != null)  conn.close();
+		}
+		return result;
+	}
+	
 	
 	public int noupdate(ApplicantsDto appdto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result = 0;
+		int status = 0;
 		ResultSet rs = null;
 		String sql = "select Status from applicants where  nickname= ? and post_num = ? "; 
 		String sql1 = "SELECT CURRENT_NUM, MINIMUM_NUM FROM ACCOMPANYBOARD where POST_NUM = ?";
@@ -227,9 +249,9 @@ public class ApplicantsDao {
 			} 
 			ps.close();
 			rs.close();
-			if( st == 2){
-				return 2;
-			} else if (st == 1 ){
+			if( st == 2){                  // 2(거절) 에서 2(거절)을 눌렀을 경우
+				status = 3;
+			} else if (st == 1 ){        //  1(수락) 에서 2(거절)을 눌렀을 경우
 				ps = conn.prepareStatement(sql2);   // 상태 업데이트
 				ps.setInt(1, appdto.getStatus());
 				ps.setString(2, appdto.getNickname());
@@ -248,15 +270,16 @@ public class ApplicantsDao {
 						ps.setInt(1, current_num-Num_people);
 						ps.setInt(2, appdto.getPost_num());
 						result = ps.executeUpdate();
-						result = 1;
+						System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@");
+						status = 2;
 					}
-			} else if (st == 0 ){
+			} else if (st == 0 ){          //  0(대기)에서 2(거절)을 눌렀을 경우
 				ps = conn.prepareStatement(sql2);   // 상태 업데이트
 				ps.setInt(1, appdto.getStatus());
 				ps.setString(2, appdto.getNickname());
 				ps.setInt(3, appdto.getPost_num());
 				result = ps.executeUpdate();
-				result = 1;
+				status = 2;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -264,7 +287,33 @@ public class ApplicantsDao {
 			if (ps   != null)   ps.close();
 			if (conn != null) conn.close();
 		}
-		return result;
+		return status;
+	}
+	
+	
+	public String getKakao(int post_num, String nickname) throws SQLException{
+		Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    String kakao_id = "";
+	    String sql = "Select kakao_id from applicants  where post_num = ?  and   NICKNAME = ? ";
+		try {
+			conn = getConnection();
+	        ps = conn.prepareStatement(sql);
+	        ps.setInt(1, post_num);
+	        ps.setString(2, nickname);
+	        rs = ps.executeQuery();
+	        if(rs.next()){
+	        	kakao_id = rs.getString("kakao_id");
+	        }
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return kakao_id;
 	}
 	
 	
