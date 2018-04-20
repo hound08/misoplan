@@ -133,6 +133,10 @@
 	width: 20px;
 	height: 20px;
 }
+.isclosed{
+	width : 50px;
+	height : 50px;
+}
 </style>
 <script type="text/javascript">
 var onoff = 0;
@@ -292,13 +296,26 @@ var onoff = 0;
  });
  
  
- $(document).on('click', '.btnesc', function(){
-	 $this = $(this);
-	 var nickname = $this.parent().prev().text();
-	 console.log("nickname = " + nickname);
-	/*  $ajax("companionupdateajax.jsp" ) */
- });
-	 
+function isclosed(post_num){
+	console.log("마감 버튼 클릭 ");
+	//postnum이 필요하고,
+	$.ajax({
+		url : 'companionisclose.jsp',
+		type : 'get',
+		data : {
+			post_num : post_num
+		},
+		success : function() {
+			console.log("나 돌아 왓다!!! ");
+			
+		},
+		error : function(XMLHttpRequest, textStatus, errorThrown) {
+			alert("request : " + XMLHttpRequest);
+			alert("Status: " + textStatus);
+			alert("Error: " + errorThrown);
+		}
+	});
+}
 </script>
 </head>
 <body>
@@ -324,6 +341,14 @@ var onoff = 0;
 										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }</td>
 									</tr>
 								</table>
+								<%-- <c:if test="${name eq '홍길동'}">
+									    홍길동이 맞습니다.
+									</c:if> --%>
+
+
+								<c:if test="${list.is_closed  == 0}">
+									<button class = "isclosed" id = "isclosed" onclick = "isclosed(${list.post_num})"> 마감 </button>
+								</c:if>
 							</div>
 						</c:forEach>
 			</div>

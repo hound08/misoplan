@@ -62,6 +62,8 @@ public class mycompanionDao {
 				dto.setCurrent_num(rs.getInt("current_num"));
 				dto.setMinimum_num(rs.getInt("minimum_num"));
 				dto.setPost_date(rs.getDate("post_date"));
+				//대희를 위한 주석
+				dto.setIs_closed(rs.getInt("is_closed"));
 				list.add(dto);
 			}
 		} catch (Exception e) {
