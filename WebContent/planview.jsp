@@ -80,7 +80,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	margin-bottom: 10px;
 	padding: 10px;
 	width: 1100px;
-	height: 300px;
+	height: 230px;
 	overflow: auto;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
@@ -90,10 +90,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 /* ------------------------- 일정 카드들 나오는 곳 시작 ------------------------- */
 .divSmall {
 	margin-left: 5px;
-	margin-right: 5px;
+	margin-right: 8px;
 	margin-bottom: 30px;
+	border-radius: 10px;
 	width: 200px;
-	height: 260px;
+	height: 220px;
 	max-height: 260px;
 	display: inline-block;
 	vertical-align: top;
@@ -102,6 +103,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .imageSmall {
 	width: 200px;
 	height: 120px;
+	border-radius: 10px;
 }
 .divTitleSmall {
 	font-size: 17px;
@@ -142,7 +144,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .center-bottom-image {
 	width: 1160px;
-	height: 180px;
+	height: 260px;
 	margin: 20px 20px;
 	font-size: 10pt;
 	vertical-align: top;
