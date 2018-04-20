@@ -363,14 +363,17 @@ public class BoardScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql1 = "select email from BOARDSCHEDULE where bs_num = ?";
-		String sql2 = "delete from BOARDSCHEDULE where bs_num = ?";
+		String sql1 = "select email from REPLYBOARDSCHEDULE where bs_num = ?";
+		String sql2 = "delete from REPLYBOARDSCHEDULE where bs_num = ?";
+		String sql3 = "select email from BOARDSCHEDULE where bs_num = ?";
+		String sql4 = "delete from BOARDSCHEDULE where bs_num = ?";
 		int result = 0;
 		String dbemail = "";
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql1);
+			ps = conn.prepareStatement(sql3);
 			ps.setInt(1, bs_num);
 			rs = ps.executeQuery();
 			
@@ -381,8 +384,10 @@ public class BoardScheduleDao {
 					rs.close();
 					ps.close();
 					ps = conn.prepareStatement(sql2);
+					ps = conn.prepareStatement(sql4);
 					ps.setInt(1, bs_num);
 					result = ps.executeUpdate();
+					
 				} else {
 					result = 0;
 				}
