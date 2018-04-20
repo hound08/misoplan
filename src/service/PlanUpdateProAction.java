@@ -2,6 +2,7 @@ package service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -44,7 +45,7 @@ public class PlanUpdateProAction implements CommandProcess {
 			if (file != null) {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
-			
+			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			dto.setBs_num(Integer.parseInt(request.getParameter("bs_num")));
 			dto.setTitle(multi.getParameter("title"));
 			dto.setTag(multi.getParameter("tag"));
@@ -61,8 +62,16 @@ public class PlanUpdateProAction implements CommandProcess {
 				dto.setImage_url("/J20180403/upload/" + filename);
 				request.setAttribute("image_url", "/J20180403/upload/" + filename);
 			} else {
-				dto.setImage_url("/J20180403/images/no_image.jpg");
-				
+				BoardScheduleDao dao = BoardScheduleDao.getInstance();
+				BoardScheduleDto dto1;
+				try {
+					dto1 = dao.selectUp(bs_num);
+					dto.setImage_url(dto1.getImage_url());
+					request.setAttribute("image_url", dto.getImage_url());
+					
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
