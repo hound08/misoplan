@@ -273,7 +273,7 @@ tr.highlight td {
 
 .post-plan{
 	width: 100%;
-	height: 200px;
+	height: 350px;
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
@@ -288,16 +288,88 @@ tr.highlight td {
 	border-radius: 10px 10px 0 0;
 }
 
+
 .tab{
 	display: inline-block;
 	height: 100%;
-	border: 1px solid gray;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px 10px 0 0;
+}
+.post-plan-body{
+	width: 100%;
+	height: 300px;
+	position: relative;
+	white-space: nowrap;
 }
 
+.plan-wrapper{
+	display: inline-block;
+	border: 1px solid gray;	
+	width: 30%;
+	height:300px;
+}
+
+.plan{
+	width: 100%;
+	height: 300px;
+	border: 1px solid gray;	
+	position:absolute;
+	left: 0;
+	top: 0;
+	overflow-x: scroll;
+	overflow-y: hidden;
+	
+	
+}
+.plan-transparent{
+	width: 0%;
+	border: 1px solid gray;	
+	opacity: 0;
+	position:absolute;
+	left: 0;
+	top: 0;
+}
+.plan-area{
+	width: 100%;
+	overflow: hidden;
+}
+.plan-tourName{
+	overflow: hidden;
+}
+
+.plan-image{
+	width: 90%;
+	height: 200px;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
-
+	$(document).ready(function(){
+		$('.plan-transparent').eq(0).removeClass('plan-transparent').addClass('plan');
+		//console.log("plans : " + plans);
+		//var plan = plans[0];
+		//console.log("plan : " + plan);
+		//plan.removeClass('plan-transparent').addClass('plan');
+		//plan.attr("plan-transparent", "plan");	
+		
+	});
+	
+	$(document).on('click', '.tab', function(){
+		$this = $(this);
+		$('.post-plan-body').children().attr('class','plan-transparent');
+		var date = $this.children().text();
+			//console.log("date : " + date);
+		date = "#"+date;
+		$(date).removeClass('plan-transparent').addClass('plan');
+			//console.log("selectedId : " + selectedId);
+	});
+	
+	
+	
 	$(document).on('click', '.span-icon-vote', function(){
 		
 		var post_num = '${post_num}';
@@ -411,14 +483,21 @@ tr.highlight td {
 					<% 
 					for(String date : dateTree){
 						%>
-						<div>
+						<div class="plan-transparent" id="<%=date %>">
 						<%
 						for(int i = 0; i < planList.size(); i++){
 							
 							while(date.equals(planList.get(i).getTour_date())){
-								String sm_code = planList.get(i).getSm_code();
+								String imagePath = planList.get(i).getImage_url();
+								String areaName = planList.get(i).getArea_name();
+								String sigunguName = planList.get(i).getSigungu_name();
+								String tourName = planList.get(i).getTour_name();
 								%>
-									<%=sm_code %>
+								<div class="plan-wrapper">
+									<div class="plan-image" style="background: url('<%=imagePath%>');"></div>
+									<div class="plan-area"><%=areaName %>-<%=sigunguName %></div>
+									<div class="plan-tourName"><%=tourName %></div>
+								</div>
 								<%
 								if(i < planList.size()-2)
 									i++;
