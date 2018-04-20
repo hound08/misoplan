@@ -612,5 +612,47 @@ public class BoardScheduleDao {
 		}
 		return total;
 	}
+	
+	public List<BoardScheduleDto> selectAdminList() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM BOARDSCHEDULE";
+		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					BoardScheduleDto dto = new BoardScheduleDto();
+					dto.setBs_num(rs.getInt(1));
+					dto.setSl_code(rs.getString(2));
+					dto.setEmail(rs.getString(3));
+					dto.setNickname(rs.getString(4));
+					dto.setTitle(rs.getString(5));
+					dto.setTag(rs.getString(6));
+					dto.setContent(rs.getString(7));
+					dto.setImage_url(rs.getString(8));
+					dto.setVote_count(rs.getInt(9));
+					dto.setView_count(rs.getInt(10));
+					dto.setBoard_date(rs.getDate(11));
+					dto.setArea_names(rs.getString(12));
+					dto.setSchedule_date(rs.getString(13));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null) conn.close();
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+		}
+		
+		return list;
+	}
 
 }
