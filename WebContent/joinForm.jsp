@@ -266,12 +266,23 @@ h1 {
 	});
 	
 	function chk() {
+		var regExp = /^\d{3}-\d{3,4}-\d{4}$/;
+		
+		if (!regExp.test($('#phone').val())) {
+			alert("잘못된 연락처 번호입니다.");
+			joinForm.phone.focus();
+			
+			return false;
+		}
+		
 		if (joinForm.btnConfirm.value.indexOf("인증완료") < 0) {
 			alert("이메일 인증이 처리되지 않았습니다.");
 			joinForm.email.focus();
 			
 			return false;
 		}
+		
+		return true;
 	};
 </script>
 </head>
@@ -296,7 +307,7 @@ h1 {
 			</div>
 			<p class="pNickname"><input type="text" id="nickname" name="nickname" class="inputType" required="required" placeholder="별명 (최대 6글자)"></p>
 			<span id="spanNickname">　</span>
-			<p class="pPhone"><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
+			<p class="pPhone"><input type="tel" name="phone" id="phone" class="inputType" required="required" placeholder="연락처"></p>
 			<h3>프로필 사진</h3>
 			<div class="divProfile">
 				<div class="divImage"><img id="output" src="images/no_profile_image.png"></div>

@@ -11,7 +11,6 @@
 //	int post_num = 1;
 	ApplicantsDao appdao = ApplicantsDao.getInstance();
 	
-		
 	
 	
 	List<ApplicantsDto> applist = appdao.youappselect(post_num);

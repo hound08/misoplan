@@ -33,7 +33,7 @@
 			.center-second { /* center 의 세부 내용 쭉쭉~~*/
 				border: 0.5px solid gray;
 				width: 350px;
-				height: 420px;
+				height: 450px;
 				display: inline-block; /* 가로형 정렬 */
 				margin: 30px 22.5px;
 				border-radius: 10px;
@@ -117,6 +117,7 @@
 				<h1>나의 일정 리스트</h1>
 				<div id="myinfo">
 					<div id="info">
+		
 						<c:forEach var="list" items="${showList }">
 							<c:if test="${list.is_deleted eq 0 }">
 							<div class="center-second">

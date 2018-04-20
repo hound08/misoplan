@@ -19,6 +19,9 @@
 	margin: 0px;
 	padding: 0px;
 }
+bady {
+	background-image: url('images/background.jpg') no-repeat;
+}
 div { /* 모두모두 가운데 정렬 !!!!! */
 	margin: 0px auto; 
  	/* border: 1px solid black; */
@@ -27,9 +30,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-top {
 	width: 1200px;
 	height: 330px;
-	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
+	border-radius: 10px;
 	
 }
 .main-imagebt{
@@ -41,16 +44,17 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 380px;
 	height: 250px;
  	margin: 25px 0 0 35px; 
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	display: inline-block;
 }
 .main-top-second2 {
 	padding: 40px 0 0 70px;
+	border-radius: 10px;
 	vertical-align: top;
 	width: 630px;
 	height: 212px;
  	margin: 25px 0 0 40px; 
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	display: inline-block;
 }
 #title {
@@ -70,11 +74,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 30px;
 }
 .main-center {
+	border-radius: 10px;
 	width: 1200px;
 	height: 350px;
-	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 }
 .center-text {
 	/* display: inline-block; */
@@ -88,7 +92,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 1200px;
 	height: 300px;
 	overflow: auto;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 }
 .center-card-box{
 	/* overflow: scroll; */
@@ -104,7 +108,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	overflow: hidden;
 	overflow: auto;
 	margin: 0 0 5px 2px;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	font-size: 10pt;
 }
 .card-box-title0 {
@@ -129,13 +133,13 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 240px;
 	height: 170px;
 	overflow: auto;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 }
 .center-bottom-image {
 	width: 1160px;
 	height: 200px;
 	margin: 20px 20px;
-	font-size: 10pt;
+	font-size: 14pt;
 	vertical-align: top;
 }
 .button-bottom {
@@ -146,7 +150,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 #radio {
 
 }
-
+.area {
+	height: 15px;
+}
+.buttonList {
+	background-color: #A2C4FF;
+	color: white;
+	border-style: double;
+	font-family: 굴림;
+	font-weight: bold;
+}
 </style>
 <script type="text/javascript">
 	function previewFile(input){
@@ -207,6 +220,7 @@ var loadFile = function(event) {
 			<input type="file" name="image" onchange="loadFile(event)" accept="image/*">
 		</div>
 	</div>
+	<div class="area"></div>
 	<div class="main-center">
 		<div class="center-text">
 			일정 내용
@@ -215,8 +229,8 @@ var loadFile = function(event) {
 			<textarea rows="13" cols="163" name="content" required="required">${dto.content }</textarea>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
-			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
+			<input type="submit" value="확인" class="buttonList" style="width: 40pt; height: 20pt">
+			<input type="button" value="취소" class="buttonList" style="width: 40pt; height: 20pt" 
 			onclick="location.href='planview.do'">
 		</div>
 	</div>

@@ -26,9 +26,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-top {
 	width: 1200px;
 	height: 330px;
-	background-color: #F6F6F6;
+	border-radius: 10px;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 2px solid #A2C4FF;
 	
 }
 .main-imagebt{
@@ -40,16 +40,17 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 380px;
 	height: 250px;
  	margin: 25px 0 0 35px; 
-	border: 1px solid gray;
+	border: 1px solid #A2C4FF;
 	display: inline-block;
 }
 .main-top-second2 {
 	padding: 40px 0 0 70px;
+	border-radius: 10px;
 	vertical-align: top;
 	width: 630px;
 	height: 212px;
  	margin: 25px 0 0 40px; 
-	border: 1px solid gray;
+	border: 1px solid #A2C4FF;
 	display: inline-block;
 }
 #title {
@@ -71,9 +72,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-center {
 	width: 1200px;
 	height: 650px;
-	background-color: #F6F6F6;
+	border-radius: 10px;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 2px solid #A2C4FF;
 }
 .center-text {
 	/* display: inline-block; */
@@ -87,10 +88,10 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 1200px;
 	height: 300px;
 	overflow: auto;
-	border: 1px solid gray;
 }
 .center-card-box{
 	/* overflow: scroll; */
+	border-radius: 10px;
 	width: 250px;
 	height: 250px;
 	margin: 25px 0 10px 35px;
@@ -98,12 +99,13 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .card-box-title {
 	vertical-align: top; /* 텍스트 라인 높이 맞춤 */
+	border-radius: 10px;
 	width: 240px;
-	height: 70px;
+	height: 160px;
 	overflow: hidden;
 	overflow: auto;
 	margin: 0 0 5px 2px;
-	border: 1px solid gray;
+	border: 1px solid #A2C4FF;
 	font-size: 10pt;
 }
 .card-box-title0 {
@@ -114,7 +116,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .card-box-title1 {
 	width: 240px;
-	height: 20px;
+	height: 80px;
 	margin: 0;
 	vertical-align: middle;
 }
@@ -125,10 +127,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	vertical-align: middle;
 }
 .card-box-bottom {
-	width: 240px;
-	height: 170px;
+	width: 235px;
+	height: 80px;
+	padding: 5px;
+	border-radius: 10px;
 	overflow: auto;
-	border: 1px solid gray;
+	border: 1px solid #A2C4FF;
 }
 .center-bottom-image {
 	width: 1160px;
@@ -144,6 +148,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 #radio {
 
+}
+.area {
+	height: 15px;
+}
+.buttonList {
+	background-color: #A2C4FF;
+	color: white;
+	border-style: double;
+	font-family: 굴림;
+	font-weight: bold;
 }
 
 </style>
@@ -207,6 +221,7 @@ var loadFile = function(event) {
 			<input type="file" name="image" onchange="loadFile(event)" accept="image/*">
 		</div>
 	</div>
+	<div class="area"></div>
 	<div class="main-center">
 		<div class="center-text">
 			세부 일정
@@ -216,7 +231,7 @@ var loadFile = function(event) {
 				<div class="center-card-box" align="center" id=${dto.sl_code}>
 					<div class="card-box-title">
 						<div class="card-box-title0">
-							${dto.sl_code }
+							<input type ="hidden" value="${dto.sl_code }">
 						</div>
 						<div class="card-box-title1"> <!--지역 -->
 							${dto.area_name } 
@@ -237,8 +252,8 @@ var loadFile = function(event) {
 			<textarea rows="13" cols="163" name="content" required="required"></textarea>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="submit" value="확인" style="width: 40pt; height: 20pt">
-			<input type="button" value="취소" style="width: 40pt; height: 20pt" 
+			<input type="submit" value="확인" class="buttonList" style="width: 40pt; height: 20pt">
+			<input type="button" value="취소" class="buttonList" style="width: 40pt; height: 20pt" 
 			onclick="location.href='planview.do?areaName='">
 		</div>
 	</div>
