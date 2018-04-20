@@ -394,13 +394,13 @@ tr.highlight td {
 
 <body>
 	<div id="apply-div" style="display: none;">
+				<button class="cancel-button" onclick="apply()">&#10006</button>
 		<form class ="form" action="applyActionAB.do">
 			<table class="apply-table">
 				<input type="hidden" value="${post_num }" name="post_num">
-				<tr><td colspan="2"><button class="cancel-button" onclick="apply()">&#10006</button></td><tr>
 				<tr><td><label class="form-label">이메일:</label></td><td><input type="text" class="form-input" placeholder="${email } " name="email" disabled></td></tr>
-				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message"></textarea></td></tr>
-				<tr><td><label class="form-label">카카오톡 아이디:</label></td><td><input type="text" class="form-input" name="kakao_id"></td><tr>
+				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message" required></textarea></td></tr>
+				<tr><td><label class="form-label">카카오톡 아이디:</label></td><td><input type="text" class="form-input" name="kakao_id" required></td><tr>
 				<tr><td><label class="form-label">참가 인원 :</label></td>
 				<td><select name="num_people" class="form-select">
 					<option value="1">1명</option>
@@ -522,10 +522,12 @@ tr.highlight td {
 				<td><pre>${board.content }</pre></td>
 			</tr>
 		</table>
-			<c:if test="${email != null }">
+			<c:if test="${email != null and board.is_closed != 1 }">
 				<button onclick="apply()">동행 신청하기</button>
 			</c:if>
-			<div class="like-button"><button>좋아요</button></div>
+			<c:if test="${email == board.email and board.is_closed != 1}">
+				<a href="closeActionAB.do?post_num=<%=request.getParameter("post_num") %>" ><button>마감하기</button></a>
+			</c:if>
 		</div>
 		
 		<a href="listAction.do"><button>목록보기</button></a>
@@ -599,7 +601,6 @@ tr.highlight td {
 		    	document.documentElement.style.overflow = 'auto'; 
 		        document.body.scroll = "yes";
 		    }
-		    
 		}
 		
 		function refresh() {

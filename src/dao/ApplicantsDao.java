@@ -332,4 +332,5 @@ public class ApplicantsDao {
 		}
 		return list;
 	}
+
 }

@@ -547,8 +547,6 @@ public void vote_down(int post_num) {
 	    if(selected == 1) {
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like ? order by post_num desc) a) where rn between ? and ?";
 	    }else if(selected == 2) {
-	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like ? order by post_num desc) a) where rn between ? and ?";
-	    }else if(selected == 3) {
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where nickname like ? order by post_num desc) a) where rn between ? and ?";
 	    }else {
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where tag like ? order by post_num desc) a) where rn between ? and ?";
@@ -599,8 +597,6 @@ public void vote_down(int post_num) {
 		   if(selected == 1) {
 		   	sql = "select count(*) from accompanyboard where title like ?";
 		   }else if(selected == 2) {
-		   	sql = "select count(*) from accompanyboard where title like ?";
-		   }else if(selected == 3) {
 		   	sql = "select count(*) from accompanyboard where nickname like ?";
 		   }else {
 		   	sql = "select count(*) from accompanyboard where tag like ?";
@@ -621,5 +617,28 @@ public void vote_down(int post_num) {
 			close(conn);
 		}
 		return total;
+	}
+
+	public int closeApplication(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "UPDATE ACCOMPANYBOARD SET IS_CLOSED = ? WHERE POST_NUM = ?";
+		
+		int result = 0;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, post_num);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
 	}
 }
