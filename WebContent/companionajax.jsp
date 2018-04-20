@@ -15,6 +15,7 @@
 	
 	
 	List<ApplicantsDto> applist = appdao.youappselect(post_num);
+	
 	JSONObject json= new JSONObject();
 	JSONArray jsonArray = new JSONArray();
 	
@@ -28,6 +29,7 @@
 		 obj.put("kakao_id", applist.get(i).getKakao_id());
 		 obj.put("num_people", applist.get(i).getNum_people());
 		 obj.put("post_num", applist.get(i).getPost_num());
+		 obj.put("is_closed", applist.get(i).getIs_closed());
 		 jsonArray.add(obj);
 		 System.out.println("ajax jsonArray = "+ jsonArray);
 	 }

@@ -140,6 +140,7 @@
 </style>
 <script type="text/javascript">
 var onoff = 0;
+var is_close = 0;
  $(document).on('click', '.postnums', function(){
 	var post_num = $(this).attr("id");
 	var send_data = "post_num="+post_num;  
@@ -153,7 +154,7 @@ var onoff = 0;
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
 				var kakao_id = this.kakao_id;
-				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td></tr></table></div>';
+				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+this.num_people+'</td></tr></table></div>';
 				   $('#menu1').append(str);
 	 		});
 	 		
@@ -164,8 +165,10 @@ var onoff = 0;
 						var kakao = this.kakao_id;
 						var postnum = this.post_num;
 						var status = this.status;
+						var is_closed = this.is_closed;
 						var kakao_id = "#"+ kakao ;
 						console.log("status :::::::: " + status);
+						console.log("is_closed :::::::: " + is_closed);
 				 		var str = 
 							'<div class="cardbox"><table>'+
 							'<tr><td id="nickname" postnum='+postnum+'>'+this.nickname+'</td><td id="'+kakao+'">'+
@@ -178,11 +181,13 @@ var onoff = 0;
 							
 						var str1 = '<button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button>';
 					/* $('#card2').after(str2);  */
-					$('#menu2').append(str); 
-					
-					if(status == 0){
-						$(kakao_id).append(str1);
-					}
+					$('#menu2').append(str);
+					if(is_closed ==0){
+						
+						if(status == 0){
+							$(kakao_id).append(str1);
+						}
+					} 
 					
 					/* '<button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button>'+ */
 					
@@ -246,7 +251,7 @@ var onoff = 0;
 						/* var date = new Date(); */
 						var kakao = this.kakao_id;
 						var kakao_to = "#"+ kakao;
-						var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td></tr></table></div>';
+						var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+ this.num_people+'</td></tr></table></div>';
 						   $('#menu1').append(str);
 						   $(xpost_num).html("");
 						   $(xpost_num).append('<td class="m1"> 현재인원 : '+this.current_num+'</td>');
@@ -310,6 +315,8 @@ function isclosed(post_num){
 		success : function() {
 			console.log("나 돌아 왓다!!! ");
 			$(ispost_num).remove();
+			$('.yesbtnimg').remove();
+			$('.nobtnimg').remove();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			alert("request : " + XMLHttpRequest);
