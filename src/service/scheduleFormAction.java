@@ -11,6 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ScheduleLargeDto;
+import dao.WishlistDto;
 import dao.mySchduleDao;
 import dao.mySchduleDto;
 
@@ -24,7 +26,6 @@ public class scheduleFormAction implements CommandProcess{
 			// 받아오는 dao
 			mySchduleDao msdao = mySchduleDao.getInstance();
 			List<mySchduleDto> planList = msdao.getMylist(email);
-			
 			// 보낼 dao
 			mySchduleDto dto = null;
 			List<mySchduleDto> showList = new ArrayList<mySchduleDto>();
@@ -50,6 +51,7 @@ public class scheduleFormAction implements CommandProcess{
 					tour_date_end = planList.get(i).getTour_date_start();
 					regi_date = planList.get(i).getRegi_date();
 				} else {	// SL_CODE가 다르면 지금까지 세팅한 값들 list에 add
+					
 					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
 					dto.setS_name(s_name);
@@ -95,6 +97,8 @@ public class scheduleFormAction implements CommandProcess{
 				String name = mdto.getArea_name() + "-" + mdto.getSigungu_name();
 				nameTree.add(name);
 			}
+			
+			
 			request.setAttribute("nameTree", nameTree);
 			request.setAttribute("showList", showList);
 			request.setAttribute("email", email);
