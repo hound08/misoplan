@@ -298,6 +298,8 @@ var onoff = 0;
  
 function isclosed(post_num){
 	console.log("마감 버튼 클릭 ");
+	var ispost_num = "#is"+ post_num;
+	console.log("ispost_num = " + ispost_num);
 	//postnum이 필요하고,
 	$.ajax({
 		url : 'companionisclose.jsp',
@@ -307,7 +309,7 @@ function isclosed(post_num){
 		},
 		success : function() {
 			console.log("나 돌아 왓다!!! ");
-			
+			$(ispost_num).remove();
 		},
 		error : function(XMLHttpRequest, textStatus, errorThrown) {
 			alert("request : " + XMLHttpRequest);
@@ -347,7 +349,7 @@ function isclosed(post_num){
 
 
 								<c:if test="${list.is_closed  == 0}">
-									<button class = "isclosed" id = "isclosed" onclick = "isclosed(${list.post_num})"> 마감 </button>
+									<button class = "isclosed" id = "is${list.post_num }" onclick = "isclosed(${list.post_num})"> 마감 </button>
 								</c:if>
 							</div>
 						</c:forEach>

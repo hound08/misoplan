@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
     
     <%
-    		int post_num = Integer.parseInt(request.getParameter("postnum"));
+    		int post_num = Integer.parseInt(request.getParameter("post_num"));
    			System.out.println("companionajax post_num = "+ post_num);
    			AccompanyDao dao = AccompanyDao.getInstance();
    			 
