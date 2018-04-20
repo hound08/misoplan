@@ -138,8 +138,12 @@ div {
 }
 
 .rankListContent {
+	width: 320px;
 	display: inline-block;
 	margin: 15px 15px 15px 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .rankName {
@@ -182,8 +186,12 @@ div {
 }
 
 .wishListContent {
+	width: 320px;
 	display: inline-block;
 	margin: 15px 15px 15px 15px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .wishName {
