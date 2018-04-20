@@ -290,7 +290,7 @@ input[type="file"] {
 						<div class="plan-div">
 							<c:forEach var="myplan" items="${list }">
 								<div class="plan">
-								<input type="radio" class="option-input radio" name="plan-radio">
+								<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
 									<table class="plan-table">
 										<tr>
 											<td>일정이름: ${myplan.s_name }</td> 
