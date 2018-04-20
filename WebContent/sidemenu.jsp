@@ -17,11 +17,7 @@
 				width: 200px;
 				float: left;
 				margin: 20px;
-			}
-		#sidemenu h1 {
-				text-align: center;
-				margin: 20px 10px 50px ;
-			
+				padding-bottom: 35px;
 			}
 		#sidemenu .sidemenus{
 				text-align: center;
@@ -32,8 +28,21 @@
 		.sidemenus .a {
 				color: black;
 		}
-		.sidemenus #b {
-				color: blue;
+		
+		.list_admin {
+			text-align: center;
+			margin : 40px 40px 10px 40px;
+			font-size: 25px;
+		}
+		.list_admin #b {
+			color: blue;
+		}
+		.list_admin_sub {
+			text-align: center;
+			margin: 5px;
+		}
+		.list_admin_sub:HOVER {
+			text-decoration: underline;
 		}
 	</style>
 </head>
@@ -49,7 +58,11 @@
 			<li class="sidemenus"><a href="myWishListForm.do?email=${email }" class="a">찜 리스트</a></li>
 			<li class="sidemenus"><a href="companionForm.do?email=${email }" class="a">동행</a></li>
 			<c:if test="${admin == 1}">
-				<li class="sidemenus"><a href="adminConfirmForm.do" id="b" >관리자 메뉴</a></li>
+				<li class="list_admin"><a href="adminConfirmForm.do" id="b">관리자 메뉴</a></li>
+				<ul>
+					<li class="list_admin_sub"><a href="adminConfirmForm.do" id="a">회원 관리</a></li>
+					<li class="list_admin_sub"><a href="adminSubjectForm.do" id="a">게시글 관리</a></li>
+				</ul>
 			</c:if>
 		</ul>
 	</div>
