@@ -17,6 +17,7 @@
 		border: 1px solid;
 		width: 1200px;
 		height: 600px;
+		background-color: black;
 	}
 	#main {
 		width: 1200px;

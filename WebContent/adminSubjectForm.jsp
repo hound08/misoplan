@@ -147,7 +147,7 @@
 						<td width="35px">${list.bs_num}</td>
 						<td class="tdTitle">${list.title}</td>
 						<td class="tdContent">${list.content}</td>
-						<td width="70px">${list.nickname}</td>
+						<td width="75px">${list.nickname}</td>
 						<td width="170px">${list.email}</td>
 						<td>${list.board_date}</td>
 					</tr>
