@@ -17,7 +17,7 @@ public class DeletePlanAction implements CommandProcess {
 		ScheduleDao sdao = ScheduleDao.getInstance();
 		int result = sdao.deletePlan(deleteId);
 		if(result == 1) {
-			return "mypage.jsp";
+			return "scheduleForm.do";
 		}
 		return "main.jsp";
 	}

@@ -118,7 +118,8 @@
 				<div id="myinfo">
 					<div id="info">
 						<c:forEach var="list" items="${showList }">
-							<div class="center-second" >
+							<c:if test="${list.is_deleted eq 0 }">
+							<div class="center-second">
 								<div class="second-box">
 									<img alt="image" src="images/1.jpg">
 								</div>
@@ -132,7 +133,7 @@
 									<button class='deletePlan' id='delete${list.sl_code}'>삭제</button>
 								</div>
 							</div>
-							
+							</c:if>
 						
 						</c:forEach>
 						<div class="pagination">

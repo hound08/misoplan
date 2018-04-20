@@ -425,9 +425,18 @@ public class ScheduleDao {
 		String sql = "UPDATE SCHEDULELARGE SET IS_DELETED = 1 WHERE SL_CODE=?";
 		int result = 0;
 		
-		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, deleteId);
+			result = ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			release(conn, ps);
+		}
 		return result;
-		
 	}
 	
 	public int check(String email) {

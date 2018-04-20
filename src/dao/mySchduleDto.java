@@ -10,7 +10,13 @@ public class mySchduleDto {
 	private Date tour_date_end;
 	private Date regi_date;
 	private String sigungu_name;
-
+	private int is_deleted;
+	public int getIs_deleted() {
+		return is_deleted;
+	}
+	public void setIs_deleted(int is_deleted) {
+		this.is_deleted = is_deleted;
+	}
 	public String getSl_code() {
 		return sl_code;
 	}

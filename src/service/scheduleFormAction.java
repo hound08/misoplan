@@ -32,6 +32,7 @@ public class scheduleFormAction implements CommandProcess{
 			// 변수 세팅
 			String sl_code = planList.get(0).getSl_code();
 			String s_name = "";
+			int is_deleted = 0;
 			List<String> area_name = new ArrayList<String>();
 			Date tour_date_start = null;
 			Date tour_date_end = null;
@@ -40,8 +41,8 @@ public class scheduleFormAction implements CommandProcess{
 			for (int i = 0; i < planList.size(); i++) {
 				if (sl_code.equals(planList.get(i).getSl_code())) {		// SL_CODE가 같다면 덮어쓰면서 값 세팅
 					s_name = planList.get(i).getS_name();
+					is_deleted = planList.get(i).getIs_deleted();
 					area_name.add(planList.get(i).getArea_name());
-
 					if (i == 0) {
 						tour_date_start = planList.get(i).getTour_date_start();
 					}
@@ -52,6 +53,7 @@ public class scheduleFormAction implements CommandProcess{
 					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
 					dto.setS_name(s_name);
+					dto.setIs_deleted(is_deleted);
 					area_name.removeAll(Collections.singleton(null));
 					dto.setArea_name(area_name.toString());
 					dto.setTour_date_start(tour_date_start);
@@ -63,6 +65,7 @@ public class scheduleFormAction implements CommandProcess{
 					area_name.clear();
 					sl_code = planList.get(i).getSl_code();
 					s_name = planList.get(i).getS_name();
+					is_deleted = planList.get(i).getIs_deleted();
 					area_name.add(planList.get(i).getArea_name());
 					tour_date_start = planList.get(i).getTour_date_start();
 					tour_date_end = planList.get(i).getTour_date_start();
@@ -75,6 +78,7 @@ public class scheduleFormAction implements CommandProcess{
 					dto = new mySchduleDto();
 					dto.setSl_code(sl_code);
 					dto.setS_name(s_name);
+					dto.setIs_deleted(is_deleted);
 					area_name.removeAll(Collections.singleton(null));
 					dto.setArea_name(area_name.toString());
 					dto.setTour_date_start(tour_date_start);
