@@ -25,6 +25,10 @@ public class BoardSelectAction implements CommandProcess {
 			mySchduleDao msdao = mySchduleDao.getInstance();
 			List<mySchduleDto> planList = msdao.getMylist(email);
 			
+			if (planList.size() <= 0 || planList == null) {
+				return "BoardError.jsp";
+			}
+			
 			// 보낼 dao
 			mySchduleDto dto = null;
 			List<mySchduleDto> showList = new ArrayList<mySchduleDto>();
@@ -87,21 +91,15 @@ public class BoardSelectAction implements CommandProcess {
 
 			request.setAttribute("showList", showList);
 			request.setAttribute("email", email);
-			
-			if (showList == null) {
-				request.setAttribute("showList", showList);
-				return "BoardError.jsp";
-		
-			} else {
-				request.setAttribute("showList", showList);
-			}
+			request.setAttribute("showList", showList);
 			
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-			return "planSelect.jsp";
-		}
 		
+		return "planSelect.jsp";
 	}
+		
+}
 
 
