@@ -49,25 +49,25 @@ public class PlanUpdateProAction implements CommandProcess {
 			dto.setBs_num(Integer.parseInt(request.getParameter("bs_num")));
 			dto.setTitle(multi.getParameter("title"));
 			dto.setTag(multi.getParameter("tag"));
-			dto.setImage_url(multi.getParameter("image_url"));
+			dto.setImage_url(multi.getParameter("image"));
 			dto.setContent(multi.getParameter("content"));
 			
 			System.out.println("@@@@@ bsnum " + dto.getBs_num());
 			System.out.println("@@@@@ title " + dto.getTitle());
 			System.out.println("@@@@@ setTag " + dto.getTag());
-			System.out.println("@@@@@ setImage_url " + dto.getImage_url());
+			System.out.println("@@@@@ setImage " + dto.getImage_url());
 			System.out.println("@@@@@ setContent " + dto.getContent());
 			
-			if(multi.getFile("image_url") !=null ) {
+			if(multi.getFile("image") !=null ) {
 				dto.setImage_url("/J20180403/upload/" + filename);
-				request.setAttribute("image_url", "/J20180403/upload/" + filename);
+				request.setAttribute("image", "/J20180403/upload/" + filename);
 			} else {
 				BoardScheduleDao dao = BoardScheduleDao.getInstance();
 				BoardScheduleDto dto1;
 				try {
 					dto1 = dao.selectUp(bs_num);
 					dto.setImage_url(dto1.getImage_url());
-					request.setAttribute("image_url", dto.getImage_url());
+					request.setAttribute("image", dto.getImage_url());
 					
 				}catch (SQLException e) {
 					e.printStackTrace();
