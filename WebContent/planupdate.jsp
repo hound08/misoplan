@@ -189,6 +189,7 @@ var loadFile = function(event) {
 <body>
 <%
 	String bs_num = request.getParameter("bs_num");
+	request.setAttribute("email", session.getAttribute("email"));
 %>
 <form action="planupdatePro.do?bs_num=${bs_num}" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
