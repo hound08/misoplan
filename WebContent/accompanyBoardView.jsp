@@ -1,3 +1,6 @@
+<%@page import="java.util.TreeSet"%>
+<%@page import="dao.ScheduleLoadDto"%>
+<%@page import="dao.ScheduleDao"%>
 <%@page import="java.net.InetAddress"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
@@ -98,8 +101,8 @@ table {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
-	padding: 1em 0 1em 1em;
 	margin-bottom: 10px; 
+	padding-top: 10px;
 }
 
 tr.highlight td {
@@ -168,6 +171,7 @@ tr.highlight td {
 	height: 400px;
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
+	margin-left: 10px;
 }
 
 .table-reply{
@@ -258,6 +262,38 @@ tr.highlight td {
 	margin: auto;
 }
 
+.body-table{
+	width: 100%;
+	margin: 0 0;
+}
+
+.body-table td:FIRST-CHILD {
+	width: 380px;
+}
+
+.post-plan{
+	width: 100%;
+	height: 200px;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px;
+	margin-bottom: 10px;
+}
+
+.post-plan-header{
+	width: 100%;
+	height: 50px;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px 10px 0 0;
+}
+
+.tab{
+	display: inline-block;
+	height: 100%;
+	border: 1px solid gray;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -274,7 +310,13 @@ tr.highlight td {
 		});
 	
 	});
-
+	
+	var aa = "${planList}";
+	console.log("aa : " + aa[0]);
+	function getSl_code(){
+		var sl_code = "${row.sl_code}";
+		$(".post-plan-body").append("<div class='aa'>"+sl_code+"</div>");
+	}
 
 </script>
 
@@ -330,16 +372,88 @@ tr.highlight td {
 				</tr>
 			</table>
 		</div>
+		
+		<!-- 일정 -->
+		<div class="post-plan">
+			<div class="post-plan-header">
+				<%
+/* 					ArrayList<ScheduleLoadDto> arr = (ArrayList<ScheduleLoadDto>)request.getAttribute("planList");
+					ScheduleLoadDto sldto = arr.get(0);
+					String firstDate = sldto.getTour_date();
+					String[] firstArr = firstDate.split(" ");
+					firstDate = firstArr[0];
+					request.setAttribute("firstDate", firstDate);
+
+ */					
+					ArrayList<ScheduleLoadDto> planList = (ArrayList<ScheduleLoadDto>)request.getAttribute("planList");
+					TreeSet<String> dateTree = new TreeSet<>();
+ 					for(int i = 0; i < planList.size(); i++){
+						ScheduleLoadDto dto = planList.get(i);
+						String date1 = dto.getTour_date();
+						String[] date2 = date1.split(" ");
+						dateTree.add(date2[0]);
+						dto.setTour_date(date2[0]);
+						planList.set(i, dto);
+					}
+ 					request.setAttribute("dateTree", dateTree);
+ 					request.setAttribute("planList", planList);
+					
+				%>
+				
+				<c:forEach var="date" items="${dateTree }">
+					<div class="tab"><p>${date}</p></div>
+				</c:forEach>
+			</div>
+			<div class="post-plan-body">
+				<% 
+					ScheduleLoadDto sldto = planList.get(0);
+				%>
+					<% 
+					for(String date : dateTree){
+						%>
+						<div>
+						<%
+						for(int i = 0; i < planList.size(); i++){
+							
+							while(date.equals(planList.get(i).getTour_date())){
+								String sm_code = planList.get(i).getSm_code();
+								%>
+									<%=sm_code %>
+								<%
+								if(i < planList.size()-2)
+									i++;
+								else
+									break;
+							}
+						}
+						%>
+						</div>
+						<%
+					}
+				
+					%>
+			</div>
+		</div>
+		
+		<!-- 바디 -->
 		<div class="post-body">
-			<pre>${board.content }</pre>
-			<div class="image"></div>
+		<table class="body-table">
+			<tr>
+				<td><div class="image"></div></td>
+				<td><pre>${board.content }</pre></td>
+			</tr>
+		</table>
 			<c:if test="${email != null }">
 				<button onclick="apply()">동행 신청하기</button>
 			</c:if>
 			<div class="like-button"><button>좋아요</button></div>
 		</div>
+		
 		<a href="listAction.do"><button>목록보기</button></a>
 		<button onclick="refresh()">새로고침</button>
+		<c:if test="">
+			<button>수정하기</button>
+		</c:if>
 		<hr>
 		<c:forEach var="reply" items="${list }">
 		<div class="reply-wrapper">
@@ -352,8 +466,8 @@ tr.highlight td {
 				<tr class="highlight"><td></td><td></td></tr>
 			</table>
 		</div>
-		</c:forEach>
 		<hr>
+		</c:forEach>
 		<div class="post-footer">
 			<%-- <c:if test="${email == null }">
 				<form action="writeReplyAB.do" method="post">

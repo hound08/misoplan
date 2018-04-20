@@ -157,8 +157,12 @@ div {
 	width: 300px;
 	height: 35px;
 }
-.search-button{
-	
+.buttonList {
+	background-color: #A2C4FF;
+	color: white;
+	border-style: double;
+	font-family: 굴림;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -197,11 +201,11 @@ div {
 	%>
 	<div class="center">
 		<div id="button1" align="left">
-			<input type="button" value="최신순" style="width: 65pt; height: 20pt;"
+			<input type="button" value="최신순" class="buttonList" style="width: 70pt; height: 25pt;"
 				onclick="location.href='boardschedule.do'">
-			<input type="button" value="조회순" style="width: 65pt; height: 20pt;"
+			<input type="button" value="조회순" class="buttonList" style="width: 70pt; height: 25pt;"
 				onClick="location.href='view_count.do'">
-			<input type="button" value="글쓰기" style="width: 65pt; height: 20pt"
+			<input type="button" value="글쓰기" class="buttonList" style="width: 70pt; height: 25pt"
 				onclick="location.href='boardselect.do?email=${email}&nickname=${nickname }'">
 		</div>
 		<c:forEach var="bs" items="${pagelist }">
@@ -336,7 +340,7 @@ div {
 			<option value="3">닉네임</option>
 			<option value="4">내용</option>
 		</select> <input type="text" class="search-bar" placeholder="일정 보기 검색" name="search-bar">
-		<input type="submit" value="검색" style="width: 50pt; height: 27pt;">
+		<input type="submit" value="검색" class="buttonList" style="width: 50pt; height: 27pt;">
 	</div>
 	</form>
 	<%@ include file="footer.jsp"%>

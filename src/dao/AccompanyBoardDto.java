@@ -7,6 +7,7 @@ public class AccompanyBoardDto {
 	private int post_num; //게시물 번호
 	private String email;	//작성자 이메일
 	private String nickname;  // 작성자 닉네임
+	private String sl_code; //일정 번호
 	private String title;	//게시물 제목
 	private String image_url; //대표 이미지 url
 	private String content; //게시물 내용
@@ -21,8 +22,12 @@ public class AccompanyBoardDto {
 	private int comment_count; //댓글수
 	private int status;
 	
-	
-	
+	public String getSl_code() {
+		return sl_code;
+	}
+	public void setSl_code(String sl_code) {
+		this.sl_code = sl_code;
+	}
 	public int getStatus() {
 		return status;
 	}

@@ -323,6 +323,16 @@ body {
 	border-radius: 5px;
 	font-size: 20px;
 }
+
+.wishList{
+	min-width: 100%;
+	height: 5.8%;
+	border-bottom: 1px solid white;
+	background-color: #39A2D8;
+}
+.wishList:hover{
+	cursor: pointer;
+}
 </style>
 
 <!--  -->
@@ -819,6 +829,7 @@ body {
 	<div class="section">
 		${areasMap }
 		<ul class="sidebar">
+			<li id = "wishList">☆</li>
 			<c:forEach var="areaMap" items="${areasList}">
 				<li id="sidebar-menu" data="${areaMap.code }">
 					<p class="sidedesc" id="sidedesc">${areaMap.name }</p>
