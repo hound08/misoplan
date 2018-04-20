@@ -183,7 +183,10 @@ var loadFile = function(event) {
 	var output = document.getElementById('output');
 	output.src = URL.createObjectURL(event.target.files[0]);
 };
-
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+};
 </script>
 </head>
 <body>
@@ -193,9 +196,7 @@ var loadFile = function(event) {
 %>
 <form action="planupdatePro.do?bs_num=${bs_num}" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
-		<!-- <div class="main-top-second1" align="left"> -->
-			<img class="main-top-second1" alt="IMG" id="output" src="${dto.image_url }">
-		<!-- </div> -->
+		<img class="main-top-second1" id="output" alt="IMG" id="output" src="${dto.image_url }">
 		<div class="main-top-second2" id ="test">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value ="${dto.title }"></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required" value="${dto.tag }"></p><br>
@@ -203,7 +204,7 @@ var loadFile = function(event) {
 				<!--  <span id="sl_codehidden"></span> -->
 		</div>
 		<div class="main-imagebt">
-			<input class="" type="file" name="image_url" onchange="image(this)">
+			<input type="file" name="image" onchange="loadFile(event)" accept="image/*">
 		</div>
 	</div>
 	<div class="main-center">
