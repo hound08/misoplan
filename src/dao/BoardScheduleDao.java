@@ -366,32 +366,19 @@ public class BoardScheduleDao {
 		String sql1 = "delete from REPLYBOARDSCHEDULE where bs_num =?";
 		String sql2 = "delete from BOARDSCHEDULE where bs_num = ? and email = ?";
 		int result = 0;
-		String dbemail = "";
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql1);
 			ps.setInt(1, bs_num);
 			rs = ps.executeQuery();
-			if (rs.next()) {
-				dbemail = rs.getString("email");
-				System.out.println("delete @@@@@@@@@@@@@@@@@@@@@@@@");
-				
-				if (dbemail.equals(email)) {
-					rs.close();
-					ps.close();
-					ps = conn.prepareStatement(sql2);
-					ps.setInt(1, bs_num);
-					ps.setString(2, email);
-					result = ps.executeUpdate();
-					
-					
-				} else {
-					result = 0;
-				}
-			} else {
-				result = -1;
-			}
+			rs.close();
+			ps.close();
+			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, bs_num);
+			ps.setString(2, email);
+			result = ps.executeUpdate();
+
 		}	finally {
 			 if (rs != null) rs.close();
 	         if (ps != null) ps.close(); 
