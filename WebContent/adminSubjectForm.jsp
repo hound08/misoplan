@@ -64,9 +64,9 @@
 	.tdTitle {
 	  width: 150px;
 	  max-width: 150px;
-	  text-overflow:ellipsis;
-	  overflow:hidden;
-	  white-space:nowrap;
+	  text-overflow: ellipsis;
+	  overflow: hidden;
+	  white-space: nowrap;
 	}
 	.tdContent {
 	  width: 270px;
