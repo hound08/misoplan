@@ -56,6 +56,7 @@ public class BoardScheduleDao {
 			if (rs.next()) {
 				dto.setBs_num(rs.getInt("bs_num"));
 				dto.setSl_code(rs.getString("sl_code"));
+				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setTitle(rs.getString("title"));
 				dto.setTag(rs.getString("tag"));
@@ -632,6 +633,45 @@ public class BoardScheduleDao {
 					dto.setBoard_date(rs.getDate(11));
 					dto.setArea_names(rs.getString(12));
 					dto.setSchedule_date(rs.getString(13));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null) conn.close();
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+		}
+		
+		return list;
+	}
+	
+	public List<ScheduleSmallDto> selectScheduleSmall(int bs_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM SCHEDULESMALL WHERE SL_CODE = (SELECT SL_CODE FROM BOARDSCHEDULE WHERE BS_NUM = ?)";
+		List<ScheduleSmallDto> list = new ArrayList<ScheduleSmallDto>();
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, bs_num);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				do {
+					ScheduleSmallDto dto = new ScheduleSmallDto();
+					dto.setSl_code(rs.getString(1));
+					dto.setSm_code(rs.getString(2));
+					dto.setSs_code(rs.getString(3));
+					dto.setTour_name(rs.getString(4));
+					dto.setTour_code(rs.getString(5));
+					dto.setCoord_x(rs.getInt(6));
+					dto.setCoord_y(rs.getInt(7));
+					dto.setImage_url(rs.getString(8));
+					dto.setTour_text(rs.getString(9));
 					list.add(dto);
 				} while (rs.next());
 			}
