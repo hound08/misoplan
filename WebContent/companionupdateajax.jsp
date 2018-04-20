@@ -48,6 +48,7 @@
 		obj.put("profile_url", list.get(i).getProfile_url());
 		obj.put("nickname", list.get(i).getNickname());
 		obj.put("kakao_id", list.get(i).getKakao_id());
+		obj.put("num_people", list.get(i).getNum_people());
 		obj.put("current_num", current_num);
 		jsonArray.add(obj);
 		System.out.println("jsonArray :"+ jsonArray);

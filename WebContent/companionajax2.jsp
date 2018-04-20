@@ -23,6 +23,7 @@
     		obj.put("profile_url", applist.get(i).getProfile_url());
     		obj.put("nickname", applist.get(i).getNickname());
     		obj.put("kakao_id", applist.get(i).getKakao_id());
+    		obj.put("num_people", applist.get(i).getNum_people());
     		jsonArray.add(obj);    		
     		System.out.println("ajax2 jsonArray = "+ jsonArray);
     	}

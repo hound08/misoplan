@@ -98,7 +98,7 @@
 		width: 90%;
 		text-align: right;
 	}
-	.adminButton {
+	.deleteButton {
 		margin-top: 5px;
 		width: 100px;
 		height: 30px;
@@ -131,6 +131,58 @@
 		border-color: transparent;
 	}
 </style>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript">
+	$(function() {
+		$('.chkboxTop').click(function(){
+			if ($('.chkboxTop').prop('checked')) {
+				$('.chkbox').prop('checked', true);
+			} else {
+				$('.chkbox').prop('checked', false);
+			}
+		});
+		
+		$('.chkbox').click(function(){
+			if ($(".chkbox").length == $(".chkbox:checked").length) {
+				$('.chkboxTop').prop('checked', true);
+			} else {
+				$('.chkboxTop').prop('checked', false);
+			}
+		});
+	});
+	
+	function deleteChk() {
+		if ($(".chkbox:checked").length == 0) {
+			alert("선택된 글이 없습니다.");
+			
+			return false;
+		} else {
+			if (confirm($(".chkbox:checked").length + "개의 글을 삭제합니다.\n계속 진행하시겠습니까?")) {
+				var rowData = new Array();
+				var tdArr = new Array();
+				var checkbox = $(".chkbox:checked");
+				
+				checkbox.each(function(i) {
+					var tr = checkbox.parent().parent().eq(i);
+					var td = tr.children();
+		
+					rowData.push(tr.text());
+					var bs_num = td.eq(1).text();
+					tdArr.push(bs_num);
+				});
+				
+				$('#hiddenDelete').val(tdArr);
+				
+				return true;
+			} else {
+				$('#hiddenDelete').val("");
+				alert("취소하셨습니다.");
+			}
+			
+			return false;
+		}
+	};
+</script>
 </head>
 <body>
 	<div id="center">
@@ -147,16 +199,16 @@
 						<td width="35px">${list.bs_num}</td>
 						<td class="tdTitle">${list.title}</td>
 						<td class="tdContent">${list.content}</td>
-						<td width="70px">${list.nickname}</td>
+						<td width="75px">${list.nickname}</td>
 						<td width="170px">${list.email}</td>
 						<td>${list.board_date}</td>
 					</tr>
 				</c:forEach>
 			</table>
 			<div class="divButton">
-				<form name="frm" action="adminBanPro.do" onsubmit="return memberBanChk()">
-					<input type="hidden" id="hiddenBan" name="hiddenBan">
-					<input type="submit" id="btnMemberBan" class="adminButton" value="글 삭제">
+				<form name="frm" action="planDeletePro.do" onsubmit="return deleteChk()">
+					<input type="hidden" id="hiddenDelete" name="hiddenDelete">
+					<input type="submit" id="btnDelete" class="deleteButton" value="글 삭제">
 				</form>
 			</div>
 			<div class="divPage">
