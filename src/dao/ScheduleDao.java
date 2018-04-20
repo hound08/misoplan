@@ -109,7 +109,7 @@ public class ScheduleDao {
 		PreparedStatement ps2 = null;
 		PreparedStatement ps3 = null;
 		String nextVal = getNextVal();
-		String sql1 = "INSERT INTO SCHEDULELARGE VALUES(?,?,?,sysdate)";
+		String sql1 = "INSERT INTO SCHEDULELARGE VALUES(?,?,?,sysdate, 0)";
 		int result = 0;
 
 		try {
