@@ -60,8 +60,8 @@
 			<c:if test="${admin == 1}">
 				<li class="list_admin"><a href="adminConfirmForm.do" id="b">관리자 메뉴</a></li>
 				<ul>
-					<li class="list_admin_sub"><a href="adminConfirmForm.do" id="a">회원 관리</a></li>
-					<li class="list_admin_sub"><a href="adminSubjectForm.do" id="a">게시글 관리</a></li>
+					<li class="list_admin_sub"><a href="adminMainForm.do" id="a">회원 관리</a></li>
+					<li class="list_admin_sub"><a href="adminSubjectForm.do" id="a">글 관리</a></li>
 				</ul>
 			</c:if>
 		</ul>

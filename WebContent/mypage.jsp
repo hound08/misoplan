@@ -1,6 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="dao.*" errorPage="Error.jsp"%>
-   <%@ include file="header.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ include file="header.jsp" %>
 <!DOCTYPE html >
 <html>
 <head>
@@ -35,6 +35,7 @@
 		width: 100px;
 		height: 100px;
 		margin-right: 50px;
+		text-align: center;
 	}
 	#btnlist li a{
 		color: white;
@@ -49,7 +50,9 @@
 				<li><a class="btn" href="scheduleForm.do?email=${email }">내 계획</a></li>
 				<li><a class="btn" href="myWishListForm.do?email=${email }">찜 List</a></li>
 				<li><a class="btn" href="companionForm.do?email=${email }">동행</a></li>
-				<li><a class="btn" href="adminConfirmForm.do">관리자</a></li>
+				<c:if test="${admin == 1}">
+					<li><a class="btn" href="adminConfirmForm.do">관리자</a></li>
+				</c:if>
 			</ul>
 	</div>
 </body>
