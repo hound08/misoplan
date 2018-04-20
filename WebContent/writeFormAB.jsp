@@ -1,3 +1,4 @@
+<%@page import="dao.ScheduleDao"%>
 <%@page import="dao.myPlanABDto"%>
 <%@page import="dao.AccompanyDao"%>
 <%@page import="dao.mySchduleDto"%>
@@ -242,7 +243,12 @@ input[type="file"] {
 
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<%
+	ScheduleDao sdao = ScheduleDao.getInstance();
+	String email = (String)session.getAttribute("email");
+	sdao.check(email);
 
+%>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$(".plan").children().eq(0).attr("checked", "checked");
