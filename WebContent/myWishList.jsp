@@ -15,11 +15,12 @@
 				width: 1200px;
 			}
 			#main {
+					border-radius: 40px;
 					width: 930px;
-					border: 3px solid green;
 					text-align: center;
 					float: left;
 					margin-top: 20px;
+					background-color: #f0f0f0;
 				}
 			#main h1 {
 					margin: 20px 0px;

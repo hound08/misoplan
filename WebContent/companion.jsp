@@ -325,6 +325,17 @@ function isclosed(post_num){
 		}
 	});
 }
+/* function companionview(post_num) {
+	console.log("view ");
+	$.ajax({
+		url : 'viewActionAB.do',
+		type : 'get',
+		data : {
+			post_num : post_num
+		}
+	});
+} */
+
 </script>
 </head>
 <body>
@@ -337,8 +348,8 @@ function isclosed(post_num){
 						<c:forEach var="list" items="${list }" >
 							<div class="card" id="z${list.post_num }">
 								<table >
-									<tr align="center">
-										<td class="m1">제목 : </td><td class="m2"><pre class="title" width="300px">${list.title}</pre></td>
+									<tr align="center" <%-- onclick="companionview(${list.post_num})" --%>>
+										<td class="m1">제목 : </td><td class="m2"><a href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
 									</tr>
 									<tr align="center">
 										<td class="m1">닉네임 : </td><td class="m2">${list.nickname }</td>

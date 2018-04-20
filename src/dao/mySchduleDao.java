@@ -45,7 +45,7 @@ public class mySchduleDao {
 	      PreparedStatement ps = null;
 	      ResultSet rs = null;
 	      String sql2 = "select l.is_deleted, l.sl_code,l.s_name, m.AREA_NAME, m.sigungu_name, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from SCHEDULELARGE l, "
-	      		+ "schedulemedium m where  l.sl_code = m.sl_code and email = ?";
+	      		+ "schedulemedium m where  l.sl_code = m.sl_code and email = ? and l.is_deleted = 0 ";
 	      List<mySchduleDto> planList = new ArrayList<mySchduleDto>();
 	      
 	      try {
@@ -53,7 +53,6 @@ public class mySchduleDao {
 		         ps = conn.prepareStatement(sql2);
 		         ps.setString(1, email);
 		         rs = ps.executeQuery();
-		         
 		         while(rs.next()){
 		        	 mySchduleDto msdto = new mySchduleDto();
 		        	 msdto.setSl_code(rs.getString("sl_code"));
@@ -72,8 +71,6 @@ public class mySchduleDao {
 		         if (ps != null)  ps.close();
 		         if (conn != null) conn.close();
 		      }
-	      
 		      return planList;
 	}
-	
 }
