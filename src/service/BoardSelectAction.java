@@ -89,7 +89,6 @@ public class BoardSelectAction implements CommandProcess {
 					
 			}
 
-			request.setAttribute("showList", showList);
 			request.setAttribute("email", email);
 			request.setAttribute("showList", showList);
 			

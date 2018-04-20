@@ -161,6 +161,7 @@ public class BoardScheduleDao {
 		String sql = "INSERT INTO BOARDSCHEDULE(BS_NUM, TITLE, TAG, NICKNAME, IMAGE_URL, CONTENT, AREA_NAMES, EMAIL, sl_code, SCHEDULE_DATE) VALUES (BS_NUM.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int result = 0;
 		try {
+			System.out.println("sl_code : >>>>>>>>>>>>>>>>>>>>>>>>>>" + dto.getSl_code());
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			/* System.out.println("sl_code" + sl_code); */
