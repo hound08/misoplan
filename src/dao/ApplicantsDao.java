@@ -45,7 +45,7 @@ public class ApplicantsDao {
 		Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
-		String sql = "select * from applicants where post_num = ?";
+		String sql = "select app.* , acc.IS_CLOSED from applicants app , ACCOMPANYBOARD acc where  app.POST_NUM = acc.POST_NUM and acc.post_num = ?";
 		List<ApplicantsDto> applist = new ArrayList<ApplicantsDto>();
 		System.out.println("dao"+ post_num);
 		try {
@@ -63,6 +63,7 @@ public class ApplicantsDao {
 	        	 dto.setNum_people(rs.getInt("num_people"));
 	        	 dto.setEmail(rs.getString("email"));
 	        	 dto.setPost_num(rs.getInt("post_num"));
+	        	 dto.setIs_closed(rs.getInt("is_closed"));
 	        	 applist.add(dto);
 	         }
 		} catch (Exception e) {
@@ -321,7 +322,7 @@ public class ApplicantsDao {
 		Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
-	    String sql = "SELECT m.PROFILE_URL , a.NICKNAME, a.KAKAO_ID   from member m, applicants a  where m.NICKNAME = a.NICKNAME and a.POST_NUM = ? and a.STATUS = ? and a.NICKNAME = ?";
+	    String sql = "SELECT m.PROFILE_URL , a.NICKNAME, a.KAKAO_ID, a.num_people   from member m, applicants a  where m.NICKNAME = a.NICKNAME and a.POST_NUM = ? and a.STATUS = ? and a.NICKNAME = ?";
 	    System.out.println("dao"+ post_num);
 	    System.out.println("dao"+ nickname);
 	    System.out.println("dao"+ status);
@@ -338,6 +339,7 @@ public class ApplicantsDao {
 	        	 dto.setProfile_url(rs.getString("profile_url"));
 	        	 dto.setNickname(rs.getString("nickname"));
 	        	 dto.setKakao_id(rs.getString("kakao_id"));
+	        	 dto.setNum_people(rs.getInt("num_people"));
 	        	 list.add(dto);
 	         }
 		} catch (Exception e) {
@@ -355,7 +357,7 @@ public class ApplicantsDao {
 		Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
-	    String sql ="select a.status, a.nickname, a.kakao_id, m.profile_url from applicants a , member m where a.email = m.email and post_num = ?";
+	    String sql ="select a.status, a.nickname, a.kakao_id, a.num_people , m.profile_url from applicants a , member m where a.email = m.email and post_num = ?";
 	    List<ApplicantsDto> list = new ArrayList<ApplicantsDto>();
 	    try {
 	    	conn = getConnection();
@@ -369,6 +371,7 @@ public class ApplicantsDao {
 		        	 dto.setProfile_url(rs.getString("profile_url"));
 		        	 dto.setNickname(rs.getString("nickname"));
 		        	 dto.setKakao_id(rs.getString("kakao_id"));
+		        	 dto.setNum_people(rs.getInt("num_people"));
 		        	 list.add(dto);
 	        	}
 	        }

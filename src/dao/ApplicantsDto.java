@@ -12,11 +12,17 @@ public class ApplicantsDto {
 	private Date   applicants_date;
 	private int    num_people;
 	private String profile_url;
+	private int is_closed;
 	
 	
 	
 	
-	
+	public int getIs_closed() {
+		return is_closed;
+	}
+	public void setIs_closed(int is_closed) {
+		this.is_closed = is_closed;
+	}
 	public String getKakao_id() {
 		return kakao_id;
 	}
