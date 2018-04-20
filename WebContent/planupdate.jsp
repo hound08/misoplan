@@ -214,7 +214,7 @@ var loadFile = function(event) {
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value ="${dto.title }"></p><br>
 		<p>태   그 : <input type="text" id="tag" name="tag" required="required" value="${dto.tag }"></p><br>
 		<h2>수정할 내용을 입력하여 주세요</h2>
-				<!--  <span id="sl_codehidden"></span> -->
+		 	<input type="hidden" id="sl_codehidden" value="${dto.sl_code }">
 		</div>
 		<div class="main-imagebt">
 			<input type="file" name="image" onchange="loadFile(event)" accept="image/*">

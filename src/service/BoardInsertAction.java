@@ -53,6 +53,7 @@ public class BoardInsertAction implements CommandProcess {
 		dto.setArea_names(multi.getParameter("area"));
 		dto.setEmail(multi.getParameter("email"));
 		dto.setSl_code(multi.getParameter("sl_code"));
+		System.out.println("sl_code : @@@@@@@@@@@@@@@@@@ " + multi.getParameter("sl_code"));
 		dto.setSchedule_date(multi.getParameter("schedule_date"));
 		
 		String schedule = dto.getSchedule_date();
