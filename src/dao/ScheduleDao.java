@@ -383,7 +383,7 @@ public class ScheduleDao {
 			}
 		}
 		
-		String sql5 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ.NEXTVAL,?,?,?,?,?,?)";
+		String sql5 = "INSERT INTO SCHEDULESMALL VALUES(?,SS_CODE_SEQ.NEXTVAL,SS_CODE_SEQ2.NEXTVAL,?,?,?,?,?,?)";
 		try {
 			ps5 = conn.prepareStatement(sql5);
 			for (int i = 0; i < sArr.size(); i++) {
@@ -406,8 +406,87 @@ public class ScheduleDao {
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		if(result1 != 0 && result2 != 0 && result3 != 0 && result4 != 0 && result5 != 0) {
+			return 1;
+		}
+		return 0;
+	}
+
+	public int deletePlan(String deleteId) {
+		Connection conn = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
+		String sql1 = "DELETE FROM SCHEDULESMALL WHERE SL_CODE = ?";
+		String sql2 = "DELETE FROM SCHEDULEMEDIUM WHERE SL_CODE = ?";
+		String sql3 = "DELETE FROM SCHEDULELARGE WHERE SL_CODE = ?";
+		int result1 = 0;
+		int result2 = 0;
+		int result3 = 0;
+		
+		try{
+			conn = getConnection();
+			ps1 = conn.prepareStatement(sql1);
+			ps1.setString(1, deleteId);
+			result1 = ps1.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps1.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		try{
+			conn = getConnection();
+			ps2 = conn.prepareStatement(sql2);
+			ps2.setString(1, deleteId);
+			result2 = ps2.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps2.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
+		try{
+			conn = getConnection();
+			ps3 = conn.prepareStatement(sql3);
+			ps3.setString(1, deleteId);
+			result3 = ps3.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				ps3.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		if(result1 != 0 && result2 != 0 && result3 != 0) {
 			return 1;
 		}
 		return 0;
