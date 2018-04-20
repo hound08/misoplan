@@ -106,6 +106,28 @@ div {
 	text-align: left;
 }
 
+.divImage {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+}
+
+#output {
+	width: 100px;
+	height: 100px;
+}
+
+.divUpload {
+	position: absolute;
+	margin-left: 5px;
+	margin-top: 37px;
+	display: inline-block;
+	width: 190px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
 #submit {
 	width: 300px;
 	height: 40px;
@@ -163,6 +185,11 @@ h1 {
 		});
 	});
 	
+	var loadFile = function(event) {
+		var output = document.getElementById('output');
+		output.src = URL.createObjectURL(event.target.files[0]);
+	};
+	
 	function emailCheck(email){
 		if (!joinForm.email.value) { 
 			alert("이메일 주소를 입력하세요.");
@@ -192,7 +219,7 @@ h1 {
 		});
 		
 		alert("해당 이메일로 인증번호가 발송되었습니다.");
-	}
+	};
 	
 	$(function() {
 		$('#btnConfirm').click(function() {
@@ -222,7 +249,7 @@ h1 {
 		}
 		
 		return;
-	}
+	};
 	
 	$(function() {
 		$('#passwordChk').change(function() {
@@ -245,7 +272,7 @@ h1 {
 			
 			return false;
 		}
-	}
+	};
 </script>
 </head>
 <body>
@@ -272,7 +299,8 @@ h1 {
 			<p class="pPhone"><input type="tel" name="phone" class="inputType" required="required" placeholder="연락처"></p>
 			<h3>프로필 사진</h3>
 			<div class="divProfile">
-				<input type="file" name="profile_url" class="inputFile">
+				<div class="divImage"><img id="output" src="images/no_profile_image.png"></div>
+				<div class="divUpload"><input type="file" accept="image/*" onchange="loadFile(event)" name="profile_url" class="inputFile"></div>
 			</div>
 			<p><input type="submit" id="submit" value="회원가입"></p>
 			<input type="hidden" name="ip_address" value="<%=userIp%>">

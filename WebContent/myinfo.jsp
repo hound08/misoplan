@@ -224,6 +224,11 @@ td {
 		
 		return;
 	};
+	
+	var loadFile = function(event) {
+		var output = document.getElementById('previewImg');
+		output.src = URL.createObjectURL(event.target.files[0]);
+	};
 </script>
 </head>
 <%
@@ -240,7 +245,7 @@ td {
 						<div id="img_div">
 							<img id="previewImg" alt="프로필 사진" src="${ memberdto.profile_url}"><br>
 							<table>
-								<tr><td class="td">사진 변경</td><td><input type="file" name="profile_url" class="input"></td></tr>
+								<tr><td class="td">사진 변경</td><td><input type="file" accept="image/*" onchange="loadFile(event)" name="profile_url" class="input"></td></tr>
 							</table>
 						</div>
 						<hr color="gray" size="1px">
