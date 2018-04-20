@@ -82,10 +82,8 @@
 				//console.log(deleteId);
 				var deleteId = deleteId.substr(6, deleteId.length);
 				//console.log(deleteId);
-				var sendData = "deleteId="+deleteId; 
-				$.post('deletePlanAction.do', sendData, function(msg) {
-					
-				});
+				$('#form').append("<input type='hidden' name='deleteId' value="+deleteId+">");
+				form.submit();
 				
 			});
 		</script>

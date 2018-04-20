@@ -28,5 +28,5 @@
 		dao.vote_down(bs_num);
 	}
 	int vote_count = dao.getTotalVote(bs_num);
-	out.print(vote_count+"명이 좋아해요");
+	out.print("♥" + vote_count + "명이 좋아해요");
 %>

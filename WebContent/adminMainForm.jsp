@@ -277,7 +277,7 @@
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
 		<div id="main">
-			<h1>관리자 메뉴</h1>
+			<h1>회원 관리</h1>
 			<div class="divTab">
 				<table class="tableTab"><tr><td class="tdAll"><a href="adminMainForm.do">전체 회원(${totCnt})</a></td><td class="tdBan"><a href="adminBanForm.do">정지된 회원</a></td></tr></table>
 			</div>
