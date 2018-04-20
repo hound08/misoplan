@@ -61,6 +61,7 @@ public class writeActionAB implements CommandProcess{
 		accompanyDto.setTitle(multi.getParameter("title"));
 		accompanyDto.setClosing_date(closing_date);
 		accompanyDto.setTag(multi.getParameter("tag"));
+		accompanyDto.setSl_code(multi.getParameter("plan-radio"));
 		accompanyDto.setContent(multi.getParameter("content"));
 		if(multi.getFile("image") != null)
 			accompanyDto.setImage_url("/J20180403/upload/" + filename);

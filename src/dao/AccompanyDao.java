@@ -103,7 +103,7 @@ public class AccompanyDao {
 			pstmt.setInt(1, num);
 			pstmt.setString(2, accompanyBoardDto.getEmail()); 
 			pstmt.setString(3, accompanyBoardDto.getNickname()); 
-			pstmt.setString(4, null); 
+			pstmt.setString(4, accompanyBoardDto.getSl_code()); 
 			pstmt.setString(5, accompanyBoardDto.getTitle());
 			pstmt.setString(6, accompanyBoardDto.getImage_url());
 			pstmt.setString(7, accompanyBoardDto.getContent());
@@ -326,6 +326,7 @@ public class AccompanyDao {
 			rs.next();
 			board.setEmail(rs.getString(2));
 			board.setNickname(rs.getString(3));
+			board.setSl_code(rs.getString(4));
 			board.setTitle(rs.getString(5));
 			board.setImage_url(rs.getString(6));
 			board.setContent(rs.getString(7));
