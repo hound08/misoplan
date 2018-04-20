@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.TreeSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -83,7 +84,14 @@ public class scheduleFormAction implements CommandProcess{
 				}
 					
 			}
-
+			
+			// 지역명 중복 제거 및 areaName + sigunguName
+			TreeSet<String> nameTree = new TreeSet<>();
+			for(mySchduleDto mdto : planList) {
+				String name = mdto.getArea_name() + "-" + mdto.getSigungu_name();
+				nameTree.add(name);
+			}
+			request.setAttribute("nameTree", nameTree);
 			request.setAttribute("showList", showList);
 			request.setAttribute("email", email);
 			

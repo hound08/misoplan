@@ -9,7 +9,7 @@ public class mySchduleDto {
 	private Date tour_date_start;
 	private Date tour_date_end;
 	private Date regi_date;
-	
+	private String sigungu_name;
 
 	public String getSl_code() {
 		return sl_code;
@@ -46,6 +46,12 @@ public class mySchduleDto {
 	}
 	public void setRegi_date(Date regi_date) {
 		this.regi_date = regi_date;
+	}
+	public String getSigungu_name() {
+		return sigungu_name;
+	}
+	public void setSigungu_name(String sigungu_name) {
+		this.sigungu_name = sigungu_name;
 	}
 
 }

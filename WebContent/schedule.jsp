@@ -23,7 +23,6 @@
 			
 			#main {
 					width: 930px;
-					border: 3px solid green;
 					text-align: center;
 					float: left;
 					margin-top: 20px;
@@ -64,6 +63,22 @@
 		</style>
 		
 		<script type="text/javascript">
+		
+			$(document).ready(function(){
+				var nameTree = "${nameTree}";
+				console.log("nameTree : " + nameTree);
+				console.log("nameTree length : " + nameTree.length);
+				
+				var str = nameTree.split(',');
+				console.log("str : " + str);
+				var text = "";
+				for(var i = 0; i < nameTree.length; i++){
+					text = text + " " + nameTree[i];
+				}
+				
+				$("#tour_name").text(text);
+			});
+		
 			$(document).on('click', '.second-text', function(){
 				//console.log("clicked");
 				var $this = $(this);
@@ -110,7 +125,7 @@
 								<div class="second-text" id=${list.sl_code }>
 									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="text">여행지 : ${list.area_name }</div>
+								<div class="text" id='tour_name'></div>
 								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
 								<div class="text">작성일 : ${list.regi_date }</div>
 								<div class="text">
