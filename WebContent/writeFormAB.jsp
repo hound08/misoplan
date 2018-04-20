@@ -251,6 +251,7 @@ input[type="file"] {
 	if(result != 1){
 		%>
 			<script>
+				alert("일정을 작성하신 후 글을 작성하실 수 있습니다.");
 				history.go(-1);
 			</script>
 		<%
@@ -309,23 +310,25 @@ input[type="file"] {
 					<td>
 						<div class="plan-div">
 							<c:forEach var="myplan" items="${list }">
-								<div class="plan">
-								<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
-									<table class="plan-table">
-										<tr>
-											<td>일정이름: ${myplan.s_name }</td> 
-										</tr>
-										<tr>
-											<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
-										</tr>
-										<tr>
-											<td>${myplan.date_start }~${myplan.date_end }</td>
-										</tr>
-										<tr>
-											<td>${myplan.regi_date }</td>
-										</tr>
-									</table>
-								</div>
+								<c:if test="${myplan.is_deleted == 0 }">
+									<div class="plan">
+									<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
+										<table class="plan-table">
+											<tr>
+												<td>일정이름: ${myplan.s_name }</td> 
+											</tr>
+											<tr>
+												<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
+											</tr>
+											<tr>
+												<td>${myplan.date_start }~${myplan.date_end }</td>
+											</tr>
+											<tr>
+												<td>${myplan.regi_date }</td>
+											</tr>
+										</table>
+									</div>
+								</c:if>
 							</c:forEach>
 						</div>
 					</td>

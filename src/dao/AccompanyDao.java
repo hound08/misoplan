@@ -491,7 +491,7 @@ public void vote_down(int post_num) {
 		  Connection conn = null;
 	      PreparedStatement pstmt = null;
 	      ResultSet rs = null;
-	      String sql = "select distinct l.sl_code,l.s_name, m.AREA_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from SCHEDULELARGE l, schedulemedium m where l.sl_code = m.sl_code and email = ? ORDER BY SL_CODE DESC, TOUR_DATE_START ASC";
+	      String sql = "select distinct l.is_deleted, l.sl_code,l.s_name, m.AREA_NAME, m.TOUR_DATE TOUR_DATE_START, l.REGI_DATE from SCHEDULELARGE l, schedulemedium m where l.sl_code = m.sl_code and email = ? ORDER BY SL_CODE DESC, TOUR_DATE_START ASC";
 	      List<myPlanABDto> planList = new ArrayList<myPlanABDto>();
 	      
 	      try {
@@ -503,6 +503,7 @@ public void vote_down(int post_num) {
 		         while(rs.next()){
 		        	 myPlanABDto dto = new myPlanABDto();
 		        	 ArrayList<String> areaList = new ArrayList<String>();
+		        	 dto.setIs_deleted(rs.getInt("is_deleted"));
 		        	 dto.setSl_code(rs.getString("sl_code"));
 		        	 dto.setS_name(rs.getString("s_name"));
 		        	 dto.setDate_start(String.valueOf(rs.getDate("tour_date_start")));

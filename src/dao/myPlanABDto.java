@@ -10,8 +10,14 @@ public class myPlanABDto {
 	private String date_start;
 	private String date_end;
 	private String regi_date;
+	private int is_deleted;
 	
-	
+	public int getIs_deleted() {
+		return is_deleted;
+	}
+	public void setIs_deleted(int is_deleted) {
+		this.is_deleted = is_deleted;
+	}
 	public String getSl_code() {
 		return sl_code;
 	}

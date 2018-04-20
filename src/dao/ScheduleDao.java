@@ -443,21 +443,40 @@ public class ScheduleDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT SL_CODE FROM SCHEDULELARGE WHERE EMAIL=?";
-		int result = 0;
+		String sql1 = "SELECT COUNT(*) FROM SCHEDULELARGE WHERE EMAIL=?";
+		String sql2 = "SELECT IS_DELETED FROM SCHEDULELARGE WHERE EMAIL=?";
 		
-		try{
+		int count = 0;
+		try {
 			conn = getConnection();
-			ps = conn.prepareStatement(sql);
+			ps = conn.prepareStatement(sql1);
 			ps.setString(1, email);
 			rs = ps.executeQuery();
-			if(rs.next()) {
-				result = 1;
+			if(rs.next())
+				count = rs.getInt(1);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		} finally {
+			release(conn, ps, rs);
+		}
+		
+		int result = 1;
+		int is_deleted = 0;
+		try{
+			conn = getConnection();
+			ps = conn.prepareStatement(sql2);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				is_deleted += rs.getInt("IS_DELETED");
 			}
 		}catch (Exception e) {
 			e.printStackTrace();
 		}finally {
 			release(conn, ps, rs);
+		}
+		if(is_deleted == count ) {
+			result = 0;
 		}
 		return result;
 	}

@@ -87,7 +87,7 @@ body {
 
 #sidebar-menu {
 	min-width: 100%;
-	height: 5.8%;
+	height: 5.5%;
 	border-bottom: 1px solid white;
 	background-color: #39A2D8;
 }
@@ -108,7 +108,7 @@ body {
 	margin: 0px;
 	float: left;
 	width: 95%;
-	height: 900px;
+	height: 910px;
 	transition: all 0.5s;
 }
 
@@ -693,6 +693,14 @@ body {
 		return locations;
 	}
 
+	
+	$(document).on('click', '#wishList', function(){
+		console.log("clicked");
+		
+		
+	});
+	
+	
 	// 서울, 인천 등 을 클릭했을 때 맵을 이동시키는 메서드
 	$(document).on('click', '#sidebar-menu', function(e) {
 		/* 좌표 미세조정 */

@@ -522,7 +522,7 @@ tr.highlight td {
 				<td><pre>${board.content }</pre></td>
 			</tr>
 		</table>
-			<c:if test="${email != null and board.is_closed != 1 }">
+			<c:if test="${email != null and board.is_closed != 1 and email != board.email}">
 				<button onclick="apply()">동행 신청하기</button>
 			</c:if>
 			<c:if test="${email == board.email and board.is_closed != 1}">
@@ -550,13 +550,6 @@ tr.highlight td {
 		<hr>
 		</c:forEach>
 		<div class="post-footer">
-			<%-- <c:if test="${email == null }">
-				<form action="writeReplyAB.do" method="post">
-					<input type="hidden" value="${post_num }"name="post_num">
-					<textarea rows="12" style="width: 70%;" name="content"></textarea>
-					<input type="submit" value="확인">
-				</form>
-			</c:if> --%>
 			<c:if test="${email != null }">
 				<form action="writeReplyAB.do" method="post" id="replyForm">
 					<input type="hidden" value="${post_num }"name="post_num">
@@ -567,6 +560,13 @@ tr.highlight td {
 						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
 					</table>
 				</form>
+			</c:if>
+			<c:if test="${email == null }">
+					<input type="hidden" value="${post_num }"name="post_num">
+					<table class="reply-table">
+						<tr><td colspan="2">로그인 후에 이용해 주세요!</td></tr>
+						<tr><td colspan="2"><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
+					</table>
 			</c:if>
 		</div>		
 		</div>	
