@@ -36,6 +36,8 @@
 	if(result == 1){
 		System.out.println("처음 수락!!!!");
 		List<ApplicantsDto> list = appdao.bonusselect(post_num, nickname, status);        /* 수락을 하면 json 출력 */
+		int current_num = appdao.getCurrent(post_num);
+		
 	// json
 	
 	JSONObject json= new JSONObject();
@@ -46,6 +48,7 @@
 		obj.put("profile_url", list.get(i).getProfile_url());
 		obj.put("nickname", list.get(i).getNickname());
 		obj.put("kakao_id", list.get(i).getKakao_id());
+		obj.put("current_num", current_num);
 		jsonArray.add(obj);
 		System.out.println("jsonArray :"+ jsonArray);
 	}

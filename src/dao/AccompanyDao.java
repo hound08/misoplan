@@ -641,4 +641,25 @@ public void vote_down(int post_num) {
 		}
 		return result;
 	}
+	
+	public int delete(int post_num) {
+		
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "DELETE FROM ACCOMPANYBOARD WHERE POST_NUM = ?";
+		int result = -10;
+		try {
+			conn = getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post_num);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(conn);
+		}
+		return result;
+	}
 }

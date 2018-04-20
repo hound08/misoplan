@@ -245,9 +245,16 @@ input[type="file"] {
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <%
 	ScheduleDao sdao = ScheduleDao.getInstance();
-	String email = (String)session.getAttribute("email");
-	sdao.check(email);
-
+	String email1 = (String)session.getAttribute("email");
+	int result = sdao.check(email1);
+	
+	if(result != 1){
+		%>
+			<script>
+				history.go(-1);
+			</script>
+		<%
+	}
 %>
 <script type="text/javascript">
 	$(document).ready(function(){

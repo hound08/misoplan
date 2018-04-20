@@ -44,7 +44,7 @@
 </head>
 <body>
 	<div id="test">
-		<video id="main" src="images/aurora.mp4" loop="loop" autoplay="autoplay" ></video>
+		<video id="main" src="<!-- images/aurora.mp4 -->" loop="loop" autoplay="autoplay" ></video>
 			<ul id="btnlist">
 				<li><a class="btn" href="myInfoConfirmForm.do?email=${email }">개인 정보 수정</a></li>
 				<li><a class="btn" href="scheduleForm.do?email=${email }">내 계획</a></li>
