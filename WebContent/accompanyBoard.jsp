@@ -63,8 +63,8 @@ div {
     font-weight: bold;
     padding: 10px 10px;
     line-height: 20px;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     display: table;
 }
 
@@ -79,8 +79,8 @@ div {
     font-weight: bold;
     padding: 10px 10px;
     line-height: 20px;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     display: table;
 }
 
@@ -199,7 +199,7 @@ p {
 
 .section-card {
 	border: 1px solid;
-	border-color: #D5D5D5;
+	border-color: #1294AB;
 	border-radius: 30px;
 	width: 100%;
 	margin-top: 35px;
@@ -278,7 +278,12 @@ p {
 
 .align button {
 	width: 100px;
-	height: 30px;
+	height: 35px;
+	background-color: #1294AB;
+	border-radius: 8px;
+	color: white;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .center-label {
@@ -297,7 +302,7 @@ p {
 	font-size: 18px;
 	justify-content: center;
 	margin-top: 20px;
-	background-color: #AA1212;
+	background-color: #1294AB;
 	border-radius: 5px;
 	color: white;
 }
@@ -455,7 +460,7 @@ p {
 
 					<c:if test="${currentPage==totalPage }">
 						<c:if test="${a == 0 }">
-							<a href='listAction.do?pageNum=${totalPage }'>&#9655</a>
+							<a href='listAction.do?pageNum=${totalPage }'><label style="color: #1294AB">&#9655</a>
 						</c:if>
 						<c:if test="${a == 1 }">
 							<a href='listActionVIEW.do?pageNum=${totalPage }'>&#9655</a>

@@ -160,6 +160,7 @@ input[type="file"] {
 	border-style: solid;
 	border-width: 1px;
 	border-color: silver;
+	border-radius: 10px;
 	display: inline-block;
 	margin: 10px 10px;
 }
@@ -176,10 +177,9 @@ input[type="file"] {
   -o-appearance: none;
   appearance: none;
   position: relative;
-  top: 13.33333px;
-  right: 0;
+  top: 10;
   bottom: 0;
-  left: 0;
+  left: 43%;
   height: 40px;
   width: 40px;
   transition: all 0.15s ease-out 0s;
@@ -241,6 +241,13 @@ input[type="file"] {
   }
 }
 
+.radio-wrapper{
+	height: 50px;
+}
+.plan-table td {
+	height: 30px;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <%
@@ -259,7 +266,7 @@ input[type="file"] {
 %>
 <script type="text/javascript">
 	$(document).ready(function(){
-		$(".plan").children().eq(0).attr("checked", "checked");
+		$(".plan").children().children().eq(0).attr("checked", "checked");
 	});
 </script>
 </head>
@@ -312,7 +319,9 @@ input[type="file"] {
 							<c:forEach var="myplan" items="${list }">
 								<c:if test="${myplan.is_deleted == 0 }">
 									<div class="plan">
-									<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
+										<div class="radio-wrapper">
+											<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
+										</div>
 										<table class="plan-table">
 											<tr>
 												<td>일정이름: ${myplan.s_name }</td> 

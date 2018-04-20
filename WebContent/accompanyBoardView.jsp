@@ -273,7 +273,7 @@ tr.highlight td {
 
 .post-plan{
 	width: 100%;
-	height: 350px;
+	height: 450px;
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
@@ -286,33 +286,59 @@ tr.highlight td {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px 10px 0 0;
+	display: table;
 }
 
 
 .tab{
-	display: inline-block;
+	display: table-cell;
 	height: 100%;
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px 10px 0 0;
+	font-size: 18px;
+	text-align:center;
+	width: 11%;
+	vertical-align: middle;
+	font-weight: bold;
 }
+
+.tab-clicked{
+	display: table-cell;
+	height: 100%;
+	border: 1px solid;
+	border-color: #D5D5D5;
+	border-radius: 10px 10px 0 0;
+	font-size: 18px;
+	text-align:center;
+	width: 11%;
+	vertical-align: middle;
+	background-color: #48CAE1;
+	color: white;
+	font-weight: bold;
+}
+
+.tab p {
+	text-align: center;
+	margin-top: 5px;
+}
+
 .post-plan-body{
 	width: 100%;
-	height: 300px;
+	height: 400px;
 	position: relative;
 	white-space: nowrap;
 }
 
 .plan-wrapper{
 	display: inline-block;
-	border: 1px solid gray;	
-	width: 30%;
-	height:300px;
+	width: 25%;
+	height:100%;
 }
 
 .plan{
 	width: 100%;
-	height: 300px;
+	height: 400px;
 	border: 1px solid gray;	
 	position:absolute;
 	left: 0;
@@ -331,25 +357,31 @@ tr.highlight td {
 	top: 0;
 }
 .plan-area{
+	margin-top: 10px;
 	width: 100%;
 	overflow: hidden;
+	text-align: center;
+	font-size: 18px; 
 }
 .plan-tourName{
+	text-align: center;
 	overflow: hidden;
 }
 
 .plan-image{
-	width: 90%;
-	height: 200px;
+	width: 80%;
+	height: 300px;
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
+	margin-top: 10px;
 }
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.plan-transparent').eq(0).removeClass('plan-transparent').addClass('plan');
+		$('.post-plan-header').children().eq(0).addClass('tab-clicked');
 		//console.log("plans : " + plans);
 		//var plan = plans[0];
 		//console.log("plan : " + plan);
@@ -365,7 +397,11 @@ tr.highlight td {
 			//console.log("date : " + date);
 		date = "#"+date;
 		$(date).removeClass('plan-transparent').addClass('plan');
-			//console.log("selectedId : " + selectedId);
+		
+		var tabs = $('.post-plan-header').children().removeClass('tab-clicked');
+			//console.log($('.post-plan-header').children());
+		$this.addClass('tab-clicked');
+		
 	});
 	
 	
@@ -494,7 +530,7 @@ tr.highlight td {
 								String tourName = planList.get(i).getTour_name();
 								%>
 								<div class="plan-wrapper">
-									<div class="plan-image" style="background: url('<%=imagePath%>');"></div>
+									<div class="plan-image" style="background: url('<%=imagePath%>'); background-size: 100% 100%"></div>
 									<div class="plan-area"><%=areaName %>-<%=sigunguName %></div>
 									<div class="plan-tourName"><%=tourName %></div>
 								</div>

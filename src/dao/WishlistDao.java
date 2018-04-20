@@ -200,38 +200,4 @@ public class WishlistDao {
 		return total;
 	}
 	
-	public ArrayList<WishlistDto> getWishListforPlanner(String email) throws SQLException{
-		Connection conn = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
-		String sql = "SELECT * FROM WISHLIST WHERE EMAIL=?";
-		ArrayList<WishlistDto> wArr = new ArrayList<>();
-		
-		try {
-			conn = getConnection();
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, email);
-			rs = ps.executeQuery();
-			
-			while(rs.next()) {
-				WishlistDto wdto = new WishlistDto();
-				wdto.setContenttypeid(rs.getInt("contenttypeid"));
-				wdto.setContendtid(rs.getInt("contendtid"));
-				wArr.add(wdto);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			if(rs != null) {
-				rs.close();
-			}
-			if(ps != null) {
-				ps.close();
-			}
-			if(conn != null) {
-				conn.close();
-			}
-		}
-		return wArr;
-	}
 }
