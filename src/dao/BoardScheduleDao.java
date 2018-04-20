@@ -58,6 +58,7 @@ public class BoardScheduleDao {
 				dto.setSl_code(rs.getString("sl_code"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setTitle(rs.getString("title"));
+				dto.setTag(rs.getString("tag"));
 				dto.setContent(rs.getString("content"));
 				dto.setImage_url(rs.getString("image_url"));
 				dto.setVote_count(rs.getInt("vote_count"));

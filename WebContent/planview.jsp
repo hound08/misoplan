@@ -20,32 +20,27 @@
 }
 div { /* 모두모두 가운데 정렬 !!!!! */
 	margin: 0px auto; 
- 	border: 1px solid black;
+/*  	border: 1px solid black; */
 }
 * {
 	font-family: 'NanumSquareRound', sans-serif;
 }
-.main-title {
-	width: 1000px;
-	heidht: 100px;
-	padding: 15px 20px 0 20px;
-/* 	vertical-align: top; */
-}
 .main-top {
 	width: 1200px;
 	height: 450px;
-	background-color: #F6F6F6;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
+	border-radius: 10px;
 }
 
 .main-top-second1 {
 	width: 610px;
 	height: 410px;
  	margin: 5px 0 0 20px; 
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	display: inline-block;
  	vertical-align: top;
+ 	border-style: 1px solid #B5B2FF;
 }
 .image-size {
 	width: 610px;
@@ -56,21 +51,22 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 250px;
 }
 .main-top-second2 {
+	border-radius: 10px;
 	padding: 60px 40px 10px 60px;
  	vertical-align: top; 
 	width: 400px;
 	height: 280px;
  	margin: 25px 0 0 40px; 
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	display: inline-block;
 	
 }
 .main-center {
 	width: 1200px;
-	height: 650px;
-	background-color: #F6F6F6;
+	height: 350px;
 	padding: 15px 0 0 0;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
+	border-radius: 10px;
 }
 .center-text {
 	/* display: inline-block; */
@@ -81,17 +77,23 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	font-size: 20pt;
 }
 .center-main-card{
-	width: 1200px;
-	height: 300px;
+	margin: 0 30px 0 0;
+	padding: 10px 0 0 10px;
+	width: 530px;
+	height: 150px;
 	overflow: auto;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
+	border-radius: 10px;
+	display: inline-block;
 }
-.center-card-box{
-	/* overflow: scroll; */
-	width: 250px;
-	height: 250px;
-	margin: 25px 0 10px 35px;
-	display: inline-block; /* 가로형 정렬 */
+.center-main-card2{
+	padding: 10px 0 0 10px;
+	width: 570px;
+	height: 150px;
+	overflow: auto;
+	border: 1px solid #B5B2FF;
+	border-radius: 10px;
+	display: inline-block;
 }
 .card-box-title {
 	vertical-align: top; /* 텍스트 라인 높이 맞춤 */
@@ -100,7 +102,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	overflow: hidden;
 	overflow: auto;
 	margin: 0 0 5px 2px;
-	border: 1px solid gray;
+	border: 1px solid #B5B2FF;
 	font-size: 10pt;
 }
 .card-box-title2 {
@@ -109,18 +111,13 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	margin: 3px 0 0 0;
 	vertical-align: middle;
 }
-.card-box-bottom {
-	width: 240px;
-	height: 170px;
-	overflow: auto;
-	border: 1px solid gray;
-}
 .center-bottom-image {
 	width: 1160px;
-	height: 200px;
+	height: 180px;
 	margin: 20px 20px;
 	font-size: 10pt;
 	vertical-align: top;
+	border-radius: 10px;
 }
 .button-bottom {
 	width: 1100px;
@@ -208,8 +205,30 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .reply_date {
 	margin-top: 5px;
-	color: gray;
+	color: #B5B2FF;
 	font-size: 13px;
+}
+.area {
+	height: 15px;
+}
+.buttonList {
+	background-color: #B5B2FF;
+	color: white;
+	border-style: double;
+	font-family: 굴림;
+	font-weight: bold;
+}
+#id-title {
+	font-size: 20pt;
+}
+#id-nickname {
+	font-size: 13pt;
+}
+#id-area{
+	font-size: 13pt;
+}
+#id-sdate{
+	font-size: 13pt;
 }
 </style>
 
@@ -240,60 +259,47 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 </script>
 </head>
 <body>
-
-	<div class ="main-title">
-		<h3>title</h3>
-	</div>
+	<div class="area"></div>
 	<div class="main-top">
-		
 		<div class="main-top-second1">
 			<img alt="image" class="image-size" src="${dto.image_url }">		
 		</div>
 		<div class="main-top-second2">
-			<p>${dto.nickname }</p>
-		<span class="span-icon-view"><i class="icon icon-view"></i>${dto.view_count }명이 읽었어요</span>
-		<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 좋아해요</span>
-			<p>${dto.tag}</p>
- 			<p>${dto.area_names }</p>
-			<p>${dto.schedule_date }</p>
-			<p>${dto.board_date }</p>
-			<p>${dto.content }</p>
-			
+			<p id="id-title">제 목 : ${dto.title }</p>
+			<br>
+			<p id="id-nickname">닉네임 : ${dto.nickname }</p>
+			<br>
+			<p id="id-area">여행지역 : ${dto.area_names }</p>
+			<br>
+			<p id="id-sdate">여행기간 : ${dto.schedule_date }</p>
+			<br>
+			<br>
+			<p id="id-tag">${dto.tag}</p>
+			<span class="span-icon-view"><i class="icon icon-view"></i>${dto.view_count }명이 읽었어요</span>
+			<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 좋아해요</span>
+			<br>
+			<p id="id-board_date">작성일 : ${dto.board_date }</p>
+ 			
 		</div>
 	</div>
+	<div class="area"></div>
 	<div class="main-center">
 		<div class="center-text">
 			My Plan List
 		</div>
-			<div class="center-main-card">
-			<c:forEach var="dto" items="">
-				<div class="center-card-box" align="center">
-					<div class="card-box-title">
-						
-						<div> 
-						
-						
-						</div>
-						<div class ="card-box-title2"> <!-- 날짜 -->
-							
-						</div>
-					</div>
-					<div class="card-box-bottom">
-						
-					</div>
-					
-				</div>
-			</c:forEach>
-			</div>
 		<div class="center-bottom-image">
-			
+			<div class="center-main-card">
+			</div>
+			<div class="center-main-card2">
+				<p>${dto.content }</p>
+			</div>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="button" value="수정" style="width: 40pt; height: 20pt"
+			<input type="button" value="수정" class="buttonList" style="width: 40pt; height: 20pt"
 			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}'">
-			<input type="button" value="삭제" style="width: 40pt; height: 20pt"
+			<input type="button" value="삭제" class="buttonList" style="width: 40pt; height: 20pt"
 			onclick="location.href='plandelete.do?bs_num=${dto.bs_num}&email=${email }'">
-			<input type="button" value="목록" style="width: 40pt; height: 20pt" 
+			<input type="button" value="목록" class="buttonList" style="width: 40pt; height: 20pt" 
 			onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
