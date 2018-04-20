@@ -1,8 +1,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="dao.mySchduleDto"%>
 <%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ include file="pageLoginCheck.jsp" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -63,10 +62,11 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-center {
 	width: 1200px;
-	height: 350px;
+	height: 750px;
 	padding: 15px 0 0 0;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
+	padding-bottom: 50px;
 }
 .center-text {
 	/* display: inline-block; */
@@ -77,23 +77,52 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	font-size: 20pt;
 }
 .center-main-card{
-	margin: 0 30px 0 0;
-	padding: 10px 0 0 10px;
-	width: 530px;
-	height: 150px;
+	margin-bottom: 10px;
+	padding: 10px;
+	width: 1100px;
+	height: 300px;
 	overflow: auto;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
-	display: inline-block;
+	display: block;
 }
+
+/* ------------------------- 일정 카드들 나오는 곳 시작 ------------------------- */
+.divSmall {
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 30px;
+	width: 200px;
+	height: 260px;
+	max-height: 260px;
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid black;
+}
+.imageSmall {
+	width: 200px;
+	height: 120px;
+}
+.divTitleSmall {
+	font-size: 17px;
+	font-weight: bold;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	text-align: center;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+/* ------------------------- 일정 카드들 나오는 곳 끝 ------------------------- */
+
 .center-main-card2{
-	padding: 10px 0 0 10px;
-	width: 570px;
-	height: 150px;
+	padding: 10px;
+	width: 1100px;
+	height: 300px;
 	overflow: auto;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
-	display: inline-block;
+	display: block;
 }
 .card-box-title {
 	vertical-align: top; /* 텍스트 라인 높이 맞춤 */
@@ -122,7 +151,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .button-bottom {
 	width: 1100px;
 	height: 30px;
-	magin : 0 30px;
+	margin-top: 500px
 }
 
 .icon-vote {
@@ -183,6 +212,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .reply_hr {
 	color: black;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 .reply_title {
 	margin-top: 20px;
@@ -289,21 +320,44 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 		</div>
 		<div class="center-bottom-image">
 			<div class="center-main-card">
+				<c:forEach var="list_small" items="${list_small}">
+					<div class="divSmall">
+						<div><img alt="관광지 사진" src="${list_small.image_url}" class="imageSmall"></div>
+						<div class="divTitleSmall">${list_small.tour_name}</div>
+						<div class="divTextSmall">${list_small.tour_text}</div>
+					</div>
+				</c:forEach>
 			</div>
 			<div class="center-main-card2">
 				<p>${dto.content }</p>
 			</div>
 		</div>
 		<div class="button-bottom" align="right">
-			<input type="button" value="수정" class="buttonList" style="width: 40pt; height: 20pt"
-			onclick="location.href='planupdate.do?bs_num=${dto.bs_num}'">
-			<input type="button" value="삭제" class="buttonList" style="width: 40pt; height: 20pt"
-			onclick="location.href='plandelete.do?bs_num=${dto.bs_num}&email=${email }'">
+			<c:if test="${email == dto.email}">
+				<input type="button" value="수정" class="buttonList" style="width: 40pt; height: 20pt"
+				onclick="location.href='planupdate.do?bs_num=${dto.bs_num}'">
+				<input type="button" value="삭제" class="buttonList" style="width: 40pt; height: 20pt"
+				onclick="location.href='plandelete.do?bs_num=${dto.bs_num}&email=${email }'">
+			</c:if>
 			<input type="button" value="목록" class="buttonList" style="width: 40pt; height: 20pt" 
 			onclick="location.href='boardschedule.do'">
 		</div>
 	</div>
 	<div class="main-reply">
+		<div class="reply_view">
+			<p class="reply_title">댓글(${list_size})</p>
+			<c:forEach var="list_reply" items="${list_reply}">
+				<div class="reply_profile_view">
+					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
+					<p>${list_reply.nickname}</p>
+				</div>
+				<div class="reply_content_view">
+					<p class="reply_text">${list_reply.reply_content}</p>
+					<p class="reply_date">${list_reply.reply_date}</p>
+				</div>
+			</c:forEach>
+		</div>
+		<hr class="reply_hr">
 		<div class="reply_write">
 			<form name="frm_reply" action="bsReplyPro.do" onsubmit="return replyChk()">
 				<div class="reply_profile_write">
@@ -318,20 +372,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 					<input type="submit" class="btn_reply" value="댓글 작성">
 				</div>
 			</form>
-		</div>
-		<hr class="reply_hr">
-		<div class="reply_view">
-			<p class="reply_title">댓글(${list_size})</p>
-			<c:forEach var="list_reply" items="${list_reply}">
-				<div class="reply_profile_view">
-					<img class="img_profile_view" alt="프로필 사진" src="${list_reply.profile_url}">
-					<p>${list_reply.nickname}</p>
-				</div>
-				<div class="reply_content_view">
-					<p class="reply_text">${list_reply.reply_content}</p>
-					<p class="reply_date">${list_reply.reply_date}</p>
-				</div>
-			</c:forEach>
 		</div>
 	</div>
 	

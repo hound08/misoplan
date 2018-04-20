@@ -1,3 +1,4 @@
+<%@page import="dao.ScheduleDao"%>
 <%@page import="dao.myPlanABDto"%>
 <%@page import="dao.AccompanyDao"%>
 <%@page import="dao.mySchduleDto"%>
@@ -241,6 +242,18 @@ input[type="file"] {
 }
 
 </style>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<%
+	ScheduleDao sdao = ScheduleDao.getInstance();
+	String email = (String)session.getAttribute("email");
+	sdao.check(email);
+
+%>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$(".plan").children().eq(0).attr("checked", "checked");
+	});
+</script>
 </head>
 <body>
 	<%
@@ -264,7 +277,7 @@ input[type="file"] {
 		<div class="write-form">
 			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
 				<table>
-				<tr><td>제목&nbsp&nbsp</td><td><input type="text" class="input" name="title"></td></tr>
+				<tr><td>제목&nbsp&nbsp</td><td><input type="text" class="input" name="title" required></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>최소 인원&nbsp&nbsp</td>
 					<td><select name="minimum_num" class="input">
@@ -280,9 +293,9 @@ input[type="file"] {
 						</select></td>
 				</tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>마감날짜&nbsp&nbsp</td><td><input type="date" class="input" name="closing_date"></td></tr>
+				<tr><td>마감날짜&nbsp&nbsp</td><td><input type="date" class="input" name="closing_date" required></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>태그&nbsp&nbsp</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#"></td></tr>
+				<tr><td>태그&nbsp&nbsp</td><td><input type="text" class="input" name="tag" id="hashtag" placeholder="#" required></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr>
 					<td>나의 일정&nbsp&nbsp</td>
@@ -311,7 +324,7 @@ input[type="file"] {
 					</td>
 				</tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="30" name="content"></textarea></div></td></tr>
+				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="30" name="content" required></textarea></div></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지&nbsp&nbsp</td><td><img id="output"/></td></tr>

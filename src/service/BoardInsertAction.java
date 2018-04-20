@@ -62,7 +62,7 @@ public class BoardInsertAction implements CommandProcess {
 		String test = dto.getSl_code();
 		System.out.println("@#@#@##@### test 확인 " + test);
 		
-		if(multi.getFile("image_url") !=null ) {
+		if(multi.getFile("image") !=null ) {
 			dto.setImage_url("/J20180403/upload/" + filename);
 			
 		} else {

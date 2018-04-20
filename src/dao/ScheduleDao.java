@@ -492,5 +492,24 @@ public class ScheduleDao {
 		}
 		return 0;
 	}
+	
+	public int check(String email) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT SL_CODE FROM SCHEDULELARGE WHERE EMAIL=?";
+		int result = 0;
+		
+		try{
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			release(conn, ps, rs);
+		}
+		
+	}
 
 }

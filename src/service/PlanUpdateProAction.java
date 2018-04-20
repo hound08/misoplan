@@ -2,6 +2,7 @@ package service;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Enumeration;
 
 import javax.servlet.ServletException;
@@ -36,28 +37,41 @@ public class PlanUpdateProAction implements CommandProcess {
 				String original = multi.getOriginalFileName(filename1);
 				String type = multi.getContentType(filename1);
 				File file = multi.getFile(filename1);
+				System.out.println("real Path : " + realPath);
+				System.out.println("파라메타 이름 : " + filename1);
+				System.out.println("실제 파일 이름 : " + original);
+				System.out.println("저장된 파일 이름 : " + filename);
+				System.out.println("파일 타입 : " + type);
 			if (file != null) {
 				System.out.println("크기 : " + file.length() + "<br>");
 			}
-			
+			int bs_num = Integer.parseInt(request.getParameter("bs_num"));
 			dto.setBs_num(Integer.parseInt(request.getParameter("bs_num")));
 			dto.setTitle(multi.getParameter("title"));
 			dto.setTag(multi.getParameter("tag"));
-			dto.setImage_url(multi.getParameter("image_url"));
+			dto.setImage_url(multi.getParameter("image"));
 			dto.setContent(multi.getParameter("content"));
 			
 			System.out.println("@@@@@ bsnum " + dto.getBs_num());
 			System.out.println("@@@@@ title " + dto.getTitle());
 			System.out.println("@@@@@ setTag " + dto.getTag());
-			System.out.println("@@@@@ setImage_url " + dto.getImage_url());
+			System.out.println("@@@@@ setImage " + dto.getImage_url());
 			System.out.println("@@@@@ setContent " + dto.getContent());
 			
-			if(multi.getFile("image_url") !=null ) {
+			if(multi.getFile("image") !=null ) {
 				dto.setImage_url("/J20180403/upload/" + filename);
-				
+				request.setAttribute("image", "/J20180403/upload/" + filename);
 			} else {
-				dto.setImage_url("/J20180403/images/no_image.jpg");
-				
+				BoardScheduleDao dao = BoardScheduleDao.getInstance();
+				BoardScheduleDto dto1;
+				try {
+					dto1 = dao.selectUp(bs_num);
+					dto.setImage_url(dto1.getImage_url());
+					request.setAttribute("image", dto.getImage_url());
+					
+				}catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();

@@ -178,14 +178,18 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 	$("#sl_codehidden").val(cardBoxTitle1.trim());					//	trim()<<< 공백 제거
 });
 
-
+var loadFile = function(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+  };
+  
 </script>
 </head>
 <body>
 <form action="boardinsert.do" name="planSelect" method="post" enctype="multipart/form-data">
 	<div class="main-top">
 		<!-- <div class="main-top-second1" align="left"> -->
-			<img class="main-top-second1" alt="IMG" src="">
+		<img class="main-top-second1" id="output">
 		<!-- </div> -->
 		<div class="main-top-second2" id = "test">
 		<p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
@@ -200,7 +204,7 @@ $(document).on('click', '.radio', function(){					 // document 전체  라디오
 				<!--  <span id="sl_codehidden"></span> -->
 		</div>
 		<div class="main-imagebt">
-			<input class="" type="file" name="image_url" value="" onchange="image(this)">
+			<input type="file" name="image" onchange="loadFile(event)" accept="image/*">
 		</div>
 	</div>
 	<div class="main-center">

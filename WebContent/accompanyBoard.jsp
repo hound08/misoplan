@@ -52,8 +52,8 @@ div {
 	height: 100px;
 }
 
-.card-header-is_closed{
-    background-color: #EF5A31 ;
+.card-header-is_not_closed{
+	background-color: #EF5A31 ;
     color: #FFF ;
     font-weight: bold ;
     text-align: center ;
@@ -63,6 +63,25 @@ div {
     font-weight: bold;
     padding: 10px 10px;
     line-height: 20px;
+    width: 50px;
+    height: 50px;
+    display: table;
+}
+
+.card-header-is_closed{
+    background-color: gray ;
+    color: #FFF ;
+    font-weight: bold ;
+    text-align: center ;
+    float: right;
+    margin: 15px 15px 0 0;
+    border-radius: 50%;
+    font-weight: bold;
+    padding: 10px 10px;
+    line-height: 20px;
+    width: 50px;
+    height: 50px;
+    display: table;
 }
 
 h1 {
@@ -282,6 +301,14 @@ p {
 	border-radius: 5px;
 	color: white;
 }
+
+.card-header-text {
+	display: table-row;
+}
+
+.card-header-number{
+	display: table-row;
+}
 </style>
 <body>
 	<div class="section">
@@ -303,16 +330,19 @@ p {
 			<div class="card">
 				<div class="card-header" style="background: url('${board.image_url}'); background-size: 100% 280px; background-repeat: no-repeat;">
 					
-					<div class="card-header-is_closed">
 						<c:if test="${board.is_closed == 0 }">
-							<div class="card-header-text">모집중</div>
-							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+							<div class="card-header-is_not_closed">
+								<div class="card-header-text">모집중</div>
+								<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+							</div>
 						</c:if>
 						<c:if test="${board.is_closed == 1 }">
-							<div class="card-header-text">마감</div>
-							<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+							<div class="card-header-is_closed">
+								<div class="card-header-text">마감</div>
+								<div class="card-header-number">${board.current_num } / ${board.minimum_num }</div>
+							</div>
 						</c:if>
-					</div>
+					
 				</div>
 				<!--  카드 바디 -->
 				<div class="card-body">
@@ -485,12 +515,13 @@ p {
 					<form action="searchActionAB.do">
 						<select class="search-select" name="search-selected">
 							<option value="1">제목</option>
-							<option value="2">지역명</option>
-							<option value="3">닉네임</option>
-							<option value="4">해시태그</option>
+							<option value="2">닉네임</option>
+							<option value="3">해시태그</option>
 						</select> 
 						<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!" name="search-keyword">
-						<input type="submit" class="search-submit">
+						<input type="submit" class="search-submit" value="검색">
+						
+						
 					</form>
 				</div>
 		</div>
