@@ -324,13 +324,13 @@ body {
 	font-size: 20px;
 }
 
-.wishList{
+#wishList{
 	min-width: 100%;
 	height: 5.8%;
 	border-bottom: 1px solid white;
 	background-color: #39A2D8;
 }
-.wishList:hover{
+#wishList:hover{
 	cursor: pointer;
 }
 </style>
@@ -339,6 +339,7 @@ body {
 
 <link rel="stylesheet" href="css/demo.css">
 <link rel="stylesheet" href="css/avgrund.css">
+
 
 <script>
 	function openDialog() {
@@ -800,10 +801,7 @@ body {
 		});
 	};
 </script>
-
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap">
-	
-</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap"></script>
 </head>
 <body>
 	<%
