@@ -85,8 +85,8 @@ div {
 
 .second-text { /* center-second 텍스트 삽입 */
 	width: 340px;
-	height: 50px;
-	padding: px 10px;
+	height: 30px;
+	padding: 0 0 0 10px;
 	overflow: hidden;
 }
 
@@ -98,7 +98,7 @@ div {
 }
 
 .local { /* 말머리개념 지역명을 나타내기 위한 영역 확보 */
-	paddin: 0 5px;
+	paddin: 0 0 0 10px;
 	margin: 5px 0 0 0;
 	font-size: 8pt;
 	width: 340px;
@@ -109,22 +109,29 @@ div {
 .tag {
 	width: 340px;
 	height: 20px;
-	padding: px 10px;
+	padding: 0 0 0 10px;
 	overflow: hidden;
 	font-size: 10pt;
 }
 
 .idlocal { /* 아아디를 나타내기 위한 영역 확보 */
 	width: 340px;
-	height: 30px;
-	padding: 0 10px 0 0;
-	font-size: 13pt;
+	height: 25px;
+	padding: 0 0 0 10px;
+	font-size: 11pt;
 	overflow: hidden;
 }
 
 .datelocal { /* 날짜를 나타내기 위한 영역 확보 */
 	width: 340px;
-	height: 30px;
+	height: 20px;
+	padding: 0 10px 0 10px;
+	font-size: 11pt;
+	overflow: hidden;
+}
+.count { 
+	width: 340px;
+	height: 20px;
 	padding: 0 20px 0 0;
 	font-size: 11pt;
 	overflow: hidden;
@@ -214,15 +221,17 @@ div {
 					<div class="second-box">
 						<img alt="image" class="card_image" src="${bs.image_url }">
 					</div>
-					<div class="local">${bs.area_names } 
+					<div class="local" style="color:#10620A">&nbsp;&nbsp;&nbsp;${bs.area_names } 
 					<input type="hidden" value="${bs.sl_code }"></div>
 					<div class="second-text">
 						<h2>제목 : ${bs.title }</h2>
 						${schedule_date }
 					</div>
-					<div class="tag">${bs.tag }</div>
-					<div class="idlocal">아이디 : ${bs.nickname }</div>
-					<div class="datelocal" align="right">${bs.board_date }</div>
+					<div class="tag"style="color:#050099">${bs.tag }</div>
+					<div class="idlocal" align="right"></div>
+					<div class="count" align="right">nick : ${bs.nickname }</div>
+					<div class="datelocal" align="center">조회수 &nbsp;${bs.view_count }&nbsp;&nbsp;&nbsp; 좋아요 ♥&nbsp;${bs.vote_count }
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${bs.board_date }</div>
 				</div>
 			</a>
 		</c:forEach>

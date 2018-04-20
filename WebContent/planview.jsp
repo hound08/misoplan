@@ -51,10 +51,10 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-top-second2 {
 	border-radius: 10px;
-	padding: 60px 40px 10px 60px;
+	padding: 30px 40px 10px 60px;
  	vertical-align: top; 
 	width: 400px;
-	height: 280px;
+	height: 320px;
  	margin: 25px 0 0 40px; 
 	border: 1px solid #B5B2FF;
 	display: inline-block;
@@ -62,7 +62,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .main-center {
 	width: 1200px;
-	height: 750px;
+	height: 720px;
 	padding: 15px 0 0 0;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
@@ -80,7 +80,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	margin-bottom: 10px;
 	padding: 10px;
 	width: 1100px;
-	height: 230px;
+	height: 280px;
 	overflow: auto;
 	border: 1px solid #B5B2FF;
 	border-radius: 10px;
@@ -89,20 +89,20 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 
 /* ------------------------- 일정 카드들 나오는 곳 시작 ------------------------- */
 .divSmall {
-	margin-left: 5px;
-	margin-right: 8px;
+	margin-left: 10px;
+	margin-right: 10px;
 	margin-bottom: 30px;
 	border-radius: 10px;
-	width: 200px;
-	height: 220px;
+	width: 245px;
+	height: 265px;
 	max-height: 260px;
 	display: inline-block;
 	vertical-align: top;
-	border: 1px solid black;
+	border: 1px solid gray;
 }
 .imageSmall {
-	width: 200px;
-	height: 120px;
+	width: 245px;
+	height: 150px;
 	border-radius: 10px;
 }
 .divTitleSmall {
@@ -118,6 +118,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 /* ------------------------- 일정 카드들 나오는 곳 끝 ------------------------- */
 
 .center-main-card2{
+	font-size: 18pt;
 	padding: 10px;
 	width: 1100px;
 	height: 300px;
@@ -144,7 +145,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 }
 .center-bottom-image {
 	width: 1160px;
-	height: 260px;
+	height: 280px;
 	margin: 20px 20px;
 	font-size: 10pt;
 	vertical-align: top;
@@ -153,7 +154,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .button-bottom {
 	width: 1100px;
 	height: 30px;
-	margin-top: 500px
+	margin-top: 380px
 }
 
 .icon-vote {
@@ -245,7 +246,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	height: 15px;
 }
 .buttonList {
-	background-color: #B5B2FF;
+	background-color: #A2C4FF;
 	color: white;
 	border-style: double;
 	font-family: 굴림;
@@ -308,6 +309,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 			<br>
 			<br>
 			<p id="id-tag">${dto.tag}</p>
+			<br>
 			<span class="span-icon-view"><i class="icon icon-view"></i>${dto.view_count }명이 읽었어요</span>
 			<span class="span-icon-vote"><i class="icon icon-vote"></i>${dto.vote_count }명이 좋아해요</span>
 			<br>
