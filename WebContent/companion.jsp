@@ -150,7 +150,7 @@ var onoff = 0;
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
 	 			var date = new Date();
-				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td></tr></table></div>';
+				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td><button class= "btnesc">삭제</button></td></tr></table></div>';
 				   $('#menu1').append(str);
 	 		});
 	 		
@@ -162,7 +162,7 @@ var onoff = 0;
 						var postnum = this.post_num;
 				 		var str = 
 							'<div class="cardbox"><table>'+
-							'<tr><td id="nickname" postnum='+postnum+'>'+this.nickname+'</td><td id="'+kakao+'"><button class="btnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button class="btnimg" aaa="2"><img class="yn" src="images/no.png"></button></td></tr>'+
+							'<tr><td id="nickname" postnum='+postnum+'>'+this.nickname+'</td><td id="'+kakao+'"><button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button></td></tr>'+
 							'<tr><td colspan="2"><pre class="mess">'+  this.message +'</pre></td></tr>'+
 							'<tr><td>인원수 : </td><td  data='+this.num_people+'>'+ this.num_people+'</td></tr>'+
 							'<tr><td>신청날짜 : </td><td>'+this.applicants_date+'</td></tr>'
@@ -178,7 +178,7 @@ var onoff = 0;
 			}
 });
  
- $(document).on('click', '.btnimg', function(){
+ $(document).on('click', '.yesbtnimg', function(){
 	 $this = $(this);
 	 var classname = $(this).attr('class');
 	 var status = $this.attr('aaa');
@@ -186,7 +186,7 @@ var onoff = 0;
 	 var nickname = $this.parent().prevAll('#nickname').text();
 	 var postnum = $this.parent().prevAll('#nickname').attr('postnum');
 	 var num_people = $this.parent().parent().next().next().children().next().attr('data');
-	 //prev().eq(2).children().eq(1).text();
+	 var current_num = $()
 	 console.log("num_people = " + num_people);
 	 
 	 var status_data = "status="+status;
@@ -199,31 +199,72 @@ var onoff = 0;
 	 	"postnum":postnum,
 	 	"num_people":num_people
 	 };
-	  
-	 console.log("status : " + status);
-	 console.log("nickname : " + nickname);
-	 console.log("postnum : " + postnum);
+	 var acceptId = $this.attr('id');
+	 	//console.log(acceptId);
+	 acceptId = acceptId.substr(6, acceptId.length);
+	 	//console.log(acceptId);
+	 searchId = "#accomStatus"+acceptId;
+	 console.log("searchId : " + searchId);
+	 var text = $(searchId).text();
+	 console.log("text : " + text);
+	 text = text.replace(/ /gi,"");
+	 console.log("parsed text : " + text);
 	 
-	 $.getJSON('companionupdateajax.jsp', senddata, function(data,status){
-		/*  var item = data[0];
-		 console.log("item : " + item);
-		 
-		 var profile_url = item.profile_url;
-		 console.log("url : " + profile_url);
-		 var nickname = item.nickname;
-		 console.log("nickname : " + nickname);
-		 var kakao_id = item.kakao_id;
-		 console.log("kakao_id : " + kakao_id);
-		 var str = '<div></div>';
-		   $('#menu1').append(str);  */
-		 $.each(data,function(){
-				var date = new Date();
-				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td></tr></table></div>';
-				   $('#menu1').append(str);
-		 });
+	 var textArr = text.split("/");  
+	 var curr = textArr[0];
+	 var max = textArr[1];
+	 console.log("curr : " + curr );
+	 console.log("max :" + max);
+	 curr *= 1;
+	 max *= 1;
+			 if(status == 1){
+		 if(curr < max){
+				 
+		 	$.getJSON('companionupdateajax.jsp', senddata, function(data,status){
+		 		 alert("돌아가자 제발!!!!!!!!!!!");
+				 $.each(data,function(){
+						var date = new Date();
+						var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td><button class= "btnesc">삭제</button></td></tr></table></div>';
+						   $('#menu1').append(str);
+				 });
+			 });
+		 } else {
+			 alert("모집 인원이 초과햇습니다.");
+			 }
+		 }
+ });
+ $(document).on('click', '.nobtnimg', function(){
+	 $this = $(this);
+	 var classname = $(this).attr('class');
+	 var status = $this.attr('aaa');
+	 console.log("$this : " + classname);
+	 var nickname = $this.parent().prevAll('#nickname').text();
+	 var postnum = $this.parent().prevAll('#nickname').attr('postnum');
+	 var num_people = $this.parent().parent().next().next().children().next().attr('data');
+	 var current_num = $()
+	 console.log("num_people = " + num_people);
+	 
+	 var status_data = "status="+status;
+	 var nickname_data = "nickname="+nickname;
+	 var postnum_data = "postnum="+postnum;
+	 
+	 var senddata = {
+		"status":status, 
+		"nickname":nickname,
+	 	"postnum":postnum,
+	 	"num_people":num_people
+	 };
+	 $.getJSON('companionupdateajax2.jsp', senddata, function(data,status){
+		 alert("작동하자좀");
 	 });
-	 
-	 
+ });
+ 
+ 
+ $(document).on('click', '.btnesc', function(){
+	 $this = $(this);
+	 var nickname = $this.parent().prev().text();
+	 console.log("nickname = " + nickname);
+	/*  $ajax("companionupdateajax.jsp" ) */
  });
 	 
 </script>
@@ -245,7 +286,7 @@ var onoff = 0;
 										<td class="m1">닉네임 : </td><td class="m2">${list.nickname }</td>
 									</tr>
 									<tr align="center" class="postnums" id='${list.post_num }'>
-										<td class="m1">동행상태 : </td><td>${list.current_num } / ${list.minimum_num }</td>
+										<td class="m1">동행상태 : </td><td id="accomStatus${list.post_num}">${list.current_num } / ${list.minimum_num }</td>
 									</tr>
 									<tr align="center"  >
 										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }</td>

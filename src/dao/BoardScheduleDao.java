@@ -517,5 +517,100 @@ public class BoardScheduleDao {
 		
 		return list;
 	}
+	public List<BoardScheduleDto> searchPage(String bar, int selected, int startRow, int endRow){
+		
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
+		String sql = null;
+		
+		if(selected == 1) {
+			sql = "select * from (select rownum rn, a.* from (select * from boardschedule where title like ? order by bs_num desc) a) where rn between ? and ?";
+		} else if(selected == 2) {
+			sql = "select * from (select rownum rn, a.* from (select * from boardschedule where area_names like ? order by bs_num desc) a) where rn between ? and ?";;
+		} else if(selected == 3) {
+			sql = "select * from (select rownum rn, a.* from (select * from boardschedule where nickname like ? order by bs_num desc) a) where rn between ? and ?";;
+		} else {
+			sql = "select * from (select rownum rn, a.* from (select * from boardschedule where content like ? order by bs_num desc) a) where rn between ? and ?";;
+		}
+		bar = "%" +  bar + "%";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, bar);
+			ps.setInt(2, startRow);
+			ps.setInt(3, endRow);
+			rs = ps.executeQuery();
+			while(rs.next()) {
+				BoardScheduleDto dto = new BoardScheduleDto();
+				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setEmail(rs.getString("email"));
+				dto.setNickname(rs.getString("nickname"));
+				dto.setTitle(rs.getString("title"));
+				dto.setContent(rs.getString("content"));
+				dto.setImage_url(rs.getString("image_url"));
+				dto.setView_count(rs.getInt("view_count"));
+				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setBoard_date(rs.getDate("board_date"));
+				dto.setArea_names(rs.getString("area_names"));
+				dto.setSchedule_date(rs.getString("schedule_date"));
+				list.add(dto);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null) conn.close();
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
+		
+	}
+	public int getTotalselect(String bar, int selected) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = null;
+		if(selected == 1) {
+			sql = "select count(*) from boardschedule where title like ?";
+		} else if(selected == 2) {
+			sql = "select count(*) from boardschedule where area_names like ?";
+		} else if(selected == 3) {
+			sql = "select count(*) from boardschedule where nickname like ?";
+		} else {
+			sql = "select count(*) from boardschedule where content like ?";
+		}
+		
+		System.out.println("selected - > " + selected);
+		bar = "%" +  bar + "%";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, bar);
+			rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		}catch (Exception e ) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if (conn != null) conn.close();
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return total;
+	}
 
 }

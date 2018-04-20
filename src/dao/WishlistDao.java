@@ -82,7 +82,7 @@ public class WishlistDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		int result=0;
-		String sql = "INSERT INTO WISHLIST VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO WISHLIST VALUES (?, ?, ?, ?, ?, WISH_NUM.NEXTVAL)";
 		
 		try {
 			conn = getConnection();
@@ -106,16 +106,23 @@ public class WishlistDao {
 		return result;
 	}
 
-	public List<WishlistDto> select(String email) throws SQLException {
+	public List<WishlistDto> select(String email, int startRow, int endRow){
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from wishlist where email = ?";
+		String sql = "select rnum, t.* "
+						+ "from (select rownum rnum, a.* "
+						+ "from (select * from WISHLIST where email = ? order by post_num desc) a "      
+						+ ") t "
+						+ " where rnum between ? and ?";
+		
 		List<WishlistDto> list = new ArrayList<WishlistDto>();
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, email);
+			ps.setInt(2, startRow);
+			ps.setInt(3, endRow);
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				WishlistDto dto = new WishlistDto();
@@ -126,12 +133,17 @@ public class WishlistDao {
 				dto.setEmail(rs.getString("email"));
 				list.add(dto);
 			}
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		} finally {
-			if (rs != null) rs.close();
-			if (ps != null) ps.close();
-			if (conn != null) conn.close();
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -156,5 +168,35 @@ public class WishlistDao {
 			if(conn != null) conn.close();
 		}
 		return result;
+	}
+
+	public int getTotalPost(String email) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select count(*) from WISHLIST where email = ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null) rs.close();
+				if (ps != null) ps.close();
+				if (conn != null) conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return total;
 	}
 }
