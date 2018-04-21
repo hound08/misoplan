@@ -80,25 +80,25 @@ div { /* 모두모두 가운데 정렬 !!!!! */
    /* vertical-align: middle; /* 텍스트 라인 높이 맞춤 */ */
    margin: 0 0 0 20px;
    width: 1100px;
-   height: 50px;
+   height: 40px;
    font-size: 20pt;
 }
 .center-main-card{
    width: 1200px;
-   height: 300px;
+   height: 270px;
    overflow: auto;
 }
 .center-card-box{
    /* overflow: scroll; */
    width: 250px;
    height: 250px;
-   margin: 25px 0 10px 35px;
+   margin: 15px 0 0 35px;
    display: inline-block; /* 가로형 정렬 */
 }
 .card-box-title {
    vertical-align: top; /* 텍스트 라인 높이 맞춤 */
    width: 240px;
-   height: 140px;
+   height: 90px;
    overflow: hidden;
    overflow: auto;
    margin: 0 0 5px 2px;
@@ -111,17 +111,17 @@ div { /* 모두모두 가운데 정렬 !!!!! */
    height: 20px;
    margin: 0;
    vertical-align: middle;
-   display: none;
+   display: none; 
 }
 .card-box-title1 {
    width: 240px;
-   height: 70px;
+   height: 40px;
    margin: 0;
    vertical-align: middle;
 }
 .card-box-title2 {
    width: 240px;
-   height: 30px;
+   height: 25px;
    margin: 3px 0 0 0;
    vertical-align: middle;
 }
@@ -173,21 +173,21 @@ div { /* 모두모두 가운데 정렬 !!!!! */
       
    }
 
-$(document).on('click', '.radio', function(){                // document 전체  라디오 버튼에 이벤트를 준다. (클래스로 잡아주고)
-   var clickedid = $(this).attr("id");                     // 클릭 이벤트시 나 자신의(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
+$(document).on('click', '.radio', function(){                  // document 전체  라디오 버튼에 이벤트를 준다. (클래스로 잡아주고)
+   var clickedid = $(this).attr("id");                  	   // 클릭 이벤트시 나 자신의(this) 이벤트 처리를 하고 다른곳에서 가지고올 필요한 데이터에 id 값을 지정해준뒤 id값을 가지고 오겠다고 지정해줌
    var parsedid = clickedid.substring(5, clickedid.lenght);    // 변수에 값을 담아주면서 서브스트링 함수를 사용하여 r a d i o 5번째 이후 부터 값을 출력하게 됨
-   parsedid = "#"+parsedid;                            // 가지고올 값 id   # 을 변수명에 더해줌
-   var centerCardBox = $(parsedid);                      // center-box에 있는 값을 뽑아본다.
-   var cardBoxTitle = centerCardBox.children().children().eq(1).text();    // 가지고올 값이 title 에 있으므로 box에서 두번 타고 내려가 값을 뽑아온다. div 파일 2번째가 name
+   parsedid = "#"+parsedid;                           		   // 가지고올 값 id   # 을 변수명에 더해줌
+   var centerCardBox = $(parsedid);                  	 	   // center-box에 있는 값을 뽑아본다.
+   var cardBoxTitle = centerCardBox.children().children().eq(1).text();     // 가지고올 값이 title 에 있으므로 box에서 두번 타고 내려가 값을 뽑아온다. div 파일 2번째가 name
    var cardBoxTitle1 = centerCardBox.children().children().eq(0).text();    // 가지고올 값이 title 에 있으므로 box에서 두번 타고 내려가 값을 뽑아온다. div 파일 첫번쨰가 sl_code
    var cardBoxBottom = centerCardBox.children().children().eq(2).text();    // 위와 동일한 방법 // div 파일 세번째가 date 값이다. 순서를 보면 이해 가능
    console.log("cardBoxTitle1 : " + cardBoxTitle1);
    
-    $("#datehidden").val(cardBoxBottom.trim());
-   $("#areahidden").val(cardBoxTitle.trim());                        // 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
+   $("#datehidden").val(cardBoxBottom.trim());
+   $("#areahidden").val(cardBoxTitle.trim());                // 뽑아온값을 value 값으로 submit 넘겨준후 Action, dao 에서 추가해주면 출력 끝!!
    $("#area").text(cardBoxTitle.trim());                     // 뽑아온값을 넣어줄곳에 아이디를 지정해주어 아이디에 담아주면 원하는 위치에 값 출력 끝!!!
    $("#date").text(cardBoxBottom);                           // 위와 동일!!
-   $("#sl_codehidden").val(cardBoxTitle1.trim());               //   trim()<<< 공백 제거
+   $("#sl_codehidden").val(cardBoxTitle1.trim());            //   trim()<<< 공백 제거
 });
 
 var loadFile = function(event) {
@@ -232,12 +232,12 @@ var loadFile = function(event) {
                      ${dto.sl_code }
                   </div>
                   <div class="card-box-title1"> <!--지역 -->
-                  	 <h4>여행 지역</h4><br>
+                  	 <!-- <h4>여행 지역</h4><br> -->
                      ${dto.area_name } 
                      <input type = "hidden" value ="${dto.area_name }">
                   </div>
                   <div class ="card-box-title2"> <!-- 날짜 -->
-                  	 <h4>여행 기간</h4>
+                  	 <!-- <h4>여행 기간</h4> -->
                      ${dto.tour_date_start } ~ ${dto.tour_date_end }
                   </div>
                </div>

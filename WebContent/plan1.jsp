@@ -59,7 +59,6 @@ div {
 	letter-spacing: 0.2em;
 	line-height: 150%;
 }
-
 .center-second { /* center 의 세부 내용 쭉쭉~~*/
 	border: 0.5px solid gray;
 	width: 350px;
@@ -68,8 +67,15 @@ div {
 	margin: 30px 22.5px;
 	border-radius: 10px;
 	vertical-align: middle; /* 텍스트 라인 높이 맞춤 */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8); /* center_second 카드 주변 그림자 효과 */
+	text-align:center; color:#504f4f;	/* align 따로 지정해준 글 제외하고 나머지 텍스트 문서들 가운데 정렬 및 color 적용 */
+	transition:all 0.6s; /* 마우스 오버시 시간에 맞게  hover background-color 컬러로 바뀜 */
 }
-
+.center-second:hover { /* center 의 세부 내용 쭉쭉~~*/
+	color:#F6F6F6;
+	background-color:#BDBDBD; 
+	transition:all 0.6s; /* 위와 동일 두곳다 써준 이유는 마우스가 영역 밖으로 이탈했을 시에도 천천히 다시 원래 색상으로 돌아오게 만들기 위한 효과 */
+}
 .second-box { /* center-second 이미지 삽입 div */
 	border-radius: 10px;
 	width: 350px;
@@ -105,7 +111,6 @@ div {
 	height: 20px;
 	overflow: hidden;
 }
-
 .tag {
 	width: 340px;
 	height: 20px;
