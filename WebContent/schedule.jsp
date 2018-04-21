@@ -55,7 +55,7 @@
 			}
 			.text {
 				text-align: left;
-			`
+			
 			}
 			.center-second:hover{
 				cursor: pointer;
@@ -65,18 +65,18 @@
 		<script type="text/javascript">
 		
 			$(document).ready(function(){
-				var nameTree = "${nameTree}";
-				console.log("nameTree : " + nameTree);
-				console.log("nameTree length : " + nameTree.length);
+				var tour_names = $(".tour_name").text();
+				console.log("tour_names : " + tour_names);
+				console.log("tour_names.length : " + tour_names.length);
+				/* var unique_tour_names = [];
+				$.each(tour_names, function(idx, val){
+					if($.inArray(val, unique_tour_names) === -1) unique_tour_names.push(val);
+				});
 				
-				var str = nameTree.split(',');
-				console.log("str : " + str);
-				var text = "";
-				for(var i = 0; i < nameTree.length; i++){
-					text = text + " " + nameTree[i];
-				}
-				
-				$("#tour_name").text(text);
+				$.each(unique_tour_names, function(idx, val){
+					console.log("unique_tour_names : " + val);
+				}); */
+			
 			});
 		
 			$(document).on('click', '.second-text', function(){
@@ -127,7 +127,7 @@
 								<div class="second-text" id=${list.sl_code }>
 									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="text" id='tour_name'></div>
+								<div class="tour_name" id='tour_name'>${list.area_name }</div>
 								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
 								<div class="text">작성일 : ${list.regi_date }</div>
 								<div class="text">
