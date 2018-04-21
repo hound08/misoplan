@@ -87,7 +87,7 @@ body {
 
 #sidebar-menu {
 	min-width: 100%;
-	height: 5.5%;
+	height: 52.94px;
 	border-bottom: 1px solid white;
 	background-color: #39A2D8;
 }
