@@ -48,12 +48,12 @@ div {
 }
 
 .card:hover .card-header  {
-	opacity: 0.8;
+	opacity: 0.7;
 	height: 100px;
 }
 
 .card-header-is_not_closed{
-	background-color: #EF5A31 ;
+	background-color: #DB0000 ;
     color: #FFF ;
     font-weight: bold ;
     text-align: center ;
@@ -69,7 +69,7 @@ div {
 }
 
 .card-header-is_closed{
-    background-color: gray ;
+    background-color: #8C8C8C ;
     color: #FFF ;
     font-weight: bold ;
     text-align: center ;
@@ -128,6 +128,7 @@ p {
     overflow: hidden;
 }
 .card-body-title {
+	margin-bottom: 5px;
 	height: 25px;
 	width: 100%;
 	overflow: hidden;
@@ -135,7 +136,8 @@ p {
 .card-body-hashtag {
 	height: 20px;
 	width: 100%;
-	color: #2478FF;
+	color: #1266FF;
+	font-weight:bold;
 	font-style: italic;
 	overflow: hidden;
 }
@@ -276,14 +278,33 @@ p {
 	margin-right: auto;
 }
 
-.align button {
+.align-button {
+	width: 100px;
+	height: 35px;
+	background-color: white;
+	border-color: #1294AB;
+	border-radius: 8px;
+	font-size: 14px;
+	font-weight: bold;
+	transition-duration: 0.4s;
+}
+
+.align-button:HOVER{
+	background-color: #1294AB;
+	color: white;
+}
+
+.align-clicked{
 	width: 100px;
 	height: 35px;
 	background-color: #1294AB;
+	border-color: #1294AB;
 	border-radius: 8px;
-	color: white;
 	font-size: 14px;
 	font-weight: bold;
+	transition-duration: 0.4s;
+	color: white;
+	opacity: 0.7;
 }
 
 .center-label {
@@ -295,15 +316,21 @@ p {
 }
 
 .write-button {
-	width: 80px;
+	width: 85px;
 	height: 35px;
 	display: flex;
 	float: right;
 	font-size: 18px;
 	justify-content: center;
 	margin-top: 20px;
+	background-color: white;
+	border-color: #1294AB;
+	border-radius: 8px;
+	transition-duration: 0.4s;
+}
+
+.write-button:HOVER{
 	background-color: #1294AB;
-	border-radius: 5px;
 	color: white;
 }
 
@@ -324,9 +351,21 @@ p {
 			</div>
 		</div>
 		<div class="align">
-			<a href="listActionVIEW.do"><button>조회순</button></a>
-			<a href="listActionVOTE.do"><button>인기순</button></a>
-			<a href="listAction.do"><button>최신순</button></a>
+			<c:if test="${a == 0 }">
+				<a href="listActionVIEW.do"><button class="align-button">조회순</button></a>
+				<a href="listActionVOTE.do"><button class="align-button">인기순</button></a>
+				<a href="listAction.do"><button class="align-clicked">최신순</button></a>
+			</c:if>
+			<c:if test="${a == 1 }">
+				<a href="listActionVIEW.do"><button class="align-clicked">조회순</button></a>
+				<a href="listActionVOTE.do"><button class="align-button">인기순</button></a>
+				<a href="listAction.do"><button class="align-button">최신순</button></a>
+			</c:if>
+			<c:if test="${a == 2 }">
+				<a href="listActionVIEW.do"><button class="align-button">조회순</button></a>
+				<a href="listActionVOTE.do"><button class="align-clicked">인기순</button></a>
+				<a href="listAction.do"><button class="align-button">최신순</button></a>
+			</c:if>
 		</div>
 		<div class="section-card">
 			
@@ -353,14 +392,14 @@ p {
 				<div class="card-body">
 					<!--  카드 바디 헤더 -->
 					<div class="card-body-header">
-						<div class="card-body-title"><h2>제목: ${board.title }</h2></div>
+						<div class="card-body-title"><h3>${board.title }</h3></div>
 						<c:set var="tags" value="${fn:split(board.tag, ' ')}"/>
 						<div class="card-body-hashtag">
 								<c:forEach var="t" items="${tags }">
 									<c:out value="${t }"></c:out>
 								</c:forEach>
 						</div>
-						<p class="card-body-nickname">작성자: ${board.nickname }</p>
+						<p class="card-body-nickname"><label style="color:#BDBDBD; font-size: 15px;">글쓴이:</label><label style="font-weight: bold; color:#757575;">${board.nickname }</label></p>
 					</div>
 					<!--  카드 바디 본문 -->
 					<textarea class="card-body-description" disabled="disabled" style="background-color: white; width:87%; border:none; overflow:hidden; resize: none">${board.content }</textarea>
@@ -520,8 +559,9 @@ p {
 					<form action="searchActionAB.do">
 						<select class="search-select" name="search-selected">
 							<option value="1">제목</option>
-							<option value="2">닉네임</option>
+							<option value="4">내용</option>
 							<option value="3">해시태그</option>
+							<option value="2">닉네임</option>
 						</select> 
 						<input type="text" class="search-bar" placeholder="지금 바로 동행을 검색해보세요!" name="search-keyword">
 						<input type="submit" class="search-submit" value="검색">

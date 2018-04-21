@@ -52,7 +52,7 @@ div {
 }	
 
 table {
-	margin: 10px auto;
+	margin: 25px auto;
 	width: 90%;
 }
 
@@ -77,7 +77,7 @@ td:FIRST-CHILD{
 }
 
 hr {
-	margin: 30px 0;
+	margin: 30px 0 0 0;
 }
 
 #hashtag{
@@ -108,16 +108,6 @@ tr.highlight td {
 	height: 35px;
 }
 
-input[type="submit"] {
-	width: 70px;
-	height: 30px;
-}
-
-input[type="button"] {
-	width: 70px;
-	height: 30px;
-}
-
 input[type="file"] {
     display: none;
 }
@@ -140,6 +130,35 @@ input[type="file"] {
 .submit-div{
 	float: right;
 	margin-right: 60px;
+}
+
+.submit-button{
+	background-color: white;
+	border-color: #1294AB;
+	width: 90px;
+	height: 35px;
+	font-size: 20px;
+	transition-duration: 0.4s;
+}
+
+.submit-button:HOVER{
+	background-color: #1294AB;
+	border-color: white;
+	color: white;
+}
+.cancel-button{
+	background-color: white;
+	border-color: #1294AB;
+	width: 90px;
+	height: 35px;
+	font-size: 20px;
+	transition-duration: 0.4s;
+}
+
+.cancel-button:HOVER{
+	background-color: #1294AB;
+	border-color: white;
+	color: white;
 }
 
 .plan-div{
@@ -248,6 +267,18 @@ input[type="file"] {
 	height: 30px;
 }
 
+info {
+	line-height: 15px;
+}
+
+.p-info {
+ margin-top: 5px;
+}
+
+h3{
+	margin-top: 20px;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <%
@@ -285,9 +316,11 @@ input[type="file"] {
 			</div>
 		</div>
 			<h3>새로운 글 등록</h3>
-				동행을 찾기 위한 게시판입니다.
-				음담패설,모욕,명예훼손,허위사실기재,성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사,형사소송의 대상이 될 수 있으며, 모두 글 작성자의 책임입니다.
-				본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.
+			<p class="p-info">&#10003 동행을 찾기 위한 글을 작성하기 위한 페이지입니다.</p>
+			<p class="p-info">&#10003 음담패설,모욕,명예훼손,허위사실기재,성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사,형사소송의 대상이 될 수 있으며, 모두 글 작성자의 책임입니다.</p>
+			<p class="p-info"> &#10003 본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</p>
+			<p class="p-info"> &#10003 한번 작성하신 글은 삭제하거나 수정하실 수 없으니 신중히 작성해주시기 바랍니다.</p>
+			<p class="p-info"> &#10003 동행인 모집이 완료되었을 경우 작성글 마감을 해주시기 바랍니다.</p>
 			<hr>
 		<div class="write-form">
 			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
@@ -351,8 +384,8 @@ input[type="file"] {
 				</table>
 				<hr>
 				<div class="submit-div">
-					<input type="submit" value="완료" align="right">
-					<input type="button" value="취소" onclick="history.back()">
+					<input type="submit" value="완료" align="right" class="submit-button">
+					<button onclick="history.back()" class="cancel-button">취소</button>
 				</div>
 			</form>
 		</div>
