@@ -20,7 +20,7 @@
 					text-align: center;
 					float: left;
 					margin-top: 20px;
-					background-color: #f0f0f0;
+					background-color: #f5f6f8;
 				}
 			#main h1 {
 					margin: 20px 0px;

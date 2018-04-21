@@ -354,10 +354,11 @@ body {
 	infowindow = [];
 	var seq = 0;
 	var path = null;
-
+	var loadStatus = 0;
 	
 	// 
 	$(document).ready(function(){
+		initMap();
 		var status = '${status}';
 		if(status == null){
 			status = '0';
@@ -791,6 +792,7 @@ body {
 			center : center,
 			gestureHandling : 'greedy'
 		});
+		loadStatus = 1;
 	};
 </script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap"></script>
