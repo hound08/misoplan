@@ -172,6 +172,7 @@ div {
 		
 		JSONArray ja1 = new JSONArray(jsonString);
 		JSONObject lastObj = ja1.getJSONObject(ja1.length()-1);
+		System.out.println("dayValue in plannerDetail : " + lastObj.get("dayvalue"));
 		int max = Integer.parseInt((String) lastObj.get("dayvalue"));
 		
 		System.out.println("date : " +date);
@@ -186,7 +187,7 @@ div {
 		String strLastDay = new SimpleDateFormat("yyyy/MM/dd").format(lastDay);
 			//System.out.println(strLastDay);
 		
-		for(int i = 0; i < ja1.length(); i++){
+		for(int i = 0; i < ja1.length(); i++) {
 			JSONObject jo1 = ja1.getJSONObject(i);
 			int dayValue = Integer.parseInt((String)jo1.get("dayvalue"));
 			Date dayf = new SimpleDateFormat("yyyy/MM/dd").parse(date);
@@ -200,7 +201,10 @@ div {
 		paraDay = paraDay.substring(1, paraDay.length());
 			//System.out.println("paraDay : " + paraDay);
 		// date calculating end
-		int status = Integer.parseInt(request.getParameter("status"));
+		int status = 0;
+		if(request.getParameter("status") != null){
+			status = Integer.parseInt(request.getParameter("status"));
+		}
 		String sl_code = "";
 		if(request.getParameter("sl_code") != null){
 			sl_code = request.getParameter("sl_code");
