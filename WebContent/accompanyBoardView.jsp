@@ -243,8 +243,8 @@ tr.highlight td {
 .write-reply-image{
 	border-radius: 50%;
 	background-size: 100% 100%; 
-	width: 100px; 
-	height: 100px; 
+	width: 130px; 
+	height: 130px; 
 }
 
 .reply-submit{
@@ -374,6 +374,31 @@ tr.highlight td {
 	border: 1px solid;
 	border-color: #D5D5D5;
 	border-radius: 10px;
+	margin-top: 10px;
+}
+
+.toList{
+	float: right;
+	width: 80px;
+	height: 30px;
+}
+
+.refresh{
+	width: 80px;
+	height: 30px;
+}
+
+.refresh-icon {
+	width: 17px;
+	height: 17px;
+	background-image: url("images/refresh.png");
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	margin-left: 10px;
+	cursor: pointer;
+}
+
+hr{
 	margin-top: 10px;
 }
 </style>
@@ -566,8 +591,8 @@ tr.highlight td {
 			</c:if>
 		</div>
 		
-		<a href="listAction.do"><button>목록보기</button></a>
-		<button onclick="refresh()">새로고침</button>
+		<a href="listAction.do"><button class="toList">목록보기</button></a>
+		<button onclick="refresh()" class="refresh">새로고침</button>
 		<c:if test="">
 			<button>수정하기</button>
 		</c:if>
@@ -590,7 +615,9 @@ tr.highlight td {
 				<form action="writeReplyAB.do" method="post" id="replyForm">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<table class="reply-table">
-						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!</td></tr>
+						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
+						<tr class="highlight"><td></td><td></td></tr>
+						<tr class="highlight"><td></td><td></td></tr>
 						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
 						<tr><td colspan="2">
 						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
@@ -600,7 +627,9 @@ tr.highlight td {
 			<c:if test="${email == null }">
 					<input type="hidden" value="${post_num }"name="post_num">
 					<table class="reply-table">
-						<tr><td colspan="2">로그인 후에 이용해 주세요!</td></tr>
+						<tr><td colspan="2">로그인 후에 이용해 주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
+						<tr class="highlight"><td></td><td></td></tr>
+						<tr class="highlight"><td></td><td></td></tr>
 						<tr><td colspan="2"><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
 					</table>
 			</c:if>

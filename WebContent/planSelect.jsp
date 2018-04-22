@@ -26,10 +26,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-top {
    width: 1200px;
    height: 330px;
-   background-color: #F6F6F6;
    padding: 15px 0 0 0;
-   border: 1px solid gray;
-   
+   border: 2px solid #B5B2FF;
+   border-radius: 10px;
 }
 .main-imagebt{
    width: 80px;
@@ -40,16 +39,17 @@ div { /* 모두모두 가운데 정렬 !!!!! */
    width: 380px;
    height: 250px;
     margin: 25px 0 0 35px; 
-   border: 1px solid gray;
+   border: 1px solid #B5B2FF;
    display: inline-block;
 }
 .main-top-second2 {
    padding: 40px 0 0 70px;
    vertical-align: top;
+   border-radius: 10px;
    width: 630px;
    height: 212px;
     margin: 25px 0 0 40px; 
-   border: 1px solid gray;
+   border: 1px solid #B5B2FF;
    display: inline-block;
 }
 #title {
@@ -71,9 +71,9 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-center {
    width: 1200px;
    height: 650px;
-   background-color: #F6F6F6;
+   border-radius: 10px;
    padding: 15px 0 0 0;
-   border: 1px solid gray;
+   border: 2px solid #B5B2FF;
 }
 .center-text {
    /* display: inline-block; */
@@ -87,7 +87,6 @@ div { /* 모두모두 가운데 정렬 !!!!! */
    width: 1200px;
    height: 300px;
    overflow: auto;
-   border: 1px solid gray;
 }
 .center-card-box{
    /* overflow: scroll; */
@@ -99,36 +98,40 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .card-box-title {
    vertical-align: top; /* 텍스트 라인 높이 맞춤 */
    width: 240px;
-   height: 70px;
+   height: 140px;
    overflow: hidden;
    overflow: auto;
    margin: 0 0 5px 2px;
-   border: 1px solid gray;
+   border: 1px solid #B5B2FF;
    font-size: 10pt;
+   border-radius: 10px;
 }
 .card-box-title0 {
    width: 240px;
    height: 20px;
    margin: 0;
    vertical-align: middle;
+   display: none;
 }
 .card-box-title1 {
    width: 240px;
-   height: 20px;
+   height: 70px;
    margin: 0;
    vertical-align: middle;
 }
 .card-box-title2 {
    width: 240px;
-   height: 20px;
+   height: 30px;
    margin: 3px 0 0 0;
    vertical-align: middle;
 }
 .card-box-bottom {
-   width: 240px;
-   height: 170px;
+   padding: 20px;
+   width: 200px;
+   height: 70px;
    overflow: auto;
-   border: 1px solid gray;
+   border: 1px solid #B5B2FF;
+   border-radius: 10px;
 }
 .center-bottom-image {
    width: 1160px;
@@ -145,7 +148,16 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 #radio {
 
 }
-
+.area {
+	height: 15px;
+}
+.buttonList {
+	background-color: #A2C4FF;
+	color: white;
+	border-style: double;
+	font-family: 굴림;
+	font-weight: bold;
+}
 </style>
 <script type="text/javascript">
    function previewFile(input){
@@ -192,41 +204,45 @@ var loadFile = function(event) {
       <img class="main-top-second1" id="output">
       <!-- </div> -->
       <div class="main-top-second2" id = "test">
-      <p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목" value =""></p><br>
+      <p>제   목 : <input type="text" id="title" name="title" required="required" placeholder="제 목"></p><br>
       <p>태   그 : <input type="text" id="tag" name="tag" required="required"></p><br>
       <p>지   역 : <span id="area"></span></p><br>
-             <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
-             <input type="hidden" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
-             <input type="hidden" name="nickname" id="nickname" value="${nickname }"> <!-- nickname 넘어가는지 확인 -->
-             <input type="hidden" name="sl_code" id="sl_codehidden"> <!-- sl_code 값을 넘겨 oracle로 받기위해 -->
+               <input type="hidden" name="area" id="areahidden"> <!-- 지역명만 따로 넘겨주기 plan1로 -->
+               <input type="hidden" name="email" id = "email" value="${email}"> <!-- email 따로 넘겨주기 plan1로 -->
+               <input type="hidden" name="nickname" id="nickname" value="${nickname }"> <!-- nickname 넘어가는지 확인 -->
+               <input type="hidden" name="sl_code" id="sl_codehidden"> <!-- sl_code 값을 넘겨 oracle로 받기위해 -->
       <p>기   간 : <span id="date"></span></p>
-             <input type="hidden" name="schedule_date" id="datehidden">
+               <input type="hidden" name="schedule_date" id="datehidden">
             <!--  <span id="sl_codehidden"></span> -->
       </div>
       <div class="main-imagebt">
          <input type="file" name="image" onchange="loadFile(event)" accept="image/*">
       </div>
    </div>
+   <div class="area"></div>
    <div class="main-center">
       <div class="center-text">
          세부 일정
       </div>
          <div class="center-main-card">
          <c:forEach var="dto" items="${showList }">
-            <div class="center-card-box" align="center" id=${dto.sl_code}>
+            <div class="center-card-box" align="center" id="${dto.sl_code}">
                <div class="card-box-title">
                   <div class="card-box-title0">
                      ${dto.sl_code }
                   </div>
                   <div class="card-box-title1"> <!--지역 -->
+                  	 <h4>여행 지역</h4><br>
                      ${dto.area_name } 
                      <input type = "hidden" value ="${dto.area_name }">
                   </div>
                   <div class ="card-box-title2"> <!-- 날짜 -->
+                  	 <h4>여행 기간</h4>
                      ${dto.tour_date_start } ~ ${dto.tour_date_end }
                   </div>
                </div>
                <div class="card-box-bottom">
+               	  <h4>일정 제목</h4><br>
                   ${dto.s_name }
                </div>
                <input type="radio" class="radio" id='radio${dto.sl_code }' name="radio">  <!-- sl_code가 기준 잡고 위 데이터 뽑기 -->
@@ -237,8 +253,8 @@ var loadFile = function(event) {
          <textarea rows="13" cols="163" name="content" required="required"></textarea>
       </div>
       <div class="button-bottom" align="right">
-         <input type="submit" value="확인" style="width: 40pt; height: 20pt">
-         <input type="button" value="취소" style="width: 40pt; height: 20pt" 
+         <input type="submit" value="확인" class="buttonList" style="width: 40pt; height: 20pt">
+         <input type="button" value="취소" class="buttonList" style="width: 40pt; height: 20pt" 
          onclick="location.href='planview.do?areaName='">
       </div>
    </div>

@@ -16,27 +16,27 @@
 			}
 			
 			/* width */
-::-webkit-scrollbar {
-    width: 3px;
-    height: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 5px grey; 
-    border-radius: 10px;
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #39A2D8; 
-    border-radius: 10px;
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-    background: #39A2D8; 
-}
+			::-webkit-scrollbar {
+			    width: 3px;
+			    height: 5px;
+			}
+			
+			/* Track */
+			::-webkit-scrollbar-track {
+			    box-shadow: inset 0 0 5px grey; 
+			    border-radius: 10px;
+			}
+			 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+			    background: #39A2D8; 
+			    border-radius: 10px;
+			}
+			
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+			    background: #39A2D8; 
+			}
 			#center {
 				margin: 0px auto;
 				width: 1200px;
@@ -59,27 +59,30 @@
 			}
 			.center-second { /* center 의 세부 내용 쭉쭉~~*/
 				border: 0.5px solid gray;
-				width: 350px;
-				height: 410px;
+				width: 280px;
+				height: 265px;
 				display: inline-block; /* 가로형 정렬 */
-				margin: 30px 22.5px;
-				border-radius: 10px;
+				margin: 30px 10.5px;
+				border-radius: 25px;
 				vertical-align: middle; /* 텍스트 라인 높이 맞춤 */
 				box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.7);
 				
 			}
 			
+
 			.second-box { /* center-second 이미지 삽입 div */
-				border-radius: 10px;
-				width: 350px;
-				height: 250px;
+				border-radius: 25px;
+				width: 280px;
+				height: 100px;
+				clear: both;
 				overflow: hidden;
 				background: url("images/1.jpg");
 				background-size: 100% 100%;
 			}
+		
 			
 			.second-text { /* center-second 텍스트 삽입 */
-				width: 350px;
+				width: 280px;
 				height: 35px;
 				text-align: left;
 				font-size: 30px;
@@ -89,23 +92,28 @@
 			}
 
 			.card-title{
+				width: 280px;
 				text-align: center;
 				line-height: 30px;
 			}
 			.tour-name{
+				width: 280px;
 				text-align: center;
 				line-height: 25px;
 			}
 			.tour-date{
+				width: 280px;
 				text-align: center;
 				line-height: 25px;
 			}
 			.tour-regi{
+				width: 280px;
 				text-align: center;
 				line-height: 25px;
 			}
 			.btnwrapper{
-				margin: 5px 0 0 0;
+				display: block;
+				margin-left : 15px;
 				height: 30px;
 			}
 			.updatePlan{
@@ -125,6 +133,10 @@
 			.deletePlan:hover{
 				background-color: #43484f;
 				color: white;
+			}
+			.deletePlan{
+				float: right;
+				margin-right: 20px;
 			}
 		</style>
 		
@@ -176,13 +188,14 @@
 							<c:if test="${list.is_deleted eq 0 }">
 							<div class="center-second">
 								<div class="second-box">
+								
 								</div>
 								<div class="second-text" >
 									<div class="card-title">${list.s_name }</div>
 								</div>
 								<div class="tour-name" id='tour-name'>${list.area_name }</div>
-								<div class="tour-date">${list.tour_date_start } ~ ${list.tour_date_end }</div>
-								<div class="tour-regi">등록 : ${list.regi_date }</div>
+								<div class="tour-date"> ${list.tour_date_start } ~ ${list.tour_date_end }</div>
+								<div class="tour-regi">작성일 : ${list.regi_date }</div>
 								<div class="btnwrapper">
 									<button class='updatePlan' id='update${list.sl_code}'>수정</button>
 									<button class='deletePlan' id='delete${list.sl_code}'>삭제</button>

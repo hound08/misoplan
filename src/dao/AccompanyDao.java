@@ -549,8 +549,11 @@ public void vote_down(int post_num) {
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where title like ? order by post_num desc) a) where rn between ? and ?";
 	    }else if(selected == 2) {
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where nickname like ? order by post_num desc) a) where rn between ? and ?";
-	    }else {
+	    }else if(selected == 3){
 	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where tag like ? order by post_num desc) a) where rn between ? and ?";
+	    }else {
+	    	sql = "select * from (select rownum rn, a.* from (select * from accompanyboard where content like ? order by post_num desc) a) where rn between ? and ?";
+	    	
 	    }
 	    keyword = "%" + keyword + "%";
 	    try {
@@ -599,8 +602,10 @@ public void vote_down(int post_num) {
 		   	sql = "select count(*) from accompanyboard where title like ?";
 		   }else if(selected == 2) {
 		   	sql = "select count(*) from accompanyboard where nickname like ?";
+		   }else if(selected == 3){
+			   sql = "select count(*) from accompanyboard where tag like ?";
 		   }else {
-		   	sql = "select count(*) from accompanyboard where tag like ?";
+			   sql = "select count(*) from accompanyboard where content like ?";			   
 		   }
 		keyword = "%" + keyword + "%";
 		try {
