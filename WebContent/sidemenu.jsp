@@ -15,6 +15,7 @@
 				background-color: #f0f0f0;
 				border-radius: 25px;
 				width: 200px;
+				height: 550px;
 				float: left;
 				margin: 20px;
 				padding-bottom: 35px;
@@ -22,7 +23,7 @@
 		#sidemenu .sidemenus{
 				text-align: center;
 				margin : 40px;
-				font-size: 25px;
+				font-size: 23px;
 				
 			}
 		.sidemenus .a {
