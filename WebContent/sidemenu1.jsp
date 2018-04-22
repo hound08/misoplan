@@ -5,48 +5,69 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta charset='utf-8'>
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="css/styles.css">
-<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-<script src="js/script.js"></script>
 <title>사이드 메뉴</title>
 	<style type="text/css">
+		*{ margin:0; padding:0; }
 		
-	::-webkit-scrollbar-thumb {
-        background: #39A2D8; 
- 	    border-radius: 10px;
-	}
+		.sidemenus{
+			margin-top: 20px;
+			width: 150px;
+			height: 700px;
+			background-color: #39A2D8; 
+			float: left;
+		}
+		.sidemenu{
+			width: 150px;
+			height: 10%;
+			clear: both;
+			border-bottom: 1px solid white;
+		}
+		.a{
+			text-decoration: none;
+			text-align: center;
+			color: white;
+			font-size: 20px;
+		}
+		.side-menu-myinfo {
+			width: 30px;
+			height: 30px;
+			background: url("images/mypage-cutout.png");
+			background-size: 100% 100%;
+			float: left;
+		}
+		.side-menu-myplan {
+			width: 30px;
+			height: 30px;
+			background: url("images/planner-cutout.png");
+			background-size: 100% 100%;
+			float: left;
+		}
+		.side-menu-wishlist {
+			width: 30px;
+			height: 30px;
+			background: url("images/star-cutout.png");
+			background-size: 100% 100%;
+			float: left;
+		}
+		.side-menu-accompany {
+			width: 30px;
+			height: 30px;
+			background: url("images/shakehands-cutout.png");
+			background-size: 100% 100%;
+			float: left;
+		}
+		.side-menu-text{
+			float: left;			
+		}
 	</style>
-
+	
 </head>
 <body>
 	<%
 		MemberDao dao = MemberDao.getInstance();
 		session.setAttribute("admin", dao.selectAdminChk((String)session.getAttribute("email")));
 	%>
-	<div id='cssmenu'>
-		<ul>
-		   
-		   <li class='last'><a href='myInfoConfirmForm.do?email=${email }'><span>내 정보</span></a></li>
-		   <li class='last'><a href='scheduleForm.do?email=${email }'><span>내 일정</span></a></li>
-		   <li class='last'><a href='myWishListForm.do?email=${email }'><span>찜 리스트</span></a></li>
-		   <li class='last'><a href='companionForm.do?email=${email }'><span>동행</span></a></li>
-		   <c:if test="${admin == 1}">
-		   <li class='has-sub'><a href='adminConfirmForm.do'><span>관리자</span></a>
-		      <ul>
-		         <li><a href='adminMainForm.do'><span>회원 관리</span></a></li>
-		         <li class='last'><a href='adminSubjectForm.do'><span>게시물 관리</span></a></li>
-		      </ul>
-		   </li>
-		   </c:if>
-		   <li class='margin' style="height: 500px;"><a style="height: 463.2px;"><span style="height: 443.2px;"></span></a></li>
-		</ul>
-	</div>
-	
-	
-	<%-- <div class="sidemenus" id="sidemenus">
+	<div class="sidemenus" id="sidemenus">
 			<div class="sidemenu" id="side-menu-myinfo">
 				<div class="side-menu-myinfo"></div>
 				<div class="side-menu-text">
@@ -78,6 +99,6 @@
 					<div class="list_admin_sub"><a href="adminSubjectForm.do" id="a">글 관리</a></div>
 				</div>
 			</c:if>
-		</div> --%>
+		</div>
 </body>
 </html>

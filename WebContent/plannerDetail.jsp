@@ -225,7 +225,7 @@ div {
 		
 	
 		<div class="planDiv">
-			<form action="insertPlanAction.do" id="form">
+			<form action="insertPlanAction.do" id="form" method="post">
 				<div class="planTop">
 				<input type="hidden" name="email" value="<%=session.getAttribute("email")%>">
 				<input type="hidden" name="title" value="<%=title %>">
