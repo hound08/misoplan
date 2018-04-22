@@ -539,13 +539,13 @@ public class BoardScheduleDao {
 			if (rs.next()) {
 				do {
 					ReplyBoardScheduleDto dto = new ReplyBoardScheduleDto();
-					dto.setRbs_num(rs.getInt(1));
-					dto.setBs_num(rs.getInt(2));
-					dto.setEmail(rs.getString(3));
-					dto.setNickname(rs.getString(4));
-					dto.setReply_content(rs.getString(5));
-					dto.setReply_date(rs.getDate(6));
-					dto.setProfile_url(rs.getString(7));
+					dto.setRbs_num(rs.getInt("rbs_num"));
+					dto.setBs_num(rs.getInt("bs_num"));
+					dto.setEmail(rs.getString("email"));
+					dto.setNickname(rs.getString("nickname"));
+					dto.setProfile_url(rs.getString("image_url"));
+					dto.setReply_content(rs.getString("reply_content"));
+					dto.setReply_date(rs.getDate("reply_date"));
 					list.add(dto);
 				} while (rs.next());
 			}
