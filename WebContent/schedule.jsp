@@ -32,20 +32,27 @@
 			}
 			.center-second { /* center 의 세부 내용 쭉쭉~~*/
 				border: 0.5px solid gray;
-				width: 350px;
-				height: 450px;
+				width: 280px;
+				height: 250px;
 				display: inline-block; /* 가로형 정렬 */
-				margin: 30px 22.5px;
-				border-radius: 10px;
+				margin: 30px 10.5px;
+				border-radius: 25px;
+				text-align: left;
 				vertical-align: middle; /* 텍스트 라인 높이 맞춤 */
+				background-color: #f5f6f8;
 			}
 			
 			.second-box { /* center-second 이미지 삽입 div */
-				border-radius: 10px;
-				width: 350px;
-				height: 250px;
+				border-radius: 25px;
+				width: 280px;
+				height: 100px;
 				clear: both;
 				overflow: hidden;
+			}
+			.second-box img {
+				border-radius: 25px;
+				width: 280px;
+				height: 100px;
 			}
 			
 			.second-text { /* center-second 텍스트 삽입 */
@@ -59,6 +66,10 @@
 			}
 			.center-second:hover{
 				cursor: pointer;
+			}
+			.deletePlan{
+				float: right;
+				margin-right: 20px;
 			}
 		</style>
 		
@@ -122,12 +133,12 @@
 							<c:if test="${list.is_deleted eq 0 }">
 							<div class="center-second">
 								<div class="second-box">
-									<img alt="image" src="images/1.jpg">
+									<img alt="image" src="images/logo.png">
 								</div>
 								<div class="second-text" id=${list.sl_code }>
 									<h1>제목 : ${list.s_name }</h1>
 								</div>
-								<div class="tour_name" id='tour_name'>${list.area_name }</div>
+								<div class="tour_name" id='tour_name'>여행지 : ${list.area_name }</div>
 								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
 								<div class="text">작성일 : ${list.regi_date }</div>
 								<div class="text">

@@ -9,7 +9,11 @@
       password="tiger" 
       driverClassName="oracle.jdbc.driver.OracleDriver" 
       factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory" 
+<<<<<<< HEAD
       url="jdbc:oracle:thin:@127.0.0.1:1521:xe" 
+=======
+      url="jdbc:oracle:thin:@127.0.0.1:1521:xe"  
+>>>>>>> 5cd1329e8248778137ad1514ab34956e661d3af8
       maxActive="500" 
       maxIdle="100"/>
 </Context>

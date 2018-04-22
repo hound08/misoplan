@@ -38,9 +38,14 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 .main-top-second1 {
    width: 380px;
    height: 250px;
-    margin: 25px 0 0 35px; 
+   margin: 25px 0 0 35px; 
    border: 1px solid #B5B2FF;
    display: inline-block;
+   box-shadow: 
+      inset 0 0 20px #fff /* 배경과 같은 색 */,
+      inset 0 0 20px #fff,
+      inset 0 0 20px #fff,
+      inset 0 0 20px #fff;
 }
 .main-top-second2 {
    padding: 40px 0 0 70px;
@@ -200,7 +205,7 @@ var loadFile = function(event) {
 <body>
 <form action="boardinsert.do" name="planSelect" method="post" enctype="multipart/form-data">
    <div class="main-top">
-      <!-- <div class="main-top-second1" align="left"> -->
+
       <img class="main-top-second1" id="output">
       <!-- </div> -->
       <div class="main-top-second2" id = "test">
