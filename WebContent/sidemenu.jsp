@@ -13,6 +13,31 @@
 <script src="js/script.js"></script>
 <title>사이드 메뉴</title>
 	<style type="text/css">
+<<<<<<< HEAD
+		*{ margin:0; padding:0; }
+		li{ list-style:none; }
+		img {vertical-align:bottom;}
+		#sidemenu  {
+				margin-top: 60px;
+				background-color: #f0f0f0;
+				border-radius: 25px;
+				width: 200px;
+				height: 550px;
+				float: left;
+				margin: 20px;
+				padding-bottom: 35px;
+			}
+		#sidemenu .sidemenus{
+				text-align: center;
+				margin : 40px;
+				font-size: 23px;
+				
+			}
+		.sidemenus .a {
+				color: black;
+		}
+=======
+>>>>>>> 1eff87345ce4d684f349d5be97bd3aecd103cb51
 		
 	::-webkit-scrollbar-thumb {
         background: #39A2D8; 

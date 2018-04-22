@@ -27,7 +27,7 @@ public class PlanViewAction implements CommandProcess {
 /*			List<ScheduleLoadDto> namelist = dao.selectCodeName(bs_num);*/
 			List<ScheduleSmallDto> list_small = dao.selectScheduleSmall(bs_num);
 			dao.view_count(bs_num);
-			
+			System.out.println("list : " + list);
 			request.setAttribute("bs_num", bs_num);
 			request.setAttribute("dto", dto);
 			request.setAttribute("list_reply", list);

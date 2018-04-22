@@ -10,7 +10,6 @@
 <title>동행 구하기</title>
 <style type="text/css">
 #center {
-	border: 1px solid red;
 	margin: 0px auto;
 	width: 1200px;
 	height: 100%;
@@ -18,7 +17,6 @@
 
 #main {
 	width: 930px;
-	border: 3px solid green;
 	text-align: center;
 	float: left;
 }
@@ -29,7 +27,6 @@
 
 
 #mainsecond1{
-	border: 1px solid;
 	width: 420px;
 	float: left;
 }
@@ -38,7 +35,6 @@
 	margin-bottom: 10px;
 }
 #mainsecond2 {
-	border: 1px solid;
 	width: 420px;
 	height: 600px;
 	float: right;
@@ -49,12 +45,12 @@
 .card {
 	width: 390px;
 	height: 150px;
-	border: 1px solid;
 	border-radius:10px;
 	background-color: #f5f6f8;
 	padding: 10px 0px 10px 0px;
 	margin-bottom: 20px;
 	margin-right: 20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 .card table {
 		font-size: 18px;
@@ -67,6 +63,7 @@
 }
 .m1 {
 	width: 150px;
+	text-align: left;
 }
 .m2 {
 	width: 220px;
@@ -75,37 +72,44 @@
 	width: 320px;
 	height: 100px;
 	 overflow: hidden;
+	 background-color: white;
+	 border-right: 20px;
 }
 .cardbox {
 	width: 350px;
 	height: 25px;
 	overflow: hidden;
-	background-color: #f5f6f8;
+	background-color: #c8ccd0;
 	margin: 0 auto;
+	border-right: 20px;
+	margin-bottom: 5px;
 }
 .cardbox:HOVER{
 	widows: 350px;
-	height: 240px;
-	background-color: white;
+	height: 180px;
+	background-color: #c8ccd0;
+	border-radius:20px;
+}
+.cardbox table {
+	margin: 0 auto;
 }
 #sidemenu{
 	width: 200px;
 	height: 400px;
-	border: 1px solid;
 	float: right;
 }
 #menu1 {
 	height: 280px;
-	border: 1px solid;
 	background-color: #f5f6f8;
 	border-radius:20px;
 	margin-bottom: 20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 #menu2 {
 	height: 280px;
-	border: 1px solid;
 	background-color: #f5f6f8;
 	border-radius:20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 .yn {
 	width: 25px;
@@ -138,6 +142,12 @@
 .ok_second_m2{
 	width: 130px;
 	text-align: center;
+}
+.postnums:HOVER {
+	-webkit-opacity: 0.5;
+}
+.post_title:HOVER {
+	-webkit-opacity: 0.5;
 }
 </style>
 <script type="text/javascript">
@@ -345,12 +355,12 @@ function isclosed(post_num){
 		<%@ include file="sidemenu.jsp"%>
 		<a href="companionForm.do?email=${email }">내 게시물</a> | <a href="companionForm2.do?email=${email }"> 내가 신청한 동행</a>
 		<div id="main">
-			<h1>내가 쓴 동행 게시물</h1>
+			<h1>내 동행 List</h1>
 			<div id="mainsecond1">
 						<c:forEach var="list" items="${list }" >
 							<div class="card" id="z${list.post_num }">
 								<table >
-									<tr align="center" <%-- onclick="companionview(${list.post_num})" --%>>
+									<tr align="center" class="post_title" <%-- onclick="companionview(${list.post_num})" --%>>
 										<td class="m1">제목 : </td><td class="m2"><a href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
 									</tr>
 									<tr align="center">

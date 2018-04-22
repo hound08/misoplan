@@ -76,17 +76,24 @@ public class ApplicantsDao {
 		return applist;
 	}
 	
-	public List<ApplicantsDto> myappselect(String email) throws SQLException{
+	public List<ApplicantsDto> myappselect(String email, int startRow, int endRow) throws SQLException{
 		Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
-		String sql = "select * from applicants where email = ?";
+	    String sql = "select rnum, t.* "
+				+ "from (select rownum rnum, a.* "
+				+ "from (select * from applicants where email = ? order by post_num desc) a "      
+				+ ") t "
+				+ " where rnum between ? and ?";
+		/*String sql = "select * from applicants where email = ?";*/
 		System.out.println("myappselect email = "+ email);
 		List<ApplicantsDto> myapplist = new ArrayList<ApplicantsDto>();
 		try {
 			 conn = getConnection();
 	         ps = conn.prepareStatement(sql);
 	         ps.setString(1, email);
+	         ps.setInt(2, startRow);
+		   	 ps.setInt(3, endRow);
 	         rs = ps.executeQuery();
 	         while(rs.next()){
 	        	 ApplicantsDto dto = new ApplicantsDto();
@@ -383,6 +390,30 @@ public class ApplicantsDao {
 			if (conn != null) conn.close();
 		}
 		return list;
+	}
+
+	public int getTotalPost(String email) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int total = 0;
+		
+		String sql = "select count(*) from applicants where email = ?";
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, email);
+			rs = ps.executeQuery();
+			rs.next();
+			total = rs.getInt(1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		return total;
 	}
 
 }
