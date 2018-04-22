@@ -237,8 +237,8 @@ div {
 				<input type="hidden" name="lastDate" value="<%=strLastDay %>">
 				<input type="hidden" name="jsonString" id="jsonString">
 				<input type="hidden" name="strDays" id="strDays" value="<%=paraDay%>">
-				<input type="hidden" name="sl_code" id="strDays" value="<%=sl_code%>">
-				<input type="hidden" name="status" id="strDays" value="<%=status%>">
+				<input type="hidden" name="sl_code" id="sl_code" value="<%=sl_code%>">
+				<input type="hidden" name="status" id="status" value="<%=status%>">
 					<div class="planTopInner">PLAN</div>
 				</div>
 				<%
