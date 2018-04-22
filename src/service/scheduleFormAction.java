@@ -63,12 +63,10 @@ public class scheduleFormAction implements CommandProcess{
 							area_name_result.add(area_name.get(j));
 						}
 					}
-					//System.out.println("areanameresult : " + area_name_result);
 
 					area_name_result.removeAll(Collections.singleton(null));
 					area_name.removeAll(Collections.singleton(null));
 					dto.setArea_name(area_name_result.toString());
-					//System.out.println("areaname : " + dto.getArea_name());
 					dto.setTour_date_start(tour_date_start);
 					dto.setTour_date_end(tour_date_end);
 					dto.setRegi_date(regi_date);
@@ -98,11 +96,9 @@ public class scheduleFormAction implements CommandProcess{
 							area_name_result.add(area_name.get(j));
 						}
 					}
-					//System.out.println("areanameresult : " + area_name_result);
 					area_name.removeAll(Collections.singleton(null));
 					area_name_result.removeAll(Collections.singleton(null));
 					dto.setArea_name(area_name_result.toString());
-					//System.out.println("areaname : " + dto.getArea_name());
 					dto.setTour_date_start(tour_date_start);
 					dto.setTour_date_end(tour_date_end);
 					dto.setRegi_date(regi_date);

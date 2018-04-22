@@ -3,11 +3,12 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ include file="header.jsp"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<title>미소플랜</title>
 <link rel="stylesheet" type="text/css" hrefs="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -31,22 +32,20 @@ a:visited {
 
 html {
 	width: 100%;
-	height: 100%;
 }
 
 body {
 	width: 100%;
-	height: 100%;
+	height: 90%;
 	padding: 0px;
 	margin: 0px;
 }
-
 /* 개별 적용 */
 .section {
 	padding: 0px;
 	margin: 0px;
 	width: 100%;
-	min-height: 100%;
+	height: 93.41%;
 	overflow: hidden;
 }
 
@@ -55,7 +54,7 @@ body {
 	margin: 0px;
 	float: left;
 	width: 0%;
-	height: 900px;
+	height: 100%;
 	overflow: scroll;
 	transition: all 0.5s;
 }
@@ -66,7 +65,7 @@ body {
 	margin: 0px;
 	float: left;
 	width: 0%;
-	height: 900px;
+	height: 100%;
 	overflow: scroll;
 	transition: all 0.5s;
 }
@@ -78,36 +77,40 @@ body {
 }
 
 .sidebar {
+	display: table;
 	padding: 0px;
 	margin: 0px;
 	float: left;
-	width: 5%;
-	height: 900px;
+	width: 10%;
+	height: 100%;
 }
 
 #sidebar-menu {
-	min-width: 100%;
-	height: 52.94px;
+	display: table-row;
+	text-align:center;
+	width: 100%;
+	height: 30px;
 	border-bottom: 1px solid white;
 	background-color: #39A2D8;
+	color: white;
 }
 
+.sidedesc {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	color: white;
+}
 #sidebar-menu:hover {
 	cursor: pointer;
 }
 
-.sidedesc {
-	padding: 20px 0 0 0;
-	margin: 0px;
-	text-align: center;
-	color: white;
-}
 
 .map {
 	padding: 0px;
 	margin: 0px;
 	float: left;
-	width: 95%;
+	width: 90%;
 	height: 910px;
 	transition: all 0.5s;
 }
@@ -122,8 +125,8 @@ body {
 
 .citydesc {
 	text-align: center;
-	width: 0%;
-	margin: 10% 0 0 30%;
+	width: 100% !important;
+	margin: 10% ;
 }
 
 #cityinfo:hover {
@@ -344,6 +347,7 @@ body {
 	}
 </script>
 <!--  -->
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap"></script>
 
 <script type="text/javascript">
 	var mapx = [];
@@ -357,6 +361,19 @@ body {
 	var loadStatus = 0;
 	
 	// 
+	function initMap() {
+		var area = document.getElementsByClassName('sidebar-menu');
+		var center = {
+			lat : 36.543583,
+			lng : 127.859900
+		};
+		map = new google.maps.Map(document.getElementById('map'), {
+			zoom : 7,
+			center : center,
+			gestureHandling : 'greedy'
+		});
+	};
+	
 	$(document).ready(function(){
 		initMap();
 		var status = '${status}';
@@ -372,6 +389,8 @@ body {
 			var dayFlag = loadJsonArr[0].tour_date;
 			//console.log("dayFlag : " + dayFlag)
 			makeDay();
+			
+			
 			jQuery.each(loadJsonArr, function(index, value){
 				if(dayFlag != value.tour_date){
 					//console.log(dayFlag +"////" + value.tour_date);
@@ -389,6 +408,10 @@ body {
 				
 				createMarker(value.coord_y, value.coord_x);
 			});
+			
+			
+			
+			
 			drawLines();
 			$('#form').append("<input type='hidden' name='sl_code' value="+loadJsonArr[0].sl_code+">");
 			
@@ -396,6 +419,10 @@ body {
 		}
 			$('#form').append("<input type='hidden' name='status' value="+status+">");
 	});
+	
+	
+	
+	
 	function makeDay(){
 		var plandiv = $('.plandiv');
 		plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
@@ -470,7 +497,7 @@ body {
 					}
 
 					document.getElementById("center").style.width = "8%"  // CSS 컨트롤
-					document.getElementById("map").style.width = "87%";
+					document.getElementById("map").style.width = "82%";
 					document.getElementById("tourlist").style.width = "0px";
 					var cityinfolist = $('.center').children();
 					var cityimagelist = document.getElementsByClassName("cityimage");
@@ -521,7 +548,7 @@ body {
 										if (addr1 == undefined) {
 											addr1 = addr2;
 										}
-										$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv'><img class='tourImage' src="+firstImage+"></div>"
+										$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv' style='background:url("+firstImage+"); background-size:100% 100%'></div>"
 																+ "<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+">"
 																+ "<p class='tourtitle'>"+ title+ "</p><p class='touraddr'>"+ addr1
 																+ "</p></div><div class='plusbutton' id="+contentid+"><p class='plusP'>+</p></div></div></li>");
@@ -539,7 +566,7 @@ body {
 					for (var i = 0; i < tourinfo.length; i++) {
 						tourinfo[i].style.width = "100%";
 					}
-					document.getElementById("map").style.width = "67%";
+					document.getElementById("map").style.width = "62%";
 					$(".center").children().removeClass("city_selected");  // 기존에 선택된 클래스의 value 제거
 					$this.addClass('city_selected');					   // 클릭된 엘리먼트의 클래스 value 설정
 				});
@@ -795,9 +822,9 @@ body {
 		loadStatus = 1;
 	};
 </script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBnkgSC0SDpUzIBHXo7NrQKEnt0T0CpQK8&callback=initMap"></script>
 </head>
 <body>
+	<%@ include file="header.jsp"%>
 	<%
 		/* if(request.getAttribute("loadJsonArr") != null){
 			System.out.println("loadJsonArr in planner.jsp : " + request.getAttribute("loadJsonArr").toString());	
@@ -823,7 +850,7 @@ body {
 		<ul class="sidebar">
 			<c:forEach var="areaMap" items="${areasList}">
 				<li id="sidebar-menu" data="${areaMap.code }">
-					<p class="sidedesc" id="sidedesc">${areaMap.name }</p>
+					<p class="sidedesc">${areaMap.name }</p>
 				</li>
 			</c:forEach>
 		</ul>
