@@ -103,6 +103,7 @@ table {
 	border-radius: 10px;
 	margin-bottom: 10px; 
 	padding-top: 10px;
+	position: relative;
 }
 
 tr.highlight td {
@@ -401,6 +402,18 @@ tr.highlight td {
 hr{
 	margin-top: 10px;
 }
+
+.post-body-bottom {
+	clear: both;
+	position: absolute;
+  	bottom: 15;
+  	left: 50%;
+}
+.center-button{
+	width: 80px;
+	height: 30px
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
@@ -577,18 +590,29 @@ hr{
 		
 		<!-- 바디 -->
 		<div class="post-body">
-		<table class="body-table">
-			<tr>
-				<td><div class="image"></div></td>
-				<td><pre>${board.content }</pre></td>
-			</tr>
-		</table>
+		<c:if test="${board.image_url != null}">
+			<table class="body-table">
+				<tr>
+					<td><div class="image"></div></td>
+					<td><pre>${board.content }</pre></td>
+				</tr>
+			</table>
+		</c:if>
+		<c:if test="${board.image_url == null}">
+			<table class="body-table">
+				<tr>
+					<td><pre>${board.content }</pre></td>
+				</tr>
+			</table>
+		</c:if>
+			<div class="post-body-bottom">
 			<c:if test="${email != null and board.is_closed != 1 and email != board.email}">
-				<button onclick="apply()">동행 신청하기</button>
+				<button onclick="apply()" class="center-button">동행 신청하기</button>
 			</c:if>
 			<c:if test="${email == board.email and board.is_closed != 1}">
-				<a href="closeActionAB.do?post_num=<%=request.getParameter("post_num") %>" ><button>마감하기</button></a>
+				<a href="closeActionAB.do?post_num=<%=request.getParameter("post_num") %>" ><button  class="center-button">마감하기</button></a>
 			</c:if>
+			</div>
 		</div>
 		
 		<a href="listAction.do"><button class="toList">목록보기</button></a>
@@ -601,7 +625,7 @@ hr{
 		<div class="reply-wrapper">
 			<div class ="reply-image" style="background-image: url('${reply.profile_url}')"></div>
 			<table class="table-reply">
-				<tr"><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
+				<tr><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;"><td><pre>${reply.content }</pre></td></tr>

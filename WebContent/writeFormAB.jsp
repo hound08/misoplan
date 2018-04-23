@@ -385,7 +385,7 @@ h3{
 				<hr>
 				<div class="submit-div">
 					<input type="submit" value="완료" align="right" class="submit-button">
-					<button onclick="history.back()" class="cancel-button">취소</button>
+					<button type="button" onclick="history.back()" class="cancel-button">취소</button>
 				</div>
 			</form>
 		</div>
