@@ -114,6 +114,7 @@ p {
     transition : .2s ease-in-out;
 	margin: 5px 20px;
 	overflow: hidden;
+	cursor: pointer;
 }
 
 .card:hover .card-body-description {
