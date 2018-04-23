@@ -319,16 +319,18 @@ public class BoardScheduleDao {
 			while (rs.next()) {
 				BoardScheduleDto dto = new BoardScheduleDto();
 				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setSl_code(rs.getString("sl_code"));
+				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setTitle(rs.getString("title"));
-				dto.setImage_url(rs.getString("image_url"));
-				dto.setContent(rs.getString("content"));
 				dto.setTag(rs.getString("tag"));
-				dto.setView_count(rs.getInt("view_count"));
+				dto.setContent(rs.getString("content"));
+				dto.setImage_url(rs.getString("image_url"));
 				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setView_count(rs.getInt("view_count"));
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setArea_names(rs.getString("area_names"));
-				dto.setSl_code(rs.getString("sl_code"));
+				dto.setSchedule_date(rs.getString("schedule_date"));
 
 				pagelist.add(dto);
 			}
