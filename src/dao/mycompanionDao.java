@@ -46,7 +46,7 @@ public class mycompanionDao {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "select * from accompanyboard where email = ?";
+		String sql = "select * from accompanyboard where email = ? order by post_num desc";
 		List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
 		try {
 			conn = getConnection();

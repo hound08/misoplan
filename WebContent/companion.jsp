@@ -61,12 +61,22 @@
 .card table tr td{
 	padding: 5px;
 }
+.m1title {
+	width: 150px;
+	text-align: left;
+}
 .m1 {
 	width: 150px;
 	text-align: left;
 }
+.m2title {
+	width: 220px;
+	overflow: hidden;
+	display: inline-block;
+}
 .m2 {
 	width: 220px;
+	overflow: hidden;
 }
 .mess {
 	width: 320px;
@@ -149,6 +159,10 @@
 .post_title:HOVER {
 	-webkit-opacity: 0.5;
 }
+.title {
+	overflow: hidden;
+}
+
 </style>
 <script type="text/javascript">
 var onoff = 0;
@@ -361,7 +375,7 @@ function isclosed(post_num){
 							<div class="card" id="z${list.post_num }">
 								<table >
 									<tr align="center" class="post_title" <%-- onclick="companionview(${list.post_num})" --%>>
-										<td class="m1">제목 : </td><td class="m2"><a href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
+										<td class="m1title">제목 : </td><td class="m2title"><a class="title" href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
 									</tr>
 									<tr align="center">
 										<td class="m1">닉네임 : </td><td class="m2">${list.nickname }</td>
