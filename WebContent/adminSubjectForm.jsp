@@ -196,11 +196,11 @@
 				<tr><th><input type="checkbox" class="chkboxTop" name="chkboxTop"></th><th>번호</th><th>제목</th><th>내용</th><th>작성자</th><th>이메일</th><th>작성일</th></tr>
 				<c:forEach var="list" items="${list}">
 					<tr><td width="25px"><input type="checkbox" class="chkbox" name="chkbox"></td>
-						<td width="35px">${list.bs_num}</td>
-						<td class="tdTitle">${list.title}</td>
-						<td class="tdContent">${list.content}</td>
-						<td width="75px">${list.nickname}</td>
-						<td width="170px">${list.email}</td>
+						<td width="35px"><a href="planview.do?bs_num=${list.bs_num}">${list.bs_num}</a></td>
+						<td class="tdTitle"><a href="planview.do?bs_num=${list.bs_num}">${list.title}</a></td>
+						<td class="tdContent"><a href="planview.do?bs_num=${list.bs_num}">${list.content}</a></td>
+						<td width="75px"><a href="adminMainForm.do?selSearch=별명&textSearch=${list.nickname}">${list.nickname}</a></td>
+						<td width="170px"><a href="adminMainForm.do?selSearch=이메일&textSearch=${list.email}">${list.email}</a></td>
 						<td>${list.board_date}</td>
 					</tr>
 				</c:forEach>
