@@ -99,7 +99,10 @@
    height: 180px;
    background-color: #c8ccd0;
    border-radius:20px;
+<<<<<<< HEAD
    transition: opacity 0.5s;
+=======
+>>>>>>> 365bf7abfd8616794dd4951f19144212991e81a2
 }
 .cardbox table {
    margin: 0 auto;
@@ -160,7 +163,10 @@
 }
 .post_title:HOVER {
    -webkit-opacity: 0.5;
+<<<<<<< HEAD
    transition: opacity 0.5s;
+=======
+>>>>>>> 365bf7abfd8616794dd4951f19144212991e81a2
 }
 .title {
    overflow: hidden;
@@ -229,7 +235,14 @@ var is_close = 0;
             });
             onoff = onoff+1;
       });
+<<<<<<< HEAD
         
+=======
+         }else{
+              $('#mainsecond2').remove(); 
+             onoff = onoff-1;  
+         }
+>>>>>>> 365bf7abfd8616794dd4951f19144212991e81a2
 });
  
  $(document).on('click', '.yesbtnimg', function(){
