@@ -12,6 +12,7 @@
 			<c:set var="ban_date" value="${ban_date_result}" />
 			<script type="text/javascript">
 				alert("해당 계정은 탈퇴 처리된 계정입니다.");
+				<% session.invalidate(); %>
 				location.href="loginForm.do";
 			</script>
 		</c:if>
@@ -19,6 +20,7 @@
 			<c:set var="ban_date" value="${ban_date_result}" />
 			<script type="text/javascript">
 				alert("해당 계정은 현재 회원 정지 상태입니다.");
+				<% session.invalidate(); %>
 				location.href="loginForm.do";
 			</script>
 		</c:if>
@@ -38,6 +40,7 @@
 	<c:if test="${nickname == null }">
 		<script type="text/javascript">
 			alert("아이디 또는 비밀번호가 틀렸습니다.");
+			<% session.invalidate(); %>
 			location.href="loginForm.do";
 		</script>
 	</c:if>
