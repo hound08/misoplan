@@ -544,6 +544,7 @@ public class BoardScheduleDao {
 					dto.setEmail(rs.getString("email"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setProfile_url(rs.getString("image_url"));
+					System.out.println("image url : " + dto.getProfile_url());
 					dto.setReply_content(rs.getString("reply_content"));
 					dto.setReply_date(rs.getDate("reply_date"));
 					list.add(dto);

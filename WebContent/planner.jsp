@@ -558,7 +558,7 @@ body {
 										if (addr1 == undefined) {
 											addr1 = addr2;
 										}
-										$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv' style='background:url("+firstImage+"); background-size:100% 100%'></div>"
+										$(".tourlist").prepend("<li class='tourinfo' id="+contentid+"><div class='tourImageDiv' imagePath="+firstImage+" style='background:url("+firstImage+"); background-size:100% 100%'></div>"
 																+ "<div class='descwrapper'><div class='tourdescdiv' id='tourdescdiv' mapx="+coordx+" mapy="+coordy+">"
 																+ "<p class='tourtitle'>"+ title+ "</p><p class='touraddr'>"+ addr1
 																+ "</p></div><div class='plusbutton' id="+contentid+"><p class='plusP'>+</p></div></div></li>");
@@ -589,7 +589,9 @@ body {
 						var coordx = $this.prevAll("#tourdescdiv").attr("mapx");
 						var coordy = $this.prevAll("#tourdescdiv").attr("mapy");
 						var sl_code = $this.prevAll("#tourdescdiv").attr("slcode");
-						var imagePath = $this.parent().prevAll(".tourImageDiv").children(".tourImage").attr("src");
+						var imagePath = $this.parent().prevAll(".tourImageDiv").attr('imagePath');
+						console.log("tourImageDiv = " + imagePath);
+						console.log("image_path in planner.jsp : " + imagePath);
 						var contentId = $(this).attr("id");
 						var plandiv = $('.plandiv');
 						var areaCode = $('.area_selected').attr('data');
