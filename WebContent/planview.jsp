@@ -40,6 +40,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	display: inline-block;
  	vertical-align: top;
  	border-style: 1px solid #B5B2FF;
+ 	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.8); /* center_second 카드 주변 그림자 효과 */
 }
 .image-size {
 	width: 610px;
@@ -75,6 +76,7 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	width: 1100px;
 	height: 50px;
 	font-size: 20pt;
+	color: #4C4C4C;
 }
 .center-main-card{
 	margin-bottom: 10px;
@@ -99,6 +101,12 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	display: inline-block;
 	vertical-align: top;
 	border: 1px solid gray;
+	box-shadow: 0 3px 7px rgba(0, 0, 0, 0.8);
+}
+.divSmall:hover {
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transform: rotate(3deg); /* 회전효과 */
+    background: #fff;
 }
 .imageSmall {
 	width: 245px;
@@ -320,7 +328,8 @@ div { /* 모두모두 가운데 정렬 !!!!! */
 	<div class="area"></div>
 	<div class="main-center">
 		<div class="center-text">
-			My Plan List
+			My Plan List<br>
+			<h3>여행 기간 : ${dto.schedule_date }</h3>
 		</div>
 		<div class="center-bottom-image">
 			<div class="center-main-card">

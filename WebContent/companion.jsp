@@ -10,7 +10,6 @@
 <title>동행 구하기</title>
 <style type="text/css">
 #center {
-	border: 1px solid red;
 	margin: 0px auto;
 	width: 1200px;
 	height: 100%;
@@ -18,7 +17,6 @@
 
 #main {
 	width: 930px;
-	border: 3px solid green;
 	text-align: center;
 	float: left;
 	border-radius: 45px;
@@ -32,35 +30,30 @@
 
 
 #mainsecond1{
-	margin: 20px;
-	border: 1px solid;
 	width: 420px;
 	float: left;
 }
 #mainsecond1 div {
 	margin: 0 auto;
-	margin-top: 10px;
 	margin-bottom: 10px;
 }
 #mainsecond2 {
-	margin: 20px;
-	border: 1px solid;
 	width: 420px;
 	height: 600px;
 	float: right;
+	margin-right: 60px;
 }
 #mainsecond2 div {
-	margin: 0 auto;
 }
 .card {
 	width: 390px;
 	height: 150px;
-	border: 1px solid;
 	border-radius:10px;
-	background-color: yellow;
+	background-color: #f5f6f8;
 	padding: 10px 0px 10px 0px;
 	margin-bottom: 20px;
 	margin-right: 20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 .card table {
 		font-size: 18px;
@@ -71,57 +64,65 @@
 .card table tr td{
 	padding: 5px;
 }
+.m1title {
+	width: 150px;
+	text-align: left;
+}
 .m1 {
-	width: 110px;
+	width: 150px;
+	text-align: left;
+}
+.m2title {
+	width: 220px;
+	overflow: hidden;
+	display: inline-block;
 }
 .m2 {
-	width: 200px;
+	width: 220px;
+	overflow: hidden;
 }
 .mess {
 	width: 320px;
 	height: 100px;
 	 overflow: hidden;
+	 background-color: white;
+	 border-right: 20px;
 }
-/* .card2 {
-	width: 400px;
-	height: 280px;
-	border: 1px solid;
-	border-radius:0px;
-	background-color: yellow;
-	padding: 10px 0px 40px 0px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-} */
-.divpost {
-	width: 380px;
-	background-color: blue;
-}
-.divpost table {
-}
-
 .cardbox {
 	width: 350px;
 	height: 25px;
 	overflow: hidden;
-	background-color: yellow;
+	background-color: #c8ccd0;
+	margin: 0 auto;
+	border-right: 20px;
+	margin-bottom: 5px;
 }
 .cardbox:HOVER{
 	widows: 350px;
-	height: 240px;
-	background-color: white;
+	height: 180px;
+	background-color: #c8ccd0;
+	border-radius:20px;
+}
+.cardbox table {
+	margin: 0 auto;
 }
 #sidemenu{
 	width: 200px;
 	height: 400px;
-	border: 1px solid;
 	float: right;
 }
 #menu1 {
 	height: 280px;
-	border: 1px solid;
+	background-color: #f5f6f8;
+	border-radius:20px;
+	margin-bottom: 20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 #menu2 {
-	border: 1px solid;
+	height: 280px;
+	background-color: #f5f6f8;
+	border-radius:20px;
+	box-shadow: 3px 3px 8px 1px #000;
 }
 .yn {
 	width: 25px;
@@ -133,13 +134,43 @@
 	border: none;
 }
 .appimg {
-	width: 20px;
-	height: 20px;
+	width: 40px;
+	height: 40px;
+	border-radius:20px;
 }
 .isclosed{
+<<<<<<< HEAD
 	width : 35px;
 	height : 25px;
+=======
+	width : 40px;
+	height : 30px;
 }
+.ok_second_box{
+	width: 380px;
+	margin: 0 auto;
+>>>>>>> ef4fcd8cf0e6979cb48bed2018e15998b90b54a7
+}
+.ok_second_m1{
+	width: 80px;
+}
+.ok_second_m1 img {
+	float: right;
+}
+.ok_second_m2{
+	width: 130px;
+	text-align: center;
+}
+.postnums:HOVER {
+	-webkit-opacity: 0.5;
+}
+.post_title:HOVER {
+	-webkit-opacity: 0.5;
+}
+.title {
+	overflow: hidden;
+}
+
 </style>
 <script type="text/javascript">
 var onoff = 0;
@@ -153,11 +184,15 @@ var is_close = 0;
 	var divpost = "#t"+post_num;
 	   console.log("tdpost : " + tdpost);
 			if(onoff == 0){
-	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"></div><div id="menu2"></div></div>')
+	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"> 수락 목록 </div><div id="menu2"> 동행 신청자 목록</div></div>')
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
 				var kakao_id = this.kakao_id;
+<<<<<<< HEAD
 				var str = '<div><table><tr><td><img class="appimg"src='+this.profile_url+'></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+this.num_people+'</td></tr></table></div>';
+=======
+				var str = '<div class="ok_second_box"><table class="oktable"><tr><td class="ok_second_m1"><img class="appimg"src='+ this.profile_url+ '></td><td class="ok_second_m2">'+this.nickname+'</td><td class="ok_second_m1">'+this.kakao_id+'</td><td class="ok_second_m1">'+this.num_people+' 인</td></tr></table></div>';
+>>>>>>> ef4fcd8cf0e6979cb48bed2018e15998b90b54a7
 				   $('#menu1').append(str);
 	 		});
 	 	});
@@ -173,12 +208,12 @@ var is_close = 0;
 						console.log("is_closed :::::::: " + is_closed);
 				 		var str = 
 							'<div class="cardbox"><table>'+
-							'<tr><td id="nickname" postnum='+postnum+'>'+this.nickname+'</td><td id="'+kakao+'">'+
+							'<tr><td id="nickname" class="second_m1" postnum='+postnum+'>'+this.nickname+'</td><td class="second_m2" id="'+kakao+'">'+
 							
 							'</td></tr>'+
-							'<tr><td colspan="2"><pre class="mess">'+  this.message +'</pre></td></tr>'+
-							'<tr><td>인원수 : </td><td  data='+this.num_people+'>'+ this.num_people+'</td></tr>'+
-							'<tr><td>신청날짜 : </td><td>'+this.applicants_date+'</td></tr>'
+							'<tr><td colspan="2" class="second_m1"><pre class="mess">'+  this.message +'</pre></td></tr>'+
+							'<tr><td class="second_m1">인원수 : </td><td class="second_m2" data='+this.num_people+'>'+ this.num_people+'</td></tr>'+
+							'<tr><td class="second_m1">신청날짜 : </td><td class="second_m2">'+this.applicants_date+'</td></tr>'
 							+'</table></div>';
 							
 						var str1 = '<button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button>';
@@ -253,7 +288,7 @@ var is_close = 0;
 						/* var date = new Date(); */
 						var kakao = this.kakao_id;
 						var kakao_to = "#"+ kakao;
-						var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+ this.num_people+'</td></tr></table></div>';
+						var str = '<div class="ok_second_box"><table class="oktable"><tr><td class="ok_second_m1"><img class="appimg"src='+ this.profile_url+ '></td><td class="ok_second_m2">'+this.nickname+'</td><td class="ok_second_m1">'+this.kakao_id+'</td><td class="ok_second_m1">'+this.num_people+' 인</td></tr></table></div>';
 						   $('#menu1').append(str);
 						   $(xpost_num).html("");
 						   $(xpost_num).append('<td class="m1"> 현재인원 : '+this.current_num+'</td>');
@@ -345,22 +380,23 @@ function isclosed(post_num){
 		<%@ include file="sidemenu.jsp"%>
 		<a href="companionForm.do?email=${email }">내 게시물</a> | <a href="companionForm2.do?email=${email }"> 내가 신청한 동행</a>
 		<div id="main">
-			<h1>내가 쓴 동행 게시물</h1>
+			<h1>내 동행 List</h1>
 			<div id="mainsecond1">
 						<c:forEach var="list" items="${list }" >
 							<div class="card" id="z${list.post_num }">
 								<table >
-									<tr align="center" <%-- onclick="companionview(${list.post_num})" --%>>
-										<td class="m1">제목 : </td><td class="m2"><a href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
+									<tr align="center" class="post_title" <%-- onclick="companionview(${list.post_num})" --%>>
+										<td class="m1title">제목 : </td><td class="m2title"><a class="title" href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
 									</tr>
 									<tr align="center">
 										<td class="m1">닉네임 : </td><td class="m2">${list.nickname }</td>
 									</tr>
 									<tr align="center" class="postnums" id='${list.post_num }'>
-										<td class="m1" id="x${list.post_num }">현재인원 : ${list.current_num } </td><td id="accomStatus${list.post_num}">최소 인원 : ${list.minimum_num }</td>
+										<td class="m1" id="x${list.post_num }">현재인원 : ${list.current_num } 명</td><td id="accomStatus${list.post_num}">최소 인원 : ${list.minimum_num } 명</td>
 									</tr>
 									<tr align="center"  >
 										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }
+<<<<<<< HEAD
 											<c:if test="${list.is_closed  == 0}">
 												<button class = "isclosed" id = "is${list.post_num }  " onclick = "isclosed(${list.post_num})"> 마감 </button>
 											</c:if>
@@ -372,13 +408,17 @@ function isclosed(post_num){
 									</c:if> --%>
 
 
+=======
+												<c:if test="${list.is_closed  == 0}">
+													<button class = "isclosed" id = "is${list.post_num }" onclick = "isclosed(${list.post_num})"> 마감 </button>
+												</c:if>
+										</td>
+									</tr>
+								</table>
+>>>>>>> ef4fcd8cf0e6979cb48bed2018e15998b90b54a7
 							</div>
 						</c:forEach>
 			</div>
-			<!-- <div id="mainsecond2">
-			
-			
-			</div> -->
 		</div>
 	</div>
 </body>
