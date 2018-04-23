@@ -219,7 +219,7 @@ tr.highlight td {
 }
 
 .cancel-button {
-	float:right;
+	float: right;
 	width: 40px;
 	height: 40px;
 	color: white;
@@ -493,9 +493,9 @@ textarea {
 
 <body>
 	<div id="apply-div" style="display: none;">
-				<button class="cancel-button" onclick="apply()">&#10006</button>
 		<form class ="form" action="applyActionAB.do">
 			<table class="apply-table">
+				<tr><td colspan="2"><button type="button" class="cancel-button" onclick="apply()">&#10006</button></td></tr>
 				<input type="hidden" value="${post_num }" name="post_num">
 				<tr><td><label class="form-label">이메일:</label></td><td><input type="text" class="form-input" placeholder="${email } " name="email" disabled></td></tr>
 				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message" required></textarea></td></tr>
