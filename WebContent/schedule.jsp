@@ -48,7 +48,7 @@
 				float: left;
 				margin-top: 20px;
 				border: 1px solid gray;
-				height: 651.2px;
+				/* height: 651.2px; */
 				overflow: scroll;
 					
 			}
