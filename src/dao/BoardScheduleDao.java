@@ -544,6 +544,7 @@ public class BoardScheduleDao {
 					dto.setEmail(rs.getString("email"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setProfile_url(rs.getString("image_url"));
+					System.out.println("image url : " + dto.getProfile_url());
 					dto.setReply_content(rs.getString("reply_content"));
 					dto.setReply_date(rs.getDate("reply_date"));
 					list.add(dto);
@@ -757,8 +758,9 @@ public class BoardScheduleDao {
 	public int deleteAdmin(int bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql1 = "DELETE FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
-		String sql2 = "DELETE FROM BOARDSCHEDULE WHERE BS_NUM = ?";
+		String sql1 = "DELETE FROM VOTEPLAN WHERE BS_NUM = ?";
+		String sql2 = "DELETE FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
+		String sql3 = "DELETE FROM BOARDSCHEDULE WHERE BS_NUM = ?";
 		int result = 0;
 		
 		try {
@@ -769,6 +771,11 @@ public class BoardScheduleDao {
 			
 			ps.close();
 			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, bs_num);
+			result = ps.executeUpdate();
+			
+			ps.close();
+			ps = conn.prepareStatement(sql3);
 			ps.setInt(1, bs_num);
 			result = ps.executeUpdate();
 		} catch (Exception e) {
