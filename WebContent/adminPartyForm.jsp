@@ -32,18 +32,18 @@
 		text-align: center;
 	}
 	.tdPlan {
+		color: gray;
+		width: 50%;
+	}
+	.tdParty {
 		width: 50%;
 		border-bottom: 4px solid #1A7AD9;
 		font-weight: bold;
 	}
-	.tdParty {
-		color: gray;
-		width: 50%;
-	}
-	.tdParty a {
+	.tdPlan a {
 		color: gray;
 	}
-	.tdParty a:HOVER {
+	.tdPlan a:HOVER {
 		color: black;
 	}
 	table.tableList {
@@ -62,8 +62,8 @@
 	  font-size: 13px;
 	}
 	.tdTitle {
-	  width: 150px;
-	  max-width: 150px;
+	  width: 250px;
+	  max-width: 250px;
 	  text-overflow: ellipsis;
 	  overflow: hidden;
 	  white-space: nowrap;
@@ -167,8 +167,8 @@
 					var td = tr.children();
 		
 					rowData.push(tr.text());
-					var bs_num = td.eq(1).text();
-					tdArr.push(bs_num);
+					var post_num = td.eq(1).text();
+					tdArr.push(post_num);
 				});
 				
 				$('#hiddenDelete').val(tdArr);
@@ -190,23 +190,24 @@
 		<div id="main">
 			<h1>글 관리</h1>
 			<div class="divTab">
-				<table class="tableTab"><tr><td class="tdPlan"><a href="adminSubjectForm.do">일정 게시판(${totCnt})</a></td><td class="tdParty"><a href="adminPartyForm.do">동행 찾기 게시판</a></td></tr></table>
+				<table class="tableTab"><tr><td class="tdPlan"><a href="adminSubjectForm.do">일정 게시판</a></td><td class="tdParty"><a href="adminPartyForm.do">동행 찾기 게시판(${totCnt})</a></td></tr></table>
 			</div>
 			<table class="tableList">
-				<tr><th><input type="checkbox" class="chkboxTop" name="chkboxTop"></th><th>번호</th><th>제목</th><th>내용</th><th>작성자</th><th>이메일</th><th>작성일</th></tr>
+				<tr><th><input type="checkbox" class="chkboxTop" name="chkboxTop"></th><th>번호</th><th>제목</th><th>작성자</th><th>이메일</th><th>지원자</th><th>마감</th><th>작성일</th></tr>
 				<c:forEach var="list" items="${list}">
 					<tr><td width="25px"><input type="checkbox" class="chkbox" name="chkbox"></td>
-						<td width="35px">${list.bs_num}</td>
+						<td width="35px">${list.post_num}</td>
 						<td class="tdTitle">${list.title}</td>
-						<td class="tdContent">${list.content}</td>
 						<td width="75px">${list.nickname}</td>
 						<td width="170px">${list.email}</td>
-						<td>${list.board_date}</td>
+						<td>${list.current_num}/${list.minimum_num}</td>
+						<td><c:if test="${list.is_closed == 0}">진행중</c:if><c:if test="${list.is_closed == 1}">종료</c:if></td>
+						<td>${list.post_date}</td>
 					</tr>
 				</c:forEach>
 			</table>
 			<div class="divButton">
-				<form name="frm" action="planDeletePro.do" onsubmit="return deleteChk()">
+				<form name="frm" action="partyDeletePro.do" onsubmit="return deleteChk()">
 					<input type="hidden" id="hiddenDelete" name="hiddenDelete">
 					<input type="submit" id="btnDelete" class="deleteButton" value="글 삭제">
 				</form>
