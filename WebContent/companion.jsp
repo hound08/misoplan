@@ -188,11 +188,8 @@ var is_close = 0;
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
 				var kakao_id = this.kakao_id;
-<<<<<<< HEAD
 				var str = '<div><table><tr><td><img class="appimg"src='+this.profile_url+'></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+this.num_people+'</td></tr></table></div>';
-=======
 				var str = '<div class="ok_second_box"><table class="oktable"><tr><td class="ok_second_m1"><img class="appimg"src='+ this.profile_url+ '></td><td class="ok_second_m2">'+this.nickname+'</td><td class="ok_second_m1">'+this.kakao_id+'</td><td class="ok_second_m1">'+this.num_people+' 인</td></tr></table></div>';
->>>>>>> ef4fcd8cf0e6979cb48bed2018e15998b90b54a7
 				   $('#menu1').append(str);
 	 		});
 	 	});
@@ -396,7 +393,6 @@ function isclosed(post_num){
 									</tr>
 									<tr align="center"  >
 										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }
-<<<<<<< HEAD
 											<c:if test="${list.is_closed  == 0}">
 												<button class = "isclosed" id = "is${list.post_num }  " onclick = "isclosed(${list.post_num})"> 마감 </button>
 											</c:if>
@@ -406,16 +402,6 @@ function isclosed(post_num){
 								<%-- <c:if test="${name eq '홍길동'}">
 									    홍길동이 맞습니다.
 									</c:if> --%>
-
-
-=======
-												<c:if test="${list.is_closed  == 0}">
-													<button class = "isclosed" id = "is${list.post_num }" onclick = "isclosed(${list.post_num})"> 마감 </button>
-												</c:if>
-										</td>
-									</tr>
-								</table>
->>>>>>> ef4fcd8cf0e6979cb48bed2018e15998b90b54a7
 							</div>
 						</c:forEach>
 			</div>
