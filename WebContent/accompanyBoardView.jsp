@@ -167,7 +167,7 @@ tr.highlight td {
 }
 
 .image {
-	width: 350px;
+	width: 96.5%;
 	height: 400px;
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
@@ -618,7 +618,7 @@ textarea {
 		
 		<!-- 바디 -->
 		<div class="post-body">
-		<c:if test="${board.image_url != null}">
+		<c:if test="${board.image_url != '/J20180403/upload/default-image.png'}">
 			<table class="body-table">
 				<tr>
 					<td><div class="image"></div></td>
@@ -628,10 +628,10 @@ textarea {
 				</tr>
 			</table>
 		</c:if>
-		<c:if test="${board.image_url == null}">
+		<c:if test="${board.image_url == '/J20180403/upload/default-image.png' }">
 			<table class="body-table">
-				<tr>
-					<td><pre>${board.content }</pre></td>
+				<tr>	
+					<td><textarea data-autoresize disabled rows="2" style="width: 96%; background-color: white; border: none; font-size: 20px;">${board.content }</textarea></td>
 				</tr>
 			</table>
 		</c:if>
@@ -672,7 +672,7 @@ textarea {
 						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
-						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
+						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="padding: 10 10; font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
 						<tr><td colspan="2">
 						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
 					</table>
@@ -684,7 +684,7 @@ textarea {
 						<tr><td colspan="2">로그인 후에 이용해 주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
-						<tr><td colspan="2"><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
+						<tr><td colspan="2"><textarea rows="8" style="padding: 10 10; font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
 					</table>
 			</c:if>
 		</div>		
