@@ -284,11 +284,11 @@ div {
 	<script type="text/javascript">
  			 var image = document.getElementById("center-image");
 			var current = 0;
-			var images = [ "images/main2.png",
+			var images = [ "images/main2.jpg",
 			               "images/mainmodel.png",
-			               "images/main3.png",
-						   "images/main4.png", 
-						   "images/main5.png",
+			               "images/main3.jpg",
+						   "images/main4.jpg", 
+						   "images/main5.jpg",
 						   "images/main1.png" ];
 			function replacePhoto() {
 				console.log(image);
