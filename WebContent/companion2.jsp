@@ -27,114 +27,64 @@
 #main h1 {
 	margin: 20px 0px;
 }
+#mytable {
+	margin: auto;
+	background-color: #FFFFFF;
+	border: 1px solid #1C6EA4;
+	width: 90%;
+	border-collapse: collapse;
+}
+#mytable .title {
+	width: 60%;
+}
+#mytable .serve {
+	width: 13%;  
+}
+#mytable th , #mytable td {
+	  border: 1px solid #AAAAAA;
+	  padding: 3px 2px;
+}
+#mytable td {
+	font-size: 14px;
+}
+#mytable tr:nth-child(odd) {
+	  background: #D0E4F5;
+	}
 
-
-#mainsecond1{
-	margin-bottom: 100px;
+#mytable th {
+	  background: #1A7AD9;
+	  border-bottom: 2px solid #444444;
+	  font-size: 15px;
+	  font-weight: bold;
+	  color: #FFFFFF;
+	  border-left: 2px solid #D0E4F5;
 }
-#mainsecond1 div {
-	float: left;
-}
-.card {
-	width: 400px;
-	height: 100px;
-	border: 1px solid;
-	border-radius:0px;
-	background-color: yellow;
-	padding: 10px 0px 40px 0px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-}
-.card table {
-		font-size: 18px;
-		margin: 0 auto;
-		border-collapse:collapse;
-		cellpadding: 5px;
-}
-.card table tr td{
-	padding: 5px;
-}
-.m1 {
-	width: 90px;
-}
-.m2 {
-	width: 220px;
-}
-.mess {
-	width: 320px;
-	height: 100px;
-	 overflow: hidden;
-}
-/* .card2 {
-	width: 400px;
-	height: 280px;
-	border: 1px solid;
-	border-radius:0px;
-	background-color: yellow;
-	padding: 10px 0px 40px 0px;
-	margin-bottom: 20px;
-	margin-right: 20px;
-} */
-.divpost {
-	width: 400px;
-	background-color: blue;
-}
-.divpost table {
-}
-
-.cardbox {
-	width: 350px;
-	height: 25px;
-	overflow: hidden;
-}
-.cardbox:HOVER{
-	widows: 350px;
-	height: 240px;
-	background-color: white;
-}
-#mainsecond2 {
-	clear: both;
-}
-
-</style>
-<script type="text/javascript">
-var onoff = 0;
- $(document).on('click', '.postnums', function(){
-	 alert("작동한다");
-	var post_num = $(this).attr("id");
-	var send_data = "post_num="+post_num;  
-	console.log("send_data : " + send_data);
-	console.log("postnum : " + post_num);
-	var trpost = "#z"+post_num;
-	var divpost = "#t"+post_num;
-	   console.log("trpost : " + trpost);
-		$.getJSON('companionajax.jsp', send_data, function(data,status) {
-			if(onoff == 0){
-				$.each(data,function(){
-					var date = new Date();
-					/*  var str = 
-						('<tr class= "send_data"><td><pre class="message">'
-								+this.message+'</pre></td><td>'+this.nickname+'</td><td>'+this.status+'</td><td>'+this.applicants_date+'</td></tr>'); */ 
+#mytable thead th:first-child {
+	  border-left: none;
+	}
+.pagination {
+				clear: both;
+			    justify-content: center;
+			    margin: 50px 0 35px 0;
+			}
 						
-				 		var str = 
-							'<div class="cardbox"><table>'+
-							'<tr><td>'+this.nickname+'</td><td>'+ this.kakao_id+'</td></tr>'+
-							'<tr><td colspan="2"><pre class="mess">'+  this.message +'</pre></td></tr>'+
-							'<tr><td>인원수 : </td><td>'+ this.num_people+'</td></tr>'+
-							'<tr><td>신청날짜 : </td><td>'+this.applicants_date+'</td></tr>'
-							+'</table></div>';
-					/* $('#card2').after(str2);  */
-					$(divpost).append(str); 
-				});
-				onoff = onoff + 1;
-			}else{
-				 $(divpost).remove(); 
-				 onoff = onoff - 1; 
+			.pagination a {
+				color:black;
+			    padding: 8px 16px;
+			    font-size:20px;
+			    text-decoration: none;
 			}
 			
-		});
-});
-</script>
+			.pagination a.active {
+			    background-color: #4CAF50;
+			    color: white;
+			}
+			
+			.pagination a:hover:not(.active) {
+			    background-color: #ddd;
+			    border-radius: 5px;
+			}
+</style>
 </head>
 <body>
 	<div id="center">
@@ -142,8 +92,9 @@ var onoff = 0;
 		<a href="companionForm.do?email=${email }">내 게시물</a> | <a href="#"> 내가 신청한 동행</a>
 		<div id="main">
 				<div id="mainsecond2">
-					<h1>내가 시청한 동행</h1>
-					<table border="1" class="mytable">
+					<h1>내가 신청한 동행</h1>
+					<div>
+					<table id="mytable">
 						<tr>
 							<th class="title">제목</th>
 							<th class="serve">닉네임</th>
@@ -154,13 +105,59 @@ var onoff = 0;
 							<tr> 
 								<td><pre class="message">${myapplist.message}</pre></td>
 								<td>${myapplist.nickname } </td>
-								<td>${myapplist.status }</td>
+								<td>
+									<c:if test="${myapplist.status   == 0}">
+										대기
+									</c:if>
+									<c:if test="${myapplist.status  == 1}">
+										수락
+									</c:if>
+									<c:if test="${myapplist.status  == 2}">
+										거절
+									</c:if> 
+								</td>
 								<td>${myapplist.applicants_date }</td>
 							</tr>
 						</c:forEach>
 					</table>
-					
-					
+					</div>
+					<div class="pagination">
+						<c:if test="${startPage!=1 }">
+							<a href='companionForm2.do?email=${email }&pageNum=${startPage-blockSize }'>&laquo;</a>
+						</c:if>
+						
+						<c:if test="${startPage==1 }">
+							<a href='companionForm2.do?email=${email }&pageNum=1'>&laquo;</a>
+						</c:if>
+						
+						<c:if test="${currentPage!=1 }">
+							<a href='companionForm2.do?email=${email }&pageNum=${currentPage-1}'>&#9665</a>
+						</c:if>
+						
+						<c:if test="${currentPage==1 }">
+							<a href='companionForm2.do?email=${email }&pageNum=1'>&#9665</a>
+						</c:if>
+						
+						<c:forEach var="i" begin="${startPage }" end="${endPage }">
+							<a href='companionForm2.do?email=${email }&pageNum=${i }'>${i }</a>
+						</c:forEach>
+						
+						<c:if test="${currentPage==totalPage }">
+							<a href='companionForm2.do?email=${email }&pageNum=${totalPage }'>&#9655</a>
+						</c:if>
+						
+						<c:if test="${currentPage!=totalPage }">
+							<a href='companionForm2.do?email=${email }&pageNum=${currentPage+1 }'>&#9655</a>
+						</c:if>
+						
+						<c:if test="${endPage>=totalPage }">
+							<a href='companionForm2.do?email=${email }&pageNum=${totalPage}'>&raquo;</a>
+						</c:if>
+						
+						<c:if test="${endPage<totalPage }">
+							<a href='companionForm2.do?email=${email }&pageNum=${endPage+blockSize }'>&raquo;</a>
+						</c:if>
+					</div>
 				</div>
 		</div>
 	</div>

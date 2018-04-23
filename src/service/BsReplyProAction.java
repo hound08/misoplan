@@ -22,7 +22,6 @@ public class BsReplyProAction implements CommandProcess {
 			dto.setNickname((String)session.getAttribute("nickname"));
 			dto.setProfile_url((String)session.getAttribute("profile_url"));
 			dto.setReply_content(request.getParameter("reply_content"));
-			
 			ReplyBoardScheduleDao dao = ReplyBoardScheduleDao.getInstance();
 			int result = dao.insertReply(dto);
 			

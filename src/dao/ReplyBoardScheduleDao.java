@@ -41,25 +41,32 @@ public class ReplyBoardScheduleDao {
 	public int insertReply(ReplyBoardScheduleDto dto) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql = "INSERT INTO REPLYBOARDSCHEDULE VALUES(RBS_NUM_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO REPLYBOARDSCHEDULE VALUES(RBS_NUM_SEQ.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE)";
 		int result = 0;
-		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, dto.getBs_num());
 			ps.setString(2, dto.getEmail());
 			ps.setString(3, dto.getNickname());
-			ps.setString(4, dto.getReply_content());
-			ps.setString(5, dto.getProfile_url());
+			ps.setString(4, dto.getProfile_url());
+			ps.setString(5, dto.getReply_content());
+			
+			
+			System.out.println("bs_num : " + dto.getBs_num());
+			System.out.println("email : " + dto.getEmail());
+			System.out.println("nickname : " + dto.getNickname());
+			System.out.println("reply : " + dto.getReply_content());
+			System.out.println("profile : " + dto.getProfile_url());
+			
 			result = ps.executeUpdate();
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if (ps != null) ps.close();
 			if (conn != null) conn.close();
 		}
-		
+		System.out.println("result : @@@@@@@@@@@@" + result);
 		return result;
 	}
 	

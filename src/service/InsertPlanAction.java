@@ -28,7 +28,7 @@ public class InsertPlanAction implements CommandProcess{
 		ArrayList<ScheduleMediumDto> mArr = new ArrayList<>();
 		ArrayList<ScheduleSmallDto> sArr = new ArrayList<>();
 		
-		
+		request.setCharacterEncoding("utf-8");
 		int status = Integer.parseInt((String)request.getParameter("status"));
 		String email = request.getParameter("email");
 		String title = request.getParameter("title");

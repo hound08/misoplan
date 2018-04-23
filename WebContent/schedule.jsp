@@ -15,78 +15,144 @@
 				font-family: 'NanumSquareRound', sans-serif;
 			}
 			
+			/* width */
+			::-webkit-scrollbar {
+			    width: 3px;
+			    height: 5px;
+			}
+			
+			/* Track */
+			::-webkit-scrollbar-track {
+			    box-shadow: inset 0 0 5px grey; 
+			    border-radius: 10px;
+			}
+			 
+			/* Handle */
+			::-webkit-scrollbar-thumb {
+			    background: #39A2D8; 
+			    border-radius: 10px;
+			}
+			
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+			    background: #39A2D8; 
+			}
 			#center {
 				margin: 0px auto;
 				width: 1200px;
-				height: 100%;
 			}
 			
 			#main {
-					width: 930px;
-					text-align: center;
-					float: left;
-					margin-top: 20px;
-				}
-			#main h1 {
-					margin: 20px 0px;
+				width: 930px;
+				text-align: center;
+				float: left;
+				margin-top: 20px;
+				border: 1px solid gray;
+				height: 651.2px;
+				overflow: scroll;
+					
+			}
+			#myinfo{
+			}
+			.mylist{
+				margin-top: 20px;
 			}
 			.center-second { /* center 의 세부 내용 쭉쭉~~*/
 				border: 0.5px solid gray;
-				width: 350px;
-				height: 450px;
+				width: 280px;
+				height: 265px;
 				display: inline-block; /* 가로형 정렬 */
-				margin: 30px 22.5px;
-				border-radius: 10px;
+				margin: 30px 10.5px;
+				border-radius: 25px;
 				vertical-align: middle; /* 텍스트 라인 높이 맞춤 */
+				box-shadow: 3px 3px 7px 0px rgba(0,0,0,0.7);
+				
 			}
 			
+
 			.second-box { /* center-second 이미지 삽입 div */
-				border-radius: 10px;
-				width: 350px;
-				height: 250px;
+				border-radius: 25px;
+				width: 280px;
+				height: 100px;
 				clear: both;
 				overflow: hidden;
+				background: url("images/1.jpg");
+				background-size: 100% 100%;
 			}
+		
 			
 			.second-text { /* center-second 텍스트 삽입 */
-				width: 340px;
-				height: 50px;
+				width: 280px;
+				height: 35px;
 				text-align: left;
+				font-size: 30px;
+				font-weight: bold;
+				line-height: 35px;
+				margin-top: 10px;
 			}
-			.text {
-				text-align: left;
-			
+
+			.card-title{
+				width: 280px;
+				text-align: center;
+				line-height: 30px;
 			}
-			.center-second:hover{
-				cursor: pointer;
+			.tour-name{
+				width: 280px;
+				text-align: center;
+				line-height: 25px;
+			}
+			.tour-date{
+				width: 280px;
+				text-align: center;
+				line-height: 25px;
+			}
+			.tour-regi{
+				width: 280px;
+				text-align: center;
+				line-height: 25px;
+			}
+			.btnwrapper{
+				display: block;
+				margin-left : 15px;
+				height: 30px;
+			}
+			.updatePlan{
+				width : 45%;
+				height: 30px;
+				border-radius: 5px;
+			}
+			.updatePlan:hover{
+				background-color: #43484f;
+				color: white;
+			}
+			.deletePlan{
+				width : 45%;
+				height: 30px;
+				border-radius: 5px;
+			}
+			.deletePlan:hover{
+				background-color: #43484f;
+				color: white;
+			}
+			.deletePlan{
+				float: right;
+				margin-right: 20px;
 			}
 		</style>
 		
 		<script type="text/javascript">
 		
-			$(document).ready(function(){
-				var tour_names = $(".tour_name").text();
-				console.log("tour_names : " + tour_names);
-				console.log("tour_names.length : " + tour_names.length);
-				/* var unique_tour_names = [];
-				$.each(tour_names, function(idx, val){
-					if($.inArray(val, unique_tour_names) === -1) unique_tour_names.push(val);
-				});
-				
-				$.each(unique_tour_names, function(idx, val){
-					console.log("unique_tour_names : " + val);
-				}); */
 			
-			});
 		
-			$(document).on('click', '.second-text', function(){
-				//console.log("clicked");
+			$(document).on('click', '.updatePlan', function(){
+					//console.log("clicked");
 				var $this = $(this);
-				var sl_code = $this.attr('id');
-				//console.log('sl_code : ' + sl_code);
-				
+				var updateId = $this.attr('id'); // update1
+					//console.log('sl_code : ' + sl_code);
+				updateId = updateId.substr(6, updateId.length);
+					//console.log("updateId : " + updateId);
 				var form = $("#form");
-				form.append("<input type='hidden' name='sl_code' value="+sl_code+">");
+				form.append("<input type='hidden' name='sl_code' value="+updateId+">");
 				form.submit();
 			});
 			
@@ -94,9 +160,9 @@
 			$(document).on('click', '.deletePlan', function(){
 				$this = $(this);
 				var deleteId = $this.attr('id');
-				//console.log(deleteId);
+					//console.log(deleteId);
 				var deleteId = deleteId.substr(6, deleteId.length);
-				//console.log(deleteId);
+					//console.log(deleteId);
 				$('#form').append("<input type='hidden' name='deleteId' value="+deleteId+">");
 				form.submit();
 				
@@ -114,7 +180,7 @@
 		<div id="center">
 			<%@ include file="sidemenu.jsp" %>
 			<div id="main">
-				<h1>나의 일정 리스트</h1>
+				<h1 class="mylist">나의 일정 리스트</h1>
 				<div id="myinfo">
 					<div id="info">
 		
@@ -122,30 +188,22 @@
 							<c:if test="${list.is_deleted eq 0 }">
 							<div class="center-second">
 								<div class="second-box">
-									<img alt="image" src="images/1.jpg">
+								
 								</div>
-								<div class="second-text" id=${list.sl_code }>
-									<h1>제목 : ${list.s_name }</h1>
+								<div class="second-text" >
+									<div class="card-title">${list.s_name }</div>
 								</div>
-								<div class="tour_name" id='tour_name'>${list.area_name }</div>
-								<div class="text">여행기간 : ${list.tour_date_start } ~ ${list.tour_date_end }</div>
-								<div class="text">작성일 : ${list.regi_date }</div>
-								<div class="text">
+								<div class="tour-name" id='tour-name'>${list.area_name }</div>
+								<div class="tour-date"> ${list.tour_date_start } ~ ${list.tour_date_end }</div>
+								<div class="tour-regi">작성일 : ${list.regi_date }</div>
+								<div class="btnwrapper">
+									<button class='updatePlan' id='update${list.sl_code}'>수정</button>
 									<button class='deletePlan' id='delete${list.sl_code}'>삭제</button>
 								</div>
 							</div>
 							</c:if>
 						
 						</c:forEach>
-						<div class="pagination">
-							<a href="#">&laquo;</a> 
-							<a href="#" class="active">1</a> 
-							<a href="#">2</a> 
-							<a href="#">3</a> 
-							<a href="#">4</a> 
-							<a href="#">5</a> 
-							<a href="#">&raquo;</a>
-						</div>
 					</div>
 				</div>
 			</div>

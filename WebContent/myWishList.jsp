@@ -10,7 +10,6 @@
 		<title>찜 리스트</title>
 		<style type="text/css">
 			#center {
-				border: 1px solid red;
 				margin: 0px auto;
 				width: 1200px;
 			}
@@ -20,7 +19,7 @@
 					text-align: center;
 					float: left;
 					margin-top: 20px;
-					background-color: #f0f0f0;
+					background-color: #f5f6f8;
 				}
 			#main h1 {
 					margin: 20px 0px;
@@ -55,6 +54,7 @@
 			}
 			.cardbody {
 				/* border: 1px solid yellow; */
+				margin-top: 5px;
 				height: 45px;
 			}
 			#cardmenu {
@@ -71,22 +71,27 @@
 			    margin: 50px 0 35px 0;
 			}
 						
-			.pagination a {
+			.pagination .a {
 				color:black;
 			    padding: 8px 16px;
 			    font-size:20px;
 			    text-decoration: none;
 			}
 			
-			.pagination a.active {
+			.pagination .a.active {
 			    background-color: #4CAF50;
 			    color: white;
 			}
 			
-			.pagination a:hover:not(.active) {
+			.pagination .a:hover:not(.active) {
 			    background-color: #ddd;
 			    border-radius: 5px;
 			}
+			.hover:HOVER {
+				box-shadow: 3px 3px 5px #000;
+				border-radius: 15px;
+				
+			} 
 		</style>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     	<script type="text/javascript">
@@ -160,10 +165,12 @@
 							<div class = "cardOut">
 								<input type="checkbox" name="wishlist" class="cardcheckbox" value="${list.contendtid }">
 								<div class="card" onclick="cardclick('${list.contendtid}', '${list.contenttypeid }', '${list.email }')">
+									<div class="hover">
 									<div class="cardhead">
 										<img alt="tour_img" src="${list.img_src }">
 									<div class="cardbody">
 										<a href="#">${list.tour_name }</a>
+									</div>
 									</div>
 									</div>
 								</div>
@@ -174,39 +181,39 @@
 				
 					<div class="pagination">
 						<c:if test="${startPage!=1 }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${startPage-blockSize }'>&laquo;</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${startPage-blockSize }'>&laquo;</a>
 						</c:if>
 						
 						<c:if test="${startPage==1 }">
-							<a href='myWishListForm.do?email=${email }&pageNum=1'>&laquo;</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=1'>&laquo;</a>
 						</c:if>
 						
 						<c:if test="${currentPage!=1 }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${currentPage-1}'>&#9665</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${currentPage-1}'>&#9665</a>
 						</c:if>
 						
 						<c:if test="${currentPage==1 }">
-							<a href='myWishListForm.do?email=${email }&pageNum=1'>&#9665</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=1'>&#9665</a>
 						</c:if>
 						
 						<c:forEach var="i" begin="${startPage }" end="${endPage }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${i }'>${i }</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${i }'>${i }</a>
 						</c:forEach>
 						
 						<c:if test="${currentPage==totalPage }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${totalPage }'>&#9655</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${totalPage }'>&#9655</a>
 						</c:if>
 						
 						<c:if test="${currentPage!=totalPage }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${currentPage+1 }'>&#9655</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${currentPage+1 }'>&#9655</a>
 						</c:if>
 						
 						<c:if test="${endPage>=totalPage }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${totalPage}'>&raquo;</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${totalPage}'>&raquo;</a>
 						</c:if>
 						
 						<c:if test="${endPage<totalPage }">
-							<a href='myWishListForm.do?email=${email }&pageNum=${endPage+blockSize }'>&raquo;</a>
+							<a class="a" href='myWishListForm.do?email=${email }&pageNum=${endPage+blockSize }'>&raquo;</a>
 						</c:if>	
 						
 					</div>
