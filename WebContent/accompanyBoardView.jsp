@@ -167,11 +167,11 @@ tr.highlight td {
 }
 
 .image {
-	width: 350px;
+	width: 96.5%;
 	height: 400px;
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
-	margin-left: 10px;
+	margin-left: 0px;
 }
 
 .table-reply{
@@ -219,7 +219,7 @@ tr.highlight td {
 }
 
 .cancel-button {
-	float:right;
+	float: right;
 	width: 40px;
 	height: 40px;
 	color: white;
@@ -255,6 +255,7 @@ tr.highlight td {
 	color: white;
 	border-radius: 5px;
 	font-size: 18px;
+	cursor: pointer;
 }
 
 .like-button{
@@ -264,11 +265,8 @@ tr.highlight td {
 
 .body-table{
 	width: 100%;
-	margin: 0 0;
-}
-
-.body-table td:FIRST-CHILD {
-	width: 380px;
+	margin: 10 20;
+	font-size: 18px;
 }
 
 .post-plan{
@@ -301,6 +299,7 @@ tr.highlight td {
 	width: 11%;
 	vertical-align: middle;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .tab-clicked{
@@ -343,10 +342,7 @@ tr.highlight td {
 	position:absolute;
 	left: 0;
 	top: 0;
-	overflow-x: scroll;
 	overflow-y: hidden;
-	
-	
 }
 .plan-transparent{
 	width: 0%;
@@ -381,11 +377,13 @@ tr.highlight td {
 	float: right;
 	width: 80px;
 	height: 30px;
+	cursor: pointer;
 }
 
 .refresh{
 	width: 80px;
 	height: 30px;
+	cursor: pointer;
 }
 
 .refresh-icon {
@@ -401,9 +399,49 @@ tr.highlight td {
 hr{
 	margin-top: 10px;
 }
+
+.post-body-bottom {
+	width: 100%;
+	margin-bottom: 55px;
+	position: relative; 
+}
+.center-button{
+	width: 90px;
+	height: 30px;
+	cursor: pointer;
+	position: absolute;
+	left: 50%;
+}
+
+.label_vote{
+	cursor: pointer;
+}
+
+textarea {
+    box-sizing: border-box;
+    resize: none;
+}
+
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
+	(function(){
+	    var resize = function (node) {
+	        var offset = node.offsetHeight - node.clientHeight;
+	        jQuery(node).css('height', 'auto').css('height', node.scrollHeight + offset);
+	    };
+	    jQuery(document).bind("ready", function(){
+	        jQuery('textarea[data-autoresize]')
+	            .bind('keyup input', function () {
+	                resize(this);
+	            })
+	            .removeAttr('data-autoresize')
+	            .addClass("resizing")
+	            .trigger("input");
+	    });
+	    jQuery(document).trigger("ready");
+	})();
+
 	$(document).ready(function(){
 		$('.plan-transparent').eq(0).removeClass('plan-transparent').addClass('plan');
 		$('.post-plan-header').children().eq(0).addClass('tab-clicked');
@@ -455,9 +493,9 @@ hr{
 
 <body>
 	<div id="apply-div" style="display: none;">
-				<button class="cancel-button" onclick="apply()">&#10006</button>
 		<form class ="form" action="applyActionAB.do">
 			<table class="apply-table">
+				<tr><td colspan="2"><button type="button" class="cancel-button" onclick="apply()">&#10006</button></td></tr>
 				<input type="hidden" value="${post_num }" name="post_num">
 				<tr><td><label class="form-label">이메일:</label></td><td><input type="text" class="form-input" placeholder="${email } " name="email" disabled></td></tr>
 				<tr><td><label class="form-label">메시지:</label></td><td><textarea rows="7" style="width: 100%; font-size: 20px" name="message" required></textarea></td></tr>
@@ -500,7 +538,7 @@ hr{
 				<tr style="font-size: 18px;">
 					<td> 
 						<span class="span-icon-view"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요</span>
-						<span class="span-icon-vote"><i class="icon icon-vote"></i><label>${board.vote_count }명이 좋아해요</label></span>
+						<span class="span-icon-vote"><i class="icon icon-vote"></i><label class="label_vote">${board.vote_count }명이 좋아해요</label></span>
 					</td>
 				</tr>
 			</table>
@@ -577,18 +615,35 @@ hr{
 		
 		<!-- 바디 -->
 		<div class="post-body">
-		<table class="body-table">
-			<tr>
-				<td><div class="image"></div></td>
-				<td><pre>${board.content }</pre></td>
-			</tr>
-		</table>
+		<c:if test="${board.image_url != '/J20180403/upload/default-image.png'}">
+			<table class="body-table">
+				<tr>
+					<td><div class="image"></div></td>
+				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr>
+					<td><textarea data-autoresize disabled rows="2" style="width: 96%; background-color: white; border: none; font-size: 20px;">${board.content }</textarea></td>
+				</tr>
+			</table>
+		</c:if>
+		<c:if test="${board.image_url == '/J20180403/upload/default-image.png' }">
+			<table class="body-table">
+				<tr>	
+					<td><textarea data-autoresize disabled rows="2" style="width: 96%; background-color: white; border: none; font-size: 20px;">${board.content }</textarea></td>
+				</tr>
+			</table>
+		</c:if>
+			<div class="post-body-bottom">
 			<c:if test="${email != null and board.is_closed != 1 and email != board.email}">
-				<button onclick="apply()">동행 신청하기</button>
+				<button onclick="apply()" class="center-button">동행 신청하기</button>
 			</c:if>
 			<c:if test="${email == board.email and board.is_closed != 1}">
-				<a href="closeActionAB.do?post_num=<%=request.getParameter("post_num") %>" ><button>마감하기</button></a>
+				<a href="closeActionAB.do?post_num=<%=request.getParameter("post_num") %>" ><button  class="center-button">마감하기</button></a>
 			</c:if>
+			</div>
 		</div>
 		
 		<a href="listAction.do"><button class="toList">목록보기</button></a>
@@ -601,7 +656,7 @@ hr{
 		<div class="reply-wrapper">
 			<div class ="reply-image" style="background-image: url('${reply.profile_url}')"></div>
 			<table class="table-reply">
-				<tr"><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
+				<tr><td><span class="span-reply">댓글 ${reply.rn }&nbsp</span><label style="font-size: 18px; font: bold">&nbsp&nbsp${reply.nickname }</label>&nbsp&nbsp<label style="color:#A6A6A6; font-size: 15px">|&nbsp&nbsp${reply.reply_date }</label></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr style="font-size: 18px;"><td><pre>${reply.content }</pre></td></tr>
@@ -618,7 +673,7 @@ hr{
 						<tr><td colspan="2">${nickname }님의 댓글을 남겨주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
-						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
+						<tr><td><div class ="write-reply-image" style="background-image: url('${profile_url_my}')"></div></td><td><textarea rows="8" style="padding: 10 10; font-size: 20px; width: 100%;" name="content" placeholder="불량댓글 작성시 미소플랜 이용을 제한받을 수 있습니다."></textarea></td></tr>
 						<tr><td colspan="2">
 						<input type="submit" class="reply-submit" value="댓글전송" id="writeReply"></td></tr>
 					</table>
@@ -630,7 +685,7 @@ hr{
 						<tr><td colspan="2">로그인 후에 이용해 주세요!<i class="icon refresh-icon" onclick="refresh()"></i></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
 						<tr class="highlight"><td></td><td></td></tr>
-						<tr><td colspan="2"><textarea rows="8" style="font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
+						<tr><td colspan="2"><textarea rows="8" style="padding: 10 10; font-size: 20px; width: 100%;" name="content" placeholder="로그인 후에 댓글을 작성하실 수 있습니다.!" disabled></textarea></td></tr>
 					</table>
 			</c:if>
 		</div>		

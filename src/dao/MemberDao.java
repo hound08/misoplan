@@ -495,5 +495,86 @@ public class MemberDao {
 		
 		return result;
 	}
+	
+	public List<AccompanyBoardDto> selectAdminPartyList() throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String sql = "SELECT * FROM ACCOMPANYBOARD";
+		List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
+
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				do {
+					AccompanyBoardDto dto = new AccompanyBoardDto();
+					dto.setPost_num(rs.getInt("POST_NUM"));
+					dto.setEmail(rs.getString("EMAIL"));
+					dto.setNickname(rs.getString("NICKNAME"));
+					dto.setSl_code(rs.getString("SL_CODE"));
+					dto.setTitle(rs.getString("TITLE"));
+					dto.setImage_url(rs.getString("IMAGE_URL"));
+					dto.setContent(rs.getString("CONTENT"));
+					dto.setTag(rs.getString("TAG"));
+					dto.setView_count(rs.getInt("VIEW_COUNT"));
+					dto.setVote_count(rs.getInt("VOTE_COUNT"));
+					dto.setPost_date(rs.getDate("POST_DATE"));
+					dto.setClosing_date(rs.getDate("CLOSING_DATE"));
+					dto.setMinimum_num(rs.getInt("MINIMUM_NUM"));
+					dto.setCurrent_num(rs.getInt("CURRENT_NUM"));
+					dto.setIs_closed(rs.getInt("IS_CLOSED"));
+					dto.setComment_count(rs.getInt("COMMENT_COUNT"));
+					list.add(dto);
+				} while (rs.next());
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {
+			if (conn != null)
+				conn.close();
+			if (rs != null)
+				rs.close();
+			if (ps != null)
+				ps.close();
+		}
+
+		return list;
+	}
+	
+	public int deletePartyAdmin(int post_num) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		String sql1 = "DELETE FROM VOTECONFIRM WHERE POST_NUM = ?";
+		String sql2 = "DELETE FROM REPLYACCOMPANY WHERE POST_NUM = ?";
+		String sql3 = "DELETE FROM ACCOMPANYBOARD WHERE POST_NUM = ?";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql1);
+			ps.setInt(1, post_num);
+			result = ps.executeUpdate();
+			
+			ps.close();
+			ps = conn.prepareStatement(sql2);
+			ps.setInt(1, post_num);
+			result = ps.executeUpdate();
+			
+			ps.close();
+			ps = conn.prepareStatement(sql3);
+			ps.setInt(1, post_num);
+			result = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
 
 }

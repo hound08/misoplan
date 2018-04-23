@@ -91,7 +91,9 @@
 				box-shadow: 3px 3px 5px #000;
 				border-radius: 15px;
 				-webkit-opacity: 0.5;
-				-webkit-transition: opacity .5s linear;
+				transition: opacity 0.5s;
+				-webkit-filter: grayscale(100%);
+ 				 filter: grayscale(100%);
 			} 
 		</style>
 		<script src="http://code.jquery.com/jquery-latest.min.js"></script>

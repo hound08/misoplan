@@ -7,27 +7,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.BoardScheduleDao;
+import dao.MemberDao;
 
-public class PlanDeleteProAction implements CommandProcess {
+public class PartyDeleteProAction implements CommandProcess {
 
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			String bs_num = request.getParameter("hiddenDelete");
-			String[] arrayBs_num = bs_num.split(",");
-			int result = 0;
-			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			
-			for (String str : arrayBs_num) {
-				result = dao.deleteAdmin(str);
-			}
+			int post_num = Integer.parseInt(request.getParameter("hiddenDelete"));
+			MemberDao dao = MemberDao.getInstance();
+			int result = dao.deletePartyAdmin(post_num);
 			
 			request.setAttribute("result", result);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
-		return "planDeletePro.jsp";
+		return "partyDeletePro.jsp";
 	}
 
 }

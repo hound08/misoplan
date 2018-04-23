@@ -319,16 +319,18 @@ public class BoardScheduleDao {
 			while (rs.next()) {
 				BoardScheduleDto dto = new BoardScheduleDto();
 				dto.setBs_num(rs.getInt("bs_num"));
+				dto.setSl_code(rs.getString("sl_code"));
+				dto.setEmail(rs.getString("email"));
 				dto.setNickname(rs.getString("nickname"));
 				dto.setTitle(rs.getString("title"));
-				dto.setImage_url(rs.getString("image_url"));
-				dto.setContent(rs.getString("content"));
 				dto.setTag(rs.getString("tag"));
-				dto.setView_count(rs.getInt("view_count"));
+				dto.setContent(rs.getString("content"));
+				dto.setImage_url(rs.getString("image_url"));
 				dto.setVote_count(rs.getInt("vote_count"));
+				dto.setView_count(rs.getInt("view_count"));
 				dto.setBoard_date(rs.getDate("board_date"));
 				dto.setArea_names(rs.getString("area_names"));
-				dto.setSl_code(rs.getString("sl_code"));
+				dto.setSchedule_date(rs.getString("schedule_date"));
 
 				pagelist.add(dto);
 			}
@@ -544,6 +546,7 @@ public class BoardScheduleDao {
 					dto.setEmail(rs.getString("email"));
 					dto.setNickname(rs.getString("nickname"));
 					dto.setProfile_url(rs.getString("image_url"));
+					System.out.println("image url : " + dto.getProfile_url());
 					dto.setReply_content(rs.getString("reply_content"));
 					dto.setReply_date(rs.getDate("reply_date"));
 					list.add(dto);
@@ -754,22 +757,28 @@ public class BoardScheduleDao {
 		return list;
 	}
 	
-	public int deleteAdmin(int bs_num) throws SQLException {
+	public int deleteAdmin(String bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
-		String sql1 = "DELETE FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
-		String sql2 = "DELETE FROM BOARDSCHEDULE WHERE BS_NUM = ?";
+		String sql1 = "DELETE FROM VOTEPLAN WHERE BS_NUM = ?";
+		String sql2 = "DELETE FROM REPLYBOARDSCHEDULE WHERE BS_NUM = ?";
+		String sql3 = "DELETE FROM BOARDSCHEDULE WHERE BS_NUM = ?";
 		int result = 0;
 		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql1);
-			ps.setInt(1, bs_num);
+			ps.setInt(1, Integer.parseInt(bs_num));
 			result = ps.executeUpdate();
 			
 			ps.close();
 			ps = conn.prepareStatement(sql2);
-			ps.setInt(1, bs_num);
+			ps.setInt(1, Integer.parseInt(bs_num));
+			result = ps.executeUpdate();
+			
+			ps.close();
+			ps = conn.prepareStatement(sql3);
+			ps.setInt(1, Integer.parseInt(bs_num));
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());

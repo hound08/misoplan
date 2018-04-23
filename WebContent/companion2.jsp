@@ -10,7 +10,6 @@
 <title>동행 구하기</title>
 <style type="text/css">
 #center {
-	border: 1px solid red;
 	margin: 0px auto;
 	width: 1200px;
 	height: 100%;
@@ -18,7 +17,6 @@
 
 #main {
 	width: 930px;
-	border: 3px solid green;
 	text-align: center;
 	float: left;
 	margin-top: 20px;
@@ -89,14 +87,14 @@
 <body>
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
-		<a href="companionForm.do?email=${email }">내 게시물</a> | <a href="#"> 내가 신청한 동행</a>
+		<a href="companionForm.do?email=${email }">동행 게시물 List</a> | <a href="companionForm2.do?email=${email }"> 동행 신청 List</a>
 		<div id="main">
 				<div id="mainsecond2">
-					<h1>내가 신청한 동행</h1>
+					<h1>동행신청 List</h1>
 					<div>
 					<table id="mytable">
 						<tr>
-							<th class="title">제목</th>
+							<th class="title">메시지</th>
 							<th class="serve">닉네임</th>
 							<th class="serve">동행상태</th>
 							<th class="serve">등록일자</th>
