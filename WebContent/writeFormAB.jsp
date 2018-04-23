@@ -73,7 +73,11 @@ td:FIRST-CHILD{
 }
 
 .form-table{
-	font-size: 15px;
+	font-size: 20px;
+}
+
+.form-table td:FIRST-CHILD{
+	width: 100px;
 }
 
 hr {
@@ -139,6 +143,7 @@ input[type="file"] {
 	height: 35px;
 	font-size: 20px;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .submit-button:HOVER{
@@ -153,6 +158,7 @@ input[type="file"] {
 	height: 35px;
 	font-size: 20px;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .cancel-button:HOVER{
@@ -279,6 +285,9 @@ h3{
 	margin-top: 20px;
 }
 
+.contents{
+	font-size: 20px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <%
@@ -299,6 +308,7 @@ h3{
 	$(document).ready(function(){
 		$(".plan").children().children().eq(0).attr("checked", "checked");
 	});
+	
 </script>
 </head>
 <body>
@@ -317,14 +327,14 @@ h3{
 		</div>
 			<h3>새로운 글 등록</h3>
 			<p class="p-info">&#10003 동행을 찾기 위한 글을 작성하기 위한 페이지입니다.</p>
-			<p class="p-info">&#10003 음담패설,모욕,명예훼손,허위사실기재,성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사,형사소송의 대상이 될 수 있으며, 모두 글 작성자의 책임입니다.</p>
+			<p class="p-info">&#10003 음담패설, 모욕, 명예훼손, 허위사실기재, 성적수치심을 불러일으키는 글의 작성에 주의해주시기 바랍니다. 각종 민사, 형사소송의 대상이 될 수 있으며 모두 글 작성자의 책임입니다.</p>
 			<p class="p-info"> &#10003 본문이나 리플에 절대 개인정보를 노출하지 마시기 바랍니다.</p>
 			<p class="p-info"> &#10003 한번 작성하신 글은 삭제하거나 수정하실 수 없으니 신중히 작성해주시기 바랍니다.</p>
 			<p class="p-info"> &#10003 동행인 모집이 완료되었을 경우 작성글 마감을 해주시기 바랍니다.</p>
 			<hr>
 		<div class="write-form">
-			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
-				<table>
+			<form action="writeAB.do" method="post" enctype="multipart/form-data">	
+				<table class="form-table">
 				<tr><td>제목&nbsp&nbsp</td><td><input type="text" class="input" name="title" required></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>최소 인원&nbsp&nbsp</td>
@@ -351,32 +361,32 @@ h3{
 						<div class="plan-div">
 							<c:forEach var="myplan" items="${list }">
 								<c:if test="${myplan.is_deleted == 0 }">
-									<div class="plan">
+									<label class="plan">
 										<div class="radio-wrapper">
 											<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
+											<table class="plan-table">
+												<tr>
+													<td>${myplan.s_name }</td> 
+												</tr>
+												<tr>
+													<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
+												</tr>
+												<tr>
+													<td>${myplan.date_start }~${myplan.date_end }</td>
+												</tr>
+												<tr>
+													<td>${myplan.regi_date }</td>
+												</tr>
+											</table>
 										</div>
-										<table class="plan-table">
-											<tr>
-												<td>일정이름: ${myplan.s_name }</td> 
-											</tr>
-											<tr>
-												<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
-											</tr>
-											<tr>
-												<td>${myplan.date_start }~${myplan.date_end }</td>
-											</tr>
-											<tr>
-												<td>${myplan.regi_date }</td>
-											</tr>
-										</table>
-									</div>
+									</label>
 								</c:if>
 							</c:forEach>
 						</div>
 					</td>
 				</tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="30" name="content" required></textarea></div></td></tr>
+				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="20" name="content" required class="contents"></textarea></div></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지&nbsp&nbsp</td><td><img id="output"/></td></tr>
@@ -385,7 +395,7 @@ h3{
 				<hr>
 				<div class="submit-div">
 					<input type="submit" value="완료" align="right" class="submit-button">
-					<button onclick="history.back()" class="cancel-button">취소</button>
+					<button type="button" onclick="history.back()" class="cancel-button">취소</button>
 				</div>
 			</form>
 		</div>

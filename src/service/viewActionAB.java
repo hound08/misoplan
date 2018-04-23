@@ -55,8 +55,6 @@ public class viewActionAB implements CommandProcess{
 		request.setAttribute("list", list);
 		request.setAttribute("result", result);
 		
-		
-		
 		return "accompanyBoardView.jsp";
 	}
 
