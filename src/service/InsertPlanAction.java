@@ -97,7 +97,7 @@ public class InsertPlanAction implements CommandProcess{
 		tdao.insertTour(sArr);
 		
 		if(result != 0 ) {
-			return "main.jsp";
+			return "main.do";
 		}
 		
 		return "plannerDetailtest.jsp";
