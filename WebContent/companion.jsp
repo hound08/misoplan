@@ -31,13 +31,8 @@
    float: left;
 }
 #mainsecond1 div {
-<<<<<<< HEAD
-	margin: 0 auto;
-	margin-bottom: 20px;
-=======
    margin: 0 auto;
    margin-bottom: 10px;
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 }
 #mainsecond2 {
    width: 420px;
@@ -100,23 +95,10 @@
    margin-bottom: 5px;
 }
 .cardbox:HOVER{
-<<<<<<< HEAD
-	widows: 350px;
-	height: 180px;
-	background-color: #c8ccd0;
-	border-radius:20px;
-	/* 펼쳐지는 속도 조절 */
-	-webkit-transition: .2s ease-in-out;
-    -moz-transition: .2s ease-in-out;
-    -ms-transition: .2s ease-in-out;
-    -o-transition: .2s ease-in-out;
-    transition : .2s ease-in-out;
-=======
    widows: 350px;
    height: 180px;
    background-color: #c8ccd0;
    border-radius:20px;
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 }
 .cardbox table {
    margin: 0 auto;
@@ -172,19 +154,10 @@
    text-align: center;
 }
 .postnums:HOVER {
-<<<<<<< HEAD
-	-webkit-opacity: 0.3;
-	transition: opacity 0.5s;
-}
-.post_title:HOVER {
-	-webkit-opacity: 0.3;
-	transition: opacity 0.5s;
-=======
    -webkit-opacity: 0.5;
 }
 .post_title:HOVER {
    -webkit-opacity: 0.5;
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 }
 .title {
    overflow: hidden;
@@ -195,80 +168,11 @@
 .second_m2 {
    width: 90px;
 }
-<<<<<<< HEAD
-.second_m1{
-	width: 200px;
-}
-.second_m2 {
-	width: 90px;
-}
-=======
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 </style>
 <script type="text/javascript">
 var onoff = 0;
 var is_close = 0;
  $(document).on('click', '.postnums', function(){
-<<<<<<< HEAD
-	var post_num = $(this).attr("id");
-	var send_data = "post_num="+post_num;  
-	console.log("send_data : " + send_data);
-	console.log("postnum : " + post_num);
-	var tdpost = "#z"+post_num;
-	var divpost = "#t"+post_num;
-	   console.log("tdpost : " + tdpost);
-			/* if(onoff == 0){ */
-			 $('#mainsecond2').remove();
-	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"> 수락 목록 </div><div id="menu2"> 동행 신청자 목록</div></div>')
-	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
-	 		$.each(data,function(){
-				var kakao_id = this.kakao_id;
-				var str = '<div class="ok_second_box"><table class="oktable"><tr><td class="ok_second_m1"><img class="appimg"src='+ this.profile_url+ '></td><td class="ok_second_m2">'+this.nickname+'</td><td class="ok_second_m1">'+this.kakao_id+'</td><td class="ok_second_m1">'+this.num_people+' 인</td></tr></table></div>';
-				   $('#menu1').append(str);
-	 		});
-	 		
-	 	});
-		$.getJSON('companionajax.jsp', send_data, function(data,status) {
-				$.each(data,function(){
-					var date = new Date();
-						var kakao = this.kakao_id;
-						var postnum = this.post_num;
-						var status = this.status;
-						var is_closed = this.is_closed;
-						var kakao_id = "#"+ kakao ;
-						console.log("status :::::::: " + status);
-						console.log("is_closed :::::::: " + is_closed);
-				 		var str = 
-							'<div class="cardbox"><table>'+
-							'<tr><td id="nickname" class="second_m1" postnum='+postnum+'>'+this.nickname+'</td><td class="second_m2" id="'+kakao+'">'+
-							
-							'</td></tr>'+
-							'<tr><td colspan="2" class="second_m1"><pre class="mess">'+  this.message +'</pre></td></tr>'+
-							'<tr><td class="second_m1">인원수 : </td><td class="second_m2" data='+this.num_people+'>'+ this.num_people+'</td></tr>'+
-							'<tr><td class="second_m1">신청날짜 : </td><td class="second_m2">'+this.applicants_date+'</td></tr>'
-							+'</table></div>';
-							
-						var str1 = '<button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button>';
-					/* $('#card2').after(str2);  */
-					$('#menu2').append(str);
-					if(is_closed ==0){
-						
-						if(status == 0){
-							$(kakao_id).append(str1);
-						}
-					} 
-					
-					/* '<button id="accept'+postnum+'" class="yesbtnimg" aaa="1"><img class="yn" src="images/yes.png"></button> <button id="accept'+postnum+'" class="nobtnimg" aaa="2"><img class="yn" src="images/no.png"></button>'+ */
-					
-					
-				});
-				onoff = onoff+1;
-		});
-			/* }else{
-				  $('#mainsecond2').remove(); 
-				 onoff = onoff-1;  
-			} */
-=======
    var post_num = $(this).attr("id");
    var send_data = "post_num="+post_num;  
    console.log("send_data : " + send_data);
@@ -326,7 +230,6 @@ var is_close = 0;
               $('#mainsecond2').remove(); 
              onoff = onoff-1;  
          }
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 });
  
  $(document).on('click', '.yesbtnimg', function(){
@@ -467,39 +370,6 @@ function isclosed(post_num){
 </script>
 </head>
 <body>
-<<<<<<< HEAD
-	<div id="center">
-		<%@ include file="sidemenu.jsp"%>
-		<a href="companionForm.do?email=${email }">동행 게시물 List</a> | <a href="companionForm2.do?email=${email }"> 동행 신청 List</a>
-		<div id="main">
-			<h1>동행 List</h1>
-			<div id="mainsecond1">
-						<c:forEach var="list" items="${list }" >
-							<div class="card" id="z${list.post_num }">
-								<table >
-									<tr align="center" class="post_title" <%-- onclick="companionview(${list.post_num})" --%>>
-										<td class="m1title">제목 : </td><td class="m2title"><a class="title" href="viewActionAB.do?post_num=${list.post_num }"><pre class="title" width="300px">${list.title}</pre></a></td>
-									</tr>
-									<tr align="center">
-										<td class="m1">닉네임 : </td><td class="m2">${list.nickname }</td>
-									</tr>
-									<tr align="center" class="postnums" id='${list.post_num }'>
-										<td class="m1" id="x${list.post_num }">현재인원 : ${list.current_num } 명</td><td id="accomStatus${list.post_num}">최소 인원 : ${list.minimum_num } 명</td>
-									</tr>
-									<tr align="center"  >
-										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }
-												<c:if test="${list.is_closed  == 0}">
-													<button class = "isclosed" id = "is${list.post_num }" onclick = "isclosed(${list.post_num})"> 마감 </button>
-												</c:if>
-										</td>
-									</tr>
-								</table>
-							</div>
-						</c:forEach>
-			</div>
-		</div>
-	</div>
-=======
    <div id="center">
       <%@ include file="sidemenu.jsp"%>
       <a href="companionForm.do?email=${email }">내 게시물</a> | <a href="companionForm2.do?email=${email }"> 내가 신청한 동행</a>
@@ -531,5 +401,4 @@ function isclosed(post_num){
          </div>
       </div>
    </div>
->>>>>>> a35c1918d9104b38f570134338d4d9cb0e94da97
 </body>

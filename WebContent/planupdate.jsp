@@ -231,7 +231,7 @@ var loadFile = function(event) {
 		<div class="button-bottom" align="right">
 			<input type="submit" value="확인" class="buttonList" style="width: 40pt; height: 20pt">
 			<input type="button" value="취소" class="buttonList" style="width: 40pt; height: 20pt" 
-			onclick="location.href='planview.do'">
+			onclick="location.href='planview.do?bs_num=${dto.bs_num}'">
 		</div>
 	</div>
 	</form>
