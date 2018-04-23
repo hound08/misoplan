@@ -755,7 +755,7 @@ public class BoardScheduleDao {
 		return list;
 	}
 	
-	public int deleteAdmin(int bs_num) throws SQLException {
+	public int deleteAdmin(String bs_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql1 = "DELETE FROM VOTEPLAN WHERE BS_NUM = ?";
@@ -766,17 +766,17 @@ public class BoardScheduleDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql1);
-			ps.setInt(1, bs_num);
+			ps.setInt(1, Integer.parseInt(bs_num));
 			result = ps.executeUpdate();
 			
 			ps.close();
 			ps = conn.prepareStatement(sql2);
-			ps.setInt(1, bs_num);
+			ps.setInt(1, Integer.parseInt(bs_num));
 			result = ps.executeUpdate();
 			
 			ps.close();
 			ps = conn.prepareStatement(sql3);
-			ps.setInt(1, bs_num);
+			ps.setInt(1, Integer.parseInt(bs_num));
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
