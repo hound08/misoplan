@@ -544,7 +544,7 @@ public class MemberDao {
 		return list;
 	}
 	
-	public int deletePartyAdmin(int post_num) throws SQLException {
+	public int deletePartyAdmin(String post_num) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		String sql1 = "DELETE FROM VOTECONFIRM WHERE POST_NUM = ?";
@@ -555,17 +555,17 @@ public class MemberDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql1);
-			ps.setInt(1, post_num);
+			ps.setInt(1, Integer.parseInt(post_num));
 			result = ps.executeUpdate();
 			
 			ps.close();
 			ps = conn.prepareStatement(sql2);
-			ps.setInt(1, post_num);
+			ps.setInt(1, Integer.parseInt(post_num));
 			result = ps.executeUpdate();
 			
 			ps.close();
 			ps = conn.prepareStatement(sql3);
-			ps.setInt(1, post_num);
+			ps.setInt(1, Integer.parseInt(post_num));
 			result = ps.executeUpdate();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
