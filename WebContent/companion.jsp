@@ -21,6 +21,9 @@
 	border: 3px solid green;
 	text-align: center;
 	float: left;
+	border-radius: 45px;
+	background-color: #f0f0f0;
+	
 }
 
 #main h1 {
@@ -134,8 +137,8 @@
 	height: 20px;
 }
 .isclosed{
-	width : 50px;
-	height : 50px;
+	width : 35px;
+	height : 25px;
 }
 </style>
 <script type="text/javascript">
@@ -154,10 +157,9 @@ var is_close = 0;
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
 				var kakao_id = this.kakao_id;
-				var str = '<div><table><tr><td><img class="appimg"src='+ this.profile_url+ '></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+this.num_people+'</td></tr></table></div>';
+				var str = '<div><table><tr><td><img class="appimg"src='+this.profile_url+'></td><td>'+this.nickname+'</td><td>'+this.kakao_id+'</td><td>'+this.num_people+'</td></tr></table></div>';
 				   $('#menu1').append(str);
 	 		});
-	 		
 	 	});
 		$.getJSON('companionajax.jsp', send_data, function(data,status) {
 				$.each(data,function(){
@@ -358,7 +360,11 @@ function isclosed(post_num){
 										<td class="m1" id="x${list.post_num }">현재인원 : ${list.current_num } </td><td id="accomStatus${list.post_num}">최소 인원 : ${list.minimum_num }</td>
 									</tr>
 									<tr align="center"  >
-										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }</td>
+										<td class="m1">등록일자 : </td><td class="m2">${list.post_date }
+											<c:if test="${list.is_closed  == 0}">
+												<button class = "isclosed" id = "is${list.post_num }  " onclick = "isclosed(${list.post_num})"> 마감 </button>
+											</c:if>
+										</td>
 									</tr>
 								</table>
 								<%-- <c:if test="${name eq '홍길동'}">
@@ -366,9 +372,6 @@ function isclosed(post_num){
 									</c:if> --%>
 
 
-								<c:if test="${list.is_closed  == 0}">
-									<button class = "isclosed" id = "is${list.post_num }" onclick = "isclosed(${list.post_num})"> 마감 </button>
-								</c:if>
 							</div>
 						</c:forEach>
 			</div>
