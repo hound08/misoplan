@@ -342,10 +342,7 @@ tr.highlight td {
 	position:absolute;
 	left: 0;
 	top: 0;
-	overflow-x: scroll;
 	overflow-y: hidden;
-	
-	
 }
 .plan-transparent{
 	width: 0%;
@@ -623,6 +620,10 @@ textarea {
 				<tr>
 					<td><div class="image"></div></td>
 				</tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
+				<tr class="highlight"><td></td><td></td></tr>
 				<tr>
 					<td><textarea data-autoresize disabled rows="2" style="width: 96%; background-color: white; border: none; font-size: 20px;">${board.content }</textarea></td>
 				</tr>

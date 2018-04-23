@@ -308,6 +308,7 @@ h3{
 	$(document).ready(function(){
 		$(".plan").children().children().eq(0).attr("checked", "checked");
 	});
+	
 </script>
 </head>
 <body>
@@ -360,25 +361,25 @@ h3{
 						<div class="plan-div">
 							<c:forEach var="myplan" items="${list }">
 								<c:if test="${myplan.is_deleted == 0 }">
-									<div class="plan">
+									<label class="plan">
 										<div class="radio-wrapper">
 											<input type="radio" class="option-input radio" name="plan-radio" value=${myplan.sl_code }>
+											<table class="plan-table">
+												<tr>
+													<td>${myplan.s_name }</td> 
+												</tr>
+												<tr>
+													<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
+												</tr>
+												<tr>
+													<td>${myplan.date_start }~${myplan.date_end }</td>
+												</tr>
+												<tr>
+													<td>${myplan.regi_date }</td>
+												</tr>
+											</table>
 										</div>
-										<table class="plan-table">
-											<tr>
-												<td>일정이름: ${myplan.s_name }</td> 
-											</tr>
-											<tr>
-												<td><c:forEach var="area" items="${myplan.area_names }">[${area }] </c:forEach></td> 
-											</tr>
-											<tr>
-												<td>${myplan.date_start }~${myplan.date_end }</td>
-											</tr>
-											<tr>
-												<td>${myplan.regi_date }</td>
-											</tr>
-										</table>
-									</div>
+									</label>
 								</c:if>
 							</c:forEach>
 						</div>
