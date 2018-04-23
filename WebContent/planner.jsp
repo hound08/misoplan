@@ -326,6 +326,16 @@ body {
 	border-radius: 5px;
 	font-size: 20px;
 }
+
+#submit-btn{
+	width: 50px;
+	height: 30px;
+	background-color: #ff9933;
+	color: white;
+	border: 1px solid #ff9933;
+	border-radius: 5px;
+}
+
 }
 </style>
 
@@ -353,7 +363,7 @@ body {
 	var mapx = [];
 	var mapy = [];
 	var daycount = 1;
-	var plandivheight = 65;
+	var plandivheight = 66;
 	markers = [];
 	infowindow = [];
 	var seq = 0;
@@ -428,7 +438,7 @@ body {
 		plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
 				+ daycount
 				+ "</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
-		plandivheight = plandivheight + 20;
+		plandivheight = plandivheight + 22;
 		plandiv.css('height', plandivheight);
 		daycount = daycount + 1;
 	}
@@ -593,7 +603,7 @@ body {
 								plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
 												+ daycount
 												+ "</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
-								plandivheight = plandivheight + 20;					 // 추가되는 div만큼 plandiv의 height 컨트롤 
+								plandivheight = plandivheight + 22;					 // 추가되는 div만큼 plandiv의 height 컨트롤 
 								plandiv.css('height', plandivheight);				 // plandiv의 CSS 수정
 								daycount = daycount + 1;
 							}
@@ -614,6 +624,7 @@ body {
 						});
 
 						markers[seq] = marker;		// 마커를 집단적으로 관리하기 위해 생성된 마커를 배열에 할당
+						console.log("created seq: " +seq);
 						seq = seq + 1;				// 마커를 추가, 삭제할 때 index로 관리하기 위해 사용하는 변수
 						marker.setMap(map);			// 마커를 map에 set
 						map.panTo(latlng);			// 지도 시점 이동
@@ -652,7 +663,7 @@ body {
 	// 1일+ 클릭 이벤트
 	$(document).on('click','.dayplus',function() {
 						var plandiv = $(".plandiv");
-						plandivheight = plandivheight + 20;
+						plandivheight = plandivheight + 22;
 						plandiv.append("<div class='day' id='div"+daycount+"'><p class='daycount' id='p"+daycount+"'>&nbsp;Day "
 										+ daycount
 										+ "</p><div class='deleteday' id='delete"+daycount+"'>X&nbsp;</div></div>");
@@ -667,15 +678,42 @@ body {
 		var parsedid = deleteid.substring(6, deleteid.length);
 		var divid = "#div" + parsedid;
 		var pid = "#p" + parsedid;
-
+		var days = $('.planelem');
+		var deleteSeqArr = [];
+		
+		$.each(days, function(idx, val){
+			if($(val).attr('dayvalue') == parsedid){
+				var parsedSeq = $(val).attr('seq').substring(4, $(val).attr('seq').length);
+				console.log("be deleted seq : " + parsedSeq);
+				deleteSeqArr.push(parsedSeq);
+				$(val).remove();
+				plandivheight = plandivheight - 22;
+			}
+		});
+		//console.log("planelem : " + days);
 		deleteid = "#delete" + parsedid;
 		daycount = daycount - 1;
-		plandivheight = plandivheight - 20;
+		plandivheight = plandivheight - 22;
 		plandiv.css('height', plandivheight);
 
 		$(divid).remove();
 		$(pid).remove();
 		$(deleteid).remove();
+		
+		console.log("deleteSeqArr length : " + deleteSeqArr.length);
+		console.log("deleteSeqArr[0] : " + deleteSeqArr[0]);
+		
+		for(var i = deleteSeqArr[0]; i <= deleteSeqArr[deleteSeqArr.length-1]; i++){
+			console.log("i : " + i);
+			markers[i].setMap(null);
+			delete markers[i];
+		}
+										
+		//console.log("markers after remove: " + markers);
+		removeLines();
+		drawLines();
+
+		
 	});
 
 	// 마커 사이를 잇는 선을 그리는 메서드
@@ -687,6 +725,7 @@ body {
 			strokeOpacity : 1.0,	// 선 투명도
 			strokeWeight : 2		// 선 두께
 		});
+		console.log("path: "+ path);
 		path.setMap(map);			// 생성된 선을 map에 붙임
 	}
 
@@ -877,7 +916,7 @@ body {
 	<form action="plannerDetail.jsp" method="post" id="form">
 		<label>플랜 제목 : </label> <input type="text" name="title" id="title" class="inputs" required> <br>
 	    <label>출발일 : </label> <input type="date" name="date" class="inputs" required> <br> 
-		<input	type="submit" value="전송">
+		<input	type="submit" value="전송" id="submit-btn">
 	</form>
 	</aside>
 	<div class="avgrund-cover"></div>

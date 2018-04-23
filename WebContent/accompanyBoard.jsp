@@ -352,19 +352,19 @@ p {
 		</div>
 		<div class="align">
 			<c:if test="${a == 0 }">
+				<a href="listAction.do"><button class="align-clicked">최신순</button></a>
 				<a href="listActionVIEW.do"><button class="align-button">조회순</button></a>
 				<a href="listActionVOTE.do"><button class="align-button">인기순</button></a>
-				<a href="listAction.do"><button class="align-clicked">최신순</button></a>
 			</c:if>
 			<c:if test="${a == 1 }">
+				<a href="listAction.do"><button class="align-button">최신순</button></a>
 				<a href="listActionVIEW.do"><button class="align-clicked">조회순</button></a>
 				<a href="listActionVOTE.do"><button class="align-button">인기순</button></a>
-				<a href="listAction.do"><button class="align-button">최신순</button></a>
 			</c:if>
 			<c:if test="${a == 2 }">
+				<a href="listAction.do"><button class="align-button">최신순</button></a>
 				<a href="listActionVIEW.do"><button class="align-button">조회순</button></a>
 				<a href="listActionVOTE.do"><button class="align-clicked">인기순</button></a>
-				<a href="listAction.do"><button class="align-button">최신순</button></a>
 			</c:if>
 		</div>
 		<div class="section-card">
