@@ -13,9 +13,14 @@ public class PlanDeleteProAction implements CommandProcess {
 	@Override
 	public String requestPro(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int bs_num = Integer.parseInt(request.getParameter("hiddenDelete"));
+			String bs_num = request.getParameter("hiddenDelete");
+			String[] arrayBs_num = bs_num.split(",");
+			int result = 0;
 			BoardScheduleDao dao = BoardScheduleDao.getInstance();
-			int result = dao.deleteAdmin(bs_num);
+			
+			for (String str : arrayBs_num) {
+				result = dao.deleteAdmin(str);
+			}
 			
 			request.setAttribute("result", result);
 		} catch (Exception e) {
