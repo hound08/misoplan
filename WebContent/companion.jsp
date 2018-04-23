@@ -32,7 +32,7 @@
 }
 #mainsecond1 div {
 	margin: 0 auto;
-	margin-bottom: 10px;
+	margin-bottom: 20px;
 }
 #mainsecond2 {
 	width: 420px;
@@ -99,6 +99,12 @@
 	height: 180px;
 	background-color: #c8ccd0;
 	border-radius:20px;
+	/* 펼쳐지는 속도 조절 */
+	-webkit-transition: .2s ease-in-out;
+    -moz-transition: .2s ease-in-out;
+    -ms-transition: .2s ease-in-out;
+    -o-transition: .2s ease-in-out;
+    transition : .2s ease-in-out;
 }
 .cardbox table {
 	margin: 0 auto;
@@ -154,15 +160,22 @@
 	text-align: center;
 }
 .postnums:HOVER {
-	-webkit-opacity: 0.5;
+	-webkit-opacity: 0.3;
+	transition: opacity 0.5s;
 }
 .post_title:HOVER {
-	-webkit-opacity: 0.5;
+	-webkit-opacity: 0.3;
+	transition: opacity 0.5s;
 }
 .title {
 	overflow: hidden;
 }
-
+.second_m1{
+	width: 200px;
+}
+.second_m2 {
+	width: 90px;
+}
 </style>
 <script type="text/javascript">
 var onoff = 0;
@@ -175,7 +188,8 @@ var is_close = 0;
 	var tdpost = "#z"+post_num;
 	var divpost = "#t"+post_num;
 	   console.log("tdpost : " + tdpost);
-			if(onoff == 0){
+			/* if(onoff == 0){ */
+			 $('#mainsecond2').remove();
 	  		 $('#main').append('<div id="mainsecond2"><div id="menu1"> 수락 목록 </div><div id="menu2"> 동행 신청자 목록</div></div>')
 	 	$.getJSON('companionajax2.jsp', send_data,function(data,status) {
 	 		$.each(data,function(){
@@ -221,10 +235,10 @@ var is_close = 0;
 				});
 				onoff = onoff+1;
 		});
-			}else{
+			/* }else{
 				  $('#mainsecond2').remove(); 
 				 onoff = onoff-1;  
-			}
+			} */
 });
  
  $(document).on('click', '.yesbtnimg', function(){
@@ -367,9 +381,9 @@ function isclosed(post_num){
 <body>
 	<div id="center">
 		<%@ include file="sidemenu.jsp"%>
-		<a href="companionForm.do?email=${email }">내 게시물</a> | <a href="companionForm2.do?email=${email }"> 내가 신청한 동행</a>
+		<a href="companionForm.do?email=${email }">동행 게시물 List</a> | <a href="companionForm2.do?email=${email }"> 동행 신청 List</a>
 		<div id="main">
-			<h1>내 동행 List</h1>
+			<h1>동행 List</h1>
 			<div id="mainsecond1">
 						<c:forEach var="list" items="${list }" >
 							<div class="card" id="z${list.post_num }">
