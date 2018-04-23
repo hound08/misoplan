@@ -73,7 +73,11 @@ td:FIRST-CHILD{
 }
 
 .form-table{
-	font-size: 15px;
+	font-size: 20px;
+}
+
+.form-table td:FIRST-CHILD{
+	width: 100px;
 }
 
 hr {
@@ -139,6 +143,7 @@ input[type="file"] {
 	height: 35px;
 	font-size: 20px;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .submit-button:HOVER{
@@ -153,6 +158,7 @@ input[type="file"] {
 	height: 35px;
 	font-size: 20px;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .cancel-button:HOVER{
@@ -279,6 +285,9 @@ h3{
 	margin-top: 20px;
 }
 
+.contents{
+	font-size: 20px;
+}
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <%
@@ -323,8 +332,8 @@ h3{
 			<p class="p-info"> &#10003 동행인 모집이 완료되었을 경우 작성글 마감을 해주시기 바랍니다.</p>
 			<hr>
 		<div class="write-form">
-			<form action="writeAB.do" class="form-table" method="post" enctype="multipart/form-data">	
-				<table>
+			<form action="writeAB.do" method="post" enctype="multipart/form-data">	
+				<table class="form-table">
 				<tr><td>제목&nbsp&nbsp</td><td><input type="text" class="input" name="title" required></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>최소 인원&nbsp&nbsp</td>
@@ -376,7 +385,7 @@ h3{
 					</td>
 				</tr>
 				<tr class="highlight"><td></td><td></td></tr>
-				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="30" name="content" required></textarea></div></td></tr>
+				<tr><td>내용&nbsp&nbsp</td><td><div><textarea rows="20" name="content" required class="contents"></textarea></div></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr class="highlight"><td></td><td></td></tr>
 				<tr><td>이미지&nbsp&nbsp</td><td><img id="output"/></td></tr>

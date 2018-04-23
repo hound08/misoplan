@@ -263,6 +263,7 @@ p {
 	height: 42px;
 	background-color: #AA1212;
 	color: white;
+	cursor: pointer;
 }
 
 .search-select {
@@ -287,6 +288,7 @@ p {
 	font-size: 14px;
 	font-weight: bold;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .align-button:HOVER{
@@ -317,7 +319,7 @@ p {
 
 .write-button {
 	width: 85px;
-	height: 35px;
+	height: 40px;
 	display: flex;
 	float: right;
 	font-size: 18px;
@@ -327,6 +329,7 @@ p {
 	border-color: #1294AB;
 	border-radius: 8px;
 	transition-duration: 0.4s;
+	cursor: pointer;
 }
 
 .write-button:HOVER{

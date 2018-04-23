@@ -103,7 +103,6 @@ table {
 	border-radius: 10px;
 	margin-bottom: 10px; 
 	padding-top: 10px;
-	position: relative;
 }
 
 tr.highlight td {
@@ -172,7 +171,7 @@ tr.highlight td {
 	height: 400px;
 	background: url("${board.image_url }");
 	background-size : 100% 100%;
-	margin-left: 10px;
+	margin-left: 0px;
 }
 
 .table-reply{
@@ -256,6 +255,7 @@ tr.highlight td {
 	color: white;
 	border-radius: 5px;
 	font-size: 18px;
+	cursor: pointer;
 }
 
 .like-button{
@@ -265,11 +265,8 @@ tr.highlight td {
 
 .body-table{
 	width: 100%;
-	margin: 0 0;
-}
-
-.body-table td:FIRST-CHILD {
-	width: 380px;
+	margin: 10 20;
+	font-size: 18px;
 }
 
 .post-plan{
@@ -302,6 +299,7 @@ tr.highlight td {
 	width: 11%;
 	vertical-align: middle;
 	font-weight: bold;
+	cursor: pointer;
 }
 
 .tab-clicked{
@@ -382,11 +380,13 @@ tr.highlight td {
 	float: right;
 	width: 80px;
 	height: 30px;
+	cursor: pointer;
 }
 
 .refresh{
 	width: 80px;
 	height: 30px;
+	cursor: pointer;
 }
 
 .refresh-icon {
@@ -404,19 +404,47 @@ hr{
 }
 
 .post-body-bottom {
-	clear: both;
-	position: absolute;
-  	bottom: 15;
-  	left: 50%;
+	width: 100%;
+	margin-bottom: 55px;
+	position: relative; 
 }
 .center-button{
-	width: 80px;
-	height: 30px
+	width: 90px;
+	height: 30px;
+	cursor: pointer;
+	position: absolute;
+	left: 50%;
+}
+
+.label_vote{
+	cursor: pointer;
+}
+
+textarea {
+    box-sizing: border-box;
+    resize: none;
 }
 
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script type="text/javascript">
+	(function(){
+	    var resize = function (node) {
+	        var offset = node.offsetHeight - node.clientHeight;
+	        jQuery(node).css('height', 'auto').css('height', node.scrollHeight + offset);
+	    };
+	    jQuery(document).bind("ready", function(){
+	        jQuery('textarea[data-autoresize]')
+	            .bind('keyup input', function () {
+	                resize(this);
+	            })
+	            .removeAttr('data-autoresize')
+	            .addClass("resizing")
+	            .trigger("input");
+	    });
+	    jQuery(document).trigger("ready");
+	})();
+
 	$(document).ready(function(){
 		$('.plan-transparent').eq(0).removeClass('plan-transparent').addClass('plan');
 		$('.post-plan-header').children().eq(0).addClass('tab-clicked');
@@ -513,7 +541,7 @@ hr{
 				<tr style="font-size: 18px;">
 					<td> 
 						<span class="span-icon-view"><i class="icon icon-view"></i>${board.view_count }명이 읽었어요</span>
-						<span class="span-icon-vote"><i class="icon icon-vote"></i><label>${board.vote_count }명이 좋아해요</label></span>
+						<span class="span-icon-vote"><i class="icon icon-vote"></i><label class="label_vote">${board.vote_count }명이 좋아해요</label></span>
 					</td>
 				</tr>
 			</table>
@@ -594,7 +622,9 @@ hr{
 			<table class="body-table">
 				<tr>
 					<td><div class="image"></div></td>
-					<td><pre>${board.content }</pre></td>
+				</tr>
+				<tr>
+					<td><textarea data-autoresize disabled rows="2" style="width: 96%; background-color: white; border: none; font-size: 20px;">${board.content }</textarea></td>
 				</tr>
 			</table>
 		</c:if>
