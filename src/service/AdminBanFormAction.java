@@ -51,11 +51,6 @@ public class AdminBanFormAction implements CommandProcess {
 			if (endPage > pageCnt) {
 				endPage = pageCnt;
 			}
-			
-			System.out.println("totCnt : " + totCnt);
-			System.out.println("pageCnt : " + pageCnt);
-			System.out.println("startPage : " + startPage);
-			System.out.println("endPage : " + endPage);
 
 			List<MemberDto> list = null;
 			list = dao.selectMemberList(startRow, endRow, 1, dtoSearch);

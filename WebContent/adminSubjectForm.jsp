@@ -211,17 +211,17 @@
 			</div>
 			<div class="divPage">
 				<c:if test="${startPage > blockSize }">
-					<a href='adminMainForm.do?pageNum=${startPage-blockSize }'>≪이전</a>
+					<a href='adminSubjectForm.do?pageNum=${startPage-blockSize }'>≪이전</a>
 				</c:if>
 				<c:forEach var="i" begin="${startPage }" end="${endPage }">
-					<a href='adminMainForm.do?pageNum=${i}'>[${i}]</a>
+					<a href='adminSubjectForm.do?pageNum=${i}'>[${i}]</a>
 				</c:forEach>
 				<c:if test="${endPage < pageCnt}">
-					<a href='adminMainForm.do?pageNum=${startPage+blockSize}'>다음≫</a>
+					<a href='adminSubjectForm.do?pageNum=${startPage+blockSize}'>다음≫</a>
 				</c:if>
 			</div>
 			<div class="divSearch">
-				<form action="adminMainForm.do" name="frm">
+				<form action="adminSubjectForm.do" name="frm">
 					<p><select name="selSearch" class="selSearch">
 						<option>제목</option>
 						<option>내용</option>

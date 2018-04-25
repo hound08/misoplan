@@ -672,17 +672,63 @@ public class BoardScheduleDao {
 		}
 		return total;
 	}
-
-	public List<BoardScheduleDto> selectAdminList() throws SQLException {
+	
+	public int selectTotalCnt(BoardScheduleDto dtoSearch) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM BOARDSCHEDULE";
-		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
-
+		String sql = "SELECT COUNT(*) FROM BOARDSCHEDULE WHERE TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ?";
+		String title = "%" + dtoSearch.getTitle() + "%";
+		String content = "%" + dtoSearch.getContent() + "%";
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
+		int result = 0;
+		
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setString(3, email);
+			ps.setString(4, nickname);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+
+	public List<BoardScheduleDto> selectAdminList(int startRow, int endRow, BoardScheduleDto dtoSearch) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
+		String sql = "SELECT BS_NUM, SL_CODE, EMAIL, NICKNAME, TITLE, TAG, CONTENT, IMAGE_URL, VOTE_COUNT, VIEW_COUNT, BOARD_DATE, AREA_NAMES, SCHEDULE_DATE " + 
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM BOARDSCHEDULE ORDER BY BS_NUM DESC) A) " + 
+					 "WHERE RN BETWEEN ? AND ? AND TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ?";
+		String title = "%" + dtoSearch.getTitle() + "%";
+		String content = "%" + dtoSearch.getContent() + "%";
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, startRow);
+			ps.setInt(2, endRow);
+			ps.setString(3, title);
+			ps.setString(4, content);
+			ps.setString(5, email);
+			ps.setString(6, nickname);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
