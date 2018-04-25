@@ -370,8 +370,8 @@ public class MemberDao {
 		List<MemberDto> list = new ArrayList<MemberDto>();
 		MemberDto dto = new MemberDto();
 		String sql = "SELECT EMAIL, NICKNAME, PHONE, MEMBER_SCORE, MEMBER_ADMIN, BAN, BAN_DATE, LEAVE, TO_CHAR(JOIN_DATE,'YYYY-MM-DD HH24:MI:SS') " +
-					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER ORDER BY NICKNAME) A) " +
-					 "WHERE RN BETWEEN ? AND ? AND BAN LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ?";
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM MEMBER WHERE BAN LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? AND PHONE LIKE ? ORDER BY NICKNAME) A) " +
+					 "WHERE RN BETWEEN ? AND ?";
 		String banResult = "%";
 		
 		if (ban == 1) {
@@ -385,12 +385,12 @@ public class MemberDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, endRow);
-			ps.setString(3, banResult);
-			ps.setString(4, email);
-			ps.setString(5, nickname);
-			ps.setString(6, phone);
+			ps.setString(1, banResult);
+			ps.setString(2, email);
+			ps.setString(3, nickname);
+			ps.setString(4, phone);
+			ps.setInt(5, startRow);
+			ps.setInt(6, endRow);
 			rs = ps.executeQuery();
 			
 			if (rs.next()) {
@@ -496,16 +496,62 @@ public class MemberDao {
 		return result;
 	}
 	
-	public List<AccompanyBoardDto> selectAdminPartyList() throws SQLException {
+	public int selectPartyTotalCnt(AccompanyBoardDto dtoSearch) throws SQLException {
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		String sql = "SELECT * FROM ACCOMPANYBOARD";
+		String sql = "SELECT COUNT(*) FROM ACCOMPANYBOARD WHERE TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ?";
+		String title = "%" + dtoSearch.getTitle() + "%";
+		String content = "%" + dtoSearch.getContent() + "%";
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
+		int result = 0;
+		
+		try {
+			conn = getConnection();
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setString(3, email);
+			ps.setString(4, nickname);
+			rs = ps.executeQuery();
+			
+			if (rs.next()) {
+				result = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		} finally {			
+			if (rs != null) rs.close();
+			if (ps != null) ps.close();
+			if (conn != null) conn.close();
+		}
+		
+		return result;
+	}
+	
+	public List<AccompanyBoardDto> selectAdminPartyList(int startRow, int endRow, AccompanyBoardDto dtoSearch) throws SQLException {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
 		List<AccompanyBoardDto> list = new ArrayList<AccompanyBoardDto>();
+		String sql = "SELECT POST_NUM, EMAIL, NICKNAME, SL_CODE, TITLE, IMAGE_URL, CONTENT, TAG, VIEW_COUNT, VOTE_COUNT, POST_DATE, CLOSING_DATE, MINIMUM_NUM, CURRENT_NUM, IS_CLOSED, COMMENT_COUNT " + 
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM ACCOMPANYBOARD WHERE TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? ORDER BY POST_NUM DESC) A) " + 
+					 "WHERE RN BETWEEN ? AND ?";
+		String title = "%" + dtoSearch.getTitle() + "%";
+		String content = "%" + dtoSearch.getContent() + "%";
+		String email = "%" + dtoSearch.getEmail() + "%";
+		String nickname = "%" + dtoSearch.getNickname() + "%";
 
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setString(3, email);
+			ps.setString(4, nickname);
+			ps.setInt(5, startRow);
+			ps.setInt(6, endRow);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {

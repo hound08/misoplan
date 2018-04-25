@@ -713,8 +713,8 @@ public class BoardScheduleDao {
 		ResultSet rs = null;
 		List<BoardScheduleDto> list = new ArrayList<BoardScheduleDto>();
 		String sql = "SELECT BS_NUM, SL_CODE, EMAIL, NICKNAME, TITLE, TAG, CONTENT, IMAGE_URL, VOTE_COUNT, VIEW_COUNT, BOARD_DATE, AREA_NAMES, SCHEDULE_DATE " + 
-					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM BOARDSCHEDULE ORDER BY BS_NUM DESC) A) " + 
-					 "WHERE RN BETWEEN ? AND ? AND TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ?";
+					 "FROM (SELECT ROWNUM RN, A.* FROM (SELECT * FROM BOARDSCHEDULE WHERE TITLE LIKE ? AND CONTENT LIKE ? AND EMAIL LIKE ? AND NICKNAME LIKE ? ORDER BY BS_NUM DESC) A) " + 
+					 "WHERE RN BETWEEN ? AND ?";
 		String title = "%" + dtoSearch.getTitle() + "%";
 		String content = "%" + dtoSearch.getContent() + "%";
 		String email = "%" + dtoSearch.getEmail() + "%";
@@ -723,12 +723,12 @@ public class BoardScheduleDao {
 		try {
 			conn = getConnection();
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, startRow);
-			ps.setInt(2, endRow);
-			ps.setString(3, title);
-			ps.setString(4, content);
-			ps.setString(5, email);
-			ps.setString(6, nickname);
+			ps.setString(1, title);
+			ps.setString(2, content);
+			ps.setString(3, email);
+			ps.setString(4, nickname);
+			ps.setInt(5, startRow);
+			ps.setInt(6, endRow);
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
