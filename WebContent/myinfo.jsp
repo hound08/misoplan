@@ -59,12 +59,10 @@ td {
 }
 
 #main {
-	background-color: #f0f0f0;
 	width: 930px;
 	text-align: center;
 	float: left;
 	margin-top: 20px;
-	border-radius: 25px;
 	padding-bottom: 20px;
 }
 
@@ -73,8 +71,7 @@ td {
 }
 
 #second {
-	background-color: #d7e4bd;
-	border-radius: 5px;
+	background-color: #f0f0f0;
 	width: 450px;
 	margin: 0px auto;
 	padding: 30px;
@@ -88,7 +85,6 @@ td {
 
 #secondbox table {
 	margin: 0px auto;
-	background-color: #d7e4bd
 }
 
 #secondbox table tr {

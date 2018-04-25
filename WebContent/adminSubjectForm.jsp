@@ -15,12 +15,10 @@
 		height: 100%;
 	}
 	#main {
-		background-color: #f0f0f0;
 		width: 930px;
 		text-align: center;
 		float: left;
 		margin-top: 20px;
-		border-radius: 25px;
 		padding-bottom: 20px;
 	}
 	h1 {

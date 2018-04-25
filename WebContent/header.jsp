@@ -3,8 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/innks/NanumSquareRound/master/nanumsquareround.min.css">
 <meta charset="UTF-8">
 <title>미소플랜</title>
 <style type="text/css">
@@ -29,13 +28,16 @@ a:VISITED {
 	color: black;
 }
 
+.header_wrap {
+	width: 100%;
+	text-align: center;
+	border-bottom: 1px solid #D0D0D0;
+}
+
 .header {
 	width: 1080px;
 	height: 50px;
 	margin: 0px auto;
-	/*	border:solid;  
-	border-color: #EAEAEA;
-	border-width: 2px;	*/
 }
 
 .logo {
@@ -155,37 +157,39 @@ a:VISITED {
 </style>
 </head>
 <body>
-	<div class="header" id="header1">
-		<div class="logo" onclick="location.href='main.do'">
-			<img alt="logo" src="images/logo.png" class="logo_image"> 
-		</div>
-		<div class="category">
-			<ul class="category-menu">
-				<li><a href="search.do"><img src="images/category1.png" align="middle" class="category-image"></a></li>
-				<li><a href="makePlan.do"><img src="images/category2.png" align="middle" class="category-image"></a></li>
-				<li><a href="boardschedule.do"><img src="images/category3.png" align="middle" class="category-image"></a></li>
-				<li><a href="listAction.do"><img src="images/category4.png" align="middle" class="category-image"></a></li>
-			</ul>
-		</div>
-		<%
-			if (session.getAttribute("email") == null) {	%>
-				<div class="login_off">
-					<div class="loginlabel">
-						<a href="loginForm.do" class="login_label">로그인</a>
-						<a href="joinForm.do" class="login_label">회원가입</a>
+	<div class="header_wrap">
+		<div class="header" id="header1">
+			<div class="logo" onclick="location.href='main.do'">
+				<img alt="logo" src="images/logo.png" class="logo_image"> 
+			</div>
+			<div class="category">
+				<ul class="category-menu">
+					<li><a href="search.do"><img src="images/category1.png" align="middle" class="category-image"></a></li>
+					<li><a href="makePlan.do"><img src="images/category2.png" align="middle" class="category-image"></a></li>
+					<li><a href="boardschedule.do"><img src="images/category3.png" align="middle" class="category-image"></a></li>
+					<li><a href="listAction.do"><img src="images/category4.png" align="middle" class="category-image"></a></li>
+				</ul>
+			</div>
+			<%
+				if (session.getAttribute("email") == null) {	%>
+					<div class="login_off">
+						<div class="loginlabel">
+							<a href="loginForm.do" class="login_label">로그인</a>
+							<a href="joinForm.do" class="login_label">회원가입</a>
+						</div>
+					</div>	<%
+				} else if (session.getAttribute("email") != null) {	%>
+					<div class="memberImageDiv">
+						<div class="memberImage"></div>
 					</div>
-				</div>	<%
-			} else if (session.getAttribute("email") != null) {	%>
-				<div class="memberImageDiv">
-					<div class="memberImage"></div>
-				</div>
-				<div class="login_on">
-					<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
-					<p class="buttons"><input type="button" class="btnMyInfo" value="내 정보" onclick="location.href='myInfoConfirmForm.do?email=${email }'">
-					<input type="button" value="로그아웃" class="btnLogout" onclick="location.href='logoutPro.do'"></p>
-				</div>	<%
-			}
-		%>
+					<div class="login_on">
+						<p class="welcome"><strong>${nickname }</strong>님 환영합니다!</p>
+						<p class="buttons"><input type="button" class="btnMyInfo" value="내 정보" onclick="location.href='myInfoConfirmForm.do?email=${email }'">
+						<input type="button" value="로그아웃" class="btnLogout" onclick="location.href='logoutPro.do'"></p>
+					</div>	<%
+				}
+			%>
+		</div>
 	</div>
 </body>
 </html>
