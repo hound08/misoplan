@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="header.jsp"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -99,16 +98,24 @@ div {
 /* ---------------------------- 관광지 순위 ---------------------------- */
 .rankList {
 	width: 100%;
-	height: 700px;
 	left: 0px;
 }
 
-.rankTitleWrap {
+.rankTitleWrap_true {
 	background-color: #F6F6F6;
 	position: absolute;
 	left: 0px;
 	width: 100%;
 	height: 700px;
+	z-index: 1;
+}
+
+.rankTitleWrap_false {
+	background-color: #F6F6F6;
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	height: 400px;
 	z-index: 1;
 }
 
@@ -129,12 +136,23 @@ div {
 	color: gray;
 }
 
-.rankListWrap {
+.rankListWrap_true {
 	position: relative;
 	padding-top: 150px;
 	text-align: center;
 	font-size: 20px;
 	z-index: 2;
+	height: 550px;
+}
+
+.rankListWrap_false {
+	position: relative;
+	padding-top: 230px;
+	padding-bottom: 150px;
+	text-align: center;
+	font-size: 20px;
+	z-index: 2;
+	color: gray;
 }
 
 .rankListContent {
@@ -158,7 +176,6 @@ div {
 /* ---------------------------- 찜 리스트 순위 ---------------------------- */
 .wishList {
 	width: 100%;
-	height: 600px;
 	left: 0px;
 }
 
@@ -179,10 +196,19 @@ div {
 	color: gray;
 }
 
-.wishListWrap {
+.wishListWrap_true {
 	padding-top: 30px;
 	text-align: center;
 	font-size: 20px;
+	height: 800px;
+}
+
+.wishListWrap_false {
+	padding-top: 100px;
+	text-align: center;
+	font-size: 20px;
+	height: 200px;
+	color: gray;
 }
 
 .wishListContent {
@@ -209,7 +235,6 @@ div {
 	position: absolute;
 	left: 0px;
 	width: 100%;
-	margin-top: 360px;
 }
 </style>
 </head>
@@ -247,34 +272,54 @@ div {
 				</div>
 			</div>
 			<div class="rankList">
-				<div class="rankTitleWrap">
-					<div class="rankText">
-						<p class="rankTextTitle">인기 여행일정</p>
-						<p class="rankTextContent">인기있는 관광지를 알아보세요</p>
-					</div>
-				</div>
-				<div class="rankListWrap">
-					<c:forEach var="listPlan" items="${listPlan }">
-						<div class="rankListContent">
-							<img class="rankImage" alt="${listPlan.tour_name }" src="${listPlan.image_url }">
-							<p class="rankName"><strong>${listPlan.tour_name }</strong></p>
+				<c:if test="${listPlan.size() == 6 }">
+					<div class="rankTitleWrap_true">
+						<div class="rankText">
+							<p class="rankTextTitle">인기 여행일정</p>
+							<p class="rankTextContent">인기있는 관광지를 알아보세요</p>
 						</div>
-					</c:forEach>
-				</div>
+					</div>
+					<div class="rankListWrap_true">
+						<c:forEach var="listPlan" items="${listPlan }">
+							<div class="rankListContent">
+								<img class="rankImage" alt="${listPlan.tour_name }" src="${listPlan.image_url }">
+								<p class="rankName"><strong>${listPlan.tour_name }</strong></p>
+							</div>
+						</c:forEach>
+					</div>
+				</c:if>
+				<c:if test="${listPlan.size() < 6 }">
+					<div class="rankTitleWrap_false">
+						<div class="rankText">
+							<p class="rankTextTitle">인기 여행일정</p>
+							<p class="rankTextContent">인기있는 관광지를 알아보세요</p>
+						</div>
+					</div>
+					<div class="rankListWrap_false">
+						<p>현재 저장된 일정 개수가 충분하지 않습니다.<br>일정 만들기를 통해 자신만의 일정을 꾸며보세요.</p>
+					</div>
+				</c:if>
 			</div>
 			<div class="wishList">
 				<div class="wishText">
 					<p class="wishTextTitle">찜 리스트 Top 9</p>
 					<p class="wishTextContent">가장 가 보고 싶은 관광지</p>
 				</div>
-				<div class="wishListWrap">
-					<c:forEach var="listWish" items="${listWish }">
-						<div class="wishListContent">
-							<img class="wishImage" alt="${listWish.tour_name }" src="${listWish.img_src }">
-							<p class="wishName"><strong>${listWish.tour_name }</strong></p>
-						</div>
-					</c:forEach>
-				</div>
+				<c:if test="${listWish.size() == 9 }">
+					<div class="wishListWrap_true">
+						<c:forEach var="listWish" items="${listWish }">
+							<div class="wishListContent">
+								<img class="wishImage" alt="${listWish.tour_name }" src="${listWish.img_src }">
+								<p class="wishName"><strong>${listWish.tour_name }</strong></p>
+							</div>
+						</c:forEach>
+					</div>
+				</c:if>
+				<c:if test="${listWish.size() < 9 }">
+					<div class="wishListWrap_false">
+						<p>현재 찜 리스트 개수가 충분하지 않습니다.<br>검색을 통해 마음에 드는 관광지를 찜 해 보세요.</p>
+					</div>
+				</c:if>
 			</div>
 		</div>
 		<div class="footer_wrap">
